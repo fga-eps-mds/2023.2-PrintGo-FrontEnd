@@ -1,0 +1,4 @@
+# Files or folders for git ignore and maintain them localy 
+
+# Dependencies
+/node_modules

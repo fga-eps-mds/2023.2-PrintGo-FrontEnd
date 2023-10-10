@@ -1,0 +1,23 @@
+{
+  "name": "2023.2-printgo-frontend",
+  "version": "1.0.0",
+  "description": "<div align=\"center\">      <img src=\"assets/logoPrintGo.svg\" height=\"350px\" width=\"350px\">  </div>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fga-eps-mds/2023.2-PrintGo-FrontEnd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fga-eps-mds/2023.2-PrintGo-FrontEnd/issues"
+  },
+  "homepage": "https://github.com/fga-eps-mds/2023.2-PrintGo-FrontEnd#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
