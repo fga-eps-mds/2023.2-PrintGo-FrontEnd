@@ -1,56 +1,70 @@
-# 2023.2-PrintGo-FrontEnd
+# Getting Started with Create React App
 
-<div align="center">
-     <img src="assets/logoPrintGo.svg" height="350px" width="350px"> 
-</div>
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Sobre
+## Available Scripts
 
-O PrintGo é um sistema produzido para a PC-GO cuja função é monitorar ativos de impressão. A ferramenta, que é de fácil uso, auxilia na contagem de impressões na hora de prestação de contas e para isso apresenta um dashboard que pode ser transformado em relatórios.
+In the project directory, you can run:
 
-Aplicação disponível em: [link da aplicação](heroku?)
+### `npm start`
 
-## Requisitos
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-### Localmente
-- yarn
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-### Docker
-- Docker
-- Docker-compose
+### `npm test`
 
-## Contribuir
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### Instalação
+### `npm run build`
 
-1. Clone o projeto
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-> git clone https://github.com/fga-eps-mds/2023.2-PrintGo-FrontEnd
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-2. Entre na pasta do projeto
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-> cd 2023.2-PrintGo-FrontEnd
+### `npm run eject`
 
-#### Localmente
-3. instale as dependências
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-> yarn
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-4. execute o projeto
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-> yarn dev
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-#### Docker
+## Learn More
 
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-## Ambientes
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-- [Documentação](https://github.com/fga-eps-mds/2023.2-PrintGo-Doc)
+### Code Splitting
 
-- [Front-End](https://github.com/fga-eps-mds/2023.2-PrintGo-FrontEnd)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-- [Back-End: UserAPI](?)
-  
-- [Back-End: EquipamentAPI](?) 
+### Analyzing the Bundle Size
 
-- [Back-End: GateWay](?) 
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
