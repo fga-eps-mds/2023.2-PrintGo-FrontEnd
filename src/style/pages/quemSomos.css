@@ -1,0 +1,88 @@
+body {
+    font-family: 'Overpass', sans-serif;
+    display: block;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    gap: 12.375rem;
+    padding: 6.25rem 13.625rem 0 8rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+}
+
+.texto {
+    text-align: center;
+    /* Cor do texto */
+    color: #003366;
+    padding-top: 1.75rem;
+    position: relative;
+    top: 0rem;
+    left: -10rem;
+}
+
+/* Estilos para o título "Quem Somos" */
+h2 {
+    font-size: 3rem;
+    font-weight: 400;
+}
+
+p {
+    
+}
+
+
+label {
+    margin-bottom: 0.5rem;
+}
+
+input::placeholder {
+    color: #6C6C6C;
+    font-size: 1rem;
+    letter-spacing: 0.05rem;
+}
+
+/* Estilos para a imagem "PessoasDois" */
+.pessoasDois {
+    width: 50rem;
+    height: 50rem;
+}
+
+/* Estilos para a imagem "PoliciaCivilLogo" */
+.PoliciaCivilLogo {
+    width: 9rem;
+    height: 9rem;
+    text-align: center;
+}
+
+.logo {
+    text-align: center;
+}
+
+.ellipse {
+    z-index: -100;
+    width: 48.29838rem;
+    height: 62.73281rem;
+    transform: rotate(-145.25deg);
+    flex-shrink: 0;
+    border-radius: 62.73281rem;
+    background: #036;
+    position: relative;
+    top: 600px;
+    left: -430px;
+}
+
+@media (max-width: 1210px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+        padding-left: 2rem;
+        align-items: center;
+    }
+}

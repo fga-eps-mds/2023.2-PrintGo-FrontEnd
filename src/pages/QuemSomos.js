@@ -1,74 +1,36 @@
 import React, { useState } from 'react';
-import '../style/pages/login.css'; 
-import pessoas from '../assets/pessoas.svg';
+import '../style/pages/quemSomos.css';
+import pessoasDois from '../assets/pessoasDois.svg';
+import PoliciaCivilLogo from '../assets/PoliciaCivilLogo.svg';
 
-function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
-
-  function isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
-  }
-
-  const handleChange = event => {
-    if (!isValidEmail(event.target.value)) {
-      setError('E-mail inválido');
-    } else {
-      setError(null);
-    }
-
-    setEmail(event.target.value);
-  };
-
-  const isFormValid =  email && password;
+function QuemSomos() {
 
   return (
-      <div className="container">
-        <img src={pessoas} alt="Pessoas" className="pessoas" />
-        <div>
-          <div className="ellipse"/>
-          <div className="login-box">
-            <div className="login-box-content">
-              <h2>Entrar</h2>
-              <form>
-                <div className="form-group">
-                  <label htmlFor="username">e-mail</label>
-                  <input 
-                    type="text" 
-                    id="username" 
-                    name="username" 
-                    placeholder="email@email.com"
-                    value={email}
-                    onChange={handleChange} 
-                  />
-                  {error && <h5 style={{color: 'red'}}>{error}</h5>}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">senha</label>
-                  <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
-                    placeholder="************" 
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)} 
-                  />
-                </div>
-                <div className="buttons">
-                  <div className="button-container">
-                    <button type="submit" disabled={!isFormValid}>LOGIN</button>
-                  </div>
-                  <div className="button-container">
-                    <button type="button">Recuperar senha</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+    <div className="container">
+      <div className="ellipse"></div>
+      <div className="texto">
+        <h2>Quem Somos</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla aliquet elementum eros. Suspendisse gravida velit id vulputate laoreet. Integer ultrices, nulla at aliquam lacinia, metus ligula dapibus metus, eget ornare turpis sapien vitae lorem. Cras sed lorem nec justo pharetra commodo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae erat sed felis auctor feugiat. Proin justo lorem, condimentum nec venenatis nec, malesuada vitae ex. Mauris mattis, diam vitae dictum pellentesque, lectus massa interdum augue, ut dictum ligula massa id nibh. Maecenas auctor elit non augue condimentum suscipit. Integer non luctus augue, nec tristique nunc. Integer ut commodo mi, vitae tincidunt neque.
+        </p>
+        <p>
+          Quisque non posuere eros, vel posuere purus. Donec vehicula est eu magna fermentum congue. Nam in mollis nisi, a congue augue. Proin vulputate laoreet ex nec interdum. Aliquam ullamcorper malesuada sem, eget eleifend ex ultrices sed. Donec elementum, turpis sit amet auctor elementum, urna erat tempus ex, fringilla elementum elit massa a arcu. Aliquam lobortis ultricies iaculis.
+        </p>
       </div>
+      
+      <div className="logo">
+       <img src={PoliciaCivilLogo} alt="PoliciaCivilLogo" className="PoliciaCivilLogo" /> 
+      </div>
+
+      <div>
+        <img src={pessoasDois} alt="PessoasDois" className="pessoasDois" />
+      </div>
+
+
+
+
+    </div>
   );
 }
 
-export default Login;
+export default QuemSomos;
