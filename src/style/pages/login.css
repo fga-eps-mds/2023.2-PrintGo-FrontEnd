@@ -131,6 +131,12 @@ button[type="button"] {
   left: 60%;
 }
 
+button:disabled {
+  background-color: #6C6C6C;
+  opacity: 65%;
+  cursor: not-allowed;
+}
+
 @media (max-width: 1210px) {
   .container {
     display: flex;
