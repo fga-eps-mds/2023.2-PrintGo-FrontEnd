@@ -22,7 +22,6 @@ return(
             <img src={Imagem_Homen} alt="Imagem de um homem ruivo"/>
         </div> 
     </div>
-    
 );
 
 }
