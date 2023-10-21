@@ -1,0 +1,20 @@
+/* CustomButton.css */
+.button {
+    width: 17vw;
+    height: 8vh;
+    padding: 10px 20px;
+    border-radius: 60px;
+    cursor: pointer;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    border: 2px solid var(--border-color);
+    font-style:normal ;
+    font-family: inherit;
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+
