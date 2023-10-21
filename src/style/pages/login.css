@@ -27,3 +27,12 @@ h2 {
     font-weight: 400;
     color: #003366; /* Cor do texto */
 }
+
+/* Estilos para a imagem "pessoas" */
+.pessoas {
+  width: 468px;
+  height: 625.39px;
+  position: absolute;
+  top: 90px;
+  left: 128px;
+}

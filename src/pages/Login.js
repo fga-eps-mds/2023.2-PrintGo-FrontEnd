@@ -5,6 +5,7 @@ import pessoas from '../assets/pessoas.png';
 function Login() {
   return (
     <div className="login-container">
+      <img src={pessoas} alt="Pessoas" className="pessoas" />
       <div className="login-box">
         <div className="login-box-content">
           <h2>Entrar</h2>
