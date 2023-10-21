@@ -19,6 +19,7 @@ function Login() {
               <input type="password" id="password" name="password" />
             </div>
             <button type="submit">LOGIN</button>
+            <button type="button">Recuperar senha</button>
           </form>
         </div>
       </div>
