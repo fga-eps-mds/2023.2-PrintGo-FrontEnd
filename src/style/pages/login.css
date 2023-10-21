@@ -1,0 +1,29 @@
+/* Estilos para a caixa de login */
+.login-box {
+    width: 26.75rem;
+    height: 33.5rem;
+    position: absolute;
+    top: 6.875rem;
+    left: 49.625rem;
+    border: 0.063rem 25% #000000; /* Adicione a cor desejada para a borda */
+    background-color: #ffffff; /* Cor de fundo da caixa de login */
+    box-shadow: 0.25rem 0.25rem 0.625rem 0rem #00000040; /* Sombra */
+  }
+  
+  /* Estilos para o conteúdo da caixa de login, como campos de entrada, botões, etc. */
+  .login-box-content {
+    padding: 0.625rem;
+  }
+
+  /* Estilos para o título "Entrar" */
+h2 {
+    width: 8.625rem;
+    height: 3.813rem;
+    position: absolute;
+    left: 1.25rem;
+    bottom: 26.25rem;
+    font-family: 'Overpass', sans-serif; 
+    font-size: 3rem;
+    font-weight: 400;
+    color: #003366; /* Cor do texto */
+}
