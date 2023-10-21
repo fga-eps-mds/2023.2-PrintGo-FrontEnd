@@ -28,11 +28,105 @@ h2 {
     color: #003366; /* Cor do texto */
 }
 
+/* Estilos para o rótulo "e-mail" */
+label[for="username"] {
+  width: 8.625rem;
+  height: 3.813rem;
+  position: absolute;
+  right: 19.25rem;
+  bottom: 23.75rem;
+  font-family: 'Overpass', sans-serif; 
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: 0.05rem;
+  text-align: center;
+  color: #003366;
+
+}
+
+/* Estilos para o campo de entrada de e-mail */
+input#username {
+  width: 18.75rem;
+  height: 1.563rem;
+  position: absolute;
+  right: 5.625rem;
+  bottom: 23.75rem;
+  border: 0.063rem solid #003366; /* Cor da borda do campo de entrada */
+  padding: 0.313rem; /* Adicione preenchimento interno conforme necessário */
+  border-radius: 0.625rem; 
+}
+
+/* Estilos para o rótulo "senha" */
+label[for="password"] {
+  width: 8.625rem;
+  height: 3.81375rem;
+  position: absolute;
+  right: 19.25rem;
+  bottom: 18.75rem;
+  font-family: 'Overpass', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: 0.05rem;
+  text-align: center;
+  color: #003366;
+}
+
+/* Estilos para o campo de entrada de senha */
+input#password {
+  width: 18.75rem;
+  height: 1.5625rem;
+  position: absolute;
+  right: 5.625rem;
+  bottom: 18.75rem;
+  border: 0.0625rem solid #003366;
+  padding: 0.3125rem;
+  border-radius: 0.625rem;
+}
+
+/* Estilos para o botão "LOGIN" */
+button[type="submit"] {
+  width: 16.4375rem;
+  height: 2.5625rem;
+  position: absolute;
+  right: 6.25rem;
+  bottom: 12.5rem;
+  border-radius: 3.125rem;
+  border: none;
+  background-color: #003366;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 2.5625rem;
+  cursor: pointer;
+}
+
+/* Estilos para o botão "Recuperar senha" */
+button[type="button"] {
+  width: 16.4375rem;
+  height: 2.5625rem;
+  position: absolute;
+  right: 6.25rem;
+  bottom: 6.25rem;
+  font-family: 'Overpass', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  letter-spacing: 0.05rem;
+  text-align: center;
+  background-color: transparent;
+  color: #006633;
+  border: none;
+  cursor: pointer;
+}
+
 /* Estilos para a imagem "pessoas" */
 .pessoas {
-  width: 468px;
-  height: 625.39px;
+  width: 29.25rem;
+  height: 39.086875rem;
   position: absolute;
-  top: 90px;
-  left: 128px;
+  top: 5.625rem;
+  left: 8rem;
 }

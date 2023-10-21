@@ -9,6 +9,17 @@ function Login() {
       <div className="login-box">
         <div className="login-box-content">
           <h2>Entrar</h2>
+          <form>
+            <div className="form-group">
+              <label htmlFor="username">e-mail</label>
+              <input type="text" id="username" name="username" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">senha</label>
+              <input type="password" id="password" name="password" />
+            </div>
+            <button type="submit">LOGIN</button>
+          </form>
         </div>
       </div>
     </div>
