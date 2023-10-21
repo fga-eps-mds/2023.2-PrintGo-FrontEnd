@@ -18,18 +18,21 @@ export default function ChangePassword() {
                                 <label>Nova Senha</label>
                                 <input 
                                     type="password"
+                                    placeholder="*****************"
+                                    className="input-field"
                                 />
                             </div>
                             <div className="input-form-container">
                                 <label>Repita a senha</label>
                                 <input 
                                     type="password"
+                                    placeholder="*****************"
+                                    className="input-field"
                                 />
                             </div>
                         </div>
                         <div className="button-container">
                             <input type="submit" value="Confirmar" className="button"/>
-                            
                         </div>
 
                         
