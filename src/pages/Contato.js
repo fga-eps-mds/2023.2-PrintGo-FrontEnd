@@ -10,17 +10,25 @@ export default function Contato(){
 return(
    
     <div className="Main-page">
+        <h1>Contato</h1>
         <div className="Contato-principal">
-            <h1>Contato</h1>
             <div className="Box-contato">
                 <p>Contato</p>
+                <div className="Input-contato">
+                    <Input label="Nome" placeholder="Nome" />
+                    <Input label="E-mail" placeholder="Email" />
+                </div>
+                <div className="Assunto-input">
+                    <Input label="Assunto" placeholder="Email" className="larger-input" />
+                </div>
+                <div className="button-div">
+                    <button className="Enviar-button">Enviar</button>
+                </div>
             </div>
-            <Input label="Nome:" placeholder="Digite seu nome" />
-            <button className="Enviar-button">Enviar</button>
+            <div className="Imagem">
+                <img src={Imagem_Homen} alt="Imagem de um homem ruivo"/>
+            </div> 
         </div>
-        <div className="Imagem">
-            <img src={Imagem_Homen} alt="Imagem de um homem ruivo"/>
-        </div> 
     </div>
 );
 

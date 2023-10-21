@@ -1,13 +1,14 @@
 import React from "react";
-import "../style/components/input.css";
+import "../style/components/input.css"
 
 export default function Input(props) {
     return (
-        <div className="input">
+        <div className="Input">
             <label>
                 {props.label}
-                <input placeholder={props.placeholder} />
             </label>
+            <input placeholder={props.placeholder} className={props.className}/>
         </div>
     );
 }
+

@@ -1,0 +1,26 @@
+
+.Input input{
+    border: 1px solid #036;
+    border-color: #036;
+    border-radius: 7.5px;
+    letter-spacing: 0.8px;
+    padding-left: 5px;
+    outline: none;
+    height: 1.1rem;
+}
+
+.Input{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.Input label {
+    color: #036;;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    letter-spacing: 0.8px;
+
+}
