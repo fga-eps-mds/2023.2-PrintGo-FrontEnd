@@ -5,28 +5,40 @@ import elipse6 from '../assets/elipse6.png';
 
 export default function ChangePassword() {
     return (
-        <div className="change-password-page">
-            <div className="people">
-                <img src={people} alt="Pessoas" />
+        <div className="change-password-container">
+            <div className="image-container">
+                <img src={people} alt="Pessoas"/>
             </div>
-            <div className="change-password-box">
-                <div className="password-box">
-                    <div className="password-box-content">
-                        <div className="form-title">Mudar Senha</div>
-                        <form className="password-form">
-                            <div className="queijo">
-                                
+            <div className="form-container">
+                <form className="form">
+                    <div className="input-container">
+                        <div className="form-title">Mudar senha</div>
+                        <div className="form-group">
+                            <div className="input-form-container">
+                                <label>Nova Senha</label>
+                                <input 
+                                    type="password"
+                                />
                             </div>
-                            <div className="pedro">
-                                
+                            <div className="input-form-container">
+                                <label>Repita a senha</label>
+                                <input 
+                                    type="password"
+                                />
                             </div>
-                            <div className="botao">
-                                <button type="submit">Mudar senha</button>
-                            </div>
-                        </form>
+                        </div>
+                        <div className="button-container">
+                            <input type="submit" value="Confirmar" className="button"/>
+                            
+                        </div>
+
+                        
                     </div>
+                </form>
+
+                <div className="elipse">
+                    <img src={elipse6}></img>
                 </div>
-                <img src={elipse6} alt="Elipse" className="elipse"/>
             </div>
         </div>
     )
