@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# PrintGo Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fga-eps-mds_2023.2-PrintGo-FrontEnd&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fga-eps-mds_2023.2-PrintGo-FrontEnd)
+
+[![codecov](https://codecov.io/gh/fga-eps-mds/2023.2-PrintGo-FrontEnd/graph/badge.svg?token=Lw95zaXoXc)](https://codecov.io/gh/fga-eps-mds/2023.2-PrintGo-FrontEnd)
 
 ## Available Scripts
 
