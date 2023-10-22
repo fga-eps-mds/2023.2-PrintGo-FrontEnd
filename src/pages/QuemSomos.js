@@ -7,7 +7,6 @@ function QuemSomos() {
 
   return (
     <div className="container">
-      <div className="ellipse"></div>
       <div className="texto">
         <h2>Quem Somos</h2>
         <p>
@@ -21,6 +20,8 @@ function QuemSomos() {
       <div className="logo">
        <img src={PoliciaCivilLogo} alt="PoliciaCivilLogo" className="PoliciaCivilLogo" /> 
       </div>
+
+      <div className="ellipse"></div>
 
       <div>
         <img src={pessoasDois} alt="PessoasDois" className="pessoasDois" />
