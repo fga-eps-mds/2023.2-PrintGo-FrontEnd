@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../style/components/signupform.css"
 import { useForm } from "react-hook-form";
 import { getLotacoes } from "../services/lotacaoService";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -59,51 +60,75 @@ export default function SignupForm(){
     }
 
     return(
-        <div>      
+        <div class="signup-container">
+            <header class="form-header">
+                Cadastro
+            </header>
+
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                    <input {...register("nome", {required: true} )} placeholder="Nome" />
-                    <span>{errors.nome?.message}</span>
+                <div class="input-group">
+                    <div class="input-box">
+                        <input {...register("nome", {required: true} )} placeholder="Nome" />
+                        <span>{errors.nome?.message}</span>
+                    </div>
+
+                    <div class="input-box">
+                        <p>Documento</p>
+                        <input {...register("documento", {required: true})} placeholder="CPF ou CNPF" />
+                    </div>
+
+                    <div class="input-box">
+                        <p>E-mail</p>
+                        <input {...register("email", {required: true} )} type="email" placeholder="Email" />
+                        <span>{errors.email?.message}</span>
+                    </div>
+
+                    <div class="input-box">
+                        <p>Confirmar E-mail</p>
+                        <input {...register("emailConfirmar", {required: true})} placeholder="Confirmar Email" />
+                        <span>{errors.emailConfirmar?.message}</span>
+                    </div>
+
+                    <div class="input-box">
+                        <p>Senha</p>
+                        <input {...register("senha", {required: true})} placeholder="Senha" type="password"/>
+                        <span>{errors.senha?.message}</span>
+                    </div>
+
+                    <div class="input-box">
+                        <p>Confirmar Senha</p>
+                        <input {...register("senhaConfirmar", {required: true})} placeholder="Confirmar Senha" type="password"/>
+                        <span>{errors.senhaConfirmar?.message}</span>
+                    </div>
+
+                    <div class="input-box">
+                        <p>Lotação</p>
+                        <select {...register("lotacao_id", {required: "Lotação é obrigatória"})}>
+                            <option value="">Selecione a Lotação</option>
+                            {lotacao.map((lotacao) => (
+                            <option key={lotacao.id} value={lotacao.id}>
+                                {lotacao.nome}
+                            </option>
+                            ))}
+                        </select>
+                        <span>{errors.lotacao_id?.message}</span>
+                    </div>
+
+                    <div class="input-box">
+                        <p>Cargo</p>
+                        <input
+                            type="checkbox"
+                            {...register("isAdmin")}
+                        />
+                        <p>Usuário é administrador?</p>
+                        <span>{errors.cargos?.message}</span>
+                    </div>
+
                 </div>
-                <div>
-                    <input {...register("email", {required: true} )} type="email" placeholder="Email" />
-                    <span>{errors.email?.message}</span>
-                </div>
-                <div>
-                    <input {...register("emailConfirmar", {required: true} )} type="email" placeholder="Confirmar email" />
-                    <span>{errors.emailConfirmar?.message}</span>    
-                </div>
-                <div>
-                    <input {...register("senha", {required: true} )} placeholder="Senha" type="password"/>
-                    <span>{errors.senha?.message}</span>
-                </div>
-                <div>
-                    <input {...register("senhaConfirmar", {required: true} )} placeholder="Confirmar Senha" type="password"/>
-                    <span>{errors.senhaConfirmar?.message}</span>
-                </div>
-                <div>
-                    <input {...register("documento", {required: true} )} placeholder="CPF ou CNPF" />
-                    <span>{errors.documento?.message}</span>
-                </div>
-                    <select {...register("lotacao_id", {required: "Lotação é obrigatória"})}>
-                        <option value="">Selecione a Lotação</option>
-                        {lotacao.map((lotacao) => (
-                        <option key={lotacao.id} value={lotacao.id}>
-                            {lotacao.nome}
-                        </option>
-                        ))}
-                    </select>
-                    <span>{errors.lotacao_id?.message}</span>
-                <div>
-                    <input
-                        type="checkbox"
-                        {...register("isAdmin")}
-                    />
-                    <p>Usuário é administrador?</p>
-                </div>
-                <div>
-                    <button type="button">CANCELAR</button>
-                    <button type="submit">REGISTAR</button>
+
+                <div class="buttons">
+                    <button type="button" class="cancelar-bnt">Cancelar</button>
+                    <button type="submit" class="registrar-bnt">REGISTRAR</button>
                 </div>
             </form>
         </div>
