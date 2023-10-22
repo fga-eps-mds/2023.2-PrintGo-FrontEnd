@@ -11,7 +11,7 @@ const signupSchema = yup.object().shape({
       .string()
       .email('Email inválido')
       .required('Email é obrigatório'),
-    emailCofirmar: yup
+    emailConfirmar: yup
       .string()
       .oneOf([yup.ref('email'), null], 'Os emails devem coincidir')
       .required('Confirmação de email é obrigatória'),
@@ -70,7 +70,7 @@ export default function SignupForm(){
                     <span>{errors.email?.message}</span>
                 </div>
                 <div>
-                    <input {...register("emailCofirmar", {required: true} )} type="email" placeholder="Confirmar email" />
+                    <input {...register("emailConfirmar", {required: true} )} type="email" placeholder="Confirmar email" />
                     <span>{errors.emailConfirmar?.message}</span>    
                 </div>
                 <div>
