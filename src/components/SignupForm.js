@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../style/components/signupform.css"
+import "../style/components/signupForm.css"
 import { useForm } from "react-hook-form";
 import { getLotacoes } from "../services/lotacaoService";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,13 +15,17 @@ const signupSchema = yup.object().shape({
     emailConfirmar: yup
       .string()
       .oneOf([yup.ref('email'), null], 'Os emails devem coincidir')
-      .required('Confirmação de email é obrigatória'),
+      .required('Email é obrigatória'),
     senha: yup.string().required('Senha é obrigatória'),
     senhaConfirmar: yup
       .string()
       .oneOf([yup.ref('senha'), null], 'As senhas devem coincidir')
-      .required('Confirmação de senha é obrigatória'),
-    documento: yup.string().required('CPF ou CNPF é obrigatório'),
+      .required('Senha é obrigatória'),
+    documento: yup.string()
+    .matches(/^(\d{11}|\d{14})$/, 'CPF ou CNPJ inválido')
+    .test('cpfOrCnpj', 'CPF ou CNPJ inválido', value => {
+        return value.length === 11 || value.length === 14;
+    }),
     lotacao_id: yup.string().required('Lotação é obrigatória'),
     isAdmin: yup.boolean(),
   });
@@ -60,75 +64,82 @@ export default function SignupForm(){
     }
 
     return(
-        <div class="signup-container">
-            <header class="form-header">
+        <div className="signup-card">
+            <header className="form-header">
                 Cadastro
             </header>
-
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div class="input-group">
-                    <div class="input-box">
-                        <input {...register("nome", {required: true} )} placeholder="Nome" />
-                        <span>{errors.nome?.message}</span>
+                <div className="input-group">
+                    <div className="input-line">
+                        <div className="input-box">
+                            <label>Nome<span>*</span></label>
+                            <input {...register("nome", {required: true} )} placeholder="Nome" />
+                            <span>{errors.nome?.message}</span>
+                        </div>
+
+                        <div className="input-box">
+                            <label>Documento<span>*</span></label>
+                            <input {...register("documento", {required: true})} type="number" placeholder="CPF ou CNPF" />
+                            <span>{errors.documento?.message}</span>
+                        </div>
+                    </div>
+                    <div className="input-line">
+                        <div className="input-box">
+                            <label>E-mail<span>*</span></label>
+                            <input {...register("email", {required: true} )} type="email" placeholder="Email" />
+                            <span>{errors.email?.message}</span>
+                        </div>
+
+                        <div className="input-box">
+                            <label>Confirmar E-mail<span>*</span></label>
+                            <input {...register("emailConfirmar", {required: true})} placeholder="Confirmar Email" />
+                            <span>{errors.emailConfirmar?.message}</span>
+                        </div>
                     </div>
 
-                    <div class="input-box">
-                        <p>Documento</p>
-                        <input {...register("documento", {required: true})} placeholder="CPF ou CNPF" />
+                    <div className="input-line">
+                        <div className="input-box">
+                            <label>Senha<span>*</span></label>
+                            <input {...register("senha", {required: true})} placeholder="Senha" type="password"/>
+                            <span>{errors.senha?.message}</span>
+                            <p className="input-description">A senha deve conter 1 letra maiuscula, 1 minuscula, 1 numero e um caractere especial</p>
+                        </div>
+                        <div className="input-box">
+                            <label>Confirmar Senha<span>*</span></label>
+                            <input {...register("senhaConfirmar", {required: true})} placeholder="Confirmar Senha" type="password"/>
+                            <span>{errors.senhaConfirmar?.message}</span>
+                        </div>
                     </div>
-
-                    <div class="input-box">
-                        <p>E-mail</p>
-                        <input {...register("email", {required: true} )} type="email" placeholder="Email" />
-                        <span>{errors.email?.message}</span>
+                    <div className="input-line">
+                        <div className="input-box">
+                            <label>Lotação <span>*</span></label>
+                            <select {...register("lotacao_id", {required: "Lotação é obrigatória"})}>
+                                <option value="">Selecione a Lotação</option>
+                                {lotacao.map((lotacao) => (
+                                <option key={lotacao.id} value={lotacao.id}>
+                                    {lotacao.nome}
+                                </option>
+                                ))}
+                            </select>
+                            <span>{errors.lotacao_id?.message}</span>
+                        </div>
                     </div>
-
-                    <div class="input-box">
-                        <p>Confirmar E-mail</p>
-                        <input {...register("emailConfirmar", {required: true})} placeholder="Confirmar Email" />
-                        <span>{errors.emailConfirmar?.message}</span>
+                    <div className="input-line">
+                        <div className="input-box">
+                            <div className="input-checkbox">
+                                <input
+                                    type="checkbox"
+                                    {...register("isAdmin")}
+                                />
+                                <label>Usuário é administrador?</label>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="input-box">
-                        <p>Senha</p>
-                        <input {...register("senha", {required: true})} placeholder="Senha" type="password"/>
-                        <span>{errors.senha?.message}</span>
-                    </div>
-
-                    <div class="input-box">
-                        <p>Confirmar Senha</p>
-                        <input {...register("senhaConfirmar", {required: true})} placeholder="Confirmar Senha" type="password"/>
-                        <span>{errors.senhaConfirmar?.message}</span>
-                    </div>
-
-                    <div class="input-box">
-                        <p>Lotação</p>
-                        <select {...register("lotacao_id", {required: "Lotação é obrigatória"})}>
-                            <option value="">Selecione a Lotação</option>
-                            {lotacao.map((lotacao) => (
-                            <option key={lotacao.id} value={lotacao.id}>
-                                {lotacao.nome}
-                            </option>
-                            ))}
-                        </select>
-                        <span>{errors.lotacao_id?.message}</span>
-                    </div>
-
-                    <div class="input-box">
-                        <p>Cargo</p>
-                        <input
-                            type="checkbox"
-                            {...register("isAdmin")}
-                        />
-                        <p>Usuário é administrador?</p>
-                        <span>{errors.cargos?.message}</span>
-                    </div>
-
                 </div>
 
-                <div class="buttons">
-                    <button type="button" class="cancelar-bnt">Cancelar</button>
-                    <button type="submit" class="registrar-bnt">REGISTRAR</button>
+                <div className="buttons">
+                    <button type="button" className="cancelar-bnt">CANCELAR</button>
+                    <button type="submit" className="registrar-bnt">REGISTRAR</button>
                 </div>
             </form>
         </div>

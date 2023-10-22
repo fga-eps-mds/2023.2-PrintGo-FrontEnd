@@ -1,6 +1,15 @@
-* {
-    padding: 0;
-    margin: 0;
-    background-color: #FFFFFF;
-    box-sizing: border-box;
+.signup-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.signup-container img{
+    margin-left: 10rem;
+}
+
+@media (max-width: 900px) {
+    .input-line {
+        display: block; 
+    }
 }
