@@ -1,0 +1,76 @@
+.signup-container {
+    position: fixed;
+    top: 20vh;
+    right: 10vw;
+    width: 35vw;
+    height: 65vh;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    padding: 30px 30px;
+}
+
+.form-header {
+    width: 100%;
+    color: #003366;
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 16px 0;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.input-box p {
+    color: #003366;
+}
+
+.input-box input{
+    font-size: 16px;
+    width: 100%;
+    border: 1px solid #003366;
+    border-color: #003366;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 16px 0;
+}
+
+.buttons button {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.cancelar-bnt {
+    background-color: #003366;
+}
+
+.registrar-bnt {
+    background-color: #006633;
+}

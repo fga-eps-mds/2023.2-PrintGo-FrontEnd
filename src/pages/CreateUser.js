@@ -1,3 +1,4 @@
+import "../style/pages/createUser.css"
 import React from "react";
 import SignupForm from "../components/SignupForm";
 
