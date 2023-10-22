@@ -1,0 +1,148 @@
+
+body {
+  font-family: 'Overpass', sans-serif;
+  display: block;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  gap: 12.375rem;
+  padding: 6.25rem 13.625rem 0 8rem;
+  background-color: transparent !important;
+}
+
+/* Estilos para a caixa de login */
+.login-box {
+  z-index: 100;
+  width: 26.75rem;
+  height: 33.5rem;
+  background-color: #ffffff; /* Cor de fundo da caixa de login */
+  border-radius: 0.625rem;
+  box-shadow: 4px 4px 15px 0px rgba(0, 0, 0, 0.25);
+}
+  
+  /* Estilos para o conteúdo da caixa de login, como campos de entrada, botões, etc. */
+.login-box-content {
+  padding: 0 2.81rem 0 2.96rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
+}
+
+  /* Estilos para o título "Entrar" */
+h2 {
+  font-size: 3rem;
+  font-weight: 400;
+  color: #003366; /* Cor do texto */
+  padding-top: 1.75rem;
+}
+
+label {
+  margin-bottom: 0.5rem;
+}
+
+/* Estilos para o rótulo "e-mail" */
+label {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: 0.05rem;
+  text-align: left;
+  color: #003366;
+}
+
+/* Estilos para o campo de entrada de e-mail */
+input{
+  height: 2.1875rem;
+  border: 0.063rem solid #003366; /* Cor da borda do campo de entrada */
+  border-radius: 0.625rem; 
+  text-indent: 0.75rem;
+}
+
+input::placeholder {
+  color: #6C6C6C;
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+}
+
+/* Estilos para o botão "LOGIN" */
+button[type="submit"] {
+  width: 16.4375rem;
+  height: 2.5625rem;
+  border-radius: 3.125rem;
+  border: none;
+  background-color: #003366;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 2.5625rem;
+  letter-spacing: 0.05625rem;
+  cursor: pointer;
+}
+
+.button-container {
+  display: grid;
+  justify-content: center;
+}
+
+/* Estilos para o botão "Recuperar senha" */
+button[type="button"] {
+  width: 16.4375rem;
+  height: 2.5625rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  letter-spacing: 0.05rem;
+  text-align: center;
+  background-color: transparent;
+  color: #006633;
+  border: none;
+  cursor: pointer;
+}
+
+/* Estilos para a imagem "pessoas" */
+.pessoas {
+  width: 29.25rem;
+  height: 39.086875rem;
+}
+
+.buttons {
+  padding-top: 3.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.06rem;
+}
+
+.ellipse {
+  z-index:-100;
+  width: 48.29838rem;
+  height: 62.73281rem;
+  transform: rotate(-145.25deg);
+  flex-shrink: 0;
+  border-radius: 62.73281rem;
+  background: #036;
+  position: absolute;
+  top: 3%;
+  left: 60%;
+}
+
+button:disabled {
+  background-color: #6C6C6C;
+  opacity: 65%;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1210px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    padding-left: 2rem;
+    align-items: center;
+  }
+}
