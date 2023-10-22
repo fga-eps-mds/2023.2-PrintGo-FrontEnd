@@ -1,14 +1,15 @@
 
 body {
   font-family: 'Overpass', sans-serif;
-  /* display: block;
-  overflow: hidden; */
+  display: block;
+  overflow: hidden;
 }
 
 .container {
   display: flex;
   gap: 12.375rem;
   padding: 6.25rem 13.625rem 0 8rem;
+  background-color: transparent !important;
 }
 
 /* Estilos para a caixa de login */
@@ -23,7 +24,6 @@ body {
   
   /* Estilos para o conteúdo da caixa de login, como campos de entrada, botões, etc. */
 .login-box-content {
-  z-index: 100;
   padding: 0 2.81rem 0 2.96rem;
 }
 
