@@ -12,6 +12,7 @@
 .Input{
     display: flex;
     flex-direction: column;
+    
 }
 
 
@@ -22,5 +23,5 @@
     font-weight: bold;
     line-height: normal;
     letter-spacing: 0.8px;
-
+    padding-bottom: 0.5rem;
 }

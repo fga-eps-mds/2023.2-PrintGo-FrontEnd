@@ -62,16 +62,34 @@
     cursor: pointer;
 }
 
-.Input input.larger-input {
-    width: 29rem ;
-    height: 10rem;
-}
-
 .Assunto-input{
     margin-left: auto;
     margin-right: auto;
     margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
 }
+
+.Assunto-input label{
+    color: #036;;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    padding-bottom: 0.5rem;
+}
+
+.Larger-input{
+    width: 28rem;
+    height: 12rem;
+    border: 1px solid #036;
+    border-color: #036;
+    border-radius: 7.5px;
+    padding-left: 5px;
+    outline: none;
+}
+
+
 
 h1{
     color: #036;

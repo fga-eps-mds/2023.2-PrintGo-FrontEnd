@@ -19,7 +19,8 @@ return(
                     <Input label="E-mail" placeholder="Email" />
                 </div>
                 <div className="Assunto-input">
-                    <Input label="Assunto" placeholder="Email" className="larger-input" />
+                    <label>Assunto</label>
+                    <textarea placeholder="Assunto" className="Larger-input"/>
                 </div>
                 <div className="button-div">
                     <button className="Enviar-button">Enviar</button>
