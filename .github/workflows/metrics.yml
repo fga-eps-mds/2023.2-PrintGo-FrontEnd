@@ -16,13 +16,6 @@ jobs:
               with:
                   fetch-depth: 0
 
-            - name: Cria arquivo .env
-              run: |
-                  touch ./scripts/.env
-                  echo TOKEN=${{ secrets.API_TOKEN_GITHUB }} >> ./scripts/.env
-                  echo RELEASE_MAJOR=${{ contains(github.event.pull_request.labels.*.name, 'MAJOR RELEASE') }} >> ./scripts/.env
-                  echo RELEASE_MINOR=${{ contains(github.event.pull_request.labels.*.name, 'MINOR RELEASE') }} >> ./scripts/.env
-
             - name: Gera release e envia métricas para repositório de DOC
               run: |
                   cd scripts && yarn install && node release.js
