@@ -1,97 +1,78 @@
+
+body {
+  font-family: 'Overpass', sans-serif;
+  display: block;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  gap: 12.375rem;
+  padding: 6.25rem 13.625rem 0 8rem;
+  background-color: transparent !important;
+}
+
 /* Estilos para a caixa de login */
 .login-box {
-    width: 26.75rem;
-    height: 33.5rem;
-    position: absolute;
-    top: 6.875rem;
-    left: 49.625rem;
-    border: 0.063rem 25% #000000; /* Adicione a cor desejada para a borda */
-    background-color: #ffffff; /* Cor de fundo da caixa de login */
-    box-shadow: 0.25rem 0.25rem 0.625rem 0rem #00000040; /* Sombra */
-  }
+  z-index: 100;
+  width: 26.75rem;
+  height: 33.5rem;
+  background-color: #ffffff; /* Cor de fundo da caixa de login */
+  border-radius: 0.625rem;
+  box-shadow: 4px 4px 15px 0px rgba(0, 0, 0, 0.25);
+}
   
   /* Estilos para o conteúdo da caixa de login, como campos de entrada, botões, etc. */
-  .login-box-content {
-    padding: 0.625rem;
-  }
+.login-box-content {
+  padding: 0 2.81rem 0 2.96rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
+}
 
   /* Estilos para o título "Entrar" */
 h2 {
-    width: 8.625rem;
-    height: 3.813rem;
-    position: absolute;
-    left: 1.25rem;
-    bottom: 26.25rem;
-    font-family: 'Overpass', sans-serif; 
-    font-size: 3rem;
-    font-weight: 400;
-    color: #003366; /* Cor do texto */
+  font-size: 3rem;
+  font-weight: 400;
+  color: #003366; /* Cor do texto */
+  padding-top: 1.75rem;
+}
+
+label {
+  margin-bottom: 0.5rem;
 }
 
 /* Estilos para o rótulo "e-mail" */
-label[for="username"] {
-  width: 8.625rem;
-  height: 3.813rem;
-  position: absolute;
-  right: 19.25rem;
-  bottom: 23.75rem;
-  font-family: 'Overpass', sans-serif; 
+label {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25rem;
   letter-spacing: 0.05rem;
-  text-align: center;
+  text-align: left;
   color: #003366;
-
 }
 
 /* Estilos para o campo de entrada de e-mail */
-input#username {
-  width: 18.75rem;
-  height: 1.563rem;
-  position: absolute;
-  right: 5.625rem;
-  bottom: 23.75rem;
+input{
+  height: 2.1875rem;
   border: 0.063rem solid #003366; /* Cor da borda do campo de entrada */
-  padding: 0.313rem; /* Adicione preenchimento interno conforme necessário */
   border-radius: 0.625rem; 
+  text-indent: 0.75rem;
 }
 
-/* Estilos para o rótulo "senha" */
-label[for="password"] {
-  width: 8.625rem;
-  height: 3.81375rem;
-  position: absolute;
-  right: 19.25rem;
-  bottom: 18.75rem;
-  font-family: 'Overpass', sans-serif;
+input::placeholder {
+  color: #6C6C6C;
   font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.25rem;
   letter-spacing: 0.05rem;
-  text-align: center;
-  color: #003366;
-}
-
-/* Estilos para o campo de entrada de senha */
-input#password {
-  width: 18.75rem;
-  height: 1.5625rem;
-  position: absolute;
-  right: 5.625rem;
-  bottom: 18.75rem;
-  border: 0.0625rem solid #003366;
-  padding: 0.3125rem;
-  border-radius: 0.625rem;
 }
 
 /* Estilos para o botão "LOGIN" */
 button[type="submit"] {
   width: 16.4375rem;
   height: 2.5625rem;
-  position: absolute;
-  right: 6.25rem;
-  bottom: 12.5rem;
   border-radius: 3.125rem;
   border: none;
   background-color: #003366;
@@ -100,21 +81,23 @@ button[type="submit"] {
   font-weight: 700;
   text-align: center;
   line-height: 2.5625rem;
+  letter-spacing: 0.05625rem;
   cursor: pointer;
+}
+
+.button-container {
+  display: grid;
+  justify-content: center;
 }
 
 /* Estilos para o botão "Recuperar senha" */
 button[type="button"] {
   width: 16.4375rem;
   height: 2.5625rem;
-  position: absolute;
-  right: 6.25rem;
-  bottom: 6.25rem;
-  font-family: 'Overpass', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.25rem;
-  letter-spacing: 5%;
+  letter-spacing: 0.05rem;
   text-align: center;
   background-color: transparent;
   color: #006633;
@@ -126,7 +109,40 @@ button[type="button"] {
 .pessoas {
   width: 29.25rem;
   height: 39.086875rem;
+}
+
+.buttons {
+  padding-top: 3.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.06rem;
+}
+
+.ellipse {
+  z-index:-100;
+  width: 48.29838rem;
+  height: 62.73281rem;
+  transform: rotate(-145.25deg);
+  flex-shrink: 0;
+  border-radius: 62.73281rem;
+  background: #036;
   position: absolute;
-  top: 5.625rem;
-  left: 8rem;
+  top: 3%;
+  left: 60%;
+}
+
+button:disabled {
+  background-color: #6C6C6C;
+  opacity: 65%;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1210px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    padding-left: 2rem;
+    align-items: center;
+  }
 }
