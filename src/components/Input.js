@@ -7,7 +7,7 @@ export default function Input(props) {
             <label>
                 {props.label}
             </label>
-            <input placeholder={props.placeholder} className={props.className}/>
+            <input placeholder={props.placeholder} className={props.className} onChange={props.onChange}/>
         </div>
     );
 }
