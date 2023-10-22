@@ -5,8 +5,7 @@ import logo from "../assets/logo 3.svg";
 export default function NavbarSimple(){
 
 return(
-   
-    <div className="fundo">
+  
         <div className="container">
             <img src={logo}></img>
             <div className="Botoes"> 
@@ -27,7 +26,7 @@ return(
             </button>
             </div>
         </div>
-    </div>
+ 
     
 
 
