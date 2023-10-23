@@ -7,10 +7,32 @@ export async function login(email, password) {
   };
 
   try {
-    const response = await axios.post('http://localhost:3001/user/login', data);
+    const response = await axios.post('http://localhost:8000/user/login', data);
     return response.data.token;
   } catch (error) {
     console.error('Erro ao fazer login:', error);
     throw error;
+  }
+}
+
+export async function changePassword(newPassword, newPasswordConfirmation) {
+  const token = localStorage.getItem('jwt')
+
+  const headers = {
+    'Authorization': token
+  }
+
+  const data = {
+    novaSenha: newPassword,
+    confirmacaoNovaSenha: newPasswordConfirmation,
+  }
+
+  try {
+    const response = await axios.post('http://localhost:8000/user/change-password', data, { headers })
+
+    return response
+  } catch(error) {
+    console.log('Erro ao trocar de senha', error)
+    throw error
   }
 }
