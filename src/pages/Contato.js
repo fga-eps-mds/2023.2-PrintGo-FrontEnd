@@ -3,7 +3,7 @@ import "../style/pages/contato.css";
 import Imagem_Homen from "../assets/imagem-homen-ruivo.svg";
 import Input from "../components/Input";
 import emailjs from "@emailjs/browser";
-import NavbarSimple from "../components/NavbarSimple"
+
 
 export default function Contato() {
   const [nome, setNome] = useState('');
@@ -36,7 +36,6 @@ export default function Contato() {
 
   return (
     <div className="Main-page-contato">
-      <NavbarSimple></NavbarSimple>
       <h1>Contato</h1>
       <div className="Contato-principal">
         <div className="Box-contato">
