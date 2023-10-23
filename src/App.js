@@ -4,6 +4,7 @@ import Home from "./pages/Home"
 import Login from "./pages/Login";
 import Contato from "./pages/Contato";
 import QuemSomos from "./pages/QuemSomos";
+import ChangePassword from "./pages/ChangePassword";
 
 
 
@@ -16,6 +17,7 @@ function App(){
       <Route path="/login" element={<Login/>}/>
       <Route path="/contato" element={<Contato/>}/>
       <Route path="/quemsomos" element={<QuemSomos/>}/>
+      <Route path="/changePassword" element={<ChangePassword/>}/>
     </Routes>
     </BrowserRouter>
   );
