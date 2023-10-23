@@ -3,14 +3,13 @@ import  "../style/pages/home.css";
 import Button from "../components/Button";
 import home_image from '../assets/home_image.svg';
 import elipse from '../assets/home_elipse.svg';
-import NavbarSimple from "../components/NavbarSimple"
+
 
 
 
 export default function Home(){
     return(
     <div className="homepage">
-        <NavbarSimple></NavbarSimple>
         <div className="content-home">
                 <div className="left-content-home">
                     <div className="aligned-content">
