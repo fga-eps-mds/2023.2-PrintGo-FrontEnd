@@ -1,11 +1,20 @@
+
 body {
     font-family: 'Overpass', sans-serif;
     display: block;
     overflow: hidden;
 }
 
+.container-about-us{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .texto {
-    position: absolute;
+    
     width: 40%;
     top: 15%;
     left: 30%;
@@ -22,6 +31,7 @@ h2 {
 
 p {
     text-align: justify;
+    font-size: 19px;
 }
 
 label {
@@ -53,7 +63,7 @@ input::placeholder {
     text-align: center;
 }
 
-.ellipse {
+.ellipse-about-us {
     z-index: -100;
     width: 48.29838rem;
     height: 62.73281rem;
