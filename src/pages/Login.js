@@ -46,12 +46,12 @@ function Login() {
       <div className="container">
         <img src={pessoas} alt="Pessoas" className="pessoas" />
         <div>
-          <div className="ellipse"/>
+          <div className="ellipse-login"/>
           <div className="login-box">
             <div className="login-box-content">
               <h2>Entrar</h2>
               <form onSubmit={handleSubmit}>
-                <div className="form-group">
+                <div className="form-group-login">
                   <label htmlFor="username">e-mail</label>
                   <input 
                     type="text" 
@@ -63,7 +63,7 @@ function Login() {
                   />
                   {error && <h5 style={{color: 'red'}}>{error}</h5>}
                 </div>
-                <div className="form-group">
+                <div className="form-group-login">
                   <label htmlFor="password">senha</label>
                   <input 
                     type="password" 
@@ -74,11 +74,11 @@ function Login() {
                     onChange={(e) => setPassword(e.target.value)} 
                   />
                 </div>
-                <div className="buttons">
-                  <div className="button-container">
+                <div className="buttons-login">
+                  <div className="button-login-container">
                     <button type="submit" disabled={!isFormValid}>LOGIN</button>
                   </div>
-                  <div className="button-container">
+                  <div className="button-login-container">
                     <button type="button">Recuperar senha</button>
                   </div>
                 </div>

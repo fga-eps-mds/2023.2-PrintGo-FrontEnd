@@ -16,18 +16,21 @@ body {
 .login-box {
   z-index: 100;
   width: 26.75rem;
-  height: 33.5rem;
+  height: 30rem;
   background-color: #ffffff; /* Cor de fundo da caixa de login */
   border-radius: 0.625rem;
   box-shadow: 4px 4px 15px 0px rgba(0, 0, 0, 0.25);
+  
 }
   
   /* Estilos para o conteúdo da caixa de login, como campos de entrada, botões, etc. */
 .login-box-content {
   padding: 0 2.81rem 0 2.96rem;
+  
+  height: 30rem;
 }
 
-.form-group {
+.form-group-login {
   display: flex;
   flex-direction: column;
   padding-bottom: 1rem;
@@ -85,7 +88,7 @@ button[type="submit"] {
   cursor: pointer;
 }
 
-.button-container {
+.button-login-container {
   display: grid;
   justify-content: center;
 }
@@ -108,27 +111,33 @@ button[type="button"] {
 /* Estilos para a imagem "pessoas" */
 .pessoas {
   width: 29.25rem;
-  height: 39.086875rem;
+  height: 33rem;
 }
 
-.buttons {
-  padding-top: 3.4rem;
+.buttons-login {
+  padding-top: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 3.06rem;
+  align-items: center;
+  
+  gap: 1rem;
+  
+  height: 10vh;
 }
 
-.ellipse {
+.ellipse-login {
   z-index:-100;
-  width: 48.29838rem;
-  height: 62.73281rem;
+  width: 55rem;
+  height: 48rem;
   transform: rotate(-145.25deg);
   flex-shrink: 0;
   border-radius: 62.73281rem;
+  /*border-top-left-radius: 0;
+  border-bottom-left-radius: 65rem;*/
   background: #036;
   position: absolute;
-  top: 3%;
-  left: 60%;
+  margin-left: 1px;
+  top:1px;
 }
 
 button:disabled {
