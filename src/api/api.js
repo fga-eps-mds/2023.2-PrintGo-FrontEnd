@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL;
+const API_PORT = process.env.REACT_APP_API_PORT;
+
 export async function login(email, password) {
   const data = {
     email: email,
@@ -7,7 +10,7 @@ export async function login(email, password) {
   };
 
   try {
-    const response = await axios.post('http://localhost:8000/user/login', data);
+    const response = await axios.post(`${API_URL}:${API_PORT}/user/login`, data);
     return response.data.token;
   } catch (error) {
     console.error('Erro ao fazer login:', error);
