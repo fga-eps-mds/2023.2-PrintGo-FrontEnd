@@ -5,7 +5,7 @@ body {
   overflow: hidden; */
 }
 
-.container {
+.container-login {
   display: flex;
   gap: 12.375rem;
   padding: 6.25rem 13.625rem 0 8rem;

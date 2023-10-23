@@ -43,7 +43,7 @@ function Login() {
   const isFormValid =  email && password;
 
   return (
-      <div className="container">
+      <div className="container-login">
         <img src={pessoas} alt="Pessoas" className="pessoas" />
         <div>
           <div className="ellipse-login"/>
