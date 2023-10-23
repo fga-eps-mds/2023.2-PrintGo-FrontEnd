@@ -10,13 +10,13 @@
   font-family: var(--font-jost);
   /*background-color: blueviolet;*/
 }
-.right-content{
+.right-content-home{
   padding: 15px;
   height: 80vh;
   width: 50vw;
   /*background-color: blueviolet;*/
 }
-.left-content{
+.left-content-home{
   height: 100vh;
   width: auto;
   display: flex;
@@ -24,6 +24,7 @@
   justify-content:space-between;
   /*background-color: red;*/
 }
+
 .aligned-content{
   align-self: end;
   /*background-color: #063;*/
@@ -35,7 +36,7 @@
   justify-content: space-between;
 }
 
-.containter-button{
+.containter-button-home{
   display: flex;
   flex-direction: column;
   height: 53px;
@@ -44,24 +45,9 @@
   align-self: self-end;
 }
 
-.page-text{
+.page-text-home{
   width: inherit;
   height: inherit;
-  /*background-color: blue;*/
-}
-
-.home-text{
-  font-size: 32px;
-  text-align: center;
-  margin-top: 1px;
-  color: #036;
-}
-
-img{
-  height: inherit;
-
-}
-.page-text{
   width: 38vw;
   height: auto;
   display: flex;
@@ -71,34 +57,34 @@ img{
   align-self: self-end;
 }
 
+.home-text{
+  font-size: 32px;
+  text-align: center;
+  margin-top: 1px;
+  color: #036;
+}
+
+
 .elipse{
   height: 31.7vh;
   width: inherit;
   /*background-color: blue;*/
   
 }
-.content{
+.content-home{
   display: flex;
 }
 
-.printgo {
+.printgo-logo {
   text-align: center;
   color: #036;
   
 }
-.text {
-  
-  
-  font-size: 32px;
-  display: inline-block;
-  width: 478px;
-  height: 46px;
-}
+
 
 
 
 .saiba-mais {
-  
   font-size: 20px;
   text-align: center;
   display: flex;
@@ -110,71 +96,3 @@ img{
 }
 
 
-/*.nav-bar-child {
-  
-  top: 0;
-  left: 0;
-  background-color: var(--color-white);
-  width: 1440px;
-  height: 110px;
-}
-.contato,
-.home,
-.quem-somos {
-  
-  top: 0;
-  display: flex;
-  align-items: center;
-  height: 110px;
-}
-.home {
-  left: 248px;
-  color: #063;
-  width: 97px;
-}
-.contato,
-.quem-somos {
-  left: 352px;
-  width: 139px;
-}
-.contato {
-  left: 517px;
-  width: 158px;
-  height: 107px;
-}
-.nav-bar-item {
-  
-  top: 27px;
-  left: 1243px;
-  border-radius: var(--br-41xl);
-  background-color: var(--color-white);
-  border: 2px solid var(--color-darkslateblue);
-  box-sizing: border-box;
-  width: 131px;
-  height: 53px;
-}
-.login {
-  
-  top: 37px;
-  left: 1283px;
-  display: inline-block;
-  width: 91px;
-  height: 44px;
-}
-.logo-4-icon,
-.nav-bar {
-  
-  top: 0;
-  left: 46px;
-  width: 110px;
-  height: 110px;
-}
-.nav-bar {
-  left: 0;
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
-  width: 1440px;
-  overflow: hidden;
-  font-size: var(--font-size-2xl);
-}*/
-
-  

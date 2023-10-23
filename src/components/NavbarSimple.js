@@ -6,9 +6,9 @@ export default function NavbarSimple(){
 
 return(
   
-        <div className="container">
+        <div className="container-navbar-s">
             <img src={logo}></img>
-            <div className="Botoes"> 
+            <div className="Botoes-navbar"> 
                 <button>
                     Home
                 </button>
@@ -20,19 +20,14 @@ return(
                 </button>
             </div>
             
-            <div className="Login">
-            <button >
-                Login
-            </button>
+            <div className="Login-navbar">
+                <button >
+                    Login
+                </button>
             </div>
         </div>
  
-    
-
-
 );
-
-
 
 
 }

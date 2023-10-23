@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import ChangePassword from "./pages/ChangePassword";
 import NavbarSimple from "./components/NavbarSimple"
 import Navbar from "./components/Navbar"
+import Contato from "./pages/Contato";
 
 function App(){
    
@@ -16,6 +17,7 @@ function App(){
       <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/NavbarSimple" element={<NavbarSimple/>}/>
       <Route path="/Navbar" element={<Navbar/>}/>
+      <Route path="/Contato" element={<Contato />} />
     </Routes>
     </BrowserRouter>
   );
