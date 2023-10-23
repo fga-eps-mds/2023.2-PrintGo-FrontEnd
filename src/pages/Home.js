@@ -31,7 +31,7 @@ export default function Home(){
                             </div>
                         </div>
                     </div>
-                    <div className="elipse">
+                    <div className="elipse-home">
                         <img alt="" src={elipse}></img>
                     </div>
                 </div>

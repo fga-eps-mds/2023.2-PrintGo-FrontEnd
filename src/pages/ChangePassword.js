@@ -71,7 +71,7 @@ export default function ChangePassword() {
                     </div>
                 </form>
 
-                <div className="elipse">
+                <div className="elipse-change-pass">
                     <img src={elipse6}></img>
                 </div>
             </div>
