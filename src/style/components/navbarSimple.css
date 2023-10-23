@@ -1,0 +1,71 @@
+
+.container-navbar-s{
+    background-color: white;
+    display: flex;
+    width: 100vw;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.container-navbar-s img{
+    width: 5vw;
+    height:8vh;
+    margin-top:1vh;
+}
+
+.Botoes-navbar{
+    display: flex;
+    margin-top: 1vh;
+    flex-direction: row;
+
+}
+
+.Botoes-navbar button{
+    background-color: white;
+    color: #036;
+    margin-top: 3vh;
+    border: none;
+    /* font-family: Jost; */
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer;
+    padding-left: 7vw;
+    padding-right: 7vw;
+
+    
+    }
+
+.Login-navbar{
+    padding-right: 1rem;
+}
+
+.Login-navbar button {
+    margin-top: 2vh;
+    background-color: white;
+    color: #036;
+    border-color: #036;
+    width: 7vw;
+    height: 6vh;
+    border-radius: 50px;
+    font-size: 24px;
+    font-weight: 500;
+    justify-content: flex-end;
+    cursor: pointer;
+    
+}
+
+.Botoes-navbar :hover{
+ 
+    color: #006633;
+    /* font-weight:bold; */
+
+}
+
+.Login-navbar :hover{
+    background-color:#036;
+    color: #fff;
+    font-weight: bold;
+
+}

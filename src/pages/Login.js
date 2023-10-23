@@ -2,11 +2,16 @@
 import React, { useState } from 'react';
 import '../style/pages/login.css'; 
 import pessoas from '../assets/pessoas.svg';
+import { login } from '../api/api';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loginError, setLoginError] = useState(null);
+
+  let navigate = useNavigate();
 
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
@@ -22,6 +27,20 @@ function Login() {
     setEmail(event.target.value);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const token = await login(email, password);
+      console.log(token);
+      localStorage.setItem('jwt', token);
+      navigate('/home');
+    } catch (error) {
+      console.log(error);
+      setLoginError('E-mail ou senha incorreto.');
+    }
+  }
+
   const isFormValid =  email && password;
 
   return (
@@ -32,7 +51,7 @@ function Login() {
           <div className="login-box">
             <div className="login-box-content">
               <h2>Entrar</h2>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="username">e-mail</label>
                   <input 
@@ -64,6 +83,7 @@ function Login() {
                     <button type="button">Recuperar senha</button>
                   </div>
                 </div>
+                {loginError && <h5 style={{color: 'red'}}>{loginError}</h5>}
               </form>
             </div>
           </div>

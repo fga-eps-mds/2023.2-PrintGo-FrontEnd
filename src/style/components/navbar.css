@@ -1,0 +1,84 @@
+
+.container-navbar{
+    background-color: white;
+    width: 100%;
+    height: 12%;
+    display: flex;
+}
+
+img{
+    width: 8vw;
+    height:8vh;
+    margin-top:1vh;
+}
+
+.Botoes{
+   
+    margin-top: 1vh;
+
+}
+
+.Botoes button{
+    background-color: white;
+    color: #036;
+   margin-top: 3vh;
+    border: none;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-left: 1rem;
+    margin-right: 5rem;
+
+}
+
+.Botoes :hover{
+ 
+    color: #006633;
+    /* font-weight:bold; */
+}
+
+.Icons button{
+    background-color: white;
+    color: #036;
+   margin-top: 3vh;
+    border: none;
+    width: 4vw;
+    margin-left: 5rem;
+    display: inline;
+    
+
+}
+
+.Icons img{
+ width: 1.5vw;
+ height: 3vh;   
+}
+
+.User button{
+    display: flex;
+    margin-left: 4vw;
+    background-color: white;
+    color: #036;
+   margin-top: 3vh;
+    border: none;
+    width: 4vw;
+   
+}
+.User img{
+    width: 1.5vw;
+    height: 3vh;   
+   }
+
+.User p{
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-left: 2rem;
+    margin-right: 1rem;
+    margin-top: 0.8rem;
+
+}
+
+

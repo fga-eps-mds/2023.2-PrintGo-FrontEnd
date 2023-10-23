@@ -1,6 +1,6 @@
 module.exports = {
-    parser: 'babel-eslint',
-    env: {
+   "parser": "@babel/eslint-parser",
+   env: {
       browser: true,
       es6: true,
     },
@@ -14,6 +14,7 @@ module.exports = {
       'import',
     ],
     rules: {
+      "react/prop-types": "off"
     },
   };
   
