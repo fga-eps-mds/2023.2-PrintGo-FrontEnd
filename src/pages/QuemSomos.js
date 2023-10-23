@@ -16,7 +16,7 @@ function QuemSomos() {
           A aplicação web foi feita sob encomenda para a Polícia Civil do estado do Goiás pela Universidade de Brasília, UnB, sob supervisão das disciplinas de EPS e MDS juntamente com seus monitores e professor.  
         </p>
       </div>
-      <div className="logo">
+      <div className="logo-about-us">
         <img src={PoliciaCivilLogo} alt="PoliciaCivilLogo" className="PoliciaCivilLogo" /> 
       </div>
       

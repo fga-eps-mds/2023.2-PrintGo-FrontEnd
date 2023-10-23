@@ -11,16 +11,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
 }
 
 .texto {
     
-    width: 40%;
+    width: 50vw;
     top: 15%;
     left: 30%;
     text-align: center;
     /* Cor do texto */
     color: #003366;
+    
 }
 
 /* Estilos para o título "Quem Somos" */
@@ -29,7 +31,7 @@ h2 {
     font-weight: 400;
 }
 
-p {
+.texto p {
     text-align: justify;
     font-size: 19px;
 }
@@ -53,20 +55,22 @@ input::placeholder {
 }
 
 /* Estilos para a imagem "PoliciaCivilLogo" */
-.PoliciaCivilLogo {
+/*.PoliciaCivilLogo {
     position: absolute;
     top: 65%;
     left: 47%;
-}
+}*/
 
-.logo {
+.logo-about-us {
     text-align: center;
+    width: 7.5vw;
+    height: 20vh;
 }
 
 .ellipse-about-us {
     z-index: -100;
-    width: 48.29838rem;
-    height: 62.73281rem;
+    width: 40rem;
+    height: 50rem;
     transform: rotate(-145.25deg);
     flex-shrink: 0;
     border-radius: 62.73281rem;
