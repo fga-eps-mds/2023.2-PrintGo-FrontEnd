@@ -10,8 +10,14 @@ export async function login(email, password) {
   };
 
   try {
-    const response = await axios.post(`${API_URL}:${API_PORT}/user/login`, data);
-    return response.data.token;
+
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      const response = await axios.post(`${API_URL}:${API_PORT}/user/login`, data);
+      return response.data.token;
+    } else {
+      const response = await axios.post(`${API_URL}/user/login`, data);
+      return response.data.token;
+    }
   } catch (error) {
     console.error('Erro ao fazer login:', error);
     throw error;
