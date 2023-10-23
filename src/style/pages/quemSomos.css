@@ -36,10 +36,10 @@ input::placeholder {
 
 /* Estilos para a imagem "PessoasDois" */
 .pessoasDois {
+    position: absolute;
     width: 100%;
-    position: relative;
-    bottom: -50%;
-    right: -250%;
+    top: 70%;
+    left: 30%;
 }
 
 /* Estilos para a imagem "PoliciaCivilLogo" */

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../style/pages/quemSomos.css';
 import pessoasDois from '../assets/pessoasDois.svg';
 import PoliciaCivilLogo from '../assets/PoliciaCivilLogo.svg';
@@ -10,10 +10,10 @@ function QuemSomos() {
       <div className="texto">
         <h2>Quem Somos</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla aliquet elementum eros. Suspendisse gravida velit id vulputate laoreet. Integer ultrices, nulla at aliquam lacinia, metus ligula dapibus metus, eget ornare turpis sapien vitae lorem. Cras sed lorem nec justo pharetra commodo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae erat sed felis auctor feugiat. Proin justo lorem, condimentum nec venenatis nec, malesuada vitae ex. Mauris mattis, diam vitae dictum pellentesque, lectus massa interdum augue, ut dictum ligula massa id nibh. Maecenas auctor elit non augue condimentum suscipit. Integer non luctus augue, nec tristique nunc. Integer ut commodo mi, vitae tincidunt neque.
+          O PrintGO tem a finalidade de corrigir o problema chave que foi definido junto com a visão do produto, que diz: Os servidores da Polícia Civil do Goiás não possuem uma ferramenta de monitoração de impressoras e impressão, mesmo que os servidores precisem monitorar e registrar valores de contadores nas unidades policias nos municípios de Goiás. O PrintGO é uma ferramenta de monitoramento de ativos de impressão que simplifica a tarefa de monitorar e registrar informações relacionadas ao uso e manutenção das impressoras de forma a garantir um acompanhamento preciso e eficaz.  
         </p>
         <p>
-          Quisque non posuere eros, vel posuere purus. Donec vehicula est eu magna fermentum congue. Nam in mollis nisi, a congue augue. Proin vulputate laoreet ex nec interdum. Aliquam ullamcorper malesuada sem, eget eleifend ex ultrices sed. Donec elementum, turpis sit amet auctor elementum, urna erat tempus ex, fringilla elementum elit massa a arcu. Aliquam lobortis ultricies iaculis.
+          A aplicação web foi feita sob encomenda para a Polícia Civil do estado do Goiás pela Universidade de Brasília, UnB, sob supervisão das disciplinas de EPS e MDS juntamente com seus monitores e professor.  
         </p>
       </div>
       
