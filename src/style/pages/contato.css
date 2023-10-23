@@ -1,12 +1,21 @@
-.Main-page{
+.Main-page-contato{
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-.Main-page h1{
+.Main-page-contato h1{
     text-align: center;
+}
+
+.Main-page-contato h1{
+    color: #036;
+}
+
+.Main-page-contato p{
+    color: #036;
+    letter-spacing: 0.8px;
 }
 
 .Contato-principal{
@@ -92,11 +101,3 @@
 
 
 
-h1{
-    color: #036;
-}
-
-p{
-    color: #036;
-    letter-spacing: 0.8px;
-}

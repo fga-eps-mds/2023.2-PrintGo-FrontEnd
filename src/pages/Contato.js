@@ -3,13 +3,14 @@ import "../style/pages/contato.css";
 import Imagem_Homen from "../assets/imagem-homen-ruivo.svg";
 import Input from "../components/Input";
 import emailjs from "@emailjs/browser";
+import NavbarSimple from "../components/NavbarSimple"
 
 export default function Contato() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [assunto, setAssunto] = useState('');
 
-  function handleEnviar(e){
+  function handleEnviar(){
     // Aqui você pode lidar com os dados, como validação e envio para um servidor
     console.log("Nome:", nome);
     console.log("E-mail:", email);
@@ -34,7 +35,8 @@ export default function Contato() {
   }
 
   return (
-    <div className="Main-page">
+    <div className="Main-page-contato">
+      <NavbarSimple></NavbarSimple>
       <h1>Contato</h1>
       <div className="Contato-principal">
         <div className="Box-contato">
@@ -68,7 +70,7 @@ export default function Contato() {
             <button className="Enviar-button" onClick={handleEnviar}>Enviar</button>
           </div>
         </div>
-        <div className="Imagem">
+        <div className="Imagem_contato">
           <img src={Imagem_Homen} alt="Imagem de um homem ruivo" />
         </div>
       </div>

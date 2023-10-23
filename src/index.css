@@ -13,3 +13,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'Overpass';
+  src: local('Overpass'), url(./fonts/Overpass/Overpass-Regular.ttf) format('truetype');
+}
