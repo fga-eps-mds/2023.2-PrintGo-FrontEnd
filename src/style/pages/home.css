@@ -68,6 +68,10 @@
   height: 31.7vh;
   width: inherit;
 }
+
+.elipse-home img{
+  height: 31.7vh;
+}
 .content-home{
   display: flex;
 }
