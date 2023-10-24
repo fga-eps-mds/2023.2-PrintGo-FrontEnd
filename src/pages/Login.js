@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../style/pages/login.css'; 
 import pessoas from '../assets/pessoas.svg';
+import login_ellipse from '../assets/login_ellipse.svg';
+
 import { login } from '../api/api';
 import { useNavigate } from 'react-router-dom';
 
@@ -44,9 +46,10 @@ function Login() {
 
   return (
       <div className="container-login">
+
         <img src={pessoas} alt="Pessoas" className="pessoas" />
-        <div>
-          <div className="ellipse-login"/>
+        <div className="login-right-content">
+          
           <div className="login-box">
             <div className="login-box-content">
               <h2>Entrar</h2>
@@ -86,6 +89,9 @@ function Login() {
               </form>
             </div>
           </div>
+        </div>
+        <div className="ellipse-login">
+          <img src={login_ellipse}/>
         </div>
       </div>
   );
