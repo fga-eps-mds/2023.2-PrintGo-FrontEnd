@@ -9,7 +9,7 @@
 }
 
 @media (max-width: 900px) {
-    .input-line {
-        display: block; 
+    #signup-container img{
+        display: none;
     }
 }

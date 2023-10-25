@@ -132,3 +132,35 @@
     opacity: 65%;
     cursor: not-allowed;
 }
+
+#input-description {
+    color: #6C6C6C;
+}
+
+.elipse-signup{
+    position: absolute;
+    width: 43vw;
+    height: 100vh;
+    top:0;
+    right: 0;
+    z-index: -1;
+    bottom: 2px;
+    color:#003366;
+  }
+  
+  .elipse-signup img{
+    width: 45vw;
+    height: 100vh;
+  }
+
+@media (max-width: 900px) {
+    #signup-card {
+        width: 90%; /* Ajuste a largura do formulário conforme necessário */
+        margin: 0 auto; /* Centraliza o formulário horizontalmente */
+        padding: 1rem; /* Ajuste o preenchimento conforme necessário */
+    }
+
+    #input-line {
+        display:block;
+    }
+}

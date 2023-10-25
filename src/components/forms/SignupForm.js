@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
-import "../../style/components/signupForm.css"
-import { useForm } from "react-hook-form";
-import { getLotacoes } from "../../services/lotacaoService";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { createUser } from "../../services/userService";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import { getLotacoes } from "../../services/lotacaoService";
+import { createUser } from "../../services/userService";
+import "../../style/components/signupForms.css";
+import elipse6 from '../../assets/elipse6.png';
+
 
 const signupSchema = yup.object().shape({
     nome: yup.string().required('Nome é obrigatório'),
@@ -16,7 +18,11 @@ const signupSchema = yup.object().shape({
       .string()
       .oneOf([yup.ref('email'), null], 'Os emails devem coincidir')
       .required('Email é obrigatória'),
-    senha: yup.string().required('Senha é obrigatória'),
+    senha: yup.string().required('Senha é obrigatória')
+    .matches(
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'A senha não segue o padrão a baixo'
+    ),
     senhaConfirmar: yup
       .string()
       .oneOf([yup.ref('senha'), null], 'As senhas devem coincidir')
@@ -37,7 +43,9 @@ export default function SignupForm(){
         async function setLotacoes() {
             try {
                 const data = await getLotacoes();
-                setLotacao(data);
+                if (data.type ==='success') {
+                    setLotacao(data.data);
+                }
             } catch (error) {
                 console.error('Erro ao obter opções do serviço:', error);
               }
@@ -78,7 +86,7 @@ export default function SignupForm(){
 
                         <div id="input-box">
                             <label>Documento<span>*</span></label>
-                            <input {...register("documento", {required: true})} type="number" placeholder="CPF ou CNPF" />
+                            <input {...register("documento", {required: true})} placeholder="CPF ou CNPF" />
                             <span>{errors.documento?.message}</span>
                         </div>
                     </div>
@@ -101,7 +109,7 @@ export default function SignupForm(){
                             <label>Senha<span>*</span></label>
                             <input {...register("senha", {required: true})} placeholder="Senha" type="password"/>
                             <span>{errors.senha?.message}</span>
-                            <p id="input-description">A senha deve conter 1 letra maiuscula, 1 minuscula, 1 numero e um caractere especial</p>
+                            <p id="input-description">A senha deve conter pelo menos 8 caracteres, 1 letra maiúscula, 1 minuscula, 1 número e um caractere especial</p>
                         </div>
                         <div id="input-box">
                             <label>Confirmar Senha<span>*</span></label>
@@ -142,6 +150,9 @@ export default function SignupForm(){
                     <button className="form-button" type="submit" id="registrar-bnt" disabled={!isValid}>REGISTRAR</button>
                 </div>
             </form>
+            <div className="elipse-signup">
+                <img alt= "elipse"  src={elipse6}></img>
+            </div>
         </div>
     );
 }
