@@ -41,7 +41,7 @@ export default function ChangePassword() {
                         <div className="form-title">Mudar senha</div>
                         <div className="form-group">
                             <div className="input-form-container">
-                                <label>Nova Senha</label>
+                                <label className="label-change-password">Nova Senha</label>
                                 <input 
                                     type="password"
                                     name="password"
@@ -52,7 +52,7 @@ export default function ChangePassword() {
                                 />
                             </div>
                             <div className="input-form-container">
-                                <label>Repita a senha</label>
+                                <label className="label-change-password">Repita a senha</label>
                                 <input 
                                     type="password"
                                     name="passwordConfirmation"

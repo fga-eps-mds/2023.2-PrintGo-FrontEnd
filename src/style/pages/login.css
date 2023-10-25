@@ -1,4 +1,4 @@
-/* 
+
 body {
   font-family: 'Overpass', sans-serif;
 }
@@ -44,18 +44,15 @@ body {
   padding-top: 1rem;
 }
 
-h2 {
+.title-login {
   font-size: 3rem;
   font-weight: 400;
   color: #003366;
   padding-top: 1.75rem;
 }
 
-label {
+.label-login {
   margin-bottom: 0.5rem;
-}
-
-label {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25rem;
@@ -64,20 +61,20 @@ label {
   color: #003366;
 }
 
-input{
+.input-login{
   height: 2.1875rem;
   border: 0.063rem solid #003366;
   border-radius: 0.625rem; 
   text-indent: 0.75rem;
 }
 
-input::placeholder {
+.input-login::placeholder {
   color: #6C6C6C;
   font-size: 1rem;
   letter-spacing: 0.05rem;
 }
 
-button[type="submit"] {
+.button-login[type="submit"] {
   width: 16.4375rem;
   height: 2.5625rem;
   border-radius: 3.125rem;
@@ -97,7 +94,7 @@ button[type="submit"] {
   justify-content: center;
 }
 
-button[type="button"] {
+.button-login[type="button"] {
   width: 16.4375rem;
   height: 2.5625rem;
   font-size: 1rem;
@@ -140,7 +137,7 @@ button[type="button"] {
   height: 130vh;
 }
 
-button:disabled {
+.button-login:disabled {
   background-color: #6C6C6C;
   opacity: 65%;
   cursor: not-allowed;
@@ -154,4 +151,4 @@ button:disabled {
     padding-left: 2rem;
     align-items: center;
   }
-} */
+}

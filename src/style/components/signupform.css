@@ -45,6 +45,10 @@
     box-sizing: border-box;
 }
 
+#label-checkbox {
+    top: 10rem;
+}
+
 #input-box label {
     color: #003366;
     display: block;
@@ -56,8 +60,16 @@
 }
 
 #input-checkbox {
+    margin-top: 2rem;
     display: flex;
     align-items: center;
+}
+
+#input-checkbox input {
+    margin:0 12px 0 0;
+    vertical-align: middle;
+    position: relative;
+    top: -3px;
 }
 
 #input-box input{
@@ -70,6 +82,7 @@
 
 #input-box select{
     font-size: 16px;
+    font-size: 1rem;
     border: 1px solid #003366;
     border-color: #003366;
     border-radius: 10px;
@@ -97,6 +110,7 @@
     margin-bottom: 20px;
 }
 
+
 .form-button:hover {
     filter: brightness(1.8);
 }
@@ -110,4 +124,11 @@
     margin-left: 8px;
     transition: background-color 0.3s, filter 0.3s;
     background-color: #006633;
+}
+
+
+#registrar-bnt:disabled {
+    background-color: #6C6C6C !important;
+    opacity: 65%;
+    cursor: not-allowed;
 }

@@ -52,11 +52,11 @@ function Login() {
           
           <div className="login-box">
             <div className="login-box-content">
-              <h2>Entrar</h2>
+              <h2 className='title-login'>Entrar</h2>
               <form onSubmit={handleSubmit}>
                 <div className="form-group-login">
-                  <label htmlFor="username">e-mail</label>
-                  <input 
+                  <label className="label-login"  htmlFor="username">e-mail</label>
+                  <input className="input-login" 
                     type="text" 
                     id="username" 
                     name="username" 
@@ -67,8 +67,8 @@ function Login() {
                   {error && <h5 style={{color: 'red'}}>{error}</h5>}
                 </div>
                 <div className="form-group-login">
-                  <label htmlFor="password">senha</label>
-                  <input 
+                  <label className="label-login" htmlFor="password">senha</label>
+                  <input className="input-login" 
                     type="password" 
                     id="password" 
                     name="password" 
@@ -79,10 +79,10 @@ function Login() {
                 </div>
                 <div className="buttons-login">
                   <div className="button-login-container">
-                    <button type="submit" disabled={!isFormValid}>LOGIN</button>
+                    <button className="button-login" type="submit" disabled={!isFormValid}>LOGIN</button>
                   </div>
                   <div className="button-login-container">
-                    <button type="button">Recuperar senha</button>
+                    <button className="button-login" type="button">Recuperar senha</button>
                   </div>
                 </div>
                 {loginError && <h5 style={{color: 'red'}}>{loginError}</h5>}

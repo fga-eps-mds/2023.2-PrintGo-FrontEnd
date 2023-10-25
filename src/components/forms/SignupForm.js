@@ -44,13 +44,14 @@ export default function SignupForm(){
         }
         setLotacoes();
       }, []);
+   
     
     const {
         register,
         handleSubmit,
-        formState: { errors }, 
+        formState: { errors, isValid }, 
         reset
-    } = useForm({resolver: yupResolver(signupSchema)})
+    } = useForm({resolver: yupResolver(signupSchema), mode: "onChange"})
 
     const onSubmit = async (data) =>  {
         data.cargos = ["USER"];
@@ -126,18 +127,19 @@ export default function SignupForm(){
                         <div id="input-box">
                             <div id="input-checkbox">
                                 <input
+                                    id="checkbox"
                                     type="checkbox"
                                     {...register("isAdmin")}
                                 />
-                                <label>Usuário é administrador?</label>
+                                <label id="label-checkbox">Usuário é administrador?</label>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div id="buttons">
-                    <button className="form-button" type="button" id="cancelar-bnt">CANCELAR</button>
-                    <button className="form-button" type="submit" id="registrar-bnt">REGISTRAR</button>
+                    <button className="form-button" type="button" id="cancelar-bnt" >CANCELAR</button>
+                    <button className="form-button" type="submit" id="registrar-bnt" disabled={!isValid}>REGISTRAR</button>
                 </div>
             </form>
         </div>

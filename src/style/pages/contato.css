@@ -1,4 +1,4 @@
-/* .Main-page-contato{
+.Main-page-contato{
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -92,6 +92,21 @@
     
 }
 
+.input{
+    height: 2.1875rem;
+    border: 0.063rem solid #003366;
+    border-radius: 0.625rem; 
+    text-indent: 0.75rem;
+    letter-spacing: 0.05rem;
+  }
+  
+.input::placeholder {
+    color: #6C6C6C;
+    font-size: 1rem;
+    letter-spacing: 0.05rem;
+}
+  
+
 
 .Assunto-input label{
     color: #036;
@@ -139,4 +154,4 @@
     width: 20vw;
     height: 70vh;
 }
- */
+

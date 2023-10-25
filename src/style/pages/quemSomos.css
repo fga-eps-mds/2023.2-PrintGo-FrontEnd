@@ -1,4 +1,4 @@
-/* 
+
 body {
     font-family: 'Overpass', sans-serif;
     display: block;
@@ -24,7 +24,7 @@ body {
     
 }
 
-h2 {
+.h2-label {
     font-size: 3rem;
     font-weight: 400;
 }
@@ -32,16 +32,6 @@ h2 {
 .texto p {
     text-align: justify;
     font-size: 19px;
-}
-
-label {
-    margin-bottom: 0.5rem;
-}
-
-input::placeholder {
-    color: #6C6C6C;
-    font-size: 1rem;
-    letter-spacing: 0.05rem;
 }
 
 .pessoasDois {
@@ -68,4 +58,4 @@ input::placeholder {
     position: absolute;
     top: 70%;
     left: -15%;
-} */
+}
