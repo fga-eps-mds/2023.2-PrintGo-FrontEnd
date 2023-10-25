@@ -64,11 +64,13 @@
 }
 
 
-.elipse{
+.elipse-home{
   height: 31.7vh;
   width: inherit;
-  /*background-color: blue;*/
-  
+}
+
+.elipse-home img{
+  height: 31.7vh;
 }
 .content-home{
   display: flex;

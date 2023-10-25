@@ -69,9 +69,11 @@ export default function Contato() {
             <button className="Enviar-button" onClick={handleEnviar}>Enviar</button>
           </div>
         </div>
-        <div className="Imagem_contato">
+        
+      </div>
+      <div className="ellipse-contact"></div>
+      <div className="Imagem-contato">
           <img src={Imagem_Homen} alt="Imagem de um homem ruivo" />
-        </div>
       </div>
     </div>
   );

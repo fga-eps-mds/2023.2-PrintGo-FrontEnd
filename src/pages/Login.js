@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../style/pages/login.css'; 
 import pessoas from '../assets/pessoas.svg';
+import login_ellipse from '../assets/login_ellipse.svg';
+
 import { login } from '../api/api';
 import { useNavigate } from 'react-router-dom';
 
@@ -43,15 +45,16 @@ function Login() {
   const isFormValid =  email && password;
 
   return (
-      <div className="container">
+      <div className="container-login">
+
         <img src={pessoas} alt="Pessoas" className="pessoas" />
-        <div>
-          <div className="ellipse"/>
+        <div className="login-right-content">
+          
           <div className="login-box">
             <div className="login-box-content">
               <h2>Entrar</h2>
               <form onSubmit={handleSubmit}>
-                <div className="form-group">
+                <div className="form-group-login">
                   <label htmlFor="username">e-mail</label>
                   <input 
                     type="text" 
@@ -63,7 +66,7 @@ function Login() {
                   />
                   {error && <h5 style={{color: 'red'}}>{error}</h5>}
                 </div>
-                <div className="form-group">
+                <div className="form-group-login">
                   <label htmlFor="password">senha</label>
                   <input 
                     type="password" 
@@ -74,11 +77,11 @@ function Login() {
                     onChange={(e) => setPassword(e.target.value)} 
                   />
                 </div>
-                <div className="buttons">
-                  <div className="button-container">
+                <div className="buttons-login">
+                  <div className="button-login-container">
                     <button type="submit" disabled={!isFormValid}>LOGIN</button>
                   </div>
-                  <div className="button-container">
+                  <div className="button-login-container">
                     <button type="button">Recuperar senha</button>
                   </div>
                 </div>
@@ -86,6 +89,9 @@ function Login() {
               </form>
             </div>
           </div>
+        </div>
+        <div className="ellipse-login">
+          <img src={login_ellipse}/>
         </div>
       </div>
   );
