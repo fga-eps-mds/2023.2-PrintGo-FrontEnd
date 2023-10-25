@@ -35,8 +35,8 @@
     flex-direction: column;
     justify-content: space-around;
     position: fixed;
-    width: 50vw;
-    height: 78vh;
+    width: 30vw;
+    height: 60vh;
     box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.12), 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -63,14 +63,23 @@
     
     
 }
+
+.input-contato-form{
+    height: 3vh !important;
+    width: 11vw !important;
+}
+
+
+
+
 .Enviar-button{
     
     color: #fff;
     border-radius: 50px;
     box-shadow: 1px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    width: 12rem;
+    width: 12vw;
     border: none;
-    height: 1.8rem;
+    height: 3.5vh;
     letter-spacing: 0.08rem;
     font-weight: bold; 
     background-color: #006633;
@@ -91,26 +100,12 @@
     align-items: flex-start;
     
 }
-
-.input{
-    height: 2.1875rem;
-    border: 0.063rem solid #003366;
-    border-radius: 0.625rem; 
-    text-indent: 0.75rem;
-    letter-spacing: 0.05rem;
-  }
-  
-.input::placeholder {
-    color: #6C6C6C;
-    font-size: 1rem;
-    letter-spacing: 0.05rem;
-}
-  
+ 
 
 
 .Assunto-input label{
     color: #036;
-    font-size: 14px;
+    font-size: 1rem;
     font-style: normal;
     font-weight: bold;
     line-height: normal;
@@ -119,8 +114,8 @@
 }
 
 .Larger-input{
-    width: 28rem;
-    height: 12rem;
+    width: 25vw;
+    height: 18vh;
     border: 1px solid #036;
     border-color: #036;
     border-radius: 7.5px;

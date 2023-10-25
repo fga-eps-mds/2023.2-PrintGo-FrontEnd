@@ -15,7 +15,6 @@ module.exports = {
       'import',
     ],
     rules: {
-      "react/prop-types": "off"
     },
   };
   

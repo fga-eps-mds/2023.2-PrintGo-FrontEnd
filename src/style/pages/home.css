@@ -40,8 +40,6 @@
 }
 
 .page-text-home{
-  width: inherit;
-  height: inherit;
   width: 38vw;
   height: auto;
   display: flex;

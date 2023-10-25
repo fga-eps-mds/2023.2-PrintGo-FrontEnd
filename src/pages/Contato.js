@@ -44,14 +44,14 @@ export default function Contato() {
             <Input
               label="Nome"
               placeholder="Digite seu nome"
-              className="input"
+              className="input-contato-form"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
             />
             <Input
               label="E-mail"
               placeholder="Digite seu email"
-              className="input"
+              className="input-contato-form"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
