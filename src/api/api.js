@@ -37,9 +37,14 @@ export async function changePassword(newPassword, newPasswordConfirmation) {
   }
 
   try {
-    const response = await axios.post('http://localhost:8000/user/change-password', data, { headers })
 
-    return response
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      const response = await axios.post(`${API_URL}:${API_PORT}/user/change-password`, data, {headers});
+      return response;
+    } else {
+      const response = await axios.post(`${API_URL}/user/change-password`, data, {headers});
+      return response;
+    }
   } catch(error) {
     console.log('Erro ao trocar de senha', error)
     throw error
