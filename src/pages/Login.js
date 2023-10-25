@@ -15,7 +15,7 @@ function Login() {
   let navigate = useNavigate();
 
   function isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
+    return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(email);
   }
 
   const handleChange = event => {
