@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { getLotacoes } from "../../services/lotacaoService";
 import { createUser } from "../../services/userService";
 import "../../style/components/signupForms.css";
-import elipse6 from '../../assets/elipse6.png';
+import elipse6 from '../../assets/elipse6.svg';
 
 
 const signupSchema = yup.object().shape({
