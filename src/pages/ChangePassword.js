@@ -1,9 +1,7 @@
-import React from "react";
+import React,{ useState } from "react";
 import '../style/pages/changePassword.css';
 import ChangePasswordPeople from '../assets/change-password-people.svg';
 import elipse6 from '../assets/elipse6.svg';
-
-import { useState } from 'react';
 import { changePassword } from "../api/api";
 
 export default function ChangePassword() {
