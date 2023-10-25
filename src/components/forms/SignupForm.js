@@ -42,7 +42,7 @@ export default function SignupForm(){
         async function setLotacoes() {
             try {
                 const data = await getLotacoes();
-                if (data.type ==='success') {
+                if (data.type ==='success' && data.data) {
                     setLotacao(data.data);
                 }
             } catch (error) {
