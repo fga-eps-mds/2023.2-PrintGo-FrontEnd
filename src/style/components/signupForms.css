@@ -81,8 +81,7 @@
 
 #input-box select{
     font-size: 16px;
-    font-size: 1rem;
-    border: 1px solid #003366;
+    font-size: 1rem;border: 1px solid #003366;
     border-color: #003366;
     border-radius: 10px;
     padding: 5px;
@@ -98,7 +97,6 @@
     display: inline-block;
     flex-direction: column;
     color: #ffffff ;
-    border-radius: 20px;
     border: none;
     padding: 10px 30px;
     border-radius: 50px;
