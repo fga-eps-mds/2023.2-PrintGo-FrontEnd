@@ -1,8 +1,6 @@
 
 body {
-    font-family: 'Overpass', sans-serif;
-    display: block;
-    overflow: hidden;
+    font-family: 'Overpass', sans-serif;    
 }
 
 .container-about-us{
@@ -56,6 +54,21 @@ body {
     border-radius: 62.73281rem;
     background: #036;
     position: absolute;
+    overflow: hidden;
     top: 70%;
     left: -15%;
 }
+
+.ellipse-about {
+}
+
+.ellipse-about{
+    height: 31.7vh;
+    width: inherit;
+    overflow: hidden;
+  }
+  
+  .ellipse-about img{
+    height: 31.7vh;
+    margin: 0;
+  }

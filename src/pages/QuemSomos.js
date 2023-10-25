@@ -2,6 +2,8 @@ import React from 'react';
 import '../style/pages/quemSomos.css';
 //import pessoasDois from '../assets/pessoasDois.svg';
 import PoliciaCivilLogo from '../assets/PoliciaCivilLogo.svg';
+import elipse from '../assets/home_elipse.svg';
+
 
 function QuemSomos() {
 
@@ -20,7 +22,9 @@ function QuemSomos() {
         <img src={PoliciaCivilLogo} alt="PoliciaCivilLogo" className="PoliciaCivilLogo" /> 
       </div>
       
-      <div className="ellipse-about-us"></div>
+      <div className="ellipse-about">
+        <img alt="" src={elipse}></img>
+      </div>
     </div>
   );
 }

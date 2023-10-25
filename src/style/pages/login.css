@@ -13,7 +13,7 @@ body {
 .container-login {
   display: flex;
   gap: 12.375rem;
-  padding: 6.25rem 13.625rem 0 8rem;
+  
   background-color: transparent !important;
 }
 
@@ -23,6 +23,8 @@ body {
   height: 32rem;
   background-color: #ffffff;
   border-radius: 0.625rem;
+  margin-top: 10vh;
+  margin-right: 15vw;
   box-shadow: 4px 4px 15px 0px rgba(0, 0, 0, 0.25);
   
   
@@ -111,6 +113,8 @@ body {
 .pessoas {
   width: 40vw;
   height: 80vh;
+  margin-left: 10vw;
+  margin-top: 5vh;
 }
 
 .buttons-login {
@@ -124,17 +128,22 @@ body {
   height: 10vh;
 }
 
-.ellipse-login {
-  z-index:-100;
-  width: 60vw;
+.ellipse-login{
+  position: absolute;
+  width: 43vw;
   height: 100vh;
-  top:1px;
-  right: 1px;
+  top:0;
+  right: 0;
+  z-index: -1;
+  bottom: 2px;
+  color:#003366;
+  overflow: hidden;
+
 }
 
 .ellipse-login img{
-  width: 90vw;
-  height: 130vh;
+  width: 45vw;
+  height: 100vh;
 }
 
 .button-login:disabled {

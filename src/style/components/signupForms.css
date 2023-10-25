@@ -9,8 +9,9 @@
     flex-direction: column;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
     padding: 1rem 5rem;
-    margin-right: 5rem;
-    margin-top: 1rem;
+    margin-right: 12vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
 }
 
 #form-header {
@@ -142,6 +143,8 @@
     z-index: -1;
     bottom: 2px;
     color:#003366;
+    overflow: hidden;
+
   }
   
   .elipse-signup img{

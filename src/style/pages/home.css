@@ -61,10 +61,12 @@
 .elipse-home{
   height: 31.7vh;
   width: inherit;
+  overflow: hidden;
 }
 
 .elipse-home img{
   height: 31.7vh;
+
 }
 .content-home{
   display: flex;
