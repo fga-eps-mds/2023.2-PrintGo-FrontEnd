@@ -82,14 +82,9 @@ export async function createLotacao (lotacoa) {
 }
 
 export async function getLotacoes() {
-  try {
-    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-      const response = await axios.get(`${API_URL}:${API_PORT}/lotacao`);
-      return { type: 'success', data: response.data};
-    } else {
+  try {    
       const response = await axios.get(`${API_URL}/lotacao`);
       return { type: 'success', data: response.data};
-    }
   } catch (error) {
     return { type: 'error', error };
 
