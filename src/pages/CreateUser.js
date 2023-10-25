@@ -5,12 +5,9 @@ import signup_image from "../assets/signup_image.svg";
 
 export default function CreateUserPage(){
     return(
-    
-        <div className="container">
-            <div className="signup-container">
-                <img className="home-image" alt="" src={signup_image} />
-                <SignupForm/>
-            </div>
+        <div id="signup-container">
+            <img alt="" src={signup_image} />
+            <SignupForm/>
         </div>
     );
 }

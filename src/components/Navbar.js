@@ -1,1 +1,0 @@
-import navbar from "../style/components/navbar.css"

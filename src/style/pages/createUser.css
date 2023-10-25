@@ -1,10 +1,10 @@
-.signup-container {
+#signup-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.signup-container img{
+#signup-container img{
     margin-left: 10rem;
 }
 

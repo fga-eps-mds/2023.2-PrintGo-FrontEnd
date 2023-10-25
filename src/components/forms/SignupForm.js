@@ -32,14 +32,12 @@ const signupSchema = yup.object().shape({
 
 export default function SignupForm(){
     const [lotacao, setLotacao] = useState([]);
-    const [isLotacaoLoaded, setIsLotacaoLoaded] = useState(false);
 
     useEffect( () => {
         async function setLotacoes() {
             try {
                 const data = await getLotacoes();
                 setLotacao(data);
-                setIsLotacaoLoaded(true);
             } catch (error) {
                 console.error('Erro ao obter opções do serviço:', error);
               }
@@ -59,63 +57,63 @@ export default function SignupForm(){
         if (data.isAdmin) {
             data.cargos.push("ADMIN");
         }
-        const response = await createUser(data);
+        await createUser(data);
         reset()
     }
 
     return(
-        <div className="signup-card">
-            <header className="form-header">
+        <div id="signup-card">
+            <header id="form-header">
                 Cadastro
             </header>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="input-group">
-                    <div className="input-line">
-                        <div className="input-box">
+                <div id="input-group">
+                    <div id="input-line">
+                        <div id="input-box">
                             <label>Nome<span>*</span></label>
                             <input {...register("nome", {required: true} )} placeholder="Nome" />
                             <span>{errors.nome?.message}</span>
                         </div>
 
-                        <div className="input-box">
+                        <div id="input-box">
                             <label>Documento<span>*</span></label>
                             <input {...register("documento", {required: true})} type="number" placeholder="CPF ou CNPF" />
                             <span>{errors.documento?.message}</span>
                         </div>
                     </div>
-                    <div className="input-line">
-                        <div className="input-box">
+                    <div id="input-line">
+                        <div id="input-box">
                             <label>E-mail<span>*</span></label>
                             <input {...register("email", {required: true} )} type="email" placeholder="Email" />
                             <span>{errors.email?.message}</span>
                         </div>
 
-                        <div className="input-box">
+                        <div id="input-box">
                             <label>Confirmar E-mail<span>*</span></label>
                             <input {...register("emailConfirmar", {required: true})} placeholder="Confirmar Email" />
                             <span>{errors.emailConfirmar?.message}</span>
                         </div>
                     </div>
 
-                    <div className="input-line">
-                        <div className="input-box">
+                    <div id="input-line">
+                        <div id="input-box">
                             <label>Senha<span>*</span></label>
                             <input {...register("senha", {required: true})} placeholder="Senha" type="password"/>
                             <span>{errors.senha?.message}</span>
-                            <p className="input-description">A senha deve conter 1 letra maiuscula, 1 minuscula, 1 numero e um caractere especial</p>
+                            <p id="input-description">A senha deve conter 1 letra maiuscula, 1 minuscula, 1 numero e um caractere especial</p>
                         </div>
-                        <div className="input-box">
+                        <div id="input-box">
                             <label>Confirmar Senha<span>*</span></label>
                             <input {...register("senhaConfirmar", {required: true})} placeholder="Confirmar Senha" type="password"/>
                             <span>{errors.senhaConfirmar?.message}</span>
                         </div>
                     </div>
-                    <div className="input-line">
-                        <div className="input-box">
+                    <div id="input-line">
+                        <div id="input-box">
                             <label>Lotação <span>*</span></label>
                             <select {...register("lotacao_id", {required: "Lotação é obrigatória"})}>
                                 <option value="">Selecione a Lotação</option>
-                                {lotacao.map((lotacao) => (
+                                {lotacao?.map((lotacao) => (
                                 <option key={lotacao.id} value={lotacao.id}>
                                     {lotacao.nome}
                                 </option>
@@ -124,9 +122,9 @@ export default function SignupForm(){
                             <span>{errors.lotacao_id?.message}</span>
                         </div>
                     </div>
-                    <div className="input-line">
-                        <div className="input-box">
-                            <div className="input-checkbox">
+                    <div id="input-line">
+                        <div id="input-box">
+                            <div id="input-checkbox">
                                 <input
                                     type="checkbox"
                                     {...register("isAdmin")}
@@ -137,9 +135,9 @@ export default function SignupForm(){
                     </div>
                 </div>
 
-                <div className="buttons">
-                    <button type="button" className="cancelar-bnt">CANCELAR</button>
-                    <button type="submit" className="registrar-bnt">REGISTRAR</button>
+                <div id="buttons">
+                    <button className="form-button" type="button" id="cancelar-bnt">CANCELAR</button>
+                    <button className="form-button" type="submit" id="registrar-bnt">REGISTRAR</button>
                 </div>
             </form>
         </div>

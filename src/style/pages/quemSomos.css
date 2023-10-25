@@ -1,0 +1,71 @@
+/* 
+body {
+    font-family: 'Overpass', sans-serif;
+    display: block;
+    overflow: hidden;
+}
+
+.container-about-us{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.texto {
+    
+    width: 50vw;
+    top: 15%;
+    left: 30%;
+    text-align: center;
+    color: #003366;
+    
+}
+
+h2 {
+    font-size: 3rem;
+    font-weight: 400;
+}
+
+.texto p {
+    text-align: justify;
+    font-size: 19px;
+}
+
+label {
+    margin-bottom: 0.5rem;
+}
+
+input::placeholder {
+    color: #6C6C6C;
+    font-size: 1rem;
+    letter-spacing: 0.05rem;
+}
+
+.pessoasDois {
+    position: absolute;
+    width: 100%;
+    top: 70%;
+    left: 30%;
+}
+
+.logo-about-us {
+    text-align: center;
+    width: 7.5vw;
+    height: 20vh;
+}
+
+.ellipse-about-us {
+    z-index: -100;
+    width: 40rem;
+    height: 50rem;
+    transform: rotate(-145.25deg);
+    flex-shrink: 0;
+    border-radius: 62.73281rem;
+    background: #036;
+    position: absolute;
+    top: 70%;
+    left: -15%;
+} */

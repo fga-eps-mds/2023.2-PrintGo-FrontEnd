@@ -1,0 +1,157 @@
+/* 
+body {
+  font-family: 'Overpass', sans-serif;
+}
+
+.login-right-content{
+  width: 60vw;
+  height: 100vh;
+  display: flex;
+  
+  justify-content: end;
+}
+.container-login {
+  display: flex;
+  gap: 12.375rem;
+  padding: 6.25rem 13.625rem 0 8rem;
+  background-color: transparent !important;
+}
+
+.login-box {
+  z-index: 100;
+  width: 26.75rem;
+  height: 32rem;
+  background-color: #ffffff;
+  border-radius: 0.625rem;
+  box-shadow: 4px 4px 15px 0px rgba(0, 0, 0, 0.25);
+  
+  
+}
+  
+.login-box-content {
+  padding: 0 2.81rem 0 2.96rem;
+  
+  height: 30rem;
+}
+
+.login-box-content h2{
+  margin: 0;
+}
+.form-group-login {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+h2 {
+  font-size: 3rem;
+  font-weight: 400;
+  color: #003366;
+  padding-top: 1.75rem;
+}
+
+label {
+  margin-bottom: 0.5rem;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: 0.05rem;
+  text-align: left;
+  color: #003366;
+}
+
+input{
+  height: 2.1875rem;
+  border: 0.063rem solid #003366;
+  border-radius: 0.625rem; 
+  text-indent: 0.75rem;
+}
+
+input::placeholder {
+  color: #6C6C6C;
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+}
+
+button[type="submit"] {
+  width: 16.4375rem;
+  height: 2.5625rem;
+  border-radius: 3.125rem;
+  border: none;
+  background-color: #003366;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 2.5625rem;
+  letter-spacing: 0.05625rem;
+  cursor: pointer;
+}
+
+.button-login-container {
+  display: grid;
+  justify-content: center;
+}
+
+button[type="button"] {
+  width: 16.4375rem;
+  height: 2.5625rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  letter-spacing: 0.05rem;
+  text-align: center;
+  background-color: transparent;
+  color: #006633;
+  border: none;
+  cursor: pointer;
+}
+
+.pessoas {
+  width: 40vw;
+  height: 80vh;
+}
+
+.buttons-login {
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  gap: 1rem;
+  
+  height: 10vh;
+}
+
+.ellipse-login {
+  z-index:-100;
+  width: 60vw;
+  height: 100vh;
+  top:1px;
+  right: 1px;
+}
+
+.ellipse-login img{
+  width: 90vw;
+  height: 130vh;
+}
+
+button:disabled {
+  background-color: #6C6C6C;
+  opacity: 65%;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1210px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    padding-left: 2rem;
+    align-items: center;
+  }
+} */
