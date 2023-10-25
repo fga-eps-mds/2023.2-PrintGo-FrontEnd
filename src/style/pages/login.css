@@ -1,8 +1,6 @@
 
 body {
   font-family: 'Overpass', sans-serif;
-  /* display: block;
-  overflow: hidden; */
 }
 
 .login-right-content{
@@ -15,23 +13,23 @@ body {
 .container-login {
   display: flex;
   gap: 12.375rem;
-  padding: 6.25rem 13.625rem 0 8rem;
+  
   background-color: transparent !important;
 }
 
-/* Estilos para a caixa de login */
 .login-box {
   z-index: 100;
   width: 26.75rem;
   height: 32rem;
-  background-color: #ffffff; /* Cor de fundo da caixa de login */
+  background-color: #ffffff;
   border-radius: 0.625rem;
+  margin-top: 10vh;
+  margin-right: 15vw;
   box-shadow: 4px 4px 15px 0px rgba(0, 0, 0, 0.25);
   
   
 }
   
-  /* Estilos para o conteúdo da caixa de login, como campos de entrada, botões, etc. */
 .login-box-content {
   padding: 0 2.81rem 0 2.96rem;
   
@@ -48,20 +46,15 @@ body {
   padding-top: 1rem;
 }
 
-  /* Estilos para o título "Entrar" */
-h2 {
+.title-login {
   font-size: 3rem;
   font-weight: 400;
-  color: #003366; /* Cor do texto */
+  color: #003366;
   padding-top: 1.75rem;
 }
 
-label {
+.label-login {
   margin-bottom: 0.5rem;
-}
-
-/* Estilos para o rótulo "e-mail" */
-label {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25rem;
@@ -70,22 +63,20 @@ label {
   color: #003366;
 }
 
-/* Estilos para o campo de entrada de e-mail */
-input{
+.input-login{
   height: 2.1875rem;
-  border: 0.063rem solid #003366; /* Cor da borda do campo de entrada */
+  border: 0.063rem solid #003366;
   border-radius: 0.625rem; 
   text-indent: 0.75rem;
 }
 
-input::placeholder {
+.input-login::placeholder {
   color: #6C6C6C;
   font-size: 1rem;
   letter-spacing: 0.05rem;
 }
 
-/* Estilos para o botão "LOGIN" */
-button[type="submit"] {
+.button-login[type="submit"] {
   width: 16.4375rem;
   height: 2.5625rem;
   border-radius: 3.125rem;
@@ -105,8 +96,7 @@ button[type="submit"] {
   justify-content: center;
 }
 
-/* Estilos para o botão "Recuperar senha" */
-button[type="button"] {
+.button-login[type="button"] {
   width: 16.4375rem;
   height: 2.5625rem;
   font-size: 1rem;
@@ -120,10 +110,11 @@ button[type="button"] {
   cursor: pointer;
 }
 
-/* Estilos para a imagem "pessoas" */
 .pessoas {
   width: 40vw;
   height: 80vh;
+  margin-left: 10vw;
+  margin-top: 5vh;
 }
 
 .buttons-login {
@@ -137,28 +128,25 @@ button[type="button"] {
   height: 10vh;
 }
 
-.ellipse-login {
-  z-index:-100;
-  width: 60vw;
-  height: 100vh;
-  /*transform: rotate(-145.25deg);
-  flex-shrink: 0;
-  border-radius: 62.73281rem;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 65rem;
-  background: #036;*/
+.ellipse-login{
   position: absolute;
-  /*margin-left: 1px;*/
-  top:1px;
-  right: 1px;
+  width: 43vw;
+  height: 100vh;
+  top:0;
+  right: 0;
+  z-index: -1;
+  bottom: 2px;
+  color:#003366;
+  overflow: hidden;
+
 }
 
 .ellipse-login img{
-  width: 90vw;
-  height: 130vh;
+  width: 45vw;
+  height: 100vh;
 }
 
-button:disabled {
+.button-login:disabled {
   background-color: #6C6C6C;
   opacity: 65%;
   cursor: not-allowed;

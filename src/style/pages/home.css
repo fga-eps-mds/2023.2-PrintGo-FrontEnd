@@ -8,13 +8,11 @@
   font-size: 64px;
   color: var(--color-darkslateblue);
   font-family: var(--font-jost);
-  /*background-color: blueviolet;*/
 }
 .right-content-home{
   padding: 15px;
   height: 80vh;
   width: 50vw;
-  /*background-color: blueviolet;*/
 }
 .left-content-home{
   height: 100vh;
@@ -22,11 +20,9 @@
   display: flex;
   flex-direction: column;
   justify-content:space-between;
-  /*background-color: red;*/
 }
 .aligned-content{
   align-self: end;
-  /*background-color: #063;*/
   width: 45vw;
   height: 50vh;
   display: flex;
@@ -40,7 +36,6 @@
   flex-direction: column;
   height: 53px;
   width: 38vw;
-  /*background-color: chartreuse;*/
   align-self: self-end;
 }
 
@@ -52,7 +47,6 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  /*background-color: aqua;*/
   align-self: self-end;
 }
 
@@ -67,10 +61,12 @@
 .elipse-home{
   height: 31.7vh;
   width: inherit;
+  overflow: hidden;
 }
 
 .elipse-home img{
   height: 31.7vh;
+
 }
 .content-home{
   display: flex;

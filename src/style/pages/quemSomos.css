@@ -1,8 +1,6 @@
 
 body {
-    font-family: 'Overpass', sans-serif;
-    display: block;
-    overflow: hidden;
+    font-family: 'Overpass', sans-serif;    
 }
 
 .container-about-us{
@@ -20,13 +18,11 @@ body {
     top: 15%;
     left: 30%;
     text-align: center;
-    /* Cor do texto */
     color: #003366;
     
 }
 
-/* Estilos para o título "Quem Somos" */
-h2 {
+.h2-label {
     font-size: 3rem;
     font-weight: 400;
 }
@@ -36,30 +32,12 @@ h2 {
     font-size: 19px;
 }
 
-label {
-    margin-bottom: 0.5rem;
-}
-
-input::placeholder {
-    color: #6C6C6C;
-    font-size: 1rem;
-    letter-spacing: 0.05rem;
-}
-
-/* Estilos para a imagem "PessoasDois" */
 .pessoasDois {
     position: absolute;
     width: 100%;
     top: 70%;
     left: 30%;
 }
-
-/* Estilos para a imagem "PoliciaCivilLogo" */
-/*.PoliciaCivilLogo {
-    position: absolute;
-    top: 65%;
-    left: 47%;
-}*/
 
 .logo-about-us {
     text-align: center;
@@ -76,6 +54,21 @@ input::placeholder {
     border-radius: 62.73281rem;
     background: #036;
     position: absolute;
+    overflow: hidden;
     top: 70%;
     left: -15%;
 }
+
+.ellipse-about {
+}
+
+.ellipse-about{
+    height: 31.7vh;
+    width: inherit;
+    overflow: hidden;
+  }
+  
+  .ellipse-about img{
+    height: 31.7vh;
+    margin: 0;
+  }

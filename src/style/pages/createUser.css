@@ -1,0 +1,15 @@
+#signup-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#signup-container img{
+    margin-left: 10vw;
+}
+
+@media (max-width: 900px) {
+    #signup-container img{
+        display: none;
+    }
+}
