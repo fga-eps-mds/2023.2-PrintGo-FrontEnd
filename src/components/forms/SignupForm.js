@@ -2,8 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { getLotacoes } from "../../services/lotacaoService";
-import { createUser } from "../../services/userService";
+import { getLotacoes, createUser } from "../../api/api";
 import "../../style/components/signupForms.css";
 import elipse6 from '../../assets/elipse6.svg';
 
@@ -43,7 +42,7 @@ export default function SignupForm(){
         async function setLotacoes() {
             try {
                 const data = await getLotacoes();
-                if (data.type ==='success') {
+                if (data.type ==='success' && data.data) {
                     setLotacao(data.data);
                 }
             } catch (error) {
