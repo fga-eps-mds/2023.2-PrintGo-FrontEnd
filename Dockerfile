@@ -2,7 +2,7 @@ FROM node:17-alpine AS development
 ENV NODE_ENV development
 
 # Diretorio
-WORKDIR /src
+WORKDIR /app
 # Instalacao das dependencias
 COPY package.json .
 COPY yarn.lock .
