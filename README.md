@@ -10,7 +10,7 @@ git clone git@github.com:fga-eps-mds/2023.2-PrintGo-FrontEnd.git
 # 2. Entre na pasta do projeto
 cd 2023.2-PrintGo-FrontEnd
 
-# Caso prefira usar yarn eh n tenha
+# Caso prefira usar yarn 
 npm i -g yarn
 
 # Instalar dependencias
@@ -21,7 +21,7 @@ npm i
 
 # Construa a imagem do docker 
 ```bash 
-sudo docker build -t printgofront
+sudo docker build -t printgofront .
 ```
 # Execute o container
 ```bash 
