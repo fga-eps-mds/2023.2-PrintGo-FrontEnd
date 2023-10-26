@@ -1,10 +1,15 @@
 module.exports = {
-    // ... outras configurações ...
-  
+    testMatch: ["**/__tests__/**/*.js", "**/?(*.)+(spec|test).js"],
+    testPathIgnorePatterns: ["/node_modules/"],
     transform: {
-      '^.+\\.js$': 'babel-jest',
+      "^.+\\.(js|jsx)$": "babel-jest",
+      "^.+\\.svg$": "<rootDir>/fileTransform.js", // Adicione esta linha
     },
-  
-    // ... outras configurações ...
+    moduleFileExtensions: ["js", "json", "jsx", "node", "svg"], // Adicione "svg" aqui
+    moduleNameMapper: {
+      "^@/(.*)$": "<rootDir>/src/$1",
+      "\\.(css|less|scss)$": "identity-obj-proxy",
+    },
+    testEnvironment: "jsdom",
   };
   
