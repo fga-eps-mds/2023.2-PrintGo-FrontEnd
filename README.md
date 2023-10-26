@@ -21,10 +21,10 @@ npm i
 
 # Construa a imagem do docker 
 ```bash 
-sudo docker build -t printgofront .
+sudo docker-compose up --build
 ```
 # Execute o container
 ```bash 
-sudo docker run -p 3000:3000 printgofront
+sudo docker-compose up
 ```
 

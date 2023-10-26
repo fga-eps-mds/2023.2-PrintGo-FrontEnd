@@ -6,10 +6,10 @@ WORKDIR /app
 # Instalacao das dependencias
 COPY package.json .
 COPY yarn.lock .
-RUN npm install
+RUN yarn install 
 # Copia arquivos do src
 COPY . .
-RUN npm build
+RUN npm run build
 # Expoe a porta
 EXPOSE 3000
 # Inicia o programa
