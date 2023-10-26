@@ -1,7 +1,7 @@
-FROM node:17-alpine AS development
+FROM node:16-alpine AS development
 ENV NODE_ENV development
 
-# Diretorio
+# Directory
 WORKDIR /app
 # Instalacao das dependencias
 COPY package.json .
@@ -9,6 +9,7 @@ COPY yarn.lock .
 RUN yarn install
 # Copia arquivos do src
 COPY . .
+RUN yarn build
 # Expoe a porta
 EXPOSE 3000
 # Inicia o programa
