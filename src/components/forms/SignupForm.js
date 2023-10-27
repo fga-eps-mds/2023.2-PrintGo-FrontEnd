@@ -145,8 +145,8 @@ export default function SignupForm(){
                 </div>
 
                 <div id="buttons">
-                    <button className="form-button" type="button" id="cancelar-bnt" >CANCELAR</button>
-                    <button className="form-button" type="submit" id="registrar-bnt" disabled={!isValid}>REGISTRAR</button>
+                    <button className="form-button" type="button" id="cancel-bnt" >CANCELAR</button>
+                    <button className="form-button" type="submit" id="register-bnt" disabled={!isValid}>REGISTRAR</button>
                 </div>
             </form>
             <div className="elipse-signup">

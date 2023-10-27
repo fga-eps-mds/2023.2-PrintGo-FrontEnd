@@ -1,4 +1,4 @@
-.Main-page-contato{
+.Main-page-contact{
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-.Main-page-contato h1{
+.Main-page-contact h1{
     text-align: center;
     color: #036;
     font-size: 36px;
@@ -14,12 +14,12 @@
 
 
 
-.Main-page-contato p{
+.Main-page-contact p{
     color: #036;
     letter-spacing: 0.8px;
 }
 
-.Contato-principal{
+.Contact-principal{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -29,7 +29,7 @@
 }
 
 
-.Box-contato{
+.Box-contact{
     border-radius: 0.7rem;
     display: flex;
     flex-direction: column;
@@ -40,7 +40,7 @@
     box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.12), 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.Box-contato p {
+.Box-contact p {
     font-size: 48px;
     padding-left: 1.5rem;
     height: 9vh;
@@ -54,7 +54,7 @@
     margin-right: auto;
 }
 
-.Input-contato{
+.Input-contact{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -64,7 +64,7 @@
     
 }
 
-.input-contato-form{
+.input-contact-form{
     height: 3vh !important;
     width: 11vw !important;
 }
@@ -72,7 +72,7 @@
 
 
 
-.Enviar-button{
+.Send-button{
     
     color: #fff;
     border-radius: 50px;
@@ -86,12 +86,12 @@
 }
 
 
-.Enviar-button:hover{
+.Send-button:hover{
     background-color: #034d1c;
     cursor: pointer;
 }
 
-.Assunto-input{
+.Subject-input{
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -103,7 +103,7 @@
  
 
 
-.Assunto-input label{
+.Subject-input label{
     color: #036;
     font-size: 1rem;
     font-style: normal;
@@ -136,7 +136,7 @@
     left: -15%;
 }
 
-.Imagem-contato{
+.Image-contact{
     width: 20vw;
     height: 70vh;
     position: absolute;
@@ -145,7 +145,7 @@
     
 }
 
-.Imagem-contato img{
+.Image-contact img{
     width: 20vw;
     height: 70vh;
 }
