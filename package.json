@@ -25,7 +25,8 @@
     "test:all": "CI=true npm run test -- --coverage",
     "test:watch": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint  --ext .{tjs,jsx}"
+    "lint": "eslint  --ext .{tjs,jsx}",
+    "dev": "docker-compose -d docker-compose.yml up"
   },
   "eslintConfig": {
     "extends": [
