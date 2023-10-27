@@ -3,14 +3,14 @@ ENV NODE_ENV development
 
 # Directory
 WORKDIR /app
-# Instalacao das dependencias
+# Install dependencies
 COPY package.json .
 COPY yarn.lock .
 RUN npm install 
-# Copia arquivos do src
+# Copy files
 COPY . .
 RUN npm run build
-# Expoe a porta
+# Expose de port
 EXPOSE 3000
-# Inicia o programa
+# Start de program
 CMD [ "npm", "start" ]
