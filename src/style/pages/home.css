@@ -27,7 +27,7 @@
   height: 50vh;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
@@ -44,7 +44,7 @@
   height: auto;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   align-self: self-end;
 }
 
