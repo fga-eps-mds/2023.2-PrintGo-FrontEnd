@@ -70,3 +70,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Rodar Mock Server
+
+#### Pré-requisito
+
+**json-server**
+
+Caso não tenha instalado, rode:
+
+`npm i -g json-server`
+
+
+
+

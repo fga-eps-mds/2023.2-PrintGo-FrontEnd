@@ -1,0 +1,18 @@
+{
+    "impressora": { 
+        "id": 1,
+        "nome": "Impressora HP Laser 107 A",
+        "tipo": "Multifuncional Colorida",
+        "numero_serie": "XXXX-000000",
+        "marca": "HP",
+        "modelo": "Laser 107 A",
+        "mib_name": "HP.json",
+        "cont_instalacao": 0,
+        "cont_retirada": 0,
+        "ip": "192.168.15.1",
+        "cod_locadora": "xMnp0-A",
+        "data_instalacao": "12/10/2023",
+        "data_retirada": null,
+        "unidade_localizacao": "Catalão"
+    }
+}
