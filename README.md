@@ -73,13 +73,21 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### Rodar Mock Server
 
-#### Pré-requisito
+#### Pré-requisitos
 
 **json-server**
 
-Caso não tenha instalado, rode:
+Caso não tenha instalado, instale usando o comando `npm i -g json-server`.
 
-`npm i -g json-server`
+#### Como rodar
+
+Para iniciar o servidor mock, use o comando:
+
+`yarn mock -- <./caminho-do-arquivo.json>`
+
+ou
+
+`npm mock -- <./caminho-do-arquivo.json>`
 
 
 
