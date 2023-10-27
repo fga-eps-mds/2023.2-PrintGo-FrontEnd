@@ -11,5 +11,16 @@ module.exports = {
       "\\.(css|less|scss)$": "identity-obj-proxy",
     },
     testEnvironment: "jsdom",
+    
+    reporters: [
+      'default',
+      [
+          'jest-sonar',
+          {
+              outputDirectory: 'reports',
+              outputName: 'sonar-report.xml'
+          }
+      ]
+  ]
   };
   
