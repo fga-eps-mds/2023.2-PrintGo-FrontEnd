@@ -99,7 +99,7 @@ export default function SignupForm(){
                         <div id="input-box">
                             <label>Confirmar E-mail<span>*</span></label>
                             <input {...register("emailConfirmar", {required: true})} placeholder="Confirmar Email" />
-                            <span>{errors.emailConfirmar?.message}</span>
+                            <span data-testid="email-error">{errors.emailConfirmar?.message}</span>
                         </div>
                     </div>
 
