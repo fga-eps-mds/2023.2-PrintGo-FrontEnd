@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import QuemSomos from '../pages/QuemSomos';
+import AboutUs from '../pages/AboutUs';
 
 test('Renderiza a página QuemSomos corretamente', () => {
-  render(<QuemSomos />);
+  render(<AboutUs />);
   
   const pageTitle = screen.getByText('Quem Somos');
   const paragraph1 = screen.getByText(/O PrintGO tem a finalidade/i);
