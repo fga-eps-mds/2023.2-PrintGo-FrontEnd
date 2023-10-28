@@ -3,8 +3,8 @@ import {BrowserRouter, Routes , Route} from "react-router-dom"
 import Home from "./pages/Home"
 import CreateUserPage from "./pages/CreateUser";
 import Login from "./pages/Login";
-import Contato from "./pages/Contato";
-import QuemSomos from "./pages/QuemSomos";
+import Contact from "./pages/Contact";
+import AboutUs from "./pages/AboutUs";
 import ChangePassword from "./pages/ChangePassword";
 
 
@@ -17,8 +17,8 @@ function App(){
       <Route path="/" element={<Home/>}/>
       <Route path="/cadastro" element={<CreateUserPage/>}/>
       <Route path="/login" element={<Login/>}/>
-      <Route path="/contato" element={<Contato/>}/>
-      <Route path="/quemsomos" element={<QuemSomos/>}/>
+      <Route path="/contato" element={<Contact/>}/>
+      <Route path="/quemsomos" element={<AboutUs/>}/>
       <Route path="/changePassword" element={<ChangePassword/>}/>
     </Routes>
     </BrowserRouter>
