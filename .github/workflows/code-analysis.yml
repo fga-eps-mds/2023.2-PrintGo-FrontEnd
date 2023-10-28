@@ -1,12 +1,13 @@
 name: Análise de Código
 on:
+  workflow_dispatch:
   push:
     branches:
-      - main
+      - dev
   pull_request:
     # types: [opened, synchronize, reopened]
     branches:
-      - main
+      - dev
 
 jobs:
   sonarcloud:
