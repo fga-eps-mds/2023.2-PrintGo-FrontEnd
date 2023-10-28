@@ -181,6 +181,7 @@ sketch
 # comment the following lines
 !.yarn/cache
 
+reports/*
 # and uncomment the following lines
 # .pnp.*
 

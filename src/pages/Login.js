@@ -91,7 +91,7 @@ export default function Login() {
           </div>
         </div>
         <div className="ellipse-login">
-          <img src={login_ellipse}/>
+          <img src={login_ellipse} alt='elipse_azul'/>
         </div>
       </div>
   );

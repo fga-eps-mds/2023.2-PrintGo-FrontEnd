@@ -7,8 +7,7 @@ body {
   width: 60vw;
   height: 100vh;
   display: flex;
-  
-  justify-content: end;
+  justify-content: flex-end;
 }
 .container-login {
   display: flex;
