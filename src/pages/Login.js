@@ -6,7 +6,7 @@ import login_ellipse from '../assets/login_ellipse.svg';
 import { login } from '../api/api';
 import { useNavigate } from 'react-router-dom';
 
-function Login() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -47,7 +47,7 @@ function Login() {
   return (
       <div className="container-login">
 
-        <img src={pessoas} alt="Pessoas" className="pessoas" />
+        <img src={pessoas} alt="Pessoas" className="persons" />
         <div className="login-right-content">
           
           <div className="login-box">
@@ -97,4 +97,4 @@ function Login() {
   );
 }
 
-export default Login;
+

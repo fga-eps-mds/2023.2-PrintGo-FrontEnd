@@ -1,10 +1,10 @@
 import React from 'react';
-import '../style/pages/quemSomos.css';
+import '../style/pages/aboutUs.css';
 import PoliciaCivilLogo from '../assets/PoliciaCivilLogo.svg';
 import elipse from '../assets/home_elipse.svg';
 
 
-function QuemSomos() {
+export default function AboutUs() {
 
   return (
     <div className="container-about-us">
@@ -28,4 +28,4 @@ function QuemSomos() {
   );
 }
 
-export default QuemSomos;
+
