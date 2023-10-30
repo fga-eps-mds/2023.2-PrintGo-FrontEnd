@@ -1,16 +1,20 @@
-FROM node:16-alpine AS development
+# Development stage
+FROM node:18.18-bookworm-slim AS development
 ENV NODE_ENV development
 
 # Directory
 WORKDIR /app
-# Install dependencies
-COPY package.json .
-COPY yarn.lock .
-RUN yarn install 
+RUN apt-get update && apt-get install -y --no-install-recommends dumb-init
+
+# Install all dependencies
+COPY --chown=node:node package*.json /app/
+RUN npm ci
+
 # Copy files
-COPY . .
-RUN yarn build
-# Expose de port
+COPY --chown=node:node . /app/
+
+# Expose the port
 EXPOSE 3000
-# Start de program
-CMD [ "npm", "start" ]
+
+
+CMD ["dumb-init", "npm", "start"]
