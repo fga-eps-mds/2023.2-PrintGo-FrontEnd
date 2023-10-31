@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
 import ChangePassword from "./pages/ChangePassword";
+import ViewImpressora from "./pages/ViewImpressora";
 
 
 
@@ -20,6 +21,7 @@ function App(){
       <Route path="/contato" element={<Contact/>}/>
       <Route path="/quemsomos" element={<AboutUs/>}/>
       <Route path="/changePassword" element={<ChangePassword/>}/>
+      <Route path="/viewImpressora" element={<ViewImpressora/>}/>
     </Routes>
     </BrowserRouter>
   );
