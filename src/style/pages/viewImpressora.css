@@ -1,7 +1,14 @@
+/* Container */
+
 #container-view {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+#left-content {
+    width: 30vw
+    
 }
 
 /* View card */
@@ -14,11 +21,10 @@
     height: 100%;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
     padding: 1rem 5rem;
     margin-right: 8vw;
-    margin-top: 2%;
+    margin-top: 10%;
     margin-bottom: 1vh;
 }
 
@@ -35,6 +41,7 @@
     font-size: 22px;
     color: #003366;
     margin-left: 8px;
+    text-decoration: none;
 }
 
 /* Infos */
@@ -82,12 +89,37 @@
     color: #003366;
     display: block;
     font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 0px;
 }
+
+/*Estilo de circuferencia */
+
+.elipse-view{
+    position: absolute; 
+    width: 40vw;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    bottom: 2px;
+    color:#003366;
+    overflow: hidden;
+}
+
+.ellipse-view img{
+    width: 45vw;
+    height: 100vh;
+  }
 
 /**/
 
-@media (max-width: 900px) {
-    #signup-container img{
-        display: none;
+@media (max-width: 1210px) {
+    .container-view{
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+        padding-left: 2rem;
+        align-items: center;
     }
 }
