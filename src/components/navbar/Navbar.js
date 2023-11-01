@@ -11,8 +11,13 @@ const Navbar = () => {
         <button className="home-navbar">
           <a href="http://localhost:3000/">Home</a>
         </button>
-        <button className="aboutUs-navbar">Quem Somos</button>
-        <button className="contact-navbar">Contato</button>
+        <button className="aboutUs-navbar">
+          <a href="http://localhost:3000/quemsomos">Quem Somos</a>
+        </button>
+        <button className="contact-navbar">
+          {" "}
+          <a href="http://localhost:3000/contato">Contato</a>
+        </button>
       </div>
 
       <div className="dropdown-navbar-users">
