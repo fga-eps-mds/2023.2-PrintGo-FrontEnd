@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Importe o Link
 import "../../style/components/navbar.css";
 import logo from "../../assets/logo 3.svg";
 
@@ -9,14 +10,13 @@ const Navbar = () => {
 
       <div className="button-navbar">
         <button className="home-navbar">
-          <a href="http://localhost:3000/">Home</a>
+          <Link to="/">Home</Link> 
         </button>
         <button className="aboutUs-navbar">
-          <a href="http://localhost:3000/quemsomos">Quem Somos</a>
+          <Link to="/quemsomos">Quem Somos</Link>
         </button>
         <button className="contact-navbar">
-          {" "}
-          <a href="http://localhost:3000/contato">Contato</a>
+          <Link to="/contato">Contato</Link>
         </button>
       </div>
 
@@ -24,8 +24,8 @@ const Navbar = () => {
         <button className="users-navbar">
           Usuários
           <div className="dropdown-users-navbar">
-            <a href="http://localhost:3000/cadastro">Cadastro de usuário</a>
-            <a href="#">Edição de usuário</a>
+            <Link to="/cadastro">Cadastro de usuário</Link>
+            <Link to="#">Edição de usuário</Link>
           </div>
         </button>
       </div>
@@ -34,8 +34,8 @@ const Navbar = () => {
         <button className="printers-navbar">
           Impressoras
           <div className="dropdown-printers-navbar">
-            <a href="#">Cadastro de impressora</a>
-            <a href="#">Edição de impressora</a>
+            <Link to="#">Cadastro de impressora</Link>
+            <Link to="#">Edição de impressora</Link>
           </div>
         </button>
       </div>

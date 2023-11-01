@@ -1,29 +1,31 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Importe o Link
 import "../../style/components/navbarSimple.css";
 import logo from "../../assets/logo 3.svg";
 
 const NavbarSimple = () => {
   return (
     <div className="container-navbar-simple">
-      <img alt="" src={logo}></img>
+      <img alt="" src={logo} />
 
       <div className="button-navbar-simple">
         <button className="home-navbar-simple">
-          <a href="http://localhost:3000/">Home</a>
+          <Link to="/">Home</Link> {/* Use o Link para navegar para a rota */}
         </button>
         <button className="aboutUs-navbar-simple">
-          <a href="http://localhost:3000/quemsomos">Quem Somos</a>
+          <Link to="/quemsomos">Quem Somos</Link>
         </button>
         <button className="contact-navbar-simple">
-          {" "}
-          <a href="http://localhost:3000/contato">Contato</a>
+          <Link to="/contato">Contato</Link>
         </button>
       </div>
 
       <div className="button-login-navbar-simple">
-        <button className="login-navbar-simple">
-          <a href="http://localhost:3000/login">Login</a>
-        </button>
+        <Link to="/login">
+          <button className="login-navbar-simple">
+            Login
+          </button>
+        </Link>
       </div>
     </div>
   );

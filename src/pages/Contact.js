@@ -3,7 +3,7 @@ import "../style/pages/contact.css";
 import Imagem_Homen from "../assets/imagem-homen-ruivo.svg";
 import Input from "../components/Input";
 import emailjs from "@emailjs/browser";
-import NavbarContact from "../components/navbar/NavbarContact";
+import NavbarSimple from "../components/navbar/NavbarSimple";
 
 export default function Contact() {
   const [nome, setNome] = useState("");
@@ -44,7 +44,7 @@ export default function Contact() {
 
   return (
     <>
-      <NavbarContact />
+      <NavbarSimple />
       <div className="Main-page-contact">
         <h1>Contato</h1>
         <div className="Contact-principal">
