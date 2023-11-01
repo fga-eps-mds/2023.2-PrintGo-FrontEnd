@@ -48,6 +48,11 @@
   text-decoration: none;
   color: #003366;
 }
+
+.login-navbar-simple a {
+  text-decoration: none;
+  color: #003366;
+}
 .button-login-navbar-simple :hover {
   background-color: #003366;
   color: #ffff;
