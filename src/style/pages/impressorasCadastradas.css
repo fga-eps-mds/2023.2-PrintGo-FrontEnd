@@ -1,86 +1,56 @@
 /* barra azul superior */
 .impressorasCadastradas-page {
   position: relative;
-  background-color: #003366;
-  width: inherit;
-  height: 10vh;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   text-align: left;
   font-family: var(--font-jost);
 }
 
+
+
+
 /* letras dentro da barra azul superior */
-.impressorasCadastradas-text{ 
-  font-size: 45px;
-  margin-top: 11px;
-  padding-left: 20px;
+.impressorasCadastradas-cabecalho{ 
+  height: 10vh;
   color: #ffffff;
   font-family: var(--font-jost);
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #003366;
+  padding-left: 1vw;
 }
 
-.impressorasCadastradas-image{
-  padding-left: 40px;
+.impressorasCadastradas-cabecalho h2{
+  margin: 0;
+  font-size: 40px;
+}
+
+.impressorasCadastradas-cabecalho-icones{
+  
   height: 10vh;
-  width: 10vw;
+  width: 50vw;
   overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .impressorasCadastradas-image img{
   height: 5vh;
 } 
 
-/* .impressorasCadastradas-image-Search{
-  height: 10vh;
-  width: 10vw;
-  overflow: hidden;
-}
 
-.impressorasCadastradas-image-Search img{
-  height: 5vh;
-} 
-
-.impressorasCadastradas-image-Filter{
-  height: 10vh;
-  width: 10vw;
-  overflow: hidden;
-} 
-
-.impressorasCadastradas-image-Filter img{
-  height: 5vh;
-}  */
-
-.impressorasCadastradas-left-content{
-  height: 100vh;
-  width: auto;
+.impressorasCadastradas-cabecalho-input{
   display: flex;
-  flex-direction: column;
-  justify-content:space-between;
+  align-items: center;
+  width: 23vw;
+  height: 4vh;
 }
 
-.impressorasCadastradas-aligned-content{
-  align-self: end;
-  width: 45vw;
-  height: 50vh;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-
-.impressorasCadastradas-page-text{
-  width: 38vw;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  align-self: self-end;
-}
-
-.impressorasCadastradas-text{
-  font-size: 45px;
-  /* text-align: center; */
-  margin-top: 12px;
-  margin-right: 30px;
-  color: #ffffff;
+.input-pesquisa-impressoras{
+  width: 23vw;
+  height: 4vh;
 }
