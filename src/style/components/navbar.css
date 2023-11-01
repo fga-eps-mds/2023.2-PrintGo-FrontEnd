@@ -1,0 +1,76 @@
+.container-navbar {
+  width: 100%;
+  background-color: #ffff;
+  height: 7vh;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 5rem;
+  display: flex;
+}
+
+.container-navbar img {
+  width: 18vw;
+  height: 7vh;
+}
+
+.button-navbar button {
+  background-color: #ffff;
+  color: #003366;
+  border: none;
+  font-size: 18px;
+  padding-right: 75px;
+}
+
+.users-navbar {
+  background-color: #ffff;
+  color: #003366;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+}
+
+.printers-navbar {
+  background-color: #ffff;
+  color: #003366;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-navbar {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-users-navbar {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-users-navbar a {
+  color: #003366;
+  width: 15vw;
+  text-decoration: none;
+  display: block;
+  font-size: 20px;
+  padding: 4px 4px;
+}
+
+.dropdown-users-navbar a:hover {
+  background-color: #003366;
+  color: #ffff;
+}
+
+.dropdown-navbar:hover .dropdown-users-navbar {
+  display: block;
+}
+
+.dropdown-navbar:hover .users-navbar {
+  background-color: #ffff;
+  color: #006633;
+}
