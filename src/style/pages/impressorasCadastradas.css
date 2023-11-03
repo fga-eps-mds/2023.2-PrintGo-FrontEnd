@@ -1,56 +1,79 @@
-/* barra azul superior */
+/* Docker da Pagina  */
 .impressorasCadastradas-page {
   position: relative;
   width: 100vw;
   height: 100vh;
+  color: #74bb24;
+  background-color: #be313100;
   overflow: hidden;
   text-align: left;
-  font-family: var(--font-jost);
+  font-family: var(--font-Overpass);
 }
 
 
-
-
-/* letras dentro da barra azul superior */
+/* Dcoker Cabecalho, barra azul e posicao inicial */
 .impressorasCadastradas-cabecalho{ 
-  height: 10vh;
+  height: 60px;
   color: #ffffff;
-  font-family: var(--font-jost);
+  font-family: var(--font-Overpass);
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: #003366;
-  padding-left: 1vw;
+  padding-left: 14px;
 }
 
+
+/* tamanho da fonte do cabecalho */
 .impressorasCadastradas-cabecalho h2{
-  margin: 0;
+  margin: 8px;
   font-size: 40px;
 }
 
+
+/* Docker dos icones e do input */
 .impressorasCadastradas-cabecalho-icones{
-  
-  height: 10vh;
-  width: 50vw;
+  height: 60px;
+  width: 669.32px;
   overflow: hidden;
   display: flex;
   justify-content: space-around;
+  align-self: flex-end;
   align-items: center;
 }
 
-.impressorasCadastradas-image img{
-  height: 5vh;
+
+/* imagens (icones) e onde estarao originalmente */
+.impressorasCadastradas-cabecalho-imagens{
+  display: flex;
+  justify-content: space-between;
+  height: 32px;
+  width: 85px;
 } 
 
 
-.impressorasCadastradas-cabecalho-input{
+/* img da classe dos icones para setar suas distancias */
+.impressorasCadastradas-cabecalho-imagens img{
   display: flex;
-  align-items: center;
-  width: 23vw;
-  height: 4vh;
+  width: 24px;
+  height: 24px;
 }
 
-.input-pesquisa-impressoras{
-  width: 23vw;
-  height: 4vh;
+
+/* Docker da barra de input para ser a barra de pesquisa */
+.impressorasCadastradas-cabecalho-input{
+  display: flex;
+  justify-content: end;
+  margin-bottom: 10px;
+  width: 301.361px;
 }
+
+
+/* barra de input para ser a barra de pesquisa */
+.input-pesquisa-impressoras{
+  display: flex;
+  width: 301.361px;
+  height: 27.852px;
+  flex-shrink: 0; 
+}
+

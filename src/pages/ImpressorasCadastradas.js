@@ -13,12 +13,11 @@ export default function ImpressorasCadastradas(){
                   <div className="impressorasCadastradas-cabecalho-input">
                     <Input className="input-pesquisa-impressoras"/>
                   </div>
-                  
-                  <img alt="" src={Search} />
-                  <img alt="" src={Filter} />
-                  
+                  <div className="impressorasCadastradas-cabecalho-imagens"> 
+                    <img alt="" src={Search} />
+                    <img alt="" src={Filter} />
+                  </div>
                 </div>
-
             </div>
         </div>
     );
