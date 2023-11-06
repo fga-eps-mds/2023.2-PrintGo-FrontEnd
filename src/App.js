@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
 import ChangePassword from "./pages/ChangePassword";
-
+import RegisterPrinter from "./pages/RegisterPrinter" 
 
 
 function App(){
@@ -20,6 +20,7 @@ function App(){
       <Route path="/contato" element={<Contact/>}/>
       <Route path="/quemsomos" element={<AboutUs/>}/>
       <Route path="/changePassword" element={<ChangePassword/>}/>
+      <Route path="/cadastroImpressora" element={<RegisterPrinter/>}/>
     </Routes>
     </BrowserRouter>
   );
