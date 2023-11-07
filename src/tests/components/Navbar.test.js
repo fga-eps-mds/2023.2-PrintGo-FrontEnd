@@ -17,4 +17,9 @@ describe('Navbar', () => {
     const homeLink = screen.getByText('Home');
     expect(homeLink).toBeInTheDocument();
   });
+
+  test('renders about us link', () => {
+    const aboutUsLink = screen.getByText('Quem Somos');
+    expect(aboutUsLink).toBeInTheDocument();
+  });
 });
