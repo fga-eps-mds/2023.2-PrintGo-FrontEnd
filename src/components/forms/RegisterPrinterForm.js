@@ -45,7 +45,10 @@ export default function RegisterPrinterForm() {
             <div id="input-line" key={index}>
               <div id="input-box">
                 <label>{field.charAt(0).toUpperCase() + field.slice(1)}<span>*</span></label>
-                <input {...register(field)} placeholder={field.charAt(0).toUpperCase() + field.slice(1)} />
+                <input
+                    {...register(field)}
+                    placeholder={field.includes('data') ? 'DD/MM/AAAA' : field.charAt(0).toUpperCase() + field.slice(1)} // Alteração aqui
+                />
                 <span>{errors[field]?.message}</span>
               </div>
             </div>
