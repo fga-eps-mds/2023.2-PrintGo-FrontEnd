@@ -90,3 +90,8 @@ export async function getLotacoes() {
 
   }
 }
+
+// Função para obter dados da impressora do banco.
+export async function getPrinterData() {
+
+}
