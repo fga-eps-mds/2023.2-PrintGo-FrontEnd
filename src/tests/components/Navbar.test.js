@@ -22,4 +22,10 @@ describe('Navbar', () => {
     const aboutUsLink = screen.getByText('Quem Somos');
     expect(aboutUsLink).toBeInTheDocument();
   });
+
+  test('renders contact link', () => {
+    const contactLink = screen.getByText('Contato');
+    expect(contactLink).toBeInTheDocument();
+  });
+
 });
