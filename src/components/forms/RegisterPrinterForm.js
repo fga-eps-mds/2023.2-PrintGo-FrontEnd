@@ -27,10 +27,7 @@ const registerPrinterSchema = yup.object().shape({
       .oneOf([yup.ref('senha'), null], 'As senhas devem coincidir')
       .required('Senha é obrigatória'),
     documento: yup.string()
-    .matches(/^(\d{11}|\d{14})$/, 'CPF ou CNPJ inválido')
-    .test('cpfOrCnpj', 'CPF ou CNPJ inválido', value => {
-        return value.length === 11 || value.length === 14;
-    }),
+    .matches(/^(\d{11}|\d{14})$/, 'CPF ou CNPJ inválido'),
     lotacao_id: yup.string().required('Lotação é obrigatória'),
     isAdmin: yup.boolean(),
   });
