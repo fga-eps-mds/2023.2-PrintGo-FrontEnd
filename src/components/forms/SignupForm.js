@@ -1,10 +1,14 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import * as yup from "yup";
-import { getLotacoes, createUser } from "../../api/api";
-import "../../style/components/signupForms.css";
 import elipse6 from '../../assets/elipse6.svg';
+import { getLotacoes } from "../../services/lotacaoService";
+import { getPoliceUnits } from "../../services/policeUnitService";
+import { createUser } from "../../services/userService";
+import "../../style/components/signupForms.css";
 
 
 const signupSchema = yup.object().shape({
@@ -37,19 +41,29 @@ const signupSchema = yup.object().shape({
 
 export default function SignupForm(){
     const [lotacao, setLotacao] = useState([]);
+    const [lotacaoInList, setLotacaoInList] = useState([]);
+    const [policieUnit, setPolicieUnit] = useState([]);
+    const [displayLotacoes, setDisplayLotacoes] = useState(false);
 
     useEffect( () => {
-        async function setLotacoes() {
+        async function setData() {
             try {
-                const data = await getLotacoes();
-                if (data.type ==='success' && data.data) {
-                    setLotacao(data.data);
+                const [dataLotacao, dataPolicieUnit] = await Promise.all([
+                    getLotacoes(),
+                    getPoliceUnits()
+                ])
+                if (dataLotacao.type ==='success' && dataLotacao.data) {
+                    setLotacao(dataLotacao.data);
                 }
+                if (dataPolicieUnit.type ==='success' && dataPolicieUnit.data) {
+                    setPolicieUnit(dataPolicieUnit.data);
+                }
+
             } catch (error) {
                 console.error('Erro ao obter opções do serviço:', error);
               }
         }
-        setLotacoes();
+        setData();
       }, []);
    
     
@@ -65,9 +79,24 @@ export default function SignupForm(){
         if (data.isAdmin) {
             data.cargos.push("ADMIN");
         }
-        await createUser(data);
-        reset()
+        const response = await createUser(data);
+        if(response.type === 'success'){
+            toast.success("Usuario cadastrado com sucesso!")
+            reset()
+        } else {
+            toast.error("Erro ao cadastrar usuario")
+        }
     }
+
+    const handlePoliceUnitChange = (event) => {
+        if(event.target.value) {
+            setDisplayLotacoes(true);
+            setLotacaoInList(lotacao.filter(lot => lot.unidade_pai_id === event.target.value))
+        }else {
+            setDisplayLotacoes(false);
+        }
+    };
+
 
     return(
         <div id="signup-card">
@@ -118,17 +147,30 @@ export default function SignupForm(){
                     </div>
                     <div id="input-line">
                         <div id="input-box">
-                            <label>Lotação <span>*</span></label>
-                            <select {...register("lotacao_id", {required: "Lotação é obrigatória"})}>
-                                <option value="">Selecione a Lotação</option>
-                                {lotacao?.map((lotacao) => (
-                                <option key={lotacao.id} value={lotacao.id}>
-                                    {lotacao.nome}
+                            <label>Unidade de Policia<span>*</span></label>
+                            <select onChange={handlePoliceUnitChange}>
+                                <option value="">Selecione a Unidade de policia</option>
+                                {policieUnit?.map((unit) => (
+                                <option key={unit.id} value={unit.id}>
+                                    {unit.nome}
                                 </option>
                                 ))}
                             </select>
-                            <span>{errors.lotacao_id?.message}</span>
                         </div>
+                        {displayLotacoes && (
+                            <div id="input-box">
+                                <label>Lotação Relacionadas <span>*</span></label>
+                                <select {...register("lotacao_id", {required: "Lotação é obrigatória"})}>
+                                    <option value="">Selecione a Lotação</option>
+                                    {lotacaoInList?.map((lotacao) => (
+                                    <option key={lotacao.id} value={lotacao.id}>
+                                        {lotacao.nome}
+                                    </option>
+                                    ))}
+                                </select>
+                                <span>{errors.lotacao_id?.message}</span>
+                            </div>
+                        )}
                     </div>
                     <div id="input-line">
                         <div id="input-box">
@@ -152,6 +194,7 @@ export default function SignupForm(){
             <div className="elipse-signup">
                 <img alt= "elipse"  src={elipse6}></img>
             </div>
+            <ToastContainer />
         </div>
     );
 }
