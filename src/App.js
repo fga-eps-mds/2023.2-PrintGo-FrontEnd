@@ -15,11 +15,11 @@ function App(){
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home/>}/>
-      <Route path="/cadastro" element={<CreateUserPage/>}/>
+      <Route path="/cadastroUsuario" element={<CreateUserPage/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/contato" element={<Contact/>}/>
-      <Route path="/quemsomos" element={<AboutUs/>}/>
-      <Route path="/changePassword" element={<ChangePassword/>}/>
+      <Route path="/quemSomos" element={<AboutUs/>}/>
+      <Route path="/trocaSenha" element={<ChangePassword/>}/>
       <Route path="/cadastroImpressora" element={<RegisterPrinter/>}/>
     </Routes>
     </BrowserRouter>
