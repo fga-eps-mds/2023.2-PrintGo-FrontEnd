@@ -1,7 +1,7 @@
 import React,{ useState } from "react";
 import '../style/pages/viewImpressora.css';
 import login_ellipse from '../assets/login_ellipse.svg';
-import voltar_vector from '../assets/voltar_vector.svg'
+import voltar_vector from '../assets/voltar_vector.svg';
 
 export default function ViewImpressora(){
     return(
@@ -14,9 +14,9 @@ export default function ViewImpressora(){
                     <div id="info-group">
                         <header id="card-header">
                             <img alt="" src={voltar_vector}></img>
-                            <a href="#">Voltar</a>
+                            <a href="">Voltar</a>
                         </header>
-                        <p id="cabecalho">Multifuncional Colorida - HP - Laser 107 A</p>
+                        <p id="cabecalho">Multifuncional P&B - Canon - MF1643i II</p>
                         <div id="info-line">
                             <div id="info-box">
                                 <label>Número de série</label>
@@ -29,12 +29,8 @@ export default function ViewImpressora(){
                         </div>
                         <div id="info-line">
                             <div id="info-box">
-                                <label>MIB</label>
-                                <p>HP.json</p>
-                            </div>
-                            <div id="info-box">
                                 <label>Código da locadora</label>
-                                <p>xMnp0-A</p>
+                                <p>PRINTER-004</p>
                             </div>
                         </div>
                         <div id="info-line">
@@ -59,8 +55,22 @@ export default function ViewImpressora(){
                         </div>
                         <div id="info-line">
                             <div id="info-box">
-                                <label>Unidade de localização</label>
-                                <p>Catalão</p>
+                                <label>Último contador</label>
+                                <p>0</p>
+                            </div>
+                            <div id="info-box">
+                                <label>Data do último contador</label>
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div id="info-line">
+                            <div id="info-box">
+                                <label>Unidade pai</label>
+                                <p>1ª Delegacia Regional de Goiânia</p>
+                            </div>
+                            <div id="info-box">
+                                <label>Unidade filha</label>
+                                <p>2ª Delegacia Municipal de Goiânia</p>
                             </div>
                         </div>
                     </div>
