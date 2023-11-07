@@ -1,4 +1,4 @@
-#signup-card {
+#registerPrinter-card {
     background-color: #FFFFFF;
     border-radius: 10px;
     display: flex;
@@ -135,7 +135,7 @@
     font-size: 10px;
 }
 
-.elipse-signup{
+.elipse-registerPrinter{
     position: fixed; 
     width: 50vw;
     height: 100vh;
@@ -148,12 +148,12 @@
 
   }
   
-  .elipse-signup img{
+  .elipse-registerPrinter img{
     height: 150vh;
   }
 
 @media (max-width: 900px) {
-    #signup-card {
+    #registerPrinter-card {
         width: 90%; /* Adjust the form width as needed*/
         margin: 0 auto; /* Centers the form horizontally*/
         padding: 1rem; /* Adjust padding as needed */

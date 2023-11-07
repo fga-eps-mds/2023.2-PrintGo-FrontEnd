@@ -1,15 +1,17 @@
-#signup-container {
+#registerPrinter-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#signup-container img{
-    margin-left: 10vw;
+#registerPrinter-container img{
+    margin-left: 5vw;
+    width: 900px;
 }
 
 @media (max-width: 900px) {
-    #signup-container img{
-        display: none;
+    #registerPrinter-container img{
+        /* width: 100px; */
+        display: auto;
     }
 }
