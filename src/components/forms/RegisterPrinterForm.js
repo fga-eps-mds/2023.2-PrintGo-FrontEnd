@@ -8,63 +8,32 @@ import elipse6 from '../../assets/elipse6.svg';
 
 
 const registerPrinterSchema = yup.object().shape({
-    nome: yup.string().required('Nome é obrigatório'),
-    email: yup
-      .string()
-      .email('Email inválido')
-      .required('Email é obrigatório'),
-    emailConfirmar: yup
-      .string()
-      .oneOf([yup.ref('email'), null], 'Os emails devem coincidir')
-      .required('Email é obrigatória'),
-    senha: yup.string().required('Senha é obrigatória')
-    .matches(
-      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      'A senha não segue o padrão a baixo'
-    ),
-    senhaConfirmar: yup
-      .string()
-      .oneOf([yup.ref('senha'), null], 'As senhas devem coincidir')
-      .required('Senha é obrigatória'),
-    documento: yup.string()
-    .matches(/^(\d{11}|\d{14})$/, 'CPF ou CNPJ inválido'),
-    lotacao_id: yup.string().required('Lotação é obrigatória'),
-    isAdmin: yup.boolean(),
+    padrao: yup.string().required('Padrão é obrigatório'),
+    ip: yup.string().required('IP é obrigatório'),
+    numeroSerie: yup.string().required('Número de série é obrigatório'),
+    codigoLocadora: yup.string().required('Código da locadora é obrigatório'),
+    contadorInstalacao: yup.string().required('Contador de instalação é obrigatório'),
+    dataInstalacao: yup.string().required('Data de instalação é obrigatória'),
+    contadorRetirada: yup.string().required('Contador de retirada é obrigatório'),
+    dataRetirada: yup.string().required('Data de retirada é obrigatória'),
+    ultimoContador: yup.string().required('Último contador é obrigatório'),
+    dataUltimoContador: yup.string().required('Data do último contador é obrigatória'),
+    unidadePai: yup.string().required('Unidade pai é obrigatória'),
+    unidadeFilho: yup.string().required('Unidade filho é obrigatória'),
   });
 
 export default function RegisterPrinterForm(){
-    const [lotacao, setLotacao] = useState([]);
-
-    useEffect( () => {
-        async function setLotacoes() {
-            try {
-                const data = await getLotacoes();
-                if (data.type ==='success' && data.data) {
-                    setLotacao(data.data);
-                }
-            } catch (error) {
-                console.error('Erro ao obter opções do serviço:', error);
-              }
-        }
-        setLotacoes();
-      }, []);
-   
-    
     const {
-        register,
-        handleSubmit,
-        formState: { errors, isValid }, 
-        reset
-    } = useForm({resolver: yupResolver(registerPrinterSchema), mode: "onChange"})
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    reset
+    } = useForm({ resolver: yupResolver(registerPrinterSchema), mode: "onChange" });
 
-    const onSubmit = async (data) =>  {
-        data.cargos = ["USER"];
-        if (data.isAdmin) {
-            data.cargos.push("ADMIN");
-        }
-        await createUser(data);
-        reset()
-    }
+  const onSubmit = async (data) => {
+    await createUser(data);
+    reset();
+  }
 
     return(
         <div id="signup-card">
