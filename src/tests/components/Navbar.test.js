@@ -28,4 +28,10 @@ describe('Navbar', () => {
     expect(contactLink).toBeInTheDocument();
   });
 
+  test('renders users dropdown on click', () => {
+    const usersButton = screen.getByText('Usuários');
+    fireEvent.click(usersButton);
+    const usersDropdown = screen.getByText('Cadastro de usuário');
+    expect(usersDropdown).toBeInTheDocument();
+  });
 });
