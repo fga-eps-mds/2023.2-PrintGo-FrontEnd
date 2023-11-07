@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { getLotacoes, createUser } from "../../api/api";
-import "../../style/components/signupForms.css";
+import "../../style/components/registerPrinterForms.css";
 import elipse6 from '../../assets/elipse6.svg';
 
 
-const signupSchema = yup.object().shape({
+const registerPrinterSchema = yup.object().shape({
     nome: yup.string().required('Nome é obrigatório'),
     email: yup
       .string()
@@ -35,7 +35,7 @@ const signupSchema = yup.object().shape({
     isAdmin: yup.boolean(),
   });
 
-export default function SignupForm(){
+export default function RegisterPrinterForm(){
     const [lotacao, setLotacao] = useState([]);
 
     useEffect( () => {
@@ -58,7 +58,7 @@ export default function SignupForm(){
         handleSubmit,
         formState: { errors, isValid }, 
         reset
-    } = useForm({resolver: yupResolver(signupSchema), mode: "onChange"})
+    } = useForm({resolver: yupResolver(registerPrinterSchema), mode: "onChange"})
 
     const onSubmit = async (data) =>  {
         data.cargos = ["USER"];
@@ -72,74 +72,82 @@ export default function SignupForm(){
     return(
         <div id="signup-card">
             <header id="form-header">
-                Cadastro
+                Cadastrar impressora
             </header>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div id="input-group">
                     <div id="input-line">
                         <div id="input-box">
-                            <label>Nome<span>*</span></label>
-                            <input {...register("nome", {required: true} )} placeholder="Nome" />
-                            <span>{errors.nome?.message}</span>
+                            <label>Padrão<span>*</span></label>
+                            <input {...register("padrao", {required: true} )} placeholder="Padrão" />
+                            <span>{errors.padrao?.message}</span>
                         </div>
 
                         <div id="input-box">
-                            <label>Documento<span>*</span></label>
-                            <input {...register("documento", {required: true})} placeholder="CPF ou CNPF" />
-                            <span>{errors.documento?.message}</span>
+                            <label>IP<span>*</span></label>
+                            <input {...register("ip", {required: true})} placeholder="123.456.789.123" />
+                            <span>{errors.ip?.message}</span>
                         </div>
                     </div>
                     <div id="input-line">
                         <div id="input-box">
-                            <label>E-mail<span>*</span></label>
-                            <input {...register("email", {required: true} )} type="email" placeholder="Email" />
-                            <span>{errors.email?.message}</span>
+                            <label>Número de série<span>*</span></label>
+                            <input {...register("numeroSerie", {required: true} )} placeholder="XXXX-000000" />
+                            <span>{errors.numeroSerie?.message}</span>
                         </div>
 
                         <div id="input-box">
-                            <label>Confirmar E-mail<span>*</span></label>
-                            <input {...register("emailConfirmar", {required: true})} placeholder="Confirmar Email" />
-                            <span>{errors.emailConfirmar?.message}</span>
-                        </div>
-                    </div>
-
-                    <div id="input-line">
-                        <div id="input-box">
-                            <label>Senha<span>*</span></label>
-                            <input {...register("senha", {required: true})} placeholder="Senha" type="password"/>
-                            <span>{errors.senha?.message}</span>
-                            <p id="input-description">A senha deve conter pelo menos 8 caracteres, 1 letra maiúscula, 1 minuscula, 1 número e um caractere especial</p>
-                        </div>
-                        <div id="input-box">
-                            <label>Confirmar Senha<span>*</span></label>
-                            <input {...register("senhaConfirmar", {required: true})} placeholder="Confirmar Senha" type="password"/>
-                            <span>{errors.senhaConfirmar?.message}</span>
+                            <label>Código da locadora<span>*</span></label>
+                            <input {...register("codigoLocadora", {required: true})} placeholder="Código da Locadora" />
+                            <span>{errors.codigoLocadora?.message}</span>
                         </div>
                     </div>
                     <div id="input-line">
                         <div id="input-box">
-                            <label>Lotação <span>*</span></label>
-                            <select {...register("lotacao_id", {required: "Lotação é obrigatória"})}>
-                                <option value="">Selecione a Lotação</option>
-                                {lotacao?.map((lotacao) => (
-                                <option key={lotacao.id} value={lotacao.id}>
-                                    {lotacao.nome}
-                                </option>
-                                ))}
-                            </select>
-                            <span>{errors.lotacao_id?.message}</span>
+                            <label>Contador de instalação<span>*</span></label>
+                            <input {...register("contadorInstalacao", {required: true})} placeholder="Contador de instalação"/>
+                            <span>{errors.contadorInstalacao?.message}</span>
+                        </div>
+                        <div id="input-box">
+                            <label>Data de instalação<span>*</span></label>
+                            <input {...register("dataInstalacao", {required: true})} placeholder="dd/mm/aaaa"/>
+                            <span>{errors.dataInstalacao?.message}</span>
                         </div>
                     </div>
                     <div id="input-line">
                         <div id="input-box">
-                            <div id="input-checkbox">
-                                <input
-                                    id="checkbox"
-                                    type="checkbox"
-                                    {...register("isAdmin")}
-                                />
-                                <label id="label-checkbox">Usuário é administrador?</label>
-                            </div>
+                            <label>Contador de retirada<span>*</span></label>
+                            <input {...register("contadorRetirada", {required: true})} placeholder="Contador de retirada"/>
+                            <span>{errors.contadorRetirada?.message}</span>
+                        </div>
+                        <div id="input-box">
+                            <label>Data de retirada<span>*</span></label>
+                            <input {...register("dataRetirada", {required: true})} placeholder="dd/mm/aaaa"/>
+                            <span>{errors.dataRetirada?.message}</span>
+                        </div>
+                    </div>
+                    <div id="input-line">
+                        <div id="input-box">
+                            <label>Último contador<span>*</span></label>
+                            <input {...register("ultimoContador", {required: true})} placeholder="Último contador"/>
+                            <span>{errors.ultimoContador?.message}</span>
+                        </div>
+                        <div id="input-box">
+                            <label>Data do último contador<span>*</span></label>
+                            <input {...register("dataUltimoContador", {required: true})} placeholder="dd/mm/aaaa"/>
+                            <span>{errors.dataUltimoContador?.message}</span>
+                        </div>
+                    </div>
+                    <div id="input-line">
+                        <div id="input-box">
+                            <label>Unidade pai<span>*</span></label>
+                            <input {...register("unidadePai", {required: true})} placeholder="Unidade pai"/>
+                            <span>{errors.unidadePai?.message}</span>
+                        </div>
+                        <div id="input-box">
+                            <label>Unidade filho<span>*</span></label>
+                            <input {...register("unidadeFilho", {required: true})} placeholder="Unidade filho"/>
+                            <span>{errors.unidadeFilho?.message}</span>
                         </div>
                     </div>
                 </div>
