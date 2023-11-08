@@ -7,7 +7,7 @@ import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
 import ChangePassword from "./pages/ChangePassword";
 import RegisterPrinter from "./pages/RegisterPrinter" 
-
+import EditPrinter from "./pages/EditPrinter"
 
 function App(){
    
@@ -21,6 +21,7 @@ function App(){
       <Route path="/quemSomos" element={<AboutUs/>}/>
       <Route path="/trocaSenha" element={<ChangePassword/>}/>
       <Route path="/cadastroImpressora" element={<RegisterPrinter/>}/>
+      <Route path="/editarImpressora" element={<EditPrinter/>}/>
     </Routes>
     </BrowserRouter>
   );
