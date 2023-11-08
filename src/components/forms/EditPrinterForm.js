@@ -7,25 +7,25 @@ import "../../style/components/editPrinterForms.css";
 import elipse6 from '../../assets/elipse6.svg';
 
 const editPrinterSchema = yup.object().shape({
-  padrao: yup.string().required('Padrão é obrigatório'),
-  ip: yup.string().required('IP é obrigatório'),
-  numeroSerie: yup.string().required('Número de série é obrigatório'),
-  codigoLocadora: yup.string().required('Código da locadora é obrigatório'),
-  contadorInstalacao: yup.string().required('Contador de instalação é obrigatório'),
-  dataInstalacao: yup.string().required('Data de instalação é obrigatória'),
-  contadorRetirada: yup.string().required('Contador de retirada é obrigatório'),
-  dataRetirada: yup.string().required('Data de retirada é obrigatória'),
-  ultimoContador: yup.string().required('Último contador é obrigatório'),
-  dataUltimoContador: yup.string().required('Data do último contador é obrigatória'),
-  unidadePai: yup.string().required('Unidade pai é obrigatória'),
-  unidadeFilho: yup.string().required('Unidade filho é obrigatória'),
+  Tipo: yup.string().required('Tipo é obrigatório'),
+  Marca: yup.string().required('Marca é obrigatório'),
+  Modelo: yup.string().required('Modelo é obrigatório'),
+  ModeloDaImpressora: yup.string().required('Modelo da impressora é obrigatório'),
+  NumeroDeSerie: yup.string().required('Número de série é obrigatório'),
+  VersaoDeFirmware: yup.string().required('Versão de Firmware é obrigatória'),
+  TempoAtivoDoSistema: yup.string().required('Tempo ativo do sistema é obrigatório'),
+  TotalDeDigitalizacoes: yup.string().required('Total de digitalizações é obrigatória'),
+  TotalDeCopiasPB: yup.string().required('Total de cópias P&B é obrigatório'),
+  TotalDeImpressoesColor: yup.string().required('Total de impressoes coloridas é obrigatória'),
+  TotalGeral: yup.string().required('Total geral é obrigatória'),
+  EnderecoDeIp: yup.string().required('Endereço de IP é obrigatória'),
 });
 
 export default function EditPrinterForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors},
     reset
   } = useForm({ resolver: yupResolver(editPrinterSchema), mode: "onChange" });
 
@@ -59,7 +59,7 @@ export default function EditPrinterForm() {
         </div>
         <div id="buttons">
           <button className="form-button" type="button" id="cancelar-bnt">CANCELAR</button>
-          <button className="form-button" type="submit" id="editar-bnt" disabled={!isValid}>EDITAR</button>
+          <button className="form-button" type="submit" id="editar-bnt">EDITAR</button>
         </div>
       </form>
       <div className="elipse-signup">

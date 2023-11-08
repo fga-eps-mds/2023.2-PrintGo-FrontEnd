@@ -91,15 +91,19 @@
 
 #buttons {
     display: flex;
-    align-items: center;
+    margin-right: 18rem;
+  
+}
+
+ #voltar-bnt {
+    margin-right:5rem ;
 }
 
 .form-button {
-    display: inline-block;
+    
     flex-direction: column;
     color: #ffffff ;
     border: none;
-    padding: 10px 30px;
     border-radius: 50px;
     cursor: pointer;
     font-size: 16px;
@@ -168,4 +172,14 @@
     #input-line {
         display:block;
     }
+
+}
+
+#cancelar-bnt{
+    background-color: hsl(355, 96%, 36%);
+    border-color: #9f0805;
+
+}
+#editar-bnt{
+    background-color: #006633;
 }

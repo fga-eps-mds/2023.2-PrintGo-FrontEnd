@@ -1,0 +1,17 @@
+#registerPrinter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#registerPrinter-container img{
+    margin-left: 5vw;
+    width: 900px;
+}
+
+@media (max-width: 900px) {
+    #registerPrinter-container img{
+        /* width: 100px; */
+        display: auto;
+    }
+}

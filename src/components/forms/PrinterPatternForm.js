@@ -3,7 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { createUser } from "../../api/api";
-import "../../style/components/registerPrinterForms.css";
+import "../../style/components/printerPatternForm.css";
 import elipse6 from '../../assets/elipse6.svg';
 
 const registerPrinterSchema = yup.object().shape({
@@ -21,11 +21,11 @@ const registerPrinterSchema = yup.object().shape({
   unidadeFilho: yup.string().required('Unidade filho é obrigatória'),
 });
 
-export default function RegisterPrinterForm() {
+export default function PrinterPatternForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors},
+    formState: { errors, isValid },
     reset
   } = useForm({ resolver: yupResolver(registerPrinterSchema), mode: "onChange" });
 
@@ -37,7 +37,7 @@ export default function RegisterPrinterForm() {
   return (
     <div id="signup-card">
       <header id="form-header">
-        Cadastrar impressora
+        Cadastrar padrão de impressora
       </header>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div id="input-group">
@@ -56,7 +56,7 @@ export default function RegisterPrinterForm() {
         </div>
         <div id="buttons">
           <button className="form-button" type="button" id="cancelar-bnt">CANCELAR</button>
-          <button className="form-button" type="submit" id="registrar-bnt">REGISTRAR</button>
+          <button className="form-button" type="submit" id="registrar-bnt" disabled={!isValid}>REGISTRAR</button>
         </div>
       </form>
       <div className="elipse-signup">

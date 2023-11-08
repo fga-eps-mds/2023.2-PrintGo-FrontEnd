@@ -8,6 +8,7 @@ import AboutUs from "./pages/AboutUs";
 import ChangePassword from "./pages/ChangePassword";
 import RegisterPrinter from "./pages/RegisterPrinter" 
 import EditPrinter from "./pages/EditPrinter"
+import PatternPrinter from "./pages/PatternPrinter";
 
 function App(){
    
@@ -22,6 +23,7 @@ function App(){
       <Route path="/trocaSenha" element={<ChangePassword/>}/>
       <Route path="/cadastroImpressora" element={<RegisterPrinter/>}/>
       <Route path="/editarImpressora" element={<EditPrinter/>}/>
+      <Route path="/padraoImpressora" element={<PatternPrinter/>}/>
     </Routes>
     </BrowserRouter>
   );
