@@ -6,6 +6,15 @@ import engine from '../assets/engine.svg';
 import Input from '../components/Input';
 
 
+const impressora=[
+  {modelo: "HP Laser 107 A", nome: "HP-2022-XYZ789", regiao:"Catalão-GO", numeracao:"0", DRP:"9°DRP", DM:"2°DM", data:"06/11/23"}
+];
+
+const listaImpressora=impressora.map(
+  (c.i)=>
+  <li key={i}>{i} - {modelo} {c.nome} {c.regiao} - R${c.numeracao} </li> 
+)
+
 export default function ImpressorasCadastradas(){
   return(
     <div className="impressorasCadastradas-page">
@@ -22,7 +31,7 @@ export default function ImpressorasCadastradas(){
         </div>
       </div>
 
-      <div className="impressorasCadastradas-Lista">
+      <div className="impressorasCadastradas-Lista"> 
         <h6>HP Laser 107 A</h6> 
         <h6>Catalão-GO</h6>
         <h6>9°DRP</h6>
@@ -31,9 +40,10 @@ export default function ImpressorasCadastradas(){
         <h6>06/11/23</h6>
         <div className="impressorasCadastradas-Lista-img">
           <img alt="" src={engine}/>
-
         </div>
+        <ul>listaImpressora</ul>
       </div>
     </div>
+
   );
 }
