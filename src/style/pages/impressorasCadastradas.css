@@ -78,42 +78,26 @@
 }
 
 
-/* ??? */
+
 .impressorasCadastradas-Lista{
+  height: 18vh;
   width: 100vw;
-  height: 110px;
-  margin-top: 38px;
-  /* background-color: blue; */
-}
-
-
-/* ??? */
-.impressorasCadastradas-Lista h6{
-  height: 60px;
   color: #003366;
   font-size: 25px;
   font-family: var(--font-Overpass);
   display: flex;
-  align-items: start;
-  padding-left: 30px;
-  /* margin: 8px; */
-  margin-block-end: 30px;
+  justify-content: space-around;
+  align-items: center;
   box-shadow: 0 5px 5px -3px black;
 }
 
-.impressorasCadastradas-tester{
-  height: 50px;
-  width: 30px;
-  font: optional;
-  font-family: var(--font-Overpass);
-  display: flex;
-  align-items: end;
+.impressorasCadastradas-Lista h6{
+  margin: 0;
 }
-.impressorasCadastradas-tester h7{
-  height: 150px;
-  width: 300px;
-  font: optional;
-  font-family: var(--font-Overpass);
+
+.impressorasCadastradas-Lista-img{
   display: flex;
-  align-items: end;
+  height: 5.8vh;
+  width: 2.6vw;
+  cursor: pointer;
 }
