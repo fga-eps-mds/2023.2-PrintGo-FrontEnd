@@ -40,11 +40,12 @@
 .users-navbar {
   background-color: #ffff;
   color: #003366;
-  padding: 10px;
+  padding: 4px;
   font-size: 18px;
   border: none;
   cursor: pointer;
   padding-right: 75px;
+
 }
 
 .dropdown-users-navbar {
@@ -86,7 +87,8 @@
   font-size: 18px;
   border: none;
   cursor: pointer;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+  height: 2vh;
 }
 
 .dropdown-printers-navbar {
@@ -104,7 +106,7 @@
   text-decoration: none;
   display: block;
   font-size: 20px;
-  padding: 4px 4px;
+  padding: 2px 2px;
 }
 
 .dropdown-printers-navbar a:hover {
@@ -119,4 +121,5 @@
 .dropdown-navbar-printers:hover .printers-navbar {
   background-color: #ffff;
   color: #006633;
+
 }
