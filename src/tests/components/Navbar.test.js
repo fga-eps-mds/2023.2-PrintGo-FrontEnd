@@ -41,4 +41,10 @@ describe('Navbar', () => {
     const printersDropdown = screen.getByText('Cadastro de impressora');
     expect(printersDropdown).toBeInTheDocument();
   });
+
+  test('renders users link', () => {
+    fireEvent.click(screen.getByText('Usuários'))
+    const usersLink = screen.getByText('Cadastro de usuário')
+    expect(usersLink).toBeInTheDocument();
+  })
 });
