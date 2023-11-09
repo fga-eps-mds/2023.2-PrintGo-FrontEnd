@@ -105,4 +105,24 @@ describe('Change Password page', () => {
           expect(screen.queryByText('Senha atualizada!')).toBeNull();
         });
     });
+
+    it('handles API errors', async () => {
+        changePassword.mockRejectedValue(new Error());
+        const { getByPlaceholderText, getByText } = render(<ChangePassword />);
+        
+        fireEvent.change(getByPlaceholderText('*****************'), { target: { value: 'password' } });
+        fireEvent.change(getByPlaceholderText('******************'), { target: { value: 'password' } });
+        fireEvent.click(getByText('Confirmar'));
+        
+        await waitFor(() => {
+            expect(changePassword).toHaveBeenCalledWith('password', 'password');
+            
+            // Verifica se o texto de sucesso não está presente
+            const errorText = screen.queryByText('Senha atualizada!');
+
+            // Verifica se a cor do texto é vermelha
+            expect(errorText).toBeNull()
+          });
+      });
+      
 })
