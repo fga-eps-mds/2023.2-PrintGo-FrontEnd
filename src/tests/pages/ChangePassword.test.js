@@ -4,8 +4,10 @@ import * as router from 'react-router-dom';
 import { render as rtlRender, fireEvent, waitFor, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+import { changePassword } from '../../api/api';
+
 jest.mock('../../api/api', () => ({
-    login: jest.fn(),
+    changePassword: jest.fn(),
 }));
   
 jest.mock('react-router-dom', () => ({
@@ -87,6 +89,20 @@ describe('Change Password page', () => {
         // Aguarda a resposta assíncrona (pode ser ajustado conforme necessário)
         await waitFor(() => {
             expect(screen.queryByText('Confirmação de Senha inválida')).toBeNull();
+        });
+    }); 
+
+    it('submits the form and calls the API', async () => {
+        changePassword.mockResolvedValue(true);
+        const { getByPlaceholderText, getByText } = render(<ChangePassword />);
+    
+        fireEvent.change(getByPlaceholderText('*****************'), { target: { value: 'password' } });
+        fireEvent.change(getByPlaceholderText('******************'), { target: { value: 'password' } });
+        fireEvent.click(getByText('Confirmar'));
+    
+        await waitFor(() => {
+          expect(changePassword).toHaveBeenCalledWith('password', 'password');
+          expect(screen.queryByText('Senha atualizada!')).toBeNull();
         });
     });
 })
