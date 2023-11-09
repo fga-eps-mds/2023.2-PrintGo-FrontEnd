@@ -47,4 +47,10 @@ describe('Navbar', () => {
     const usersLink = screen.getByText('Cadastro de usuário')
     expect(usersLink).toBeInTheDocument();
   })
+
+  test('renders users link for edit users', () => {
+    fireEvent.click(screen.getByText('Usuários'))
+    const usersLink = screen.getByText('Edição de usuário')
+    expect(usersLink).toBeInTheDocument();
+  })
 });
