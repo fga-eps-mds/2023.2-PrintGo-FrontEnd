@@ -58,7 +58,7 @@ export default function ChangePassword() {
                   <input
                     type="password"
                     name="passwordConfirmation"
-                    placeholder="*****************"
+                    placeholder="******************"
                     className="input-field"
                     value={passwordConfirmation}
                     onChange={(e) => setPasswordConfirmation(e.target.value)}
@@ -66,7 +66,12 @@ export default function ChangePassword() {
                 </div>
               </div>
               <div className="button-container">
-                <input type="submit" value="Confirmar" className="button" />
+                <button
+                  className="button"
+                  type="submit"
+                >
+                  Confirmar
+                </button>
               </div>
               {error && <h5 style={{ color: "red" }}>{error}</h5>}
               {success && <h5 style={{ color: "green" }}>Senha atualizada!</h5>}
