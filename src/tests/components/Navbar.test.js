@@ -53,4 +53,10 @@ describe('Navbar', () => {
     const usersLink = screen.getByText('Edição de usuário')
     expect(usersLink).toBeInTheDocument();
   })
+
+  test('renders printers link', () => {
+    fireEvent.click(screen.getByText('Impressoras'))
+    const usersLink = screen.getByText('Cadastro de impressora')
+    expect(usersLink).toBeInTheDocument();
+  })
 });
