@@ -50,7 +50,25 @@ describe('Change Password page', () => {
 
         // Aguarda a resposta assíncrona (pode ser ajustado conforme necessário)
         await waitFor(() => {
-            expect(screen.queryByText('queryByText'))
+            expect(screen.queryByText('Senha atualizada!'))
+        });
+    });
+
+    it('should display error for empty password', async () => {
+        render(<ChangePassword />);
+  
+        const newPasswordInput = screen.getByPlaceholderText('*****************');
+        const repeatPasswordInput = screen.getByPlaceholderText('******************');
+        const submitButton = screen.getByText('Confirmar');
+
+        fireEvent.change(newPasswordInput, { target: { value: '' } });
+        fireEvent.change(repeatPasswordInput, { target: { value: 'novaSenha123' } });
+
+        fireEvent.click(submitButton);
+
+        // Aguarda a resposta assíncrona (pode ser ajustado conforme necessário)
+        await waitFor(() => {
+            expect(screen.queryByText('Senha inválida'))
         });
     });
 })
