@@ -8,8 +8,34 @@ import Navbar from "../components/navbar/Navbar";
 export default function ChangePassword() {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [error, setError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
+  const [passwordConfirmationError, setPasswordConfirmationError] = useState(null);
   const [success, setSuccess] = useState(false);
+
+  function isValidPassword(password) {
+    const trimmedPassword = password.trim()
+    return trimmedPassword === ''
+  }
+
+  const handlePasswordChange = (e) => {
+    if(!isValidPassword(e.target.value)){
+      setPasswordError("Senha inválida")
+    } else {
+      setPasswordError(null)
+    }
+
+    setPassword(e.target.value)
+  }
+
+  const handlePasswordConfirmationChange = (e) => {
+    if(!isValidPassword(e.target.value)){
+      setPasswordConfirmationError("Confirmação de Senha inválida")
+    } else {
+      setPasswordConfirmationError(null)
+    }
+
+    setPasswordConfirmation(e.target.value)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +50,7 @@ export default function ChangePassword() {
       }
     } catch (error) {
       console.log(error);
-      setError("Erro ao trocar de senha");
+      setPasswordError("Erro ao trocar de senha");
     }
   };
 
@@ -48,7 +74,7 @@ export default function ChangePassword() {
                     placeholder="*****************"
                     className="input-field"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={handlePasswordChange}
                   />
                 </div>
                 <div className="input-form-container">
@@ -61,7 +87,7 @@ export default function ChangePassword() {
                     placeholder="******************"
                     className="input-field"
                     value={passwordConfirmation}
-                    onChange={(e) => setPasswordConfirmation(e.target.value)}
+                    onChange={handlePasswordConfirmationChange}
                   />
                 </div>
               </div>
@@ -73,7 +99,8 @@ export default function ChangePassword() {
                   Confirmar
                 </button>
               </div>
-              {error && <h5 style={{ color: "red" }}>{error}</h5>}
+              {passwordError && <h5 style={{ color: "red" }}>{passwordError}</h5>}
+              {passwordConfirmationError && <h5 style={{ color: "red" }}>{passwordConfirmationError}</h5>}
               {success && <h5 style={{ color: "green" }}>Senha atualizada!</h5>}
             </div>
           </form>
