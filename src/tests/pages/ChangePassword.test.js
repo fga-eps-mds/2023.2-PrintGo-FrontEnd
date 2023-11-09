@@ -50,7 +50,7 @@ describe('Change Password page', () => {
 
         // Aguarda a resposta assíncrona (pode ser ajustado conforme necessário)
         await waitFor(() => {
-            expect(screen.queryByText('Senha atualizada!'))
+            expect(screen.queryByText('Senha atualizada!')).toBeNull();
         });
     });
 
@@ -68,7 +68,7 @@ describe('Change Password page', () => {
 
         // Aguarda a resposta assíncrona (pode ser ajustado conforme necessário)
         await waitFor(() => {
-            expect(screen.queryByText('Senha inválida'))
+            expect(screen.queryByText('Senha inválida')).toBeNull();
         });
     });
 
@@ -86,7 +86,7 @@ describe('Change Password page', () => {
 
         // Aguarda a resposta assíncrona (pode ser ajustado conforme necessário)
         await waitFor(() => {
-            expect(screen.queryByText('Confirmação de Senha inválida'))
+            expect(screen.queryByText('Confirmação de Senha inválida')).toBeNull();
         });
     });
 })
