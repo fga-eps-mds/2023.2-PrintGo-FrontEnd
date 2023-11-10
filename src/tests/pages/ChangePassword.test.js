@@ -1,7 +1,7 @@
 import ChangePassword from '../../pages/ChangePassword';
 import React from 'react';
 import * as router from 'react-router-dom';
-import { render as rtlRender, fireEvent, waitFor, screen } from '@testing-library/react';
+import { render as rtlRender, fireEvent, waitFor, screen, getByText } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import { changePassword } from '../../api/api';
@@ -144,5 +144,4 @@ describe('Change Password page', () => {
           expect(screen.queryByText('Senha atualizada!')).toBeNull();
         });
     });
-      
 })
