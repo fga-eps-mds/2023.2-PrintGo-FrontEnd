@@ -6,19 +6,34 @@ import { createUser } from "../../api/api";
 import "../../style/components/registerPrinterForms.css";
 import elipse6 from '../../assets/elipse6.svg';
 
+const fieldLabels = {
+  padrao: 'Padrão',
+  ip: 'IP',
+  numeroSerie: 'Número de Série',
+  codigoLocadora: 'Código da Locadora',
+  contadorInstalacao: 'Contador de Instalação',
+  dataInstalacao: 'Data de Instalação',
+  contadorRetirada: 'Contador de Retirada',
+  dataRetirada: 'Data de Retirada',
+  ultimoContador: 'Último Contador',
+  dataUltimoContador: 'Data do Último Contador',
+  unidadePai: 'Unidade Pai',
+  unidadeFilho: 'Unidade Filho',
+};
+
 const registerPrinterSchema = yup.object().shape({
-  padrao: yup.string().required('Padrão é obrigatório'),
-  ip: yup.string().required('IP é obrigatório'),
-  numeroSerie: yup.string().required('Número de série é obrigatório'),
-  codigoLocadora: yup.string().required('Código da locadora é obrigatório'),
-  contadorInstalacao: yup.string().required('Contador de instalação é obrigatório'),
-  dataInstalacao: yup.string().required('Data de instalação é obrigatória'),
-  contadorRetirada: yup.string().required('Contador de retirada é obrigatório'),
-  dataRetirada: yup.string().required('Data de retirada é obrigatória'),
-  ultimoContador: yup.string().required('Último contador é obrigatório'),
-  dataUltimoContador: yup.string().required('Data do último contador é obrigatória'),
-  unidadePai: yup.string().required('Unidade pai é obrigatória'),
-  unidadeFilho: yup.string().required('Unidade filho é obrigatória'),
+  padrao: yup.string().required(`${fieldLabels.padrao} é obrigatório`),
+  ip: yup.string().required(`${fieldLabels.ip} é obrigatório`),
+  numeroSerie: yup.string().required(`${fieldLabels.numeroSerie} é obrigatório`),
+  codigoLocadora: yup.string().required(`${fieldLabels.codigoLocadora} é obrigatório`),
+  contadorInstalacao: yup.string().required(`${fieldLabels.contadorInstalacao} é obrigatório`),
+  dataInstalacao: yup.string().required(`${fieldLabels.dataInstalacao} é obrigatória`),
+  contadorRetirada: yup.string().required(`${fieldLabels.contadorRetirada} é obrigatório`),
+  dataRetirada: yup.string().required(`${fieldLabels.dataRetirada} é obrigatória`),
+  ultimoContador: yup.string().required(`${fieldLabels.ultimoContador} é obrigatório`),
+  dataUltimoContador: yup.string().required(`${fieldLabels.dataUltimoContador} é obrigatória`),
+  unidadePai: yup.string().required(`${fieldLabels.unidadePai} é obrigatória`),
+  unidadeFilho: yup.string().required(`${fieldLabels.unidadeFilho} é obrigatória`),
 });
 
 export default function RegisterPrinterForm() {
@@ -41,7 +56,7 @@ export default function RegisterPrinterForm() {
       </header>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div id="input-group">
-          {Object.keys(registerPrinterSchema.fields).map((field, index) => (
+          {Object.values(fieldLabels).map((field, index) => (
             <div id="input-line" key={index}>
               <div id="input-box">
                 <label>{field.charAt(0).toUpperCase() + field.slice(1)}<span>*</span></label>
