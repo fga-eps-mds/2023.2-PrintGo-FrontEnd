@@ -122,7 +122,27 @@ describe('Change Password page', () => {
 
             // Verifica se a cor do texto é vermelha
             expect(errorText).toBeNull()
-          });
-      });
+        });
+    });
+
+    it('should not display error message', async () => {
+        render(<ChangePassword />);
+    
+        const newPasswordInput = screen.getByPlaceholderText('*****************');
+        const repeatPasswordInput = screen.getByPlaceholderText('******************');
+        const submitButton = screen.getByText('Confirmar');
+    
+        // Simulando a entrada de senhas válidas
+        fireEvent.change(newPasswordInput, { target: { value: 'novaSenha123' } });
+        fireEvent.change(repeatPasswordInput, { target: { value: 'novaSenha123' } });
+    
+        // Simulando o envio do formulário
+        fireEvent.click(submitButton);
+    
+        // Aguardando a mensagem de sucesso ser exibida
+        await waitFor(() => {
+          expect(screen.queryByText('Senha atualizada!')).toBeNull();
+        });
+    });
       
 })
