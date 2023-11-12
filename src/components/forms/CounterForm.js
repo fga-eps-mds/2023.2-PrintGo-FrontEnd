@@ -7,22 +7,23 @@ import { yupResolver } from "@hookform/resolvers/yup";
 const impressoras = [];
 
 const counterSchema = yup.object().shape({
-    serial: yup.string().required('O número de série é obrigatório'),
-    copiasPB: yup.number(),
-    impressoesPB: yup.number(),
-    copiasColor: yup.number(),
-    impressoesColor: yup.number(),
-    contadorGeral: yup.number(),
-    dataEmissao: yup.date().required('A data de emissão é obrigatória').test('date-format', 'Data inválida. Use o formato dd/mm/aaaa', function(value) {
-        if (!value) return true; // Aceita valor vazio, pois ele é opcional.
-        // Verifica se a data está no formato dd/mm/aaaa
-        return /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/.test(value);
-    }),
-    horaEmissao: yup.string().test('time-format', 'Horário inválido. Use o formato hh:mm', function(value) {
-        if (!value) return true; // Aceita valor vazio, pois ele é opcional.
-        // Verifica se o horário está no formato hh:mm
-        return /^([01][0-9]|2[0-3]):[0-5][0-9]$/.test(value);
-    })
+    serial: yup.string()
+        .required('O número de série é obrigatório'),
+    copiasPB: yup.string()
+        .matches(/^\d+$/, 'O contador deve ser um número'),
+    impressoesPB: yup.string()
+        .matches(/^\d+$/, 'O contador deve ser um número'),
+    copiasColor: yup.string()
+        .matches(/^\d+$/, 'O contador deve ser um número'),
+    impressoesColor: yup.string()
+        .matches(/^\d+$/, 'O contador deve ser um número'),
+    contadorGeral: yup.string()
+        .matches(/^\d+$/, 'O contador deve ser um número'),
+    dataEmissao: yup.date()
+        .required('A data de emissão é obrigatória'),
+    horaEmissao: yup.string()
+        .required('O horário de emissão é obrigatória')
+        .matches(/^([01][0-9]|2[0-3]):[0-5][0-9]$/, 'Horário inválido. Use o formato hh:mm'),
 });
 
 export default function CounterForm() {
@@ -30,9 +31,9 @@ export default function CounterForm() {
     const {
         register,
         handleSubmit,
-        formState: {errors, isValid },
+        formState: { errors, isValid },
         reset
-    } = useForm({resolver: yupResolver(counterSchema), mode: "onChange"});
+    } = useForm({ resolver: yupResolver(counterSchema), mode: "onChange" });
 
     const onSubmit = async (data) => {
         // A ser feito após o PrinterService.
@@ -50,11 +51,67 @@ export default function CounterForm() {
                     <div id="input-line">
                         <div id="input-box">
                             <label>Número de série</label>
-                            <input {...register("serial", {required: true})} placeholder="Número de série"/>
+                            <input {...register("serial", { required: true })} placeholder="Número de série" />
                             <span>{errors.serial?.message}</span>
                         </div>
                     </div>
+                    <div id="input-line">
+                        <div id="input-box">
+                            <label>Cópias P&B</label>
+                            <input {...register("copiasPB", { required: true })} placeholder="Valor do contador" />
+                            <span>{errors.copiasPB?.message}</span>
+                        </div>
+                        <div id="input-box">
+                            <label>Impressões P&B</label>
+                            <input {...register("impressoesPB", { required: true })} placeholder="Valor do contador" />
+                            <span>{errors.impressoesPB?.message}</span>
+                        </div>
+                    </div>
+                    <div id="input-line">
+                        <div id="input-box">
+                            <label>Cópias color</label>
+                            <input {...register("copiasColor", { required: true })} placeholder="Valor do contador" />
+                            <span>{errors.copiasColor?.message}</span>
+                        </div>
+                        <div id="input-box">
+                            <label>Impressões color</label>
+                            <input {...register("impressoesColor", { required: true })} placeholder="Valor do contador" />
+                            <span>{errors.impressoesColor?.message}</span>
+                        </div>
+                    </div>
+                    <div id="input-line">
+                        <div id="input-box">
+                            <label>Contador geral</label>
+                            <input {...register("contadorGeral", { required: true })} placeholder="Valor do contador" />
+                            <span>{errors.contadorGeral?.message}</span>
+                        </div>
+                    </div>
+                    <div id="input-line">
+                        <div id="input-box">
+                            <label>Data de emissão</label>
+                            <input {...register("dataEmissao", { required: true })} type="date" placeholder="dd/mm/aaaa" />
+                            <span>{errors.dataEmissao?.message}</span>
+                        </div>
+                        <div id="input-box">
+                            <label>Horário de emissão</label>
+                            <input {...register("horaEmissao", { required: true })} placeholder="hh:mm" />
+                            <span>{errors.horaEmissao?.message}</span>
+                        </div>
+                    </div>
+                    <div id="input-line">
+                        <div id="input-box">
+                            <label>Anexar relatório</label>
+                            <input {...register("relatorioPDF")} type="file" accept=".pdf" />
+                            <span>{errors.relatorioPDF?.message}</span>
+                        </div>
+                    </div>
                 </div>
+
+                <div id="form-buttons">
+                    <button className="form-button" type="button" id="cancel-bnt" >CANCELAR</button>
+                    <button className="form-button" type="submit" id="register-bnt" disabled={!isValid}>INSERIR</button>
+                </div>
+
             </form>
         </div>
     );
