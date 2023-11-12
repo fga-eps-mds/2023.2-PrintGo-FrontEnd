@@ -1,5 +1,6 @@
 import React from "react";
 import  "../style/pages/impressorasCadastradas.css";
+import { Link } from "react-router-dom"
 import Search from '../assets/Search.svg';
 import Filter from '../assets/Filter.svg';
 import engine from '../assets/engine.svg';
@@ -28,22 +29,43 @@ export default function ImpressorasCadastradas(){
     },
     
   ];
+
+  const [dropdown, setDropdown] = useState(false);
+  const [search, setSearch] = useState('');
+
+  console.log(search)
+
+  const toggleDropdown = () => {
+    setDropdown(!dropdown)
+  };
+
+
   return(
     <div className="impressorasCadastradas-page">
       <div className="impressorasCadastradas-cabecalho">
         <h2>Impressoras cadastradas</h2>
         <div className="impressorasCadastradas-cabecalho-icones">
           <div className="impressorasCadastradas-cabecalho-input">
-            <Input className="input-pesquisa-impressoras"/>
+            <Input 
+              onChange={(e) => setSearch(e.target.value.toLowerCase())} 
+              className="input-pesquisa-impressoras"
+            
+            />
           </div>
           <div className="impressorasCadastradas-cabecalho-imagens"> 
             <img alt="" src={Search} />
-            <img alt="" src={Filter} />
+            <img alt="" src={Filter} onClick={toggleDropdown} />
           </div>
         </div>
       </div>
       
-      {impressoras.map((impressora, index) => (
+      {impressoras.filter((impressora) => {
+        return search.toLowerCase() === '' 
+        ? impressora 
+        : impressora.nome.toLowerCase().includes(search)
+      
+      
+      }).map((impressora, index) => (
 
         <div key={index} className="impressorasCadastradas-Lista">
           <h6>{impressora.nome}</h6>
@@ -53,7 +75,18 @@ export default function ImpressorasCadastradas(){
           <h6>{impressora.data}</h6>
 
           <div className="impressorasCadastradas-Lista-img">
-            <img alt="" src={engine}/>
+            <img 
+              alt="" 
+              src={engine}
+              onClick={toggleDropdown}
+            />
+
+              {dropdown && (
+                <div className="dropdownEngine">
+                  <Link to="#">Desativar</Link>
+                  <Link to="#">Editar</Link>
+                </div>
+              )} 
           </div>
 
         </div>

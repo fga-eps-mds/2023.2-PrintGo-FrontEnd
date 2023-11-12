@@ -103,3 +103,31 @@
   width: 2.6vw;
   cursor: pointer;
 }
+
+.dropdownEngine {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdownEngine a {
+  color: #003366;
+  width: 15vw;
+  text-decoration: none;
+  display: block;
+  font-size: 20px;
+  padding: 4px 4px;
+}
+
+.dropdownEngine a:hover {
+  background-color: #003366;
+  color: #fff;
+}
+
+.impressorasCadastradas-Lista-img:hover .dropdownEngine {
+  display: flex;
+  flex-direction: column;
+}
