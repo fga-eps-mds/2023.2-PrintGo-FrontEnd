@@ -109,7 +109,7 @@ export default function CounterForm() {
 
                 <div id="form-buttons">
                     <button className="form-button" type="button" id="cancel-bnt" >CANCELAR</button>
-                    <button className="form-button" type="submit" id="register-bnt" disabled={!isValid}>INSERIR</button>
+                    <button className="form-button" type="submit" id="insert-bnt" disabled={!isValid}>INSERIR</button>
                 </div>
 
             </form>

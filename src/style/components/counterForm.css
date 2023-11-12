@@ -3,12 +3,13 @@
     border-radius: 10px;
     display: flex;
     width: 30vw;
+    max-width: 30rem;
     height: 100%;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-    padding: 1rem 5rem;
+    padding: 1rem 3rem;
 }
 
 #form-header {
@@ -17,4 +18,42 @@
 
 #form-header h5 {
     margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+#input-line {
+    display: flex;
+    justify-content: space-between;
+}
+
+#input-box label {
+    margin-bottom: 0px;
+}
+
+#form-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+    gap: 2rem;
+}
+
+#form-buttons button {
+    width: 100%;
+}
+
+#cancel-bnt {
+    background-color: #BF1B1B;
+    transition: background-color 0.3s, filter 0.3s;
+}
+
+#insert-bnt {
+    margin-left: 8px;
+    transition: background-color 0.3s, filter 0.3s;
+    background-color: #006633;
+}
+
+#insert-bnt:disabled {
+    background-color: #6C6C6C !important;
+    opacity: 65%;
+    cursor: not-allowed;
 }
