@@ -4,7 +4,7 @@ import React from "react";
 import CounterForm from "../components/forms/CounterForm";
 import Navbar from "../components/navbar/Navbar";
 
-export default function CreateUserPage() {
+export default function InsertCounter() {
   return (
     <>
       <Navbar />
@@ -12,7 +12,7 @@ export default function CreateUserPage() {
         <CounterForm />
       </div>
       <div id="ellipse-insert-counter">
-        <img alt="" src={ellipse_image}/>
+        <img alt="ellipse_image" src={ellipse_image}/>
       </div>
     </>
   );
