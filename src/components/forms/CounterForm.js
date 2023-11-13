@@ -1,6 +1,7 @@
 import * as yup from "yup";
 import React from "react";
 import "../../style/components/counterForm.css";
+import download_pdf from "../../assets/Paper-Download.svg";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -24,7 +25,12 @@ const counterSchema = yup.object().shape({
     horaEmissao: yup.string()
         .required('O horário de emissão é obrigatória')
         .matches(/^([01][0-9]|2[0-3]):[0-5][0-9]$/, 'Horário inválido. Use o formato hh:mm'),
-});
+    relatorioPDF: yup.mixed()
+        .test('required', 'O relatório PDF é obrigatório', (value) => {
+            // Verifica se o campo de arquivo foi preenchido
+            return value && value.length > 0;
+        })
+    });
 
 export default function CounterForm() {
 
@@ -41,7 +47,7 @@ export default function CounterForm() {
     }
 
     return (
-        <div id="form-card">
+        <div id="counter-form-card">
             <div id="form-header">
                 <h5>Inserir contador manual</h5>
             </div>
@@ -53,6 +59,12 @@ export default function CounterForm() {
                             <label>Número de série</label>
                             <input {...register("serial", { required: true })} placeholder="Número de série" />
                             <span>{errors.serial?.message}</span>
+                            <div id="arquivo-instrucional">
+                                <a href="" download>
+                                    <img alt="" src={ download_pdf }></img>
+                                    Arquivo instrucional
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div id="input-line">
@@ -101,7 +113,7 @@ export default function CounterForm() {
                     <div id="input-line">
                         <div id="input-box">
                             <label>Anexar relatório</label>
-                            <input {...register("relatorioPDF")} type="file" accept=".pdf" />
+                            <input {...register("relatorioPDF", { required: true })} type="file" accept=".pdf" />
                             <span>{errors.relatorioPDF?.message}</span>
                         </div>
                     </div>

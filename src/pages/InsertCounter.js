@@ -8,7 +8,7 @@ export default function InsertCounter() {
   return (
     <>
       <Navbar />
-      <div id="form-container">
+      <div id="insert-counter-container">
         <CounterForm />
       </div>
       <div id="ellipse-insert-counter">
