@@ -5,6 +5,7 @@ import Search from '../assets/Search.svg';
 import Filter from '../assets/Filter.svg';
 import engine from '../assets/engine.svg';
 import Input from '../components/Input';
+import Modal from '../components/ui/Modal';
 import { useState } from "react";
 
 
@@ -32,6 +33,7 @@ export default function ImpressorasCadastradas(){
 
   const [dropdown, setDropdown] = useState(false);
   const [search, setSearch] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
 
   console.log(search)
 
@@ -42,6 +44,7 @@ export default function ImpressorasCadastradas(){
 
   return(
     <div className="impressorasCadastradas-page">
+      {modalOpen && <Modal setOpenModal={setModalOpen} />}
       <div className="impressorasCadastradas-cabecalho">
         <h2>Impressoras cadastradas</h2>
         <div className="impressorasCadastradas-cabecalho-icones">
@@ -83,7 +86,9 @@ export default function ImpressorasCadastradas(){
 
               {dropdown && (
                 <div className="dropdownEngine">
-                  <Link to="#">Desativar</Link>
+                  <div onClick={() => {setModalOpen(true);}}>
+                    <Link to="#">Desativar</Link>
+                  </div>
                   <Link to="#">Editar</Link>
                 </div>
               )} 
@@ -92,6 +97,7 @@ export default function ImpressorasCadastradas(){
         </div>
       ))}
 
+      
     </div>
   );
 }
