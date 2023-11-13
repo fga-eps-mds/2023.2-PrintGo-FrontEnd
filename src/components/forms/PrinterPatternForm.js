@@ -40,7 +40,6 @@ const registerPrinterSchema = yup.object().shape({
     totalImpressoesColorido: yup.string().required(`${fieldLabels.snmp.totalImpressoesColorido} é obrigatório`),
     totalGeral: yup.string().required(`${fieldLabels.snmp.totalGeral} é obrigatório`),
     enderecoIP: yup.string().required(`${fieldLabels.snmp.enderecoIP} é obrigatório`),
-    codigoOID: yup.string().required('Código OID é obrigatório'),
   }).required('SNMP é obrigatório'),
 });
 
@@ -54,7 +53,7 @@ export default function PrinterPatternForm() {
 
   const onSubmit = async (data) => {
     console.log(data);
-    // Coloque a lógica para criar usuário ou qualquer outra coisa aqui
+    // Add logic to create user or perform other actions here
     reset();
   };
 
@@ -64,55 +63,46 @@ export default function PrinterPatternForm() {
         Cadastrar padrão de impressora
       </header>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div id="input-group" style={{ display: 'flex' }}>
-          {/* SNMP Fields */}
-          <div style={{ flex: 1 }}>
-            {Object.keys(registerPrinterSchema.fields).map((field, index) => (
-              field === 'snmp' && (
+        <div id="input-group">
+          <div id="input-box">
+            {/* Other Fields */}
+            <div>
+              {['tipo', 'marca', 'modelo'].map((field, index) => (
                 <div id="input-line" key={index}>
-                  <div id="input-box">
-                    <label>SNMP</label>
-                    {Object.keys(fieldLabels[field]).map((subField, subIndex) => (
-                      <div id="input-line" key={`sub-${subIndex}`}>
-                        <div id="input-box">
-                          <label>{fieldLabels[field][subField]}<span>*</span></label>
-                          {['modeloImpressora', 'numeroSerie', 'versaoFirmware', 'tempoAtivo', 'totalDigitalizacoes', 'totalCopiasPB', 'totalCopiasColorido', 'totalImpressoesPB', 'totalImpressoesColorido', 'totalGeral', 'enderecoIP'].includes(subField) ? (
-                            <input
-                              {...register(`${field}.${subField}`)}
-                              placeholder="Código OID"
-                            />
-                          ) : (
-                            <input
-                              {...register(`${field}.${subField}`)}
-                              placeholder={`Digite ${fieldLabels[field][subField].toLowerCase()}`}
-                            />
-                          )}
-                          <span>{errors[`${field}.${subField}`]?.message}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                  <label>{fieldLabels[field]}<span>*</span></label>
+                  <input
+                    {...register(field)}
+                    style={{ width: '200px' }}  // Adjust the width as needed
+                    placeholder={`Digite ${fieldLabels[field].toLowerCase()}`}
+                  />
+                  <span>{errors[field]?.message}</span>
                 </div>
-              )
-            ))}
-          </div>
-  
-          {/* Other Fields */}
-          <div style={{ flex: 1 }}>
-            {Object.keys(registerPrinterSchema.fields).map((field, index) => (
-              field !== 'snmp' && (
-                <div id="input-line" key={index}>
-                  <div id="input-box">
-                    <label>{fieldLabels[field]}<span>*</span></label>
+              ))}
+            </div>
+
+            {/* SNMP Fields */}
+            <div>
+              <label>SNMP</label>
+              {Object.keys(fieldLabels.snmp).map((subField, subIndex) => (
+                <div id="input-line" key={`sub-${subIndex}`}>
+                  <label>{fieldLabels.snmp[subField]}<span>*</span></label>
+                  {['modeloImpressora', 'numeroSerie', 'versaoFirmware', 'tempoAtivo', 'totalDigitalizacoes', 'totalCopiasPB', 'totalCopiasColorido', 'totalImpressoesPB', 'totalImpressoesColorido', 'totalGeral', 'enderecoIP'].includes(subField) ? (
                     <input
-                      {...register(field)}
-                      placeholder={`Digite ${fieldLabels[field].toLowerCase()}`}
+                      {...register(`snmp.${subField}`)}
+                      style={{ width: '200px' }}  // Adjust the width as needed
+                      placeholder="Código OID"
                     />
-                    <span>{errors[field]?.message}</span>
-                  </div>
+                  ) : (
+                    <input
+                      {...register(`snmp.${subField}`)}
+                      style={{ width: '200px' }}  // Adjust the width as needed
+                      placeholder={`Digite ${fieldLabels.snmp[subField].toLowerCase()}`}
+                    />
+                  )}
+                  <span>{errors[`snmp.${subField}`]?.message}</span>
                 </div>
-              )
-            ))}
+              ))}
+            </div>
           </div>
         </div>
         <div id="buttons">
