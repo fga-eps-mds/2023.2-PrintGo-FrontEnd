@@ -64,18 +64,19 @@ export default function PrinterPatternForm() {
         Cadastrar padrão de impressora
       </header>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div id="input-group">
-          {Object.keys(registerPrinterSchema.fields).map((field, index) => (
-            <div id="input-line" key={index}>
-              <div id="input-box">
-                {field === 'snmp' ? (
-                  <>
+        <div id="input-group" style={{ display: 'flex' }}>
+          {/* SNMP Fields */}
+          <div style={{ flex: 1 }}>
+            {Object.keys(registerPrinterSchema.fields).map((field, index) => (
+              field === 'snmp' && (
+                <div id="input-line" key={index}>
+                  <div id="input-box">
                     <label>SNMP</label>
                     {Object.keys(fieldLabels[field]).map((subField, subIndex) => (
                       <div id="input-line" key={`sub-${subIndex}`}>
                         <div id="input-box">
                           <label>{fieldLabels[field][subField]}<span>*</span></label>
-                          {['modeloImpressora', 'numeroSerie', 'versaoFirmware', 'tempoAtivo', 'totalDigitalizacoes', 'totalCopiasPB', 'totalCopiasColorido', 'totalImpressoesPB', 'totalImpressoesColorido','totalGeral', 'enderecoIP'].includes(subField) ? (
+                          {['modeloImpressora', 'numeroSerie', 'versaoFirmware', 'tempoAtivo', 'totalDigitalizacoes', 'totalCopiasPB', 'totalCopiasColorido', 'totalImpressoesPB', 'totalImpressoesColorido', 'totalGeral', 'enderecoIP'].includes(subField) ? (
                             <input
                               {...register(`${field}.${subField}`)}
                               placeholder="Código OID"
@@ -90,20 +91,29 @@ export default function PrinterPatternForm() {
                         </div>
                       </div>
                     ))}
-                  </>
-                ) : (
-                  <>
+                  </div>
+                </div>
+              )
+            ))}
+          </div>
+  
+          {/* Other Fields */}
+          <div style={{ flex: 1 }}>
+            {Object.keys(registerPrinterSchema.fields).map((field, index) => (
+              field !== 'snmp' && (
+                <div id="input-line" key={index}>
+                  <div id="input-box">
                     <label>{fieldLabels[field]}<span>*</span></label>
                     <input
                       {...register(field)}
                       placeholder={`Digite ${fieldLabels[field].toLowerCase()}`}
                     />
                     <span>{errors[field]?.message}</span>
-                  </>
-                )}
-              </div>
-            </div>
-          ))}
+                  </div>
+                </div>
+              )
+            ))}
+          </div>
         </div>
         <div id="buttons">
           <button className="form-button" type="button" id="cancelar-bnt">
