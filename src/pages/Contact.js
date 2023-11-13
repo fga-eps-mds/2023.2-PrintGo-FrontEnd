@@ -4,7 +4,7 @@ import Imagem_Homen from "../assets/imagem-homen-ruivo.svg";
 import Input from "../components/Input";
 import emailjs from "@emailjs/browser";
 import NavbarSimple from "../components/navbar/NavbarSimple";
-
+import elipse from "../assets/home_elipse.svg";
 export default function Contact() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -82,7 +82,9 @@ export default function Contact() {
             </div>
           </div>
         </div>
-        <div className="ellipse-contact"></div>
+        <div className="elipse-contact">
+          <img alt="" src={elipse}></img>
+        </div>
         <div className="Image-contact">
           <img src={Imagem_Homen} alt="Imagem de um homem ruivo" />
         </div>
