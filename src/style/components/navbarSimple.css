@@ -19,7 +19,7 @@
   font-size: 18px;
   padding-right: 75px;
   cursor: pointer;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 .button-navbar-simple a {
   text-decoration: none;
@@ -40,14 +40,72 @@
   border-radius: 35px;
   border-color: #003366;
   background-color: #ffff;
-  margin-top: 0.65rem;
-  margin-left: 30rem;
+  margin-top: 0.35rem;
+  margin-left: 10rem;
   cursor: pointer;
 }
 .button-login-navbar-simple a {
   text-decoration: none;
   color: #003366;
-  
+  .container-navbar-simple {
+    width: 100%;
+    background-color: #ffff;
+    height: 7vh;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    margin-bottom: 4rem;
+    display: flex;
+  }
+
+  .container-navbar-simple img {
+    width: 18vw;
+    height: 7vh;
+  }
+
+  .button-navbar-simple button {
+    background-color: #ffff;
+    color: #003366;
+    border: none;
+    font-size: 18px;
+    padding-right: 75px;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+  .button-navbar-simple a {
+    text-decoration: none;
+    color: #003366;
+  }
+  .button-navbar-simple :hover {
+    background-color: #ffff;
+    color: #006633;
+    cursor: pointer;
+  }
+
+  .button-login-navbar-simple button {
+    font-size: 18px;
+    font-weight: 500;
+    color: #003366;
+    width: 12vw;
+    height: 5vh;
+    border-radius: 35px;
+    border-color: #003366;
+    background-color: #ffff;
+    margin-top: 0.65rem;
+    margin-left: 30rem;
+    cursor: pointer;
+  }
+  .button-login-navbar-simple a {
+    text-decoration: none;
+    color: #003366;
+  }
+
+  .login-navbar-simple a {
+    text-decoration: none;
+    color: #003366;
+  }
+  .button-login-navbar-simple :hover {
+    color: #006633;
+    border-color: #006633;
+  }
 }
 
 .login-navbar-simple a {
