@@ -4,34 +4,28 @@
      <img src="assets/logoPrintGo.svg" height="350px" width="350px">
 </div>
 
-## Quality Control
-
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fga-eps-mds_2023.2-PrintGo-BackEnd&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fga-eps-mds_2023.2-PrintGo-BackEnd)
-
-[![codecov](https://codecov.io/gh/fga-eps-mds/2023.2-PrintGo-UserService/graph/badge.svg?token=g0er9UGKLc)](https://codecov.io/gh/fga-eps-mds/2023.2-PrintGo-UserService)
-
-## Sobre
-
-O PrintGo é um sistema produzido para a PC-GO cuja função é monitorar ativos de impressão. A ferramenta, que é de fácil uso, auxilia na contagem de impressões na hora de prestação de contas e para isso apresenta um dashboard que pode ser transformado em relatórios.
-
-Aplicação disponível em: [link da aplicação](?)
-
-## Requisitos
-
-- Node.js 18.18 (Latest em 10-05-2023)
-- Docker
-- Docker-compose
-
-
-### Instalação
-
-```bash
 # 1. Clone o projeto
 git clone git@github.com:fga-eps-mds/2023.2-PrintGo-FrontEnd.git
 
 # 2. Entre na pasta do projeto
 cd 2023.2-PrintGo-FrontEnd
 
+# Construa a imagem do docker 
+```bash 
+sudo docker build -t frontprintgo .
+```
+# Execute o container
+```bash 
+sudo docker run -p 3000:3000 frontprintgo 
+```
+# Caso os comando acima falhem, utilize:
+```bash 
+sudo docker-compose up --build
+```
+```bash 
+sudo docker-compose up
+```
+=======
 # Caso prefira usar yarn eh n tenha
 npm i -g yarn
 
