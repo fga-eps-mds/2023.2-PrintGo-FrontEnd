@@ -22,8 +22,8 @@ export default function Home(){
                         <div className="containter-button-home">
                             <div className="learn-more">
                                 <Button
-                                    textColor="#036"
-                                    bgColor="white"
+                                    textColor="white"
+                                    bgColor="#036"
                                     borderColor="#036"
                                 >
                                     Saiba mais
