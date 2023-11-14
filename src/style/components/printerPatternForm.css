@@ -1,46 +1,87 @@
-#registerPrinter-card {
+#printer-pattern-signup-card {
     background-color: #FFFFFF;
     border-radius: 10px;
     display: flex;
-    width: 30vw;
-    height: 100%;
+    width: 48vw;
+    height: 92vh;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-    padding: 1rem 5rem;
+    padding: 1rem 1rem;
     margin-right: 8vw;
-    margin-top: 2%;
-    margin-bottom: 1vh;
 }
 
-#form-header {
-    font-size: 48px;
+#printer-pattern-fields{
+    height: 23vh;
+    width: 45vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 14px;
+}
+
+
+#printer-pattern-form-header {
     color: #003366;
-    margin-bottom: 16px;
+    margin: 0;
+    width: 48vw;
+    text-align: center;
+ 
 }
 
-#input-group {
+#printer-pattern-input-group {
+    height: 82vh;
+    width: 48vw;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 16px 0;
+    justify-content: center;
 }
 
-#input-line {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px; 
-}
-
-#input-box {
+#printer-pattern-input-line {
+    
     flex: 1;
     min-width: 100px; /* Largura mínima para cada input */
     display: flex;
     width: 250px;
     flex-direction: column;
-    margin-bottom: 16px;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+#printer-pattern-snmp-fields{
+    height: 55vh;
+    width: 45vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+#snmp-fields-input-line{
+    display: flex;
+    width: 45vw;
+
+    justify-content: space-between;
+    /*flex-wrap: wrap;*/
+    /*gap: 10px;*/
+    
+}
+#snmp-fields-input-line label{
+    margin-left: 0.3rem;
+    
+}
+
+#snmp-fields-input-line span{
+    display: none;
+}
+
+#printer-pattern-input-box {
+    flex: 1;
+    min-width: 100px; /* Largura mínima para cada input */
+    display: flex;
+    width: 250px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
     padding: 0 10px;
     box-sizing: border-box;
 }
@@ -49,13 +90,13 @@
     top: 10rem;
 }
 
-#input-box label {
+#printer-pattern-input-box label {
     color: #003366;
     display: block;
-    margin-bottom: 5px;
+    /*margin-bottom: 5px;*/
 }
 
-#input-box span {
+#printer-pattern-input-box span {
     color: #9f0805;
 }
 
@@ -72,43 +113,46 @@
     top: -3px;
 }
 
-#input-box input{
-    font-size: 16px;
+#printer-pattern-fields input{
+    font-size: 14px;
     border: 1px solid #003366;
     border-color: #003366;
     border-radius: 10px;
     padding: 5px;
 }
 
-#input-box select{
-    font-size: 16px;
-    font-size: 1rem;border: 1px solid #003366;
+#snmp-fields-input-line input{
+    font-size: 14px;
+    border: 1px solid #003366;
     border-color: #003366;
     border-radius: 10px;
     padding: 5px;
-    color: #6C6C6C;
 }
 
-#buttons {
+
+
+#printer-pattern-buttons {
+    height: 8vh;
     display: flex;
     align-items: center;
+    justify-content: space-around;
 }
 
-.form-button {
-    display: inline-block;
-    flex-direction: column;
+.printer-pattern-form-button {
+    height: 5vh;
+    width: 12vw;
+    text-align: center;
     color: #ffffff ;
     border: none;
-    padding: 10px 30px;
     border-radius: 50px;
     cursor: pointer;
     font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 20px;
+    padding: 0.5rem;
+    font-weight: bold;  
 }
 
 
-.form-button:hover {
+.printer-pattern-form-button:hover {
     filter: brightness(1.8);
 }
 
@@ -118,8 +162,7 @@
     transition: background-color 0.3s, filter 0.3s;
 }
 
-#register-bnt {
-    margin-left: 8px;
+#registrar-bnt {
     transition: background-color 0.3s, filter 0.3s;
     background-color: #006633;
 }
@@ -153,14 +196,3 @@
     height: 150vh;
   }
 
-@media (max-width: 900px) {
-    #registerPrinter-card {
-        width: 90%; /* Adjust the form width as needed*/
-        margin: 0 auto; /* Centers the form horizontally*/
-        padding: 1rem; /* Adjust padding as needed */
-    }
-
-    #input-line {
-        display:block;
-    }
-}

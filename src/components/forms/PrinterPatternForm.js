@@ -6,8 +6,8 @@ import "../../style/components/printerPatternForm.css";
 import elipse6 from '../../assets/elipse6.svg';
 
 const fieldLabels = {
-  tipo: 'Padrão',
-  marca: 'IP',
+  tipo: 'Tipo',
+  marca: 'Marca',
   modelo: 'Modelo',
   snmp: {
     modeloImpressora: 'Modelo da impressora',
@@ -58,21 +58,21 @@ export default function PrinterPatternForm() {
   };
 
   return (
-    <div id="signup-card">
-      <header id="form-header">
+    <div id="printer-pattern-signup-card">
+      <h2 id="printer-pattern-form-header">
         Cadastrar padrão de impressora
-      </header>
+      </h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div id="input-group">
-          <div id="input-box">
-            {/* Other Fields */}
-            <div>
+        <div id="printer-pattern-input-group">
+          <div id="printer-pattern-input-box">
+           
+            <div id="printer-pattern-fields">
               {['tipo', 'marca', 'modelo'].map((field, index) => (
-                <div id="input-line" key={index}>
+                <div id="printer-pattern-input-line" key={index}>
                   <label>{fieldLabels[field]}<span>*</span></label>
                   <input
                     {...register(field)}
-                    style={{ width: '200px' }}  // Adjust the width as needed
+                    //style={{ width: '200px'}}  // Adjust the width as needed
                     placeholder={`Digite ${fieldLabels[field].toLowerCase()}`}
                   />
                   <span>{errors[field]?.message}</span>
@@ -81,15 +81,15 @@ export default function PrinterPatternForm() {
             </div>
 
             {/* SNMP Fields */}
-            <div>
+            <div id="printer-pattern-snmp-fields">
               <label>SNMP</label>
               {Object.keys(fieldLabels.snmp).map((subField, subIndex) => (
-                <div id="input-line" key={`sub-${subIndex}`}>
+                <div id="snmp-fields-input-line" key={`sub-${subIndex}`}>
                   <label>{fieldLabels.snmp[subField]}<span>*</span></label>
                   {['modeloImpressora', 'numeroSerie', 'versaoFirmware', 'tempoAtivo', 'totalDigitalizacoes', 'totalCopiasPB', 'totalCopiasColorido', 'totalImpressoesPB', 'totalImpressoesColorido', 'totalGeral', 'enderecoIP'].includes(subField) ? (
                     <input
                       {...register(`snmp.${subField}`)}
-                      style={{ width: '200px' }}  // Adjust the width as needed
+                      //style={{ width: '200px' }}  // Adjust the width as needed
                       placeholder="Código OID"
                     />
                   ) : (
@@ -105,12 +105,12 @@ export default function PrinterPatternForm() {
             </div>
           </div>
         </div>
-        <div id="buttons">
-          <button className="form-button" type="button" id="cancelar-bnt">
+        <div id="printer-pattern-buttons">
+          <button className="printer-pattern-form-button" type="button" id="cancelar-bnt">
             CANCELAR
           </button>
           <button
-            className="form-button"
+            className="printer-pattern-form-button"
             type="submit"
             id="registrar-bnt"
             disabled={!isValid}
