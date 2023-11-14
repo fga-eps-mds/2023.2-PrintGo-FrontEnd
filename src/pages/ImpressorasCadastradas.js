@@ -111,15 +111,16 @@ export default function ImpressorasCadastradas(){
               src={engine}
               onClick={toggleDropdown}
             />
-
+            <div className="impressorasCadastradas-dropdown-container">
               {dropdown && (
-                <div className="dropdownEngine">
+                <div className="impressorasCadastradas-dropdown">
                   <div onClick={() => {setModalOpen(true);}}>
                     <Link to="#">Desativar</Link>
                   </div>
                   <Link to="#">Editar</Link>
                 </div>
-              )} 
+              )}
+            </div> 
           </div>
 
         </div>

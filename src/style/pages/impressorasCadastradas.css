@@ -102,7 +102,12 @@
   display: flex;
   justify-content: end;
   margin-bottom: 15px;
-  width: 19.62vw;
+  width: 20vw;
+  height: 4vh;
+}
+
+.impressorasCadastradas-cabecalho-input Input {
+  height: 2.5vh;
 }
 
 
@@ -121,8 +126,6 @@
   width: 100vw;
   color: #003366;
   font-size: 25px;
-  
-  
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -136,8 +139,10 @@
   font-weight: lighter;
 }
 
+/* Dropdown */
 .impressorasCadastradas-Lista-img{ 
   display: flex;
+  flex-direction: column;
   height: 6vh;
   width: 4vw;
   margin-right: 20px;
@@ -145,31 +150,35 @@
   
 }
 
-.dropdownEngine {
+.impressorasCadastradas-dropdown-container {
+  align-self: flex-start;
+}
+
+
+.impressorasCadastradas-dropdown {
   display: none;
   position: absolute;
+  right: 0px;
   background-color: #f9f9f9;
   min-width: 180px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  margin-right: 10px;
   z-index: 1;
 }
 
-.dropdownEngine a {
+.impressorasCadastradas-dropdown a {
   color: #003366;
-  width: 15vw;
   text-decoration: none;
   display: block;
   font-size: 20px;
   padding: 4px 4px;
 }
 
-.dropdownEngine a:hover {
+.impressorasCadastradas-dropdown a:hover {
   background-color: #003366;
   color: #fff;
 }
 
-.impressorasCadastradas-Lista-img:hover .dropdownEngine {
+.impressorasCadastradas-Lista-img:hover .impressorasCadastradas-dropdown {
   display: flex;
   flex-direction: column;
 }
