@@ -3,10 +3,8 @@
   position: relative;
   width: 100vw;
   height: 100vh;
-  color: #74bb24;
   /* background-color: red; */
-  font-weight: regular;
-  overflow: hidden;
+  /*overflow: hidden;*/
   text-align: left;
 }
 

@@ -54,7 +54,7 @@ export default function ImpressorasCadastradas(){
         <Modal 
           setOpenModal={setModalOpen} 
           title={"Desativação de impressora"} 
-          bodytext={"Voce tem certeza que deseja desativar impressora? aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+          bodytext={"Você tem certeza que deseja desativar esta impressora?"}
         />
         
       )}

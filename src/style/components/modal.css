@@ -10,8 +10,8 @@
 }
   
 .modal-container {
-    width: 500px;
-    height: 500px;
+    width: 38.5vw;
+    height: 75vh;
     border-radius: 12px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -21,11 +21,11 @@
 }
   
 .modal-title {
+    height: 15vh;
     display: inline-block;
     text-align: center;
     margin-top: 10px;
     color: black;
-    background-color: aqua;
 }
   
 .title-close-btn {
@@ -41,18 +41,25 @@
 }
   
 .modal-body{
-    flex: 50%;
+    height: 35vh;
+    width: 38.5vw;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.7rem;
     text-align: center;
     color: black;
-    background-color: blue;
-    white-space: nowrap; /* Impede que o texto seja quebrado em várias linhas */
-    overflow: hidden; /* Oculta qualquer conteúdo além do contêiner */
-    text-overflow: ellipsis; /* Exibe reticências (...) quando o texto é cortado */
+    
 
+}
+
+.modal-body p{
+    margin: 0;
+    height: 25vh;
+    width: 38.5vw;
+    text-align: center;
+    word-wrap:break-word;
+    
 }
   
 .modal-footer {
@@ -62,18 +69,3 @@
     align-items: center;
 }
   
-/*.modal-footer button {
-    width: 150px;
-    height: 45px;
-    margin: 10px;
-    border: none;
-    background-color: cornflowerblue;
-    color: white;
-    border-radius: 8px;
-    font-size: 20px;
-    cursor: pointer;
-}*/
-  
-#cancelBtn {
-    background-color: crimson;
-}
