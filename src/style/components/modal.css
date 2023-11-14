@@ -5,7 +5,7 @@
     position: fixed;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
     z-index: 2;
 }
   
@@ -24,6 +24,8 @@
     display: inline-block;
     text-align: center;
     margin-top: 10px;
+    color: black;
+    background-color: aqua;
 }
   
 .title-close-btn {
@@ -45,16 +47,22 @@
     align-items: center;
     font-size: 1.7rem;
     text-align: center;
+    color: black;
+    background-color: blue;
+    white-space: nowrap; /* Impede que o texto seja quebrado em várias linhas */
+    overflow: hidden; /* Oculta qualquer conteúdo além do contêiner */
+    text-overflow: ellipsis; /* Exibe reticências (...) quando o texto é cortado */
+
 }
   
 .modal-footer {
     flex: 20%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
   
-.modal-footer button {
+/*.modal-footer button {
     width: 150px;
     height: 45px;
     margin: 10px;
@@ -64,7 +72,7 @@
     border-radius: 8px;
     font-size: 20px;
     cursor: pointer;
-}
+}*/
   
 #cancelBtn {
     background-color: crimson;

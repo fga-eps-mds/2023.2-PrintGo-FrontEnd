@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import Search from '../assets/Search.svg';
 import Filter from '../assets/Filter.svg';
 import engine from '../assets/engine.svg';
-import Input from '../components/Input';
+import Input from '../components/Input'; 
 import Modal from '../components/ui/Modal';
 import { useState } from "react";
 
@@ -13,18 +13,24 @@ export default function ImpressorasCadastradas(){
    
   const impressoras = [
     {
-      nome: 'HP InkJet 50',
-      codigo: 'HPInkJet-1234-ABCD',
-      modelo: 'PRINTER-002',
-      tipo: '1°DRP',
+      modelo: 'HP InkJet 50',
+      padrao: 'HPInkJet-1234-ABCD',
+      ip: '987.654.32',
+      codigo_loc: 'PRINTER-002',
+      unidade_pai: '1°DRP',
+      unidade_filha: '2ª DM',
+      contador: '83',
       data: '07/11/23',
       imagem: 'caminho/para/imagem1.jpg',
     },
     {
-      nome: 'Epson LaserJet',
-      codigo: 'EpsonLaser-5678-EFGH',
-      modelo: 'PRINTER-003',
-      tipo: '2°DRP',
+      modelo: 'Epson LaserJet',
+      padrao: 'EpsonLaser-5678-EFGH',
+      ip: '340.90.98',
+      codigo_loc: 'PRINTER-003',
+      unidade_pai: '2°DRP',
+      unidade_filha: '3ª DM',
+      contador: '88',
       data: '08/11/23',
       imagem: 'caminho/para/imagem2.jpg',
     },
@@ -44,7 +50,14 @@ export default function ImpressorasCadastradas(){
 
   return(
     <div className="impressorasCadastradas-page">
-      {modalOpen && <Modal setOpenModal={setModalOpen} />}
+      {modalOpen && (
+        <Modal 
+          setOpenModal={setModalOpen} 
+          title={"Desativação de impressora"} 
+          bodytext={"Voce tem certeza que deseja desativar impressora? aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+        />
+        
+      )}
       <div className="impressorasCadastradas-cabecalho">
         <h2>Impressoras cadastradas</h2>
         <div className="impressorasCadastradas-cabecalho-icones">
@@ -71,11 +84,26 @@ export default function ImpressorasCadastradas(){
       }).map((impressora, index) => (
 
         <div key={index} className="impressorasCadastradas-Lista">
-          <h6>{impressora.nome}</h6>
-          <h6>{impressora.codigo}</h6>
-          <h6>{impressora.modelo}</h6> 
-          <h6>{impressora.tipo}</h6>
-          <h6>{impressora.data}</h6>
+          <div className="impressoras-modelo">
+            <h4>{impressora.modelo}</h4>
+          </div>
+          
+          <div className="impressoras-identificacao"> 
+            <h6>{impressora.padrao}</h6>
+            <h6>IP: {impressora.ip}</h6>
+            <h6>{impressora.codigo_loc}</h6> 
+          </div>
+          
+          <div className="impressoras-unidade-contador">
+            <h6>{impressora.unidade_pai}</h6>
+            <h6>{impressora.unidade_filha}</h6>
+            <h6>{impressora.contador}</h6>
+          </div>
+          
+          <div className="data-ultimo-contador">
+            <h6>Data do último contador: {impressora.data}</h6>
+          </div>
+          
 
           <div className="impressorasCadastradas-Lista-img">
             <img 
@@ -101,3 +129,39 @@ export default function ImpressorasCadastradas(){
     </div>
   );
 }
+
+
+/*
+
+// SeuComponentePrincipal.js
+import React, { useState } from 'react';
+import Modal from './Modal';
+
+const SeuComponentePrincipal = () => {
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const [textoDoModal, setTextoDoModal] = useState('');
+
+  const abrirModal = (texto) => {
+    setTextoDoModal(texto);
+    setMostrarModal(true);
+  };
+
+  const fecharModal = () => {
+    setMostrarModal(false);
+    setTextoDoModal('');
+  };
+
+  return (
+    <div>
+      <button onClick={() => abrirModal('Seu texto aqui')}>Abrir Modal</button>
+
+      {mostrarModal && (
+        <Modal texto={textoDoModal} onClose={fecharModal} />
+      )}
+    </div>
+  );
+};
+
+export default SeuComponentePrincipal;
+
+*/
