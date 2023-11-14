@@ -1,12 +1,16 @@
-#registerPrinter-container {
+#register-printer-pattern-container {
+    
+    height: 100vh;
+    width: 100vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#registerPrinter-container img{
-    margin-left: 5vw;
-    width: 900px;
+#register-printer-pattern-container img{
+    /*margin-left: 5vw;*/
+    width: 50vw;
+    height: 50vh;
 }
 
 @media (max-width: 900px) {
