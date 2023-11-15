@@ -1,0 +1,18 @@
+#editPattern-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#editPattern-container img {
+  /*margin-left: 5vw;*/
+  margin-left: 5vw;
+  width: 45vw;
+}
+
+@media (max-width: 900px) {
+  #editPattern-container img {
+    /* width: 100px; */
+    display: auto;
+  }
+}
