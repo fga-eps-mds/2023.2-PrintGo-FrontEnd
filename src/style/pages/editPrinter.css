@@ -5,8 +5,8 @@
 }
 
 #editPrinter-container img {
-  margin-left: 5vw;
-  width: 900px;
+  margin-left: 4vw;
+  width: 45vw;
 }
 
 @media (max-width: 900px) {
