@@ -1,165 +1,163 @@
 #registerPrinter-card {
-    background-color: #FFFFFF;
-    border-radius: 10px;
-    display: flex;
-    width: 30vw;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-    padding: 1rem 5rem;
-    margin-right: 8vw;
-    margin-top: 2%;
-    margin-bottom: 1vh;
+  background-color: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  width: 35vw;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  padding: 1rem 5rem;
+  margin-right: 8vw;
+  margin-top: 2%;
+  margin-bottom: 1vh;
 }
 
 #form-header {
-    font-size: 48px;
-    color: #003366;
-    margin-bottom: 16px;
+  font-size: 48px;
+  color: #003366;
+  margin-bottom: 16px;
 }
 
 #input-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 16px 0;
 }
 
 #input-line {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px; 
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 #input-box {
-    flex: 1;
-    min-width: 100px; /* Largura mínima para cada input */
-    display: flex;
-    width: 250px;
-    flex-direction: column;
-    margin-bottom: 16px;
-    padding: 0 10px;
-    box-sizing: border-box;
+  flex: 1;
+  min-width: 100px; /* Largura mínima para cada input */
+  display: flex;
+  width: 250px;
+  flex-direction: column;
+  margin-bottom: 16px;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 #label-checkbox {
-    top: 10rem;
+  top: 10rem;
 }
 
 #input-box label {
-    color: #003366;
-    display: block;
-    margin-bottom: 5px;
+  color: #003366;
+  display: block;
+  margin-bottom: 5px;
 }
 
 #input-box span {
-    color: #9f0805;
+  color: #9f0805;
 }
 
 #input-checkbox {
-    margin-top: 2rem;
-    display: flex;
-    align-items: center;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
 }
 
 #input-checkbox input {
-    margin:0 12px 0 0;
-    vertical-align: middle;
-    position: relative;
-    top: -3px;
+  margin: 0 12px 0 0;
+  vertical-align: middle;
+  position: relative;
+  top: -3px;
 }
 
-#input-box input{
-    font-size: 16px;
-    border: 1px solid #003366;
-    border-color: #003366;
-    border-radius: 10px;
-    padding: 5px;
+#input-box input {
+  font-size: 16px;
+  border: 1px solid #003366;
+  border-color: #003366;
+  border-radius: 10px;
+  padding: 5px;
 }
 
-#input-box select{
-    font-size: 16px;
-    font-size: 1rem;border: 1px solid #003366;
-    border-color: #003366;
-    border-radius: 10px;
-    padding: 5px;
-    color: #6C6C6C;
+#input-box select {
+  font-size: 16px;
+  font-size: 1rem;
+  border: 1px solid #003366;
+  border-color: #003366;
+  border-radius: 10px;
+  padding: 5px;
+  color: #6c6c6c;
 }
 
 #buttons {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .form-button {
-    display: inline-block;
-    flex-direction: column;
-    color: #ffffff ;
-    border: none;
-    padding: 10px 30px;
-    border-radius: 50px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 20px;
+  display: inline-block;
+  flex-direction: column;
+  color: #ffffff;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-
 .form-button:hover {
-    filter: brightness(1.8);
+  filter: brightness(1.8);
 }
 
 #cancel-bnt {
-    background-color: #003366;
-    transition: background-color 0.3s, filter 0.3s;
+  background-color: #003366;
+  transition: background-color 0.3s, filter 0.3s;
 }
 
-
 #registrar-bnt.form-button {
-    margin-left: 8px;
-    transition: background-color 0.3s, filter 0.3s;
-    background-color: #006633;
+  margin-left: 8px;
+  transition: background-color 0.3s, filter 0.3s;
+  background-color: #006633;
 }
 
 #register-bnt:disabled {
-    background-color: #006633 !important;
-    opacity: 65%;
-    cursor: not-allowed;
+  background-color: #006633 !important;
+  opacity: 65%;
+  cursor: not-allowed;
 }
 
 #input-description {
-    color: #6C6C6C;
-    font-size: 10px;
+  color: #6c6c6c;
+  font-size: 10px;
 }
 
-.elipse-registerPrinter{
-    position: fixed; 
-    width: 50vw;
-    height: 100vh;
-    top:0;
-    right: 0;
-    z-index: -1;
-    bottom: 2px;
-    color:#003366;
-    overflow: hidden;
+.elipse-registerPrinter {
+  position: fixed;
+  width: 60vw;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  bottom: 2px;
+  color: #003366;
+  overflow: hidden;
+}
 
-  }
-  
-  .elipse-registerPrinter img{
-    height: 150vh;
-  }
+.elipse-registerPrinter img {
+  height: 150vh;
+}
 
 @media (max-width: 900px) {
-    #registerPrinter-card {
-        width: 90%; /* Adjust the form width as needed*/
-        margin: 0 auto; /* Centers the form horizontally*/
-        padding: 1rem; /* Adjust padding as needed */
-    }
+  #registerPrinter-card {
+    width: 90%; /* Adjust the form width as needed*/
+    margin: 0 auto; /* Centers the form horizontally*/
+    padding: 1rem; /* Adjust padding as needed */
+  }
 
-    #input-line {
-        display:block;
-    }
+  #input-line {
+    display: block;
+  }
 }
