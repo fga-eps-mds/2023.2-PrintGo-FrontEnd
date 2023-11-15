@@ -41,6 +41,7 @@ export default function ImpressorasCadastradas(){
   )
 
   const [dropdown, setDropdown] = useState(true);
+  const [filterDropdown, setFilterDropdown] = useState(true);
   const [search, setSearch] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
@@ -83,7 +84,7 @@ export default function ImpressorasCadastradas(){
       <div className="printerslist-header">
         <div className="printerslist-header-title">
           <h2>Impressoras cadastradas</h2>
-          <h7>todas/ativadas/desativadas</h7>
+          <h4>todas/ativadas/desativadas</h4>
         </div>
 
         <div className="printerslist-header-search-filter">
@@ -91,7 +92,21 @@ export default function ImpressorasCadastradas(){
             onChange={(e) => setSearch(e.target.value.toLowerCase())} 
           />
           <img alt="" src={Search} />
-          <img alt="" src={Filter} />
+
+          <div className="printerslist-filter">
+            <img alt="" src={Filter} className="printerslist-filter"></img>
+          
+            <div className="printerslist-filter-dropdown-container">
+              {filterDropdown && (
+                <div className="printerslist-dropdown-filter">
+                  <Link to="#">Todas</Link>
+                  <Link to="#">Ativas</Link>
+                  <Link to="#">Desativas</Link>
+                </div>
+              )}
+            </div>
+          </div> 
+
         </div>
       </div>
       
@@ -133,9 +148,9 @@ export default function ImpressorasCadastradas(){
               alt="" 
               src={engine}
             />
-            <div className="printerslist-dropdown-container">
+            <div className="printerslist-engine-dropdown">
               {dropdown && (
-                <div className="printerslist-dropdown">
+                <div className="printerslist-printer-dropdown">
                   <div onClick={() => {setModalOpen(true);}}>
                     {
                       (impressora.ativada && 
