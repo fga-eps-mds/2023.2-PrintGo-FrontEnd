@@ -20,13 +20,23 @@
   padding-left: 8px;
 }
 
+.impressoras-modelo{
+  display: flex;
+  flex-direction: column;
+}
 .impressoras-modelo h4{
   
   width: 20vw;
   margin: 0;
   padding-left: 1rem;
 }
-
+.impressoras-modelo h5{
+  padding-top: 0.8rem;
+  padding-left: 1rem;
+  color: #BF1B1B;
+  margin: 0;
+  
+}
 
 .data-ultimo-contador h4{
   margin: 0;
@@ -181,4 +191,9 @@
 .impressorasCadastradas-Lista-img:hover .impressorasCadastradas-dropdown {
   display: flex;
   flex-direction: column;
+}
+
+/* Modal */
+.deactivate-modal-buttons {
+  display: none;
 }
