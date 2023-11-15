@@ -21,7 +21,7 @@ function App(){
       <Route path="/contato" element={<Contact/>}/>
       <Route path="/quemsomos" element={<AboutUs/>}/>
       <Route path="/changePassword" element={<ChangePassword/>}/>
-      <Route path="/viewImpressora" element={<ViewImpressora/>}/>
+      <Route path="/viewPrinter" element={<ViewImpressora/>}/>
     </Routes>
     </BrowserRouter>
   );

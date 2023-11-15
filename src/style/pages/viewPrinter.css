@@ -1,16 +1,16 @@
 /* Container */
 
-#container-view {
+#container-viewprinter {
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
 
-#left-content {
+#viewprinter-left-content {
     width: 30vw;
 }
 
-#right-content {
+#viewprinter-right-content {
     width: 70vw;
     display: flex;
     justify-content: flex-end;
@@ -18,7 +18,7 @@
 
 /* View card */
 
-#view-card {
+#viewprinter-card {
     background-color: #FFFFFF;
     border-radius: 10px;
     display: flex;
@@ -35,13 +35,13 @@
 
 /* Header */
 
-#card-header {
+#viewprinter-card #card-header {
     width: 100%;
     margin-top: 10px;
     display: block;
 }
 
-#card-header a {
+#viewprinter-card #card-header a {
     font-weight: bold;
     font-size: 22px;
     color: #003366;
@@ -51,14 +51,7 @@
 
 /* Infos */
 
-#cabecalho {
-    display: block;
-    width: 100%;
-    color: #003366;
-    font-size: 30px;
-}
-
-#info-group {
+#viewprinter-info-group{
     display: flex;
     width: 100%;
     flex-wrap: wrap;
@@ -67,7 +60,14 @@
     padding: 16px 0;
 }
 
-#info-line {
+#viewprinter-info-header {
+    display: block;
+    width: 100%;
+    color: #003366;
+    font-size: 30px;
+}
+
+#viewprinter-info-line {
     display: flex;
     width: 100%;
     justify-content: flex-start;
@@ -75,7 +75,7 @@
     gap: 110px;
 }
 
-#info-box {
+#viewprinter-info-box {
     flex: 1;
     display: flex;
     max-width: 280px;
@@ -84,13 +84,13 @@
     box-sizing: border-box;
 }
 
-#info-box label {
+#viewprinter-info-box label {
     color: #003366;
     display: block;
     margin-bottom: 0px;
 }
 
-#info-box p {
+#viewprinter-info-box p {
     color: #003366;
     display: block;
     font-size: 20px;
@@ -100,7 +100,7 @@
 
 /*Estilo de circuferencia */
 
-.elipse-view{
+.elipse-viewprinter{
     position: fixed;
     display: flex;
     width: fit-content;
@@ -111,7 +111,7 @@
     color:#003366;
 }
 
-.ellipse-view img{
+.elipse-viewprinter img{
     width: 40vw;
     height: 100vh;
 }
@@ -119,7 +119,7 @@
 /**/
 
 @media (max-width: 1210px) {
-    .container-view{
+    .container-viewprinter{
         display: flex;
         flex-direction: column;
         gap: 5rem;
