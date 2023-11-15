@@ -1,12 +1,13 @@
 import React from "react";
 import '../../style/components/modal.css';
 import PropTypes from 'prop-types';
-import Button from '../Button';
+import Button from "../Button";
 
-function Modal({ setOpenModal, title, bodytext}) {
+function Modal({ setOpenModal, title, bodytext, onConfirm }) {
   return (
     <div className="modal-background">
       <div className="modal-container">
+
         <div className="title-close-btn">
           <button
             onClick={() => {
@@ -16,12 +17,15 @@ function Modal({ setOpenModal, title, bodytext}) {
             X
           </button>
         </div>
+
         <div className="modal-title">
           <h1>{title}</h1>
         </div>
+
         <div className="modal-body">
           <p>{bodytext}</p>
         </div>
+
         <div className="modal-footer">
           <Button
             textColor="white" 
@@ -34,10 +38,12 @@ function Modal({ setOpenModal, title, bodytext}) {
 
             Cancelar
           </Button>
+
           <Button
             textColor="white"
             bgColor="#036"
             borderColor="#036"
+            onClick={onConfirm}
           >
             Confirmar
           </Button>
@@ -55,27 +61,9 @@ Modal.propTypes = {
   setOpenModal: PropTypes.func,
   bodytext: PropTypes.string
 }
+Modal.propTypes = {
+  setOpenModal: PropTypes.func,
+  onConfirm: PropTypes.func
+}
 
 export default Modal;
-
-
-/* 
-
-// Modal.js
-import React from 'react';
-
-const Modal = ({ texto, onClose }) => {
-  return (
-    <div className="modal">
-      <div className="modal-content">
-        <span className="close" onClick={onClose}>&times;</span>
-        <p>{texto}</p>
-      </div>
-    </div>
-  );
-};
-
-export default Modal;  
-
-*/
-
