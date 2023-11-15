@@ -6,8 +6,8 @@
 
 #register-printer-pattern-container img {
   /*margin-left: 5vw;*/
-  margin-left: 4vw;
-  width: 50vw;
+  margin-left: 5vw;
+  width: 45vw;
 }
 
 @media (max-width: 900px) {
