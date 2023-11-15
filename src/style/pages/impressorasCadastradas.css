@@ -20,57 +20,7 @@
   padding-left: 8px;
 }
 
-.impressoras-modelo{
-  display: flex;
-  flex-direction: column;
-}
-.impressoras-modelo h4{
-  
-  width: 20vw;
-  margin: 0;
-  padding-left: 1rem;
-}
-.impressoras-modelo h5{
-  padding-top: 0.8rem;
-  padding-left: 1rem;
-  color: #BF1B1B;
-  margin: 0;
-  
-}
 
-.data-ultimo-contador h4{
-  margin: 0;
-  font-weight: lighter;
-  
-}
-
-.data-ultimo-contador{
-  height: 15vh;
-  width: 25vw;
-  display: flex;
-  align-items: center;
-}
-.impressoras-identificacao{
-  
-  display: flex;
-  flex-direction: column;
-  height: 15vh;
-  width: 30vw;
-  justify-content: space-around;
-  padding-left: 1rem;
-}
-
-.impressoras-unidade-contador{
-  display: flex;
-  flex-direction: column;
-  height: 15vh;
-  width: 15vw;
-  
-  justify-content: space-around;
-  padding-left: 1rem;
-  
-}
- 
 /* tamanho da fonte do cabecalho */
 .impressorasCadastradas-cabecalho h2{
   margin: 8px;
@@ -90,23 +40,6 @@
 }
 
 
-/* imagens (icones) e onde estarao originalmente */
-.impressorasCadastradas-cabecalho-imagens{
-  display: flex;
-  justify-content: space-between;
-  height: 4.4756vh;
-  width: 5.534vw;
-} 
-
-
-/* img da classe dos icones para setar suas distancias */
-.impressorasCadastradas-cabecalho-imagens img{
-  display: flex;
-  height: 3.3566vh;
-  width: 1.5625vw;
-}
-
-
 /* Docker da barra de input para ser a barra de pesquisa */
 .impressorasCadastradas-cabecalho-input{
   display: flex;
@@ -115,6 +48,7 @@
   width: 20vw;
   height: 4vh;
 }
+
 
 .impressorasCadastradas-cabecalho-input Input {
   height: 2.5vh;
@@ -130,6 +64,29 @@
 }
 
 
+/* imagens (icones) e onde estarao originalmente */
+.impressorasCadastradas-cabecalho-imagens{
+  display: flex;
+  justify-content: space-between;
+  height: 4.4756vh;
+  width: 5.534vw;
+}
+
+
+/* img da classe dos icones para setar suas distancias */
+.impressorasCadastradas-cabecalho-imagens img{
+  display: flex;
+  height: 3.3566vh;
+  width: 1.5625vw;
+}
+
+
+.impressorasCadastradas-RespostaFiltro h5{
+  margin: 8px;
+  font-size: 25px;
+  padding-left: 10px;
+}
+
 
 .impressorasCadastradas-Lista{
   height: 18vh; 
@@ -142,12 +99,63 @@
   box-shadow: 0 5px 5px -3px black;
 }
 
+
 .impressorasCadastradas-Lista h6{
   margin: 0;
   display: flex;
   flex-direction: column;
   font-weight: lighter;
 }
+
+
+.impressoras-modelo{
+  display: flex;
+  flex-direction: column;
+}
+.impressoras-modelo h4{
+  width: 20vw;
+  margin: 0;
+  padding-left: 1rem;
+}
+.impressoras-modelo h5{
+  padding-top: 0.8rem;
+  padding-left: 1rem;
+  color: #BF1B1B;
+  margin: 0;
+}
+
+
+.impressoras-identificacao{
+  display: flex;
+  flex-direction: column;
+  height: 15vh;
+  width: 30vw;
+  justify-content: space-around;
+  padding-left: 1rem;
+}
+
+
+.impressoras-unidade-contador{ 
+  display: flex;
+  flex-direction: column;
+  height: 15vh;
+  width: 15vw;
+  justify-content: space-around;
+  padding-left: 1rem;
+}
+
+
+.data-ultimo-contador{
+  height: 15vh;
+  width: 25vw;
+  display: flex;
+  align-items: center;
+}
+.data-ultimo-contador h4{   /*h4?*/
+  margin: 0;
+  font-weight: lighter;
+}
+
 
 /* Dropdown */
 .impressorasCadastradas-Lista-img{ 
@@ -157,8 +165,8 @@
   width: 4vw;
   margin-right: 20px;
   cursor: pointer;
-  
 }
+
 
 .impressorasCadastradas-dropdown-container {
   align-self: flex-start;
@@ -174,7 +182,6 @@
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
-
 .impressorasCadastradas-dropdown a {
   color: #003366;
   text-decoration: none;
@@ -182,16 +189,15 @@
   font-size: 20px;
   padding: 4px 4px;
 }
-
 .impressorasCadastradas-dropdown a:hover {
   background-color: #003366;
   color: #fff;
 }
-
 .impressorasCadastradas-Lista-img:hover .impressorasCadastradas-dropdown {
   display: flex;
   flex-direction: column;
 }
+
 
 /* Modal */
 .deactivate-modal-buttons {

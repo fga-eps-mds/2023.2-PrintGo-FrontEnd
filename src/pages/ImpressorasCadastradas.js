@@ -8,9 +8,7 @@ import Input from '../components/Input';
 import Modal from '../components/ui/Modal';
 import { useState } from "react";
 
-
 export default function ImpressorasCadastradas(){
-  
   const [impressoras, setImpressoras] = useState(
     [
       {
@@ -37,7 +35,7 @@ export default function ImpressorasCadastradas(){
         ativada: true,
         imagem: 'caminho/para/imagem2.jpg',
       },
-  ]
+    ]
   )
 
   const [dropdown, setDropdown] = useState(true);
@@ -81,24 +79,27 @@ export default function ImpressorasCadastradas(){
           bodytext={modalBodytext}
           onConfirm={printerToggle}
         />
-        
-
       )}
       <div className="impressorasCadastradas-cabecalho">
         <h2>Impressoras cadastradas</h2>
+
         <div className="impressorasCadastradas-cabecalho-icones">
           <div className="impressorasCadastradas-cabecalho-input">
             <Input 
               onChange={(e) => setSearch(e.target.value.toLowerCase())} 
               className="input-pesquisa-impressoras"
-            
             />
           </div>
-          <div className="impressorasCadastradas-cabecalho-imagens"> 
+
+          <div className="impressorasCadastradas-cabecalho-imagens">
             <img alt="" src={Search} />
             <img alt="" src={Filter} onClick={toggleDropdown} />
           </div>
         </div>
+      </div>
+
+      <div className="impressorasCadastradas-RespostaFiltro">
+        <h5>todas/ativadas/desativadas</h5>
       </div>
       
       {impressoras.filter((impressora) => {
@@ -111,10 +112,7 @@ export default function ImpressorasCadastradas(){
           impressora.modelo.toLocaleLowerCase().includes(search) ||
           impressora.numeroSerie.toLocaleLowerCase().includes(search)
 
-      
-      
       }).map((impressora, index) => (
-
         <div key={index} className="impressorasCadastradas-Lista" style={{ color: impressora.ativada ? '' : 'gray' }}>
           <div className="impressoras-modelo">
             <h4>{impressora.modelo}</h4>
@@ -137,7 +135,6 @@ export default function ImpressorasCadastradas(){
             <h6>Data do último contador: {impressora.data}</h6>
           </div>
           
-
           <div className="impressorasCadastradas-Lista-img">
             <img 
               alt="" 
@@ -153,7 +150,7 @@ export default function ImpressorasCadastradas(){
                             Desativar
                           </Link>
                         )
-                      ) || (!impressora.ativada && 
+                      ) || (!impressora.ativada &&
                         ( <Link to="#" onClick={() => {activePrinter(index)}}>
                             Ativar
                           </Link>
@@ -166,11 +163,8 @@ export default function ImpressorasCadastradas(){
               )}
             </div> 
           </div>
-
         </div>
       ))}
-
-      
     </div>
   );
 }
