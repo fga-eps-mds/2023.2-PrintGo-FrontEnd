@@ -7,6 +7,7 @@ import engine from '../assets/engine.svg';
 import Input from '../components/Input'; 
 import Modal from '../components/ui/Modal';
 import { useState } from "react";
+import Navbar from "../components/navbar/Navbar";
 
 export default function ImpressorasCadastradas(){
 
@@ -75,123 +76,126 @@ export default function ImpressorasCadastradas(){
   };
 
   return(
-    <div className="printerslist-container">
-      {modalOpen && (
-        <Modal 
-          setOpenModal={setModalOpen} 
-          title={modalTitle} 
-          bodytext={modalBodytext}
-          onConfirm={printerToggle}
-        />
-      )}
-
-      <div className="printerslist-header">
-        <div className="printerslist-header-title">
-          <h2>Impressoras cadastradas</h2>
-          {
-            (filter === 'all' && (<h4>Todas</h4>)) ||
-            (filter === 'active' && (<h4>Ativas</h4>)) ||
-            (filter === 'deactivated' && (<h4>Desativadas</h4>))
-          }
-        </div>
-
-        <div className="printerslist-header-search-filter">
-          <Input 
-            onChange={(e) => setSearch(e.target.value.toLowerCase())} 
+    <>
+      <Navbar />
+      <div className="printerslist-container">
+        {modalOpen && (
+          <Modal 
+            setOpenModal={setModalOpen} 
+            title={modalTitle} 
+            bodytext={modalBodytext}
+            onConfirm={printerToggle}
           />
-          <img alt="" src={Search} />
+        )}
 
-          <div className="printerslist-filter">
-            <img alt="" src={Filter} className="printerslist-filter"></img>
-          
-            <div className="printerslist-filter-dropdown-container">
-              {filterDropdown && (
-                <div className="printerslist-dropdown-filter">
-                  <Link to="#" onClick={() => {setFilter('all')}}>Todas</Link>
-                  <Link to="#" onClick={() => {setFilter('active')}}>Ativas</Link>
-                  <Link to="#" onClick={() => {setFilter('deactivated')}}>Desativas</Link>
-                </div>
-              )}
-            </div>
-          </div> 
+        <div className="printerslist-header">
+          <div className="printerslist-header-title">
+            <h2>Impressoras cadastradas</h2>
+            {
+              (filter === 'all' && (<h4>Todas</h4>)) ||
+              (filter === 'active' && (<h4>Ativas</h4>)) ||
+              (filter === 'deactivated' && (<h4>Desativadas</h4>))
+            }
+          </div>
 
-        </div>
-      </div>
-      
-      {impressoras.filter((impressora) => {
-        // Filtro de pesquisa.
-        return search.toLowerCase() === '' 
-        ? impressora 
-        : impressora.codigo_loc.toLocaleLowerCase().includes(search) ||
-          impressora.unidade_pai.toLocaleLowerCase().includes(search) ||
-          impressora.unidade_filha.toLocaleLowerCase().includes(search) ||
-          impressora.ip.toLocaleLowerCase().includes(search) ||
-          impressora.modelo.toLocaleLowerCase().includes(search) ||
-          impressora.numeroSerie.toLocaleLowerCase().includes(search)
-
-      }).filter((impressora) => {
-        // Filtro por estado.
-        if (filter === 'active') {
-          return impressora.ativada;
-        } else if (filter === 'deactivated') {
-          return !impressora.ativada;
-        } else {
-          return impressora;
-        }
-
-      }).map((impressora, index) => (
-        <div key={index} className="printerslist-printer" style={{ color: impressora.ativada ? '' : 'gray' }}>
-          <div className="printerslist-model">
-            <h4>{impressora.modelo}</h4>
-            {!impressora.ativada && (<h5>Desativada</h5>)}
-          </div>
-          
-          <div className="printerslist-identification" style={{ color: impressora.ativada ? '' : 'gray' }}> 
-            <h6>{impressora.numeroSerie}</h6>
-            <h6>IP: {impressora.ip}</h6>
-            <h6>{impressora.codigo_loc}</h6> 
-          </div>
-          
-          <div className="printerslist-location-counter" style={{ color: impressora.ativada ? '' : 'gray' }}>
-            <h6>{impressora.unidade_pai}</h6>
-            <h6>{impressora.unidade_filha}</h6>
-            <h6>{impressora.contador}</h6>
-          </div>
-          
-          <div className="printerslist-counter-date" style={{ color: impressora.ativada ? '' : 'gray' }}>
-            <h6>Data do último contador: {impressora.data}</h6>
-          </div>
-          
-          <div className="printerslist-engine">
-            <img 
-              alt="" 
-              src={engine}
+          <div className="printerslist-header-search-filter">
+            <Input 
+              onChange={(e) => setSearch(e.target.value.toLowerCase())} 
             />
-            <div className="printerslist-engine-dropdown">
-              {dropdown && (
-                <div className="printerslist-printer-dropdown">
-                  <div onClick={() => {setModalOpen(true);}}>
-                    {
-                      (impressora.ativada && 
-                        ( <Link to="#" onClick={() => {modalDeactivatePrinter(impressora)}}>
-                            Desativar
-                          </Link>
-                        )
-                      ) || (!impressora.ativada &&
-                        ( <Link to="#" onClick={() => {modalActivePrinter(impressora)}}>
-                            Ativar
-                          </Link>
-                        )
-                      ) 
-                    }
+            <img alt="" src={Search} />
+
+            <div className="printerslist-filter">
+              <img alt="" src={Filter} className="printerslist-filter"></img>
+            
+              <div className="printerslist-filter-dropdown-container">
+                {filterDropdown && (
+                  <div className="printerslist-dropdown-filter">
+                    <Link to="#" onClick={() => {setFilter('all')}}>Todas</Link>
+                    <Link to="#" onClick={() => {setFilter('active')}}>Ativas</Link>
+                    <Link to="#" onClick={() => {setFilter('deactivated')}}>Desativas</Link>
                   </div>
-                  <Link to="#">Editar</Link>
-                </div>
-              )}
+                )}
+              </div>
             </div> 
+
           </div>
         </div>
-      ))}
-    </div>
+        
+        {impressoras.filter((impressora) => {
+          // Filtro de pesquisa.
+          return search.toLowerCase() === '' 
+          ? impressora 
+          : impressora.codigo_loc.toLocaleLowerCase().includes(search) ||
+            impressora.unidade_pai.toLocaleLowerCase().includes(search) ||
+            impressora.unidade_filha.toLocaleLowerCase().includes(search) ||
+            impressora.ip.toLocaleLowerCase().includes(search) ||
+            impressora.modelo.toLocaleLowerCase().includes(search) ||
+            impressora.numeroSerie.toLocaleLowerCase().includes(search)
+
+        }).filter((impressora) => {
+          // Filtro por estado.
+          if (filter === 'active') {
+            return impressora.ativada;
+          } else if (filter === 'deactivated') {
+            return !impressora.ativada;
+          } else {
+            return impressora;
+          }
+
+        }).map((impressora, index) => (
+          <div key={index} className="printerslist-printer" style={{ color: impressora.ativada ? '' : 'gray' }}>
+            <div className="printerslist-model">
+              <h4>{impressora.modelo}</h4>
+              {!impressora.ativada && (<h5>Desativada</h5>)}
+            </div>
+            
+            <div className="printerslist-identification" style={{ color: impressora.ativada ? '' : 'gray' }}> 
+              <h6>{impressora.numeroSerie}</h6>
+              <h6>IP: {impressora.ip}</h6>
+              <h6>{impressora.codigo_loc}</h6> 
+            </div>
+            
+            <div className="printerslist-location-counter" style={{ color: impressora.ativada ? '' : 'gray' }}>
+              <h6>{impressora.unidade_pai}</h6>
+              <h6>{impressora.unidade_filha}</h6>
+              <h6>{impressora.contador}</h6>
+            </div>
+            
+            <div className="printerslist-counter-date" style={{ color: impressora.ativada ? '' : 'gray' }}>
+              <h6>Data do último contador: {impressora.data}</h6>
+            </div>
+            
+            <div className="printerslist-engine">
+              <img 
+                alt="" 
+                src={engine}
+              />
+              <div className="printerslist-engine-dropdown">
+                {dropdown && (
+                  <div className="printerslist-printer-dropdown">
+                    <div onClick={() => {setModalOpen(true);}}>
+                      {
+                        (impressora.ativada && 
+                          ( <Link to="#" onClick={() => {modalDeactivatePrinter(impressora)}}>
+                              Desativar
+                            </Link>
+                          )
+                        ) || (!impressora.ativada &&
+                          ( <Link to="#" onClick={() => {modalActivePrinter(impressora)}}>
+                              Ativar
+                            </Link>
+                          )
+                        ) 
+                      }
+                    </div>
+                    <Link to="#">Editar</Link>
+                  </div>
+                )}
+              </div> 
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
