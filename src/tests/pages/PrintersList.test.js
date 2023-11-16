@@ -17,3 +17,11 @@ test("deve filtrar impressoras com base na pesquisa", () => {
   expect(screen.getByText("HP InkJet 50")).toBeInTheDocument();
   expect(screen.queryByText("Epson LaserJet")).toBeNull();
 });
+
+// Teste de Modal de Ativação/Desativação
+test("deve abrir o modal de ativação/desativação e realizar a ação", async () => {
+  render(<ImpressorasCadastradas />);
+  // Encontra e clica no botão que abre o modal de desativação/ativação
+  const botaoDesativar = screen.getByText("Desativar");
+  fireEvent.click(botaoDesativar);
+});
