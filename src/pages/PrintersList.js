@@ -40,9 +40,10 @@ export default function ImpressorasCadastradas(){
     ]
   )
 
-  const [dropdown, setDropdown] = useState(true);
-  const [filterDropdown, setFilterDropdown] = useState(true);
   const [search, setSearch] = useState('');
+  const [filterDropdown, setFilterDropdown] = useState(true);
+  const [filter, setFilter] = useState('all');
+  const [dropdown, setDropdown] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalBodytext, setModalBodytext] = useState('');
@@ -84,7 +85,11 @@ export default function ImpressorasCadastradas(){
       <div className="printerslist-header">
         <div className="printerslist-header-title">
           <h2>Impressoras cadastradas</h2>
-          <h4>todas/ativadas/desativadas</h4>
+          {
+            (filter === 'all' && (<h4>Todas</h4>)) ||
+            (filter === 'active' && (<h4>Ativas</h4>)) ||
+            (filter === 'deactivated' && (<h4>Desativadas</h4>))
+          }
         </div>
 
         <div className="printerslist-header-search-filter">
@@ -99,9 +104,9 @@ export default function ImpressorasCadastradas(){
             <div className="printerslist-filter-dropdown-container">
               {filterDropdown && (
                 <div className="printerslist-dropdown-filter">
-                  <Link to="#">Todas</Link>
-                  <Link to="#">Ativas</Link>
-                  <Link to="#">Desativas</Link>
+                  <Link to="#" onClick={() => {setFilter('all')}}>Todas</Link>
+                  <Link to="#" onClick={() => {setFilter('active')}}>Ativas</Link>
+                  <Link to="#" onClick={() => {setFilter('deactivated')}}>Desativas</Link>
                 </div>
               )}
             </div>
@@ -111,6 +116,7 @@ export default function ImpressorasCadastradas(){
       </div>
       
       {impressoras.filter((impressora) => {
+        // Filtro de pesquisa.
         return search.toLowerCase() === '' 
         ? impressora 
         : impressora.codigo_loc.toLocaleLowerCase().includes(search) ||
@@ -119,6 +125,16 @@ export default function ImpressorasCadastradas(){
           impressora.ip.toLocaleLowerCase().includes(search) ||
           impressora.modelo.toLocaleLowerCase().includes(search) ||
           impressora.numeroSerie.toLocaleLowerCase().includes(search)
+
+      }).filter((impressora) => {
+        // Filtro por estado.
+        if (filter === 'active') {
+          return impressora.ativada;
+        } else if (filter === 'deactivated') {
+          return !impressora.ativada;
+        } else {
+          return impressora;
+        }
 
       }).map((impressora, index) => (
         <div key={index} className="printerslist-printer" style={{ color: impressora.ativada ? '' : 'gray' }}>
