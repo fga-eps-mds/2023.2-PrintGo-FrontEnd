@@ -75,8 +75,8 @@ export default function RegisterPrinterForm() {
       <header id="form-header">Cadastrar impressora</header>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div id="input-group">
-          {Object.values(fieldLabels).map((field, index) => (
-            <div id="input-line" key={index}>
+          {Object.values(fieldLabels).map((field) => (
+            <div id="input-line" key={field.id}>
               <div id="input-box">
                 <label>
                   {field.charAt(0).toUpperCase() + field.slice(1)}

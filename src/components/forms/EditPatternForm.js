@@ -92,8 +92,8 @@ export default function EditPatternForm() {
         <div id="printer-pattern-input-group">
           <div id="printer-pattern-input-box">
             <div id="printer-pattern-fields">
-              {["tipo", "marca", "modelo"].map((field, index) => (
-                <div id="printer-pattern-input-line" key={index}>
+              {["tipo", "marca", "modelo"].map((field) => (
+                <div id="printer-pattern-input-line" key={field.id}>
                   <label>
                     {fieldLabels[field]}
                     <span>*</span>
@@ -111,8 +111,8 @@ export default function EditPatternForm() {
             {/* SNMP Fields */}
             <div id="printer-pattern-snmp-fields">
               <label>SNMP</label>
-              {Object.keys(fieldLabels.snmp).map((subField, subIndex) => (
-                <div id="snmp-fields-input-line" key={`sub-${subIndex}`}>
+              {Object.keys(fieldLabels.snmp).map((subField) => (
+                <div id="snmp-fields-input-line" key={`sub-${subField.id}`}>
                   <label>
                     {fieldLabels.snmp[subField]}
                     <span>*</span>
