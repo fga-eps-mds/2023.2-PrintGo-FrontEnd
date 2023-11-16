@@ -8,6 +8,7 @@
   font-size: 64px;
   color: var(--color-darkslateblue);
   font-family: var(--font-jost);
+  margin-top: 5rem;
 }
 .right-content-home{
   padding: 15px;
