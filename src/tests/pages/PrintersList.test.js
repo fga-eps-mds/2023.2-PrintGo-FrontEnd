@@ -44,6 +44,21 @@ test("deve filtrar impressoras com base na pesquisa", () => {
   expect(screen.queryByText("Epson LaserJet")).toBeNull();
 });
 
+//Teste de Atualização de Status com Mock da API
+test("deve atualizar o status da impressora", async () => {
+  render(<ImpressorasCadastradas />);
+
+  const botaoDesativar = await screen.findByText("Desativar", {
+    selector: "button",
+  });
+  fireEvent.click(botaoDesativar);
+
+  await waitFor(() => {
+    expect(api.updatePrinterStatus).toHaveBeenCalledWith();
+  });
+
+  expect(await screen.findByText("Desativada")).toBeInTheDocument();
+});
 // Teste de Modal de Ativação/Desativação
 test("deve abrir o modal de ativação/desativação e realizar a ação", async () => {
   render(<ImpressorasCadastradas />);
