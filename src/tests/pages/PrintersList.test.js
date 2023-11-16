@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import ImpressorasCadastradas from "./ImpressorasCadastradas";
+import ImpressorasCadastradas from "../../pages/PrintersList";
 
 // Teste de Renderização Inicial
 test("deve renderizar a lista de impressoras corretamente", () => {
