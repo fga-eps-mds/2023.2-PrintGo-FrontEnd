@@ -79,3 +79,13 @@ test("deve abrir o modal de ativação/desativação e realizar a ação", async
   const statusImpressora = await screen.findByText("Desativada");
   expect(statusImpressora).toBeInTheDocument();
 });
+
+//Teste de Navegação com Mock do Router
+test("deve redirecionar para a página de detalhes da impressora", async () => {
+  const { getByText } = render(<ImpressorasCadastradas />);
+  fireEvent.click(getByText("Ver detalhes"));
+
+  expect(router.useHistory().push).toHaveBeenCalledWith(
+    "/detalhes-da-impressora"
+  );
+});
