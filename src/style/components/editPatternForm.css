@@ -39,7 +39,7 @@
 
 #printer-pattern-input-line {
   flex: 1;
-  min-width: 100px; /* Largura mínima para cada input */
+  min-width: 100px;
   display: flex;
   width: 250px;
   flex-direction: column;
@@ -59,8 +59,6 @@
   width: 45vw;
 
   justify-content: space-between;
-  /*flex-wrap: wrap;*/
-  /*gap: 10px;*/
 }
 #snmp-fields-input-line label {
   margin-left: 0.3rem;
@@ -72,7 +70,7 @@
 
 #printer-pattern-input-box {
   flex: 1;
-  min-width: 100px; /* Largura mínima para cada input */
+  min-width: 100px;
   display: flex;
   width: 250px;
   flex-direction: column;
@@ -89,7 +87,6 @@
 #printer-pattern-input-box label {
   color: #003366;
   display: block;
-  /*margin-bottom: 5px;*/
 }
 
 #printer-pattern-input-box span {
