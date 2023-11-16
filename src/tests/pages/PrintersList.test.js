@@ -21,7 +21,16 @@ test("deve filtrar impressoras com base na pesquisa", () => {
 // Teste de Modal de Ativação/Desativação
 test("deve abrir o modal de ativação/desativação e realizar a ação", async () => {
   render(<ImpressorasCadastradas />);
+
   // Encontra e clica no botão que abre o modal de desativação/ativação
   const botaoDesativar = screen.getByText("Desativar");
   fireEvent.click(botaoDesativar);
+
+  // Verifica se o modal foi aberto
+  const tituloModal = await screen.findByText("Desativação de impressora");
+  expect(tituloModal).toBeInTheDocument();
+
+  // Simula clique no botão de confirmação no modal
+  const botaoConfirmar = screen.getByText("Confirmar");
+  fireEvent.click(botaoConfirmar);
 });
