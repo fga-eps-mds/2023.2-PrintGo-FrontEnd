@@ -1,11 +1,37 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import ImpressorasCadastradas from "../../pages/PrintersList";
+import * as api from "../../api/api";
+import * as router from "react-router-dom";
+
+// Mock das chamadas de API
+jest.mock("../../api/api", () => ({
+  getPrinters: jest.fn(),
+  updatePrinterStatus: jest.fn(),
+}));
+
+// Mock do React Router
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useHistory: () => ({
+    push: jest.fn(),
+  }),
+}));
+
+beforeEach(() => {
+  api.getPrinters.mockResolvedValue([
+    { id: 1, name: "HP InkJet 50", status: "Ativa" },
+    { id: 2, name: "Epson LaserJet", status: "Ativa" },
+  ]);
+  api.updatePrinterStatus.mockResolvedValue({});
+  jest.clearAllMocks();
+});
 
 // Teste de Renderização Inicial
-test("deve renderizar a lista de impressoras corretamente", () => {
+test("deve renderizar a lista de impressoras corretamente", async () => {
   render(<ImpressorasCadastradas />);
-  expect(screen.getByText("Impressoras cadastradas")).toBeInTheDocument();
+  expect(await screen.findByText("HP InkJet 50")).toBeInTheDocument();
+  expect(await screen.findByText("Epson LaserJet")).toBeInTheDocument();
 });
 
 // Teste de Filtro de Pesquisa
