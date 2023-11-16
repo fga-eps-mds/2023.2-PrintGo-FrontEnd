@@ -33,4 +33,8 @@ test("deve abrir o modal de ativação/desativação e realizar a ação", async
   // Simula clique no botão de confirmação no modal
   const botaoConfirmar = screen.getByText("Confirmar");
   fireEvent.click(botaoConfirmar);
+
+  // Verifica se a impressora foi desativada.
+  const statusImpressora = await screen.findByText("Desativada");
+  expect(statusImpressora).toBeInTheDocument();
 });
