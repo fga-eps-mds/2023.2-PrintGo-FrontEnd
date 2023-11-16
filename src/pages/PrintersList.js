@@ -15,6 +15,7 @@ export default function ImpressorasCadastradas(){
   const [impressoras, setImpressoras] = useState(
     [
       {
+        id_impressora: 1,
         modelo: 'HP InkJet 50',
         numeroSerie: 'HPInkJet-1234-ABCD',
         ip: '987.654.32',
@@ -27,6 +28,7 @@ export default function ImpressorasCadastradas(){
         imagem: 'caminho/para/imagem1.jpg', 
       },
       {
+        id_impressora: 2,
         modelo: 'Epson LaserJet',
         numeroSerie: 'EpsonLaser-5678-EFGH',
         ip: '340.90.98',
@@ -42,9 +44,7 @@ export default function ImpressorasCadastradas(){
   )
 
   const [search, setSearch] = useState('');
-  const [filterDropdown, setFilterDropdown] = useState(true);
   const [filter, setFilter] = useState('all');
-  const [dropdown, setDropdown] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalBodytext, setModalBodytext] = useState('');
@@ -55,6 +55,7 @@ export default function ImpressorasCadastradas(){
     setSelectedPrinter(printer);
     setModalTitle("Desativação de impressora");
     setModalBodytext("Você tem certeza que deseja desativar a impressora?");
+    setModalOpen(true);
   }
 
   const modalActivePrinter = (printer) => {
@@ -62,6 +63,7 @@ export default function ImpressorasCadastradas(){
     setSelectedPrinter(printer);
     setModalTitle("Ativação de impressora");
     setModalBodytext("Você tem certeza que deseja reativar a impressora?");
+    setModalOpen(true);
   }
 
   const printerToggle = () => {
@@ -108,13 +110,11 @@ export default function ImpressorasCadastradas(){
               <img alt="" src={Filter} className="printerslist-filter"></img>
             
               <div className="printerslist-filter-dropdown-container">
-                {filterDropdown && (
-                  <div className="printerslist-dropdown-filter">
-                    <Link to="#" onClick={() => {setFilter('all')}}>Todas</Link>
-                    <Link to="#" onClick={() => {setFilter('active')}}>Ativas</Link>
-                    <Link to="#" onClick={() => {setFilter('deactivated')}}>Desativas</Link>
-                  </div>
-                )}
+                <div className="printerslist-dropdown-filter">
+                  <Link to="#" onClick={() => {setFilter('all')}}>Todas</Link>
+                  <Link to="#" onClick={() => {setFilter('active')}}>Ativas</Link>
+                  <Link to="#" onClick={() => {setFilter('deactivated')}}>Desativas</Link>
+                </div>
               </div>
             </div> 
 
@@ -124,7 +124,7 @@ export default function ImpressorasCadastradas(){
         {impressoras.filter((impressora) => {
           // Filtro de pesquisa.
           return search.toLowerCase() === '' 
-          ? impressora 
+          ? impressora.ativada || !impressora.ativada 
           : impressora.codigo_loc.toLocaleLowerCase().includes(search) ||
             impressora.unidade_pai.toLocaleLowerCase().includes(search) ||
             impressora.unidade_filha.toLocaleLowerCase().includes(search) ||
@@ -139,11 +139,11 @@ export default function ImpressorasCadastradas(){
           } else if (filter === 'deactivated') {
             return !impressora.ativada;
           } else {
-            return impressora;
+            return impressora.ativada || !impressora.ativada;
           }
 
         }).map((impressora, index) => (
-          <div key={index} className="printerslist-printer" style={{ color: impressora.ativada ? '' : 'gray' }}>
+          <div key={impressora.id_impressora} className="printerslist-printer" style={{ color: impressora.ativada ? '' : 'gray' }}>
             <div className="printerslist-model">
               <h4>{impressora.modelo}</h4>
               {!impressora.ativada && (<h5>Desativada</h5>)}
@@ -171,9 +171,7 @@ export default function ImpressorasCadastradas(){
                 src={engine}
               />
               <div tabIndex="0" className="printerslist-engine-dropdown">
-                {dropdown && (
                   <div  className="printerslist-printer-dropdown">
-                    <div onClick={() => {setModalOpen(true);}} >
                       {
                         (impressora.ativada && 
                           ( <Link to="#" tabIndex="0" onClick={() => {modalDeactivatePrinter(impressora)}}>
@@ -187,10 +185,8 @@ export default function ImpressorasCadastradas(){
                           )
                         ) 
                       }
-                    </div>
                     <Link to="#" tabIndex="0">Editar</Link>
                   </div>
-                )}
               </div> 
             </div>
           </div>
