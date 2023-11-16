@@ -33,8 +33,8 @@ export default function ViewImpressora(){
         dataRetirada: "-",
         ultimoContador: "0",
         dataUltimoContador: "-",
-        unidadePai: "1ª Delegacia Regional de Goiânia",
-        unidadeFilha: "2ª Delegacia Municipal de Goiânia"
+        circunscricao: "1ª Delegacia Regional de Goiânia",
+        unidade: "2ª Delegacia Municipal de Goiânia"
     }
 
     return(
@@ -98,12 +98,12 @@ export default function ViewImpressora(){
                             </div>
                             <div id="viewprinter-info-line">
                                 <div id="viewprinter-info-box">
-                                    <label>Unidade pai</label>
-                                    <p>{exampleData && exampleData.unidadePai}</p>
+                                    <label>Circunscrição</label>
+                                    <p>{exampleData && exampleData.circunscricao}</p>
                                 </div>
                                 <div id="viewprinter-info-box">
-                                    <label>Unidade filha</label>
-                                    <p>{exampleData && exampleData.unidadeFilha}</p>
+                                    <label>Unidade</label>
+                                    <p>{exampleData && exampleData.unidade}</p>
                                 </div>
                             </div>
                         </div>
