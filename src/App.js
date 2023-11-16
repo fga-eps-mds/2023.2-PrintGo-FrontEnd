@@ -1,6 +1,6 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import {BrowserRouter, Routes , Route} from "react-router-dom"
+import Home from "./pages/Home"
 import CreateUserPage from "./pages/CreateUser";
 import Login from "./pages/Login";
 import Contact from "./pages/Contact";
@@ -16,11 +16,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/cadastroUsuario" element={<CreateUserPage />} />
+        <Route path="/cadastro" element={<CreateUserPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contato" element={<Contact />} />
-        <Route path="/quemSomos" element={<AboutUs />} />
-        <Route path="/trocaSenha" element={<ChangePassword />} />
+        <Route path="/quemsomos" element={<AboutUs />} />
+        <Route path="/mudarsenha" element={<ChangePassword />} />
         <Route path="/cadastroImpressora" element={<RegisterPrinter />} />
         <Route path="/editarImpressora" element={<EditPrinter />} />
         <Route path="/padraoImpressora" element={<PatternPrinter />} />
