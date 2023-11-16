@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import  "../style/pages/printersList.css";
 import { Link } from "react-router-dom"
 import Search from '../assets/Search.svg';
@@ -6,7 +6,6 @@ import Filter from '../assets/Filter.svg';
 import engine from '../assets/engine.svg';
 import Input from '../components/Input'; 
 import Modal from '../components/ui/Modal';
-import { useState } from "react";
 import Navbar from "../components/navbar/Navbar";
 
 export default function ImpressorasCadastradas(){
