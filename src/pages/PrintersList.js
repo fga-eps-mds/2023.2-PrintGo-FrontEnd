@@ -47,18 +47,18 @@ export default function ImpressorasCadastradas(){
   const [modalOpen, setModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalBodytext, setModalBodytext] = useState('');
-  const [selectedPrinterID, setSelectedPrinterID] = useState();
+  const [selectedPrinter, setSelectedPrinter] = useState();
 
-  const modalDeactivatePrinter = (printerID) => {
+  const modalDeactivatePrinter = (printer) => {
     // Abre o modal para desativar uma impressora.
-    setSelectedPrinterID(printerID);
+    setSelectedPrinter(printer);
     setModalTitle("Desativação de impressora");
     setModalBodytext("Você tem certeza que deseja desativar a impressora?");
   }
 
-  const modalActivePrinter = (printerID) => {
+  const modalActivePrinter = (printer) => {
     // Abre o modal para ativar uma impressora.
-    setSelectedPrinterID(printerID);
+    setSelectedPrinter(printer);
     setModalTitle("Ativação de impressora");
     setModalBodytext("Você tem certeza que deseja reativar a impressora?");
   }
@@ -66,7 +66,10 @@ export default function ImpressorasCadastradas(){
   const printerToggle = () => {
     // Altera o estado de ativação de uma impressora após confirmação no modal.
     const updatedImpressoras = [...impressoras];
-    updatedImpressoras[selectedPrinterID].ativada = !updatedImpressoras[selectedPrinterID].ativada;
+    
+    const printerToBeUpdated = updatedImpressoras.find(printer => printer === selectedPrinter);
+    printerToBeUpdated.ativada = !printerToBeUpdated.ativada;
+
     setImpressoras(updatedImpressoras);
     setModalOpen(false);
   };
@@ -170,12 +173,12 @@ export default function ImpressorasCadastradas(){
                   <div onClick={() => {setModalOpen(true);}}>
                     {
                       (impressora.ativada && 
-                        ( <Link to="#" onClick={() => {modalDeactivatePrinter(index)}}>
+                        ( <Link to="#" onClick={() => {modalDeactivatePrinter(impressora)}}>
                             Desativar
                           </Link>
                         )
                       ) || (!impressora.ativada &&
-                        ( <Link to="#" onClick={() => {modalActivePrinter(index)}}>
+                        ( <Link to="#" onClick={() => {modalActivePrinter(impressora)}}>
                             Ativar
                           </Link>
                         )
