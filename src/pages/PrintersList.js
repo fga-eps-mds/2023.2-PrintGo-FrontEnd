@@ -170,25 +170,25 @@ export default function ImpressorasCadastradas(){
                 alt="" 
                 src={engine}
               />
-              <div className="printerslist-engine-dropdown">
+              <div tabIndex="0" className="printerslist-engine-dropdown">
                 {dropdown && (
-                  <div className="printerslist-printer-dropdown">
-                    <div onClick={() => {setModalOpen(true);}}>
+                  <div  className="printerslist-printer-dropdown">
+                    <div onClick={() => {setModalOpen(true);}} >
                       {
                         (impressora.ativada && 
-                          ( <Link to="#" onClick={() => {modalDeactivatePrinter(impressora)}}>
+                          ( <Link to="#" tabIndex="0" onClick={() => {modalDeactivatePrinter(impressora)}}>
                               Desativar
                             </Link>
                           )
                         ) || (!impressora.ativada &&
-                          ( <Link to="#" onClick={() => {modalActivePrinter(impressora)}}>
+                          ( <Link to="#" tabIndex="0" onClick={() => {modalActivePrinter(impressora)}}>
                               Ativar
                             </Link>
                           )
                         ) 
                       }
                     </div>
-                    <Link to="#">Editar</Link>
+                    <Link to="#" tabIndex="0">Editar</Link>
                   </div>
                 )}
               </div> 
