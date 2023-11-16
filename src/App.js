@@ -19,7 +19,7 @@ function App() {
         <Route path="/contato" element={<Contact />} />
         <Route path="/quemsomos" element={<AboutUs />} />
         <Route path="/mudarsenha" element={<ChangePassword />} />
-        <Route path="/printersList" element={<PrintersList/>}/>
+        <Route path="/impressorascadastradas" element={<PrintersList/>}/>
     </Routes>
     </BrowserRouter>
   );
