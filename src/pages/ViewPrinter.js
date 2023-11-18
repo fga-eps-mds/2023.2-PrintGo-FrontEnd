@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { getPrinterData } from "../api/api";
+//import { getPrinterData } from "../api/api";
 import '../style/pages/viewPrinter.css';
-import login_ellipse from '../assets/login_ellipse.svg';
+import ellipse from '../assets/login_ellipse.svg';
 import voltar_vector from '../assets/voltar_vector.svg';
 import Navbar from "../components/navbar/Navbar";
 
-export default function ViewImpressora(){
+export default function ViewPrinter(){
     // Estado para armazenar os dados da impressora.
-    const [printerData, setPrinterData] = useState([]);
+    //const [printerData, setPrinterData] = useState([]);
 
+    /*
     useEffect( () => {
         // Função para buscar os dados na API.
         async function fetchPrinterData() {
@@ -21,6 +22,7 @@ export default function ViewImpressora(){
         }
         fetchPrinterData(); // Chame a função de busca.
     }, []);
+    */
 
     // Dados de uma impressora exemplo.
     const exampleData = {
@@ -109,7 +111,7 @@ export default function ViewImpressora(){
                         </div>
                     </div>
                     <div className="elipse-viewprinter">
-                        <img alt= "elipse"  src={login_ellipse}></img>
+                        <img alt= "elipse"  src={ellipse}></img>
                     </div>
                 </div>
             </div>
