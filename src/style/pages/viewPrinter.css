@@ -72,15 +72,13 @@
     width: 100%;
     justify-content: flex-start;
     flex-wrap: wrap;
-    gap: 110px;
 }
 
 #viewprinter-info-box {
-    flex: 1;
     display: flex;
-    max-width: 280px;
+    width: 50%;
     flex-direction: column;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
     box-sizing: border-box;
 }
 

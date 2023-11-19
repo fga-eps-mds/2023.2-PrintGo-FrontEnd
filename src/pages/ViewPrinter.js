@@ -23,6 +23,22 @@ export default function ViewPrinter(){
         fetchPrinterData(); // Chame a função de busca.
     }, []);
     */
+    
+    // Labels dos campos de informação.
+    const infoLabels = {
+        numeroSerie: "Número de série",
+        ip: "IP",
+        codigoLocadora: "Código de locadora",
+        espacoLivre: "",
+        contadorInstalacao: "Contador de instalação",
+        dataInstalacao: "Data de instalação",
+        contadorRetirada: "Contador de retirada",
+        dataRetirada: "Data de retirada",
+        ultimoContador: "Último contador",
+        dataUltimoContador: "Data do último contador",
+        circunscricao: "Circunscrição",
+        unidade: "Unidade"
+    }
 
     // Dados de uma impressora exemplo.
     const exampleData = {
@@ -53,60 +69,12 @@ export default function ViewPrinter(){
                             </header>
                             <p id="viewprinter-info-header">Multifuncional P&B - Canon - MF1643i II</p>
                             <div id="viewprinter-info-line">
-                                <div id="viewprinter-info-box">
-                                    <label>Número de série</label>
-                                    <p>{exampleData && exampleData.numeroSerie}</p>
-                                </div>
-                                <div id="viewprinter-info-box">
-                                    <label>IP</label>
-                                    <p>{exampleData && exampleData.ip}</p>
-                                </div>
-                            </div>
-                            <div id="viewprinter-info-line">
-                                <div id="viewprinter-info-box">
-                                    <label>Código da locadora</label>
-                                    <p>{exampleData && exampleData.codigoLocadora}</p>
-                                </div>
-                            </div>
-                            <div id="viewprinter-info-line">
-                                <div id="viewprinter-info-box">
-                                    <label>Contador de instalação</label>
-                                    <p>{exampleData && exampleData.contadorInstalacao}</p>
-                                </div>
-                                <div id="viewprinter-info-box">
-                                    <label>Data de instalação</label>
-                                    <p>{exampleData && exampleData.dataInstalacao}</p>
-                                </div>
-                            </div>
-                            <div id="viewprinter-info-line">
-                                <div id="viewprinter-info-box">
-                                    <label>Contador de retirada</label>
-                                    <p>{exampleData && exampleData.contadorRetirada}</p>
-                                </div>
-                                <div id="viewprinter-info-box">
-                                    <label>Data de retirada</label>
-                                    <p>{exampleData && exampleData.dataRetirada}</p>
-                                </div>
-                            </div>
-                            <div id="viewprinter-info-line">
-                                <div id="viewprinter-info-box">
-                                    <label>Último contador</label>
-                                    <p>{exampleData && exampleData.ultimoContador}</p>
-                                </div>
-                                <div id="viewprinter-info-box">
-                                    <label>Data do último contador</label>
-                                    <p>{exampleData && exampleData.dataUltimoContador}</p>
-                                </div>
-                            </div>
-                            <div id="viewprinter-info-line">
-                                <div id="viewprinter-info-box">
-                                    <label>Circunscrição</label>
-                                    <p>{exampleData && exampleData.circunscricao}</p>
-                                </div>
-                                <div id="viewprinter-info-box">
-                                    <label>Unidade</label>
-                                    <p>{exampleData && exampleData.unidade}</p>
-                                </div>
+                                {Object.entries(infoLabels).map(([key, label]) => (
+                                  <div key={key} id="viewprinter-info-box">
+                                    <label>{label}</label>
+                                    <p>{exampleData && exampleData[key]}</p>
+                                  </div>
+                                ))}
                             </div>
                         </div>
                     </div>
