@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
 import ChangePassword from "./pages/ChangePassword";
+import ViewPattern from "./pages/ViewPattern";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/contato" element={<Contact />} />
         <Route path="/quemsomos" element={<AboutUs />} />
         <Route path="/mudarsenha" element={<ChangePassword />} />
+        <Route path="/visualizarpadrao" element={<ViewPattern />} />
       </Routes>
     </BrowserRouter>
   );
