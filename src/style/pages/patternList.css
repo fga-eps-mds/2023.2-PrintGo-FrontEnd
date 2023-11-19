@@ -1,3 +1,4 @@
+/* Container */
 .patternlist-container{
   position: relative;
   width: 100vw;
@@ -5,6 +6,7 @@
   text-align: left;
 }
 
+/* Header */
 .patternlist-header{
   height: 10vh;
   color: #ffffff;
@@ -53,8 +55,19 @@
     display: block;
 }
 
+/* Filter dropdown */
 .patternlist-filter:hover{
-    cursor:pointer;
+    cursor: pointer;
+}
+
+.patternlist-dropdown-filter {
+  display: none;
+  position: absolute;
+  right: 0px;
+  background-color: #f9f9f9;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 .patternlist-dropdown-filter a{
@@ -75,15 +88,19 @@
     flex-direction: column;
 }
 
+/* Padrão */
 .patternlist-pattern {
-    height:10vh;
+    height:18vh;
     width: 100vw;
     color: #003366;
     font-size: 25px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     box-shadow: 0 5px 5px -3px black;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
 }
 
 .patternlist-pattern h6 {
@@ -99,7 +116,7 @@
 }
 
 .patternlist-model h4{
-    width: 20vw;
+    width: 60vw;
     margin: 0;
     padding-left: lrem;
 }
@@ -143,14 +160,16 @@
 } 
 */
 
+/* Dropdown padrão */
 .patternlist-engine {
     display: flex;
     flex-direction: column;
-    height: 6vh;
+    height: 4vh;
     width: 4vw;
-    margin-right: 20px;
+    margin-right: 40px;
     cursor: pointer;
 }
+
 
 .patternlist-pattern-dropdown {
     display: none;
@@ -180,6 +199,7 @@
     flex-direction: column;
 }
 
+/* Modal */
 .deactivate-modal-buttons{
     display: none;
 }
