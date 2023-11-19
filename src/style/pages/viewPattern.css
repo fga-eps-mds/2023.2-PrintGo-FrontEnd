@@ -19,7 +19,7 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
     padding: 1rem 5rem;
     margin-right: 8vw;
-    margin-top: 11%;
+    margin-top: 8%;
     margin-bottom: 1vh;
 }
 
@@ -100,7 +100,6 @@
 .viewpattern-oid-line {
   display: block;
   width: 100%;
-  padding-right: 200px;
   margin-bottom: 30px;
 }
 
@@ -110,7 +109,7 @@
 
 .viewpattern-oid-box {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
   height: fit-content;
   margin: 0px;
@@ -118,6 +117,7 @@
 
 .viewpattern-oid-box label {
   color: #003366;
+  width: 57%;
   margin-bottom: 0px;
 }
 
@@ -152,7 +152,7 @@
 /**/
 
 @media (max-width: 1210px) {
-    .container-viewprinter{
+    .viewpattern-container{
         display: flex;
         flex-direction: column;
         gap: 5rem;
