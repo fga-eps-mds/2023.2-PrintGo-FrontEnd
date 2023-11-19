@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import "../style/pages/patternList.css";
 import { Link } from "react-router-dom"
 import Search from '../assets/Search.svg';
+import Filter from '../assets/Filter.svg';
+import Engine from '../assets/engine.svg';
 import Input from "../components/Input";
+// import Modal from '../components/ui/Modal';
 import Navbar from "../components/navbar/Navbar";
 
 export default function PatternList() {
@@ -56,7 +59,7 @@ export default function PatternList() {
       */}
         <div className="patternlist-header">
           <div className="patternlist-header-title">
-            <h2>Padrões de impressora cadastrados</h2>
+            <h2>Padrões de Impressoras Cadastradas</h2>
             {
               (filter === 'all' && (<h4>Todas</h4>)) ||
               (filter === 'active' && (<h4>Ativas</h4>)) ||
@@ -68,6 +71,19 @@ export default function PatternList() {
             <Input
               onChange={(e) => setSearch(e.target.value.toLowerCase())}
             />
+            <img alt="" src={Search} />
+
+            <div className="patternlist-filter">
+              <img alt="" src={Filter} className="patternlist-filter"></img>
+            
+              <div className="patternlist-filter-dropdown-container">
+                <div className="patternlist-dropdown-filter">
+                  <Link to="#" onClick={() => {setFilter('all')}}>Todas</Link>
+                  <Link to="#" onClick={() => {setFilter('active')}}>Ativas</Link>
+                  <Link to="#" onClick={() => {setFilter('deactivated')}}>Desativas</Link>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -91,9 +107,58 @@ export default function PatternList() {
 
         }).map((pattern) => (
           <div key={pattern.id_padrao} className="patternlist-pattern" style={{ color: pattern.ativado ? '' : 'gray'}}>
-          
+            <div className="patternlist-model">
+              <h4>Padrão {pattern.marca} - {pattern.modelo} - {pattern.tipo}</h4>
+              {!pattern.ativado && (<h5>Desativada</h5>)}
+            </div>
+            
+            {/* <div className="patternlist-identification" style={{ color: pattern.ativada ? '' : 'gray' }}> 
+              <h6>{pattern.numeroSerie}</h6>
+              <h6>IP: {pattern.ip}</h6>
+              <h6>{pattern.codigo_loc}</h6> 
+            </div> */}
+            
+            {/* <div className="patternlist-location-counter" style={{ color: pattern.ativada ? '' : 'gray' }}>
+              <h6>{pattern.unidade_pai}</h6>
+              <h6>{pattern.unidade_filha}</h6>
+              <h6>{pattern.contador}</h6>
+            </div> */}
+            
+            {/* <div className="patternlist-counter-date" style={{ color: pattern.ativada ? '' : 'gray' }}>
+              <h6>Data do último contador: {pattern.data}</h6>
+            </div> */}
+            
+            <div className="patternlist-engine">
+              <img 
+                alt="" 
+                src={Engine}
+              />
+              <div tabIndex="0" className="patternlist-engine-dropdown">
+                  <div  className="patternlist-pattern-dropdown">
+                      {
+                        /*
+                        (pattern.ativada && 
+                          ( <Link to="#" tabIndex="0" onClick={() => {modalDeactivatePrinter(pattern)}}>
+                              Desativar
+                            </Link>
+                          )
+                        ) || (!pattern.ativada &&
+                          ( <Link to="#" tabIndex="0" onClick={() => {modalActivePrinter(pattern)}}>
+                              Ativar
+                            </Link>
+                          )
+                        ) 
+                        */
+                      }
+                    <Link to="#" tabIndex="0">Editar</Link>
+                  </div>
+              </div> 
+            </div>
+
+
           </div>
-        ))}
+        ))
+        }
       </div>
     </>
   );
