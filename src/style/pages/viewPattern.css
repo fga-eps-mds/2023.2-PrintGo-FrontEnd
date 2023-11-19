@@ -63,9 +63,7 @@
     width: 100%;
     justify-content: flex-start;
     flex-wrap: wrap;
-    gap: 110px;
     margin-bottom: 10px;
-
 }
 
 .viewpattern-info-line label {
@@ -75,9 +73,8 @@
 }
 
 .viewpattern-info-box {
-    flex: 1;
     display: flex;
-    max-width: 280px;
+    width: 50%;
     flex-direction: column;
     margin-bottom: 12px;
     box-sizing: border-box;
@@ -117,7 +114,7 @@
 
 .viewpattern-oid-box label {
   color: #003366;
-  width: 57%;
+  width: 50%;
   margin-bottom: 0px;
 }
 

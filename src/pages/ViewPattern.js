@@ -6,6 +6,26 @@ import Navbar from "../components/navbar/Navbar";
 
 export default function ViewPattern() {
 
+  const infoLabels = {
+    tipo: "Tipo",
+    modelo: "Modelo",
+    marca: "Marca",
+  }
+
+  const oidLabels = {
+    oid_modelo: "Modelo de impressora",
+    oid_serial: "Número de série",
+    oid_firmware: "Versão de Firmware",
+    oid_tempo: "Tempo ativo do sistema",
+    oid_digitalizacoes: "Total de digitalizações",
+    oid_copiasPB: "Total de cópias P&B",
+    oid_copias_color: "Total de cópias color",
+    oid_impressoesPB: "Total de impressões P&B",
+    oid_impressoes_color: "Total de impressões color",
+    oid_total: "Total geral",
+    oid_ip: "Endereço de IP",
+  }
+
   const [pattern, setPattern] = useState(
     {
       id_padrao: 1,
@@ -23,7 +43,7 @@ export default function ViewPattern() {
       oid_impressoesPB: "1.3.6.1.2.1.xxxx",
       oid_impressoes_color: "1.3.6.1.2.1.xxxx",
       oid_total: "1.3.6.1.2.1.xxxx",
-      oid_endereco: "1.3.6.1.2.1.1347.xx",
+      oid_ip: "1.3.6.1.2.1.1347.xx",
     }
   )
 
@@ -40,63 +60,22 @@ export default function ViewPattern() {
             </header>
 
             <div className="viewpattern-info-line">
-              <div className="viewpattern-info-box">
-                <label>Tipo</label>
-                <p>{pattern && pattern.tipo}</p>
-              </div>
-              <div className="viewpattern-info-box">
-                <label>Marca</label>
-                <p>{pattern && pattern.marca}</p>
-              </div>
+              {Object.entries(infoLabels).map(([key, label]) => (
+                <div key={key} className="viewpattern-info-box">
+                  <label>{label}</label>
+                  <p>{pattern[key]}</p>
+                </div>
+              ))}
             </div>
-            <div className="viewpattern-info-line">
-              <div className="viewpattern-info-box">
-                <label>Modelo</label>
-                <p>{pattern && pattern.modelo}</p>
-              </div>
-            </div>
+
             <div className="viewpattern-oid-line">
               <label>SNMP</label>
-              <div className="viewpattern-oid-box">
-                <label>Modelo de impressora:</label>
-                <p>{pattern && pattern.oid_modelo}</p>
-              </div>
-              <div className="viewpattern-oid-box">
-                <label>Número de série:</label>
-                <p>{pattern && pattern.oid_serial}</p>
-              </div>
-              <div className="viewpattern-oid-box">
-                <label>Versão do Firmware:</label>
-                <p>{pattern && pattern.oid_firmware}</p>
-              </div>
-              <div className="viewpattern-oid-box">
-                <label>Tempo ativo do sistema:</label>
-                <p>{pattern && pattern.oid_tempo}</p>
-              </div>
-              <div className="viewpattern-oid-box">
-                <label>Total de cópias P&B:</label>
-                <p>{pattern && pattern.oid_copiasPB}</p>
-              </div>
-              <div className="viewpattern-oid-box">
-                <label>Total de cópias color:</label>
-                <p>{pattern && pattern.oid_copias_color}</p>
-              </div>
-              <div className="viewpattern-oid-box">
-                <label>Total de impressões P&B:</label>
-                <p>{pattern && pattern.oid_impressoesPB}</p>
-              </div>
-              <div className="viewpattern-oid-box">
-                <label>Total de impressões color:</label>
-                <p>{pattern && pattern.oid_impressoes_color}</p>
-              </div>
-              <div className="viewpattern-oid-box">
-                <label>Total geral:</label>
-                <p>{pattern && pattern.oid_total}</p>
-              </div>
-              <div className="viewpattern-oid-box">
-                <label>Endereço de IP:</label>
-                <p>{pattern && pattern.oid_endereco}</p>
-              </div>
+              {Object.entries(oidLabels).map(([key, label]) => (
+                <div key={key} className="viewpattern-oid-box">
+                  <label>{label}:</label>
+                  <p>{pattern[key]}</p>
+                </div>
+              ))}
             </div>
 
           </div>
