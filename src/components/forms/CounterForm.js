@@ -7,6 +7,18 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 const impressoras = [];
 
+const fieldLabels = {
+  serial: "Número de série",
+  copiasPB: "Cópias P&B",
+  impressoesPB: "Impressões P&B",
+  copiasColor: "Cópias color",
+  impressoesColor: "Impressões color",
+  contadorGeral: "Contador geral",
+  dataEmissao: "Data de emissão",
+  horaEmissao: "Horário de emissão",
+  relatorioPDF: "Anexar relatório",
+}
+
 const counterSchema = yup.object().shape({
     serial: yup.string()
         .required('O número de série é obrigatório'),
@@ -57,7 +69,7 @@ export default function CounterForm() {
                 <div id="input-container">
                     <div id="input-line">
                         <div id="input-box">
-                            <label>Número de série</label>
+                            <label>{fieldLabels.serial}</label>
                             <input {...register("serial", { required: true })} placeholder="Número de série" />
                             <span data-testid="serial-test">{errors.serial?.message}</span>
                             <div id="arquivo-instrucional">
@@ -70,50 +82,50 @@ export default function CounterForm() {
                     </div>
                     <div id="input-line">
                         <div id="input-box">
-                            <label>Cópias P&B</label>
+                            <label>{fieldLabels.copiasPB}</label>
                             <input {...register("copiasPB", { required: true })} placeholder="Valor do contador" />
                             <span data-testid="copiasPB-test">{errors.copiasPB?.message}</span>
                         </div>
                         <div id="input-box">
-                            <label>Impressões P&B</label>
+                            <label>{fieldLabels.impressoesPB}</label>
                             <input {...register("impressoesPB", { required: true })} placeholder="Valor do contador" />
                             <span data-testid="impressoesPB-test">{errors.impressoesPB?.message}</span>
                         </div>
                     </div>
                     <div id="input-line">
                         <div id="input-box">
-                            <label>Cópias color</label>
+                            <label>{fieldLabels.copiasColor}</label>
                             <input {...register("copiasColor", { required: true })} placeholder="Valor do contador" />
                             <span data-testid="copiasColor-test">{errors.copiasColor?.message}</span>
                         </div>
                         <div id="input-box">
-                            <label>Impressões color</label>
+                            <label>{fieldLabels.impressoesColor}</label>
                             <input {...register("impressoesColor", { required: true })} placeholder="Valor do contador" />
                             <span data-testid="impressoesColor-test">{errors.impressoesColor?.message}</span>
                         </div>
                     </div>
                     <div id="input-line">
                         <div id="input-box">
-                            <label>Contador geral</label>
+                            <label>{fieldLabels.contadorGeral}</label>
                             <input {...register("contadorGeral", { required: true })} placeholder="Valor do contador" />
                             <span data-testid="contadorGeral-test">{errors.contadorGeral?.message}</span>
                         </div>
                     </div>
                     <div id="input-line">
                         <div id="input-box">
-                            <label>Data de emissão</label>
+                            <label>{fieldLabels.dataEmissao}</label>
                             <input {...register("dataEmissao", { required: true })} type="date" placeholder="dd/mm/aaaa" />
                             <span data-testid="dataEmissao-test">{errors.dataEmissao?.message}</span>
                         </div>
                         <div id="input-box">
-                            <label>Horário de emissão</label>
+                            <label>{fieldLabels.horaEmissao}</label>
                             <input {...register("horaEmissao", { required: true })} placeholder="hh:mm" />
                             <span data-testid="horaEmissao-test">{errors.horaEmissao?.message}</span>
                         </div>
                     </div>
                     <div id="input-line">
                         <div id="input-box">
-                            <label>Anexar relatório</label>
+                            <label>{fieldLabels.relatorioPDF}</label>
                             <input {...register("relatorioPDF", { required: true })} type="file" accept=".pdf" />
                             <span data-testid="relatorioPDF-test">{errors.relatorioPDF?.message}</span>
                         </div>

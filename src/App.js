@@ -18,7 +18,7 @@ function App() {
         <Route path="/contato" element={<Contact />} />
         <Route path="/quemsomos" element={<AboutUs />} />
         <Route path="/mudarsenha" element={<ChangePassword />} />
-        <Route path="/inserirContador" element={<InsertCounter />} />
+        <Route path="/inserircontador" element={<InsertCounter />} />
       </Routes>
     </BrowserRouter>
   );
