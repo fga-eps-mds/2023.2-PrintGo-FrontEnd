@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import "../style/pages/printersList.css";
 import { Link } from "react-router-dom";
 import Search from '../assets/Search.svg';
@@ -77,7 +77,7 @@ export default function ImpressorasCadastradas() {
 
 
   //filtros para busca de impressora
-  const filteredPrinters = () => {
+  const filteredPrinters = useMemo(() => {
     return impressoras.filter(impressora => {
       const searchLower = search.toLowerCase();
       return (
@@ -94,7 +94,7 @@ export default function ImpressorasCadastradas() {
              (filter === 'active' && impressora.ativada) ||
              (filter === 'deactivated' && !impressora.ativada);
     });
-  };
+  }, [impressoras, search, filter]);
 
   return (
     <>
@@ -134,7 +134,7 @@ export default function ImpressorasCadastradas() {
           </div>
         </div>
 
-        {filteredPrinters().map(impressora => (
+        {filteredPrinters.map(impressora => (
           <div key={impressora.id_impressora} className="printerslist-printer" style={{ color: impressora.ativada ? '' : 'gray' }}>
             <div className="printerslist-model">
               <h4>{impressora.modelo}</h4>
