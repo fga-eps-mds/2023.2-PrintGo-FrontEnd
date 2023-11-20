@@ -80,14 +80,23 @@ export default function ImpressorasCadastradas() {
   const filteredPrinters = useMemo(() => {
     return impressoras.filter(impressora => {
       const searchLower = search.toLowerCase();
+      const {
+        codigo_loc,
+        unidade_pai,
+        unidade_filha,
+        ip,
+        modelo,
+        numeroSerie,
+      } = impressora;
+  
       return (
         search === '' ||
-        impressora.codigo_loc.toLowerCase().includes(searchLower) ||
-        impressora.unidade_pai.toLowerCase().includes(searchLower) ||
-        impressora.unidade_filha.toLowerCase().includes(searchLower) ||
-        impressora.ip.toLowerCase().includes(searchLower) ||
-        impressora.modelo.toLowerCase().includes(searchLower) ||
-        impressora.numeroSerie.toLowerCase().includes(searchLower)
+        codigo_loc.toLowerCase().includes(searchLower) ||
+        unidade_pai.toLowerCase().includes(searchLower) ||
+        unidade_filha.toLowerCase().includes(searchLower) ||
+        ip.toLowerCase().includes(searchLower) ||
+        modelo.toLowerCase().includes(searchLower) ||
+        numeroSerie.toLowerCase().includes(searchLower)
       );
     }).filter(impressora => {
       return filter === 'all' ||
