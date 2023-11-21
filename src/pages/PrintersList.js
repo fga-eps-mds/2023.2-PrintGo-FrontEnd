@@ -76,7 +76,16 @@ export default function ImpressorasCadastradas() {
   };
 
   //qual filtro esta sendo aplicado
-  const filter_being_shown = filter === 'all' ? 'Todas' : filter === 'active' ? 'Ativas' : 'Desativadas'
+  const filter_being_shown = (filter) => {
+
+    if (filter === 'all') {
+      return 'Todas';
+    } else if (filter === 'active') {
+      return 'Ativas';
+    } else {
+      return 'Desativadas';
+    }
+  };
 
   //filtros para busca de impressora
   const filteredPrinters = useMemo(() => {
