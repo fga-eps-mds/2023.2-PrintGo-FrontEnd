@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import RegisterPrinterForm, { fieldLabels } from '../../components/forms/RegisterPrinterForm';
 import { createUser } from '../../api/api'; 
+import userEvent from '@testing-library/user-event';
 
 jest.mock('../../api/api', () => ({
   createUser: jest.fn(),
@@ -63,4 +64,61 @@ describe('RegisterPrinterForm', () => {
       });
     });
   });
+
+  it('submits form with valid data', async () => {
+  render(<RegisterPrinterForm />);
+
+  Object.entries(data).forEach(([field, value]) => {
+    const fieldValue = fieldLabels[field];
+    const input = screen.getByPlaceholderText(fieldValue);
+    userEvent.type(input, value);
+  });
+
+  const submitButton = screen.getByText('REGISTRAR');
+  userEvent.click(submitButton);
+
+  await waitFor(() => {
+    expect(createUser).toHaveBeenCalledWith(data);
+  });
+  });
+
+  it('does not submit form with empty fields', async () => {
+    render(<RegisterPrinterForm />);
+   
+    Object.entries(dataWithEmptyFields).forEach(([field, value]) => {
+      const fieldValue = fieldLabels[field];
+      const input = screen.getByPlaceholderText(fieldValue);
+      userEvent.type(input, value);
+    });
+   
+    const submitButton = screen.getByText('REGISTRAR');
+    userEvent.click(submitButton);
+   
+    await waitFor(() => {
+      expect(createUser).not.toHaveBeenCalled();
+      expect(screen.getByText('Último Contador é obrigatório')).toBeInTheDocument();
+      expect(screen.getByText('Data do Último Contador é obrigatória')).toBeInTheDocument();
+    });
+   });
+   
+  it('resets form after submission', async () => {
+    render(<RegisterPrinterForm />);
+   
+    Object.entries(data).forEach(([field, value]) => {
+      const fieldValue = fieldLabels[field];
+      const input = screen.getByPlaceholderText(fieldValue);
+      userEvent.type(input, value);
+    });
+   
+    const submitButton = screen.getByText('REGISTRAR');
+    userEvent.click(submitButton);
+   
+    await waitFor(() => {
+      expect(createUser).toHaveBeenCalledWith(data);
+      Object.values(fieldLabels).forEach((field) => {
+        const input = screen.getByPlaceholderText(field);
+        expect(input.value).toBe('');
+      });
+    });
+   });
 });
