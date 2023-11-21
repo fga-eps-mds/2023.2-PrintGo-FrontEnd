@@ -3,7 +3,6 @@
   background-color: #ffff;
   height: 7vh;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  /*margin-bottom: 5rem;*/
   display: flex;
 }
 
@@ -23,7 +22,6 @@
   font-size: 18px;
   padding-right: 75px;
   cursor: pointer;
-  /*margin-top: 1.5rem;*/
 }
 .button-navbar a {
   text-decoration: none;
@@ -39,9 +37,6 @@
   display: flex;
   align-items: center;
   margin-left: 0.1px;
-  /*position: relative;*/
-  /*display: inline-block;*/
-  /*margin-top: 1rem;*/
 }
 
 .users-navbar {
@@ -51,7 +46,6 @@
   font-size: 18px;
   border: none;
   cursor: pointer;
-  /*padding-right: 75px;*/
 
 }
 
@@ -94,8 +88,6 @@
   font-size: 18px;
   border: none;
   cursor: pointer;
-  /*margin-top: 0.5rem;*/
-  /*height: 2vh;*/
 }
 
 .dropdown-printers-navbar {
