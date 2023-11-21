@@ -75,6 +75,8 @@ export default function ImpressorasCadastradas() {
     setModalOpen(false);
   };
 
+  //qual filtro esta sendo aplicado
+  const filter_being_shown = filter === 'all' ? 'Todas' : filter === 'active' ? 'Ativas' : 'Desativadas'
 
   //filtros para busca de impressora
   const filteredPrinters = useMemo(() => {
@@ -121,7 +123,7 @@ export default function ImpressorasCadastradas() {
         <div className="printerslist-header">
           <div className="printerslist-header-title">
             <h2>Impressoras cadastradas</h2>
-            <h4>{filter === 'all' ? 'Todas' : filter === 'active' ? 'Ativas' : 'Desativadas'}</h4>
+            <h4>{filter_being_shown}</h4>
           </div>
 
           <div className="printerslist-header-search-filter">
