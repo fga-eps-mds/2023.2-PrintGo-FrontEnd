@@ -12,3 +12,14 @@ test('Deve renderizar o texto do corpo do modal corretamente', () => {
   
     expect(bodyText).toBeInTheDocument();
 });
+
+test('Deve fechar o modal ao clicar no botão "Cancelar"', () => {
+    const setOpenModal = jest.fn();
+    render(<Modal setOpenModal={setOpenModal} />);
+  
+    const cancelButton = screen.getByText('Cancelar');
+    fireEvent.click(cancelButton);
+  
+    expect(setOpenModal).toHaveBeenCalledTimes(1);
+    expect(setOpenModal).toHaveBeenCalledWith(false);
+});
