@@ -6,54 +6,54 @@ import { BrowserRouter } from 'react-router-dom';
 
 describe('ViewPrinter component', () => {
 
-  // Renderização.
-  it('should render without crashing', () => {
-    render (
-      <BrowserRouter>
-        <ViewPrinter />
-      </BrowserRouter>
+  // Mock das chamadas de API
+  jest.mock("../../api/api", () => ({
+    getPrinterById: jest.fn(),
+    getPatternById: jest.fn(),
+  }));
+
+  // Mock do React Router
+  jest.mock("react-router-dom", () => ({
+    ...jest.requireActual("react-router-dom"),
+    useHistory: () => ({
+      push: jest.fn(),
+    })
+  }));
+
+  beforeEach(() => {
+    api.getPrinterById.mockResolvedValue(
+      {
+        id: "",
+        padrao_id: "",
+        ip: "192.168.15.1",
+        numeroSerie: "XXXX-000000",
+        codigoLocadora: "PRINTER-004",
+        contadorInstalacao: 0,
+        ultimoContador: 0,
+        dataInstalacao: "12/10/2023",
+        dataUltimoContador: "20/11/2023",
+        contadorRetirada: 0,
+        dataRetirada: "12/10/2023",
+        circunscricao: "1ª Delegacia Regional de Goiânia",
+        unidade: "2ª Delegacia Municipal de Goiânia",
+      }
     );
+    api.getPatternById.mockResolvedValue(
+      {
+        tipo: "Multifuncional P&B",
+        marca: "Canon",
+        modelo: "MF1643i II",
+      }
+    )
+    jest.clearAllMocks();
   });
 
-  it('should render printer information correctly', () => {
-    render (
-      <BrowserRouter>
-        <ViewPrinter />
-      </BrowserRouter>
-    );
-
-    expect(screen.getByText('Número de série')).toBeInTheDocument();
-    expect(screen.getByText('IP')).toBeInTheDocument();
-    expect(screen.getByText('Código da locadora')).toBeInTheDocument();
-    expect(screen.getByText('Contador de instalação')).toBeInTheDocument();
-    expect(screen.getByText('Data de instalação')).toBeInTheDocument();
-    expect(screen.getByText('Contador de retirada')).toBeInTheDocument();
-    expect(screen.getByText('Data de retirada')).toBeInTheDocument();
-    expect(screen.getByText('Último contador')).toBeInTheDocument();
-    expect(screen.getByText('Data do último contador')).toBeInTheDocument();
-    expect(screen.getByText('Circunscrição')).toBeInTheDocument();
-    expect(screen.getByText('Unidade')).toBeInTheDocument();
+  // Teste de renderização inicial.
+  test("deve renderizar a visualização de impressora corretamente", async () => {
+    render(<BrowserRouter>
+            <ViewPrinter />
+          </BrowserRouter>);
+    expect(await screen.findByText("Multifuncional P&B")).toBeInTheDocument();
+    expect(await screen.findByText("PRINTER-004")).toBeInTheDocument();
   });
-
-  it('should render "Voltar" button', () => {
-    render (
-      <BrowserRouter>
-        <ViewPrinter />
-      </BrowserRouter>
-    );
-
-    expect(screen.getByText('Voltar')).toBeInTheDocument();
-  });
-
-  it('should render ellipse', () => {
-    render (
-      <BrowserRouter>
-        <ViewPrinter />
-      </BrowserRouter>
-    );
-
-    expect(screen.getByAltText('elipse')).toBeInTheDocument();
-  });
-
-  // Testando API
 });

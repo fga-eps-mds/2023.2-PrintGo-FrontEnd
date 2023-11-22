@@ -22,6 +22,26 @@ export default function ViewPrinter(){
         unidade: "Unidade"
     }
 
+    // Estado para armazenar os dados do padrão.
+    const [patternData, setPatternData] = useState(
+      {
+        id: "",
+        tipo: "Multifuncional P&B",
+        marca: "Canon",
+        modelo: "MF1643i II",
+        numeroSerie: "",
+        versaoFirmware: "",
+        tempoAtivoSistema: "",
+        totalDigitalizacoes: "",
+        totalCopiasPB: "",
+        totalCopiasColoridas: "",
+        totalImpressoesPb: "",
+        totalImpressoesColoridas: "",
+        totalGeral: "",
+        enderecoIp: "",
+      }
+    );
+
     // Estado para armazenar os dados da impressora.
     const [printerData, setPrinterData] = useState(
       {
@@ -68,7 +88,9 @@ export default function ViewPrinter(){
                                 <img alt="" src={voltar_vector}></img>
                                 <a href="">Voltar</a>
                             </header>
-                            <p id="viewprinter-info-header">Multifuncional P&B - Canon - MF1643i II</p>
+                            <p id="viewprinter-info-header">
+                              {patternData.tipo} - {patternData.marca} - {patternData.modelo}
+                            </p>
                             <div id="viewprinter-info-line">
                                 {Object.entries(infoLabels).map(([key, label]) => (
                                   <div key={key} id="viewprinter-info-box">
