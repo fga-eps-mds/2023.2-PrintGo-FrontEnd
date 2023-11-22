@@ -6,24 +6,6 @@ import voltar_vector from '../assets/voltar_vector.svg';
 import Navbar from "../components/navbar/Navbar";
 
 export default function ViewPrinter(){
-    // Estado para armazenar os dados da impressora.
-    //const [printerData, setPrinterData] = useState([]);
-
-    /*
-    useEffect( () => {
-        // Função para buscar os dados na API.
-        async function fetchPrinterData() {
-            try {
-                const data = await getPrinterData();
-                setPrinterData(); // Atualiza o estado com os dados recebidos.
-            } catch (error) {
-                console.error('Erro ao obter os dados do serviço:', error);
-            }
-        }
-        fetchPrinterData(); // Chame a função de busca.
-    }, []);
-    */
-    
     // Labels dos campos de informação.
     const infoLabels = {
         numeroSerie: "Número de série",
@@ -40,20 +22,39 @@ export default function ViewPrinter(){
         unidade: "Unidade"
     }
 
-    // Dados de uma impressora exemplo.
-    const exampleData = {
-        numeroSerie: "XXXX-000000",
+    // Estado para armazenar os dados da impressora.
+    const [printerData, setPrinterData] = useState(
+      {
+        id: "",
+        padrao_id: "",
         ip: "192.168.15.1",
+        numeroSerie: "XXXX-000000",
         codigoLocadora: "PRINTER-004",
-        contadorInstalacao: "0",
+        contadorInstalacao: 0,
+        ultimoContador: 0,
         dataInstalacao: "12/10/2023",
-        contadorRetirada: "0",
-        dataRetirada: "-",
-        ultimoContador: "0",
-        dataUltimoContador: "-",
+        dataUltimoContador: "20/11/2023",
+        contadorRetirada: 0,
+        dataRetirada: "12/10/2023",
         circunscricao: "1ª Delegacia Regional de Goiânia",
         unidade: "2ª Delegacia Municipal de Goiânia"
-    }
+      }
+    );
+
+    /*
+    useEffect( () => {
+        // Função para buscar os dados na API.
+        async function fetchPrinterData() {
+            try {
+                const data = await getPrinterData();
+                setPrinterData(); // Atualiza o estado com os dados recebidos.
+            } catch (error) {
+                console.error('Erro ao obter os dados do serviço:', error);
+            }
+        }
+        fetchPrinterData(); // Chame a função de busca.
+    }, []);
+    */
 
     return(
         <>
@@ -72,7 +73,7 @@ export default function ViewPrinter(){
                                 {Object.entries(infoLabels).map(([key, label]) => (
                                   <div key={key} id="viewprinter-info-box">
                                     <label>{label}</label>
-                                    <p>{exampleData && exampleData[key]}</p>
+                                    <p>{printerData && printerData[key]}</p>
                                   </div>
                                 ))}
                             </div>
