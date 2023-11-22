@@ -1,124 +1,25 @@
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
-import RegisterPrinterForm, { fieldLabels } from '../../components/forms/RegisterPrinterForm';
-import { createUser } from '../../api/api'; 
-import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
+import RegisterPrinter from '../../pages/RegisterPrinter';
+import '@testing-library/jest-dom/extend-expect';
 
-jest.mock('../../api/api', () => ({
-  createUser: jest.fn(),
-}));
+// Mock de componentes que não são o foco do teste
+jest.mock('../../components/navbar/Navbar', () => () => <div>Navbar Mock</div>);
+jest.mock('../../components/forms/RegisterPrinterForm', () => () => <div>RegisterPrinterForm Mock</div>);
 
-createUser.mockImplementation((data) => {
-  return Promise.resolve();
-})
+describe('RegisterPrinterPage', () => {
+  test('renders Navbar, image, and RegisterPrinterForm', () => {
+    render(<RegisterPrinter />);
 
-const data = {
-    padrao: 'Teste',
-    ip: '192.168.0.1',
-    numeroSerie: "1A2B3C4E",
-    codigoLocadora: "001",
-    contadorInstalacao: "003",
-    dataInstalacao: "11-02-2021",
-    contadorRetirada: "006",
-    dataRetirada: "11-12-2022",
-    ultimoContador: "3",
-    dataUltimoContador: "13-12-2022",
-    unidadePai: "Catalão",
-    unidadeFilho: "Formosa",
-};
+    // Verificar se a Navbar está presente
+    expect(screen.getByText('Navbar Mock')).toBeInTheDocument();
 
-const dataWithEmptyFields = {
-    padrao: 'Teste',
-    ip: '192.168.0.1',
-    numeroSerie: "1A2B3C4E",
-    codigoLocadora: "001",
-    contadorInstalacao: "003",
-    dataInstalacao: "11-02-2021",
-    contadorRetirada: "006",
-    dataRetirada: "11-12-2022",
-    ultimoContador: "",
-    dataUltimoContador: "",
-    unidadePai: "Catalão",
-    unidadeFilho: "Formosa",
-};
+    // Verificar se a imagem está presente
+    const image = screen.getByRole('img');
+    expect(image).toBeInTheDocument();
+    expect(image).toHaveAttribute('src', expect.stringContaining('registerPrinter_image'));
 
-describe('RegisterPrinterForm', () => {
-  it('should render without crashing', () => {
-    render(<RegisterPrinterForm />);
+    expect(screen.getByText('RegisterPrinterForm Mock')).toBeInTheDocument();
   });
 
-  it('should change inputs on form', async () => {
-    const { getByPlaceholderText } = render(<RegisterPrinterForm />);
-
-    Object.entries(data).forEach(([field, value]) => {
-      const fieldValue = fieldLabels[field];
-      const input = getByPlaceholderText(fieldValue);
-      fireEvent.change(input, { target: { value } });
-    });
-
-    await waitFor(() => {
-      Object.entries(data).forEach(([field, value]) => {
-        const fieldValue = fieldLabels[field];
-        const input = getByPlaceholderText(fieldValue);
-        expect(input.value).toBe(value);
-      });
-    });
-  });
-
-  it('submits form with valid data', async () => {
-  render(<RegisterPrinterForm />);
-
-  Object.entries(data).forEach(([field, value]) => {
-    const fieldValue = fieldLabels[field];
-    const input = screen.getByPlaceholderText(fieldValue);
-    userEvent.type(input, value);
-  });
-
-  const submitButton = screen.getByText('REGISTRAR');
-  userEvent.click(submitButton);
-
-  await waitFor(() => {
-    expect(createUser).toHaveBeenCalledWith(data);
-  });
-  });
-
-  it('does not submit form with empty fields', async () => {
-    render(<RegisterPrinterForm />);
-   
-    Object.entries(dataWithEmptyFields).forEach(([field, value]) => {
-      const fieldValue = fieldLabels[field];
-      const input = screen.getByPlaceholderText(fieldValue);
-      userEvent.type(input, value);
-    });
-   
-    const submitButton = screen.getByText('REGISTRAR');
-    userEvent.click(submitButton);
-   
-    await waitFor(() => {
-      expect(createUser).not.toHaveBeenCalled();
-      expect(screen.getByText('Último Contador é obrigatório')).toBeInTheDocument();
-      expect(screen.getByText('Data do Último Contador é obrigatória')).toBeInTheDocument();
-    });
-   });
-   
-  it('resets form after submission', async () => {
-    render(<RegisterPrinterForm />);
-   
-    Object.entries(data).forEach(([field, value]) => {
-      const fieldValue = fieldLabels[field];
-      const input = screen.getByPlaceholderText(fieldValue);
-      userEvent.type(input, value);
-    });
-   
-    const submitButton = screen.getByText('REGISTRAR');
-    userEvent.click(submitButton);
-   
-    await waitFor(() => {
-      expect(createUser).toHaveBeenCalledWith(data);
-      Object.values(fieldLabels).forEach((field) => {
-        const input = screen.getByPlaceholderText(field);
-        expect(input.value).toBe('');
-      });
-    });
-   });
 });

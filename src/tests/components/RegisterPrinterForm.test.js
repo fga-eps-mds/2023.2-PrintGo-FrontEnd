@@ -35,7 +35,6 @@ describe('RegisterPrinterForm', () => {
       dataInstalacao: '11-02-2021',
       contadorRetirada: '006',
       dataRetirada: '11-12-2022',
-      // outros campos, assegure-se de que estão preenchidos corretamente
     };
 
     render(<RegisterPrinterForm />);
@@ -58,6 +57,8 @@ describe('RegisterPrinterForm', () => {
         }
       }
     });
-    });
+});
+
+  
   
 });
