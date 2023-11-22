@@ -10,6 +10,7 @@ import RegisterPrinter from "./pages/RegisterPrinter";
 import EditPrinter from "./pages/EditPrinter";
 import PatternPrinter from "./pages/PatternPrinter";
 import EditPattern from "./pages/EditPattern";
+import PrintersList from "./pages/PrintersList";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/editarImpressora" element={<EditPrinter />} />
         <Route path="/padraoImpressora" element={<PatternPrinter />} />
         <Route path="/editarPadrao" element={<EditPattern />} />
+        <Route path="/impressorascadastradas" element={<PrintersList/>}/>
       </Routes>
     </BrowserRouter>
   );
