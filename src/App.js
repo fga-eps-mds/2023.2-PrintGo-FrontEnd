@@ -12,6 +12,7 @@ import PatternPrinter from "./pages/PatternPrinter";
 import EditPattern from "./pages/EditPattern";
 import PrintersList from "./pages/PrintersList";
 
+
 function App() {
   return (
     <BrowserRouter>
