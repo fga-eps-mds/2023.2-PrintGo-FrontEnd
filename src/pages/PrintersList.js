@@ -8,7 +8,8 @@ import Input from '../components/Input';
 import Modal from '../components/ui/Modal';
 import Navbar from "../components/navbar/Navbar";
 
-export default function ImpressorasCadastradas() {
+
+export default function PrintersList() {
   const [impressoras, setImpressoras] = useState([
     {
       id_impressora: 1,
@@ -76,7 +77,7 @@ export default function ImpressorasCadastradas() {
   };
 
   //qual filtro esta sendo aplicado
-  const filter_being_shown = (filter) => {
+  function filterBeingShown(filter){
 
     if (filter === 'all') {
       return 'Todas';
@@ -85,7 +86,8 @@ export default function ImpressorasCadastradas() {
     } else {
       return 'Desativadas';
     }
-  };
+  }
+  
 
   //filtros para busca de impressora
   const filteredPrinters = useMemo(() => {
@@ -132,7 +134,7 @@ export default function ImpressorasCadastradas() {
         <div className="printerslist-header">
           <div className="printerslist-header-title">
             <h2>Impressoras cadastradas</h2>
-            <h4>{filter_being_shown}</h4>
+            <h4 data-testid="filter_beign_shown">{filterBeingShown(filter)}</h4>
           </div>
 
           <div className="printerslist-header-search-filter">
@@ -147,7 +149,7 @@ export default function ImpressorasCadastradas() {
                 <div className="printerslist-dropdown-filter">
                   <Link to="#" onClick={() => setFilter('all')}>Todas</Link>
                   <Link to="#" onClick={() => setFilter('active')}>Ativas</Link>
-                  <Link to="#" onClick={() => setFilter('deactivated')}>Desativas</Link>
+                  <Link to="#" onClick={() => setFilter('deactivated')}>Desativadas</Link>
                 </div>
               </div>
             </div> 
