@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import "../../style/components/registerPrinterForms.css";
 import elipse6 from "../../assets/elipse6.svg";
-import { createUser } from "../../api/api";
+
 
 const fieldLabels = {
   padrao: "Padrão",
@@ -48,7 +48,7 @@ export default function RegisterPrinterForm() {
   });
 
   const onSubmit = async (data) => {
-    await createUser(data);
+    console.log(data);
     reset();
   };
 
