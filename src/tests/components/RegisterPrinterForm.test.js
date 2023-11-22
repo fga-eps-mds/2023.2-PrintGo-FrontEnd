@@ -49,7 +49,7 @@ describe('RegisterPrinterForm', () => {
       const input = screen.getByPlaceholderText(fieldValue);
 
       if (value !== "") {
-        await userEvent.type(input, value);
+        userEvent.type(input, value);
       }
     }
 
