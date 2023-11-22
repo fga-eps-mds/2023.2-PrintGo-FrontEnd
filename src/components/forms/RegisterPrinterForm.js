@@ -2,7 +2,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { createUser } from "../../api/api";
 import "../../style/components/registerPrinterForms.css";
 import elipse6 from "../../assets/elipse6.svg";
 
@@ -24,34 +23,16 @@ const fieldLabels = {
 const registerPrinterSchema = yup.object().shape({
   padrao: yup.string().required(`${fieldLabels.padrao} é obrigatório`),
   ip: yup.string().required(`${fieldLabels.ip} é obrigatório`),
-  numeroSerie: yup
-    .string()
-    .required(`${fieldLabels.numeroSerie} é obrigatório`),
-  codigoLocadora: yup
-    .string()
-    .required(`${fieldLabels.codigoLocadora} é obrigatório`),
-  contadorInstalacao: yup
-    .string()
-    .required(`${fieldLabels.contadorInstalacao} é obrigatório`),
-  dataInstalacao: yup
-    .string()
-    .required(`${fieldLabels.dataInstalacao} é obrigatória`),
-  contadorRetirada: yup
-    .string()
-    .required(`${fieldLabels.contadorRetirada} é obrigatório`),
-  dataRetirada: yup
-    .string()
-    .required(`${fieldLabels.dataRetirada} é obrigatória`),
-  ultimoContador: yup
-    .string()
-    .required(`${fieldLabels.ultimoContador} é obrigatório`),
-  dataUltimoContador: yup
-    .string()
-    .required(`${fieldLabels.dataUltimoContador} é obrigatória`),
+  numeroSerie: yup.string().required(`${fieldLabels.numeroSerie} é obrigatório`),
+  codigoLocadora: yup.string().required(`${fieldLabels.codigoLocadora} é obrigatório`),
+  contadorInstalacao: yup.string().required(`${fieldLabels.contadorInstalacao} é obrigatório`),
+  dataInstalacao: yup.string().required(`${fieldLabels.dataInstalacao} é obrigatória`),
+  contadorRetirada: yup.string().required(`${fieldLabels.contadorRetirada} é obrigatório`),
+  dataRetirada: yup.string().required(`${fieldLabels.dataRetirada} é obrigatória`),
+  ultimoContador: yup.string().required(`${fieldLabels.ultimoContador} é obrigatório`),
+  dataUltimoContador: yup.string().required(`${fieldLabels.dataUltimoContador} é obrigatória`),
   unidadePai: yup.string().required(`${fieldLabels.unidadePai} é obrigatória`),
-  unidadeFilho: yup
-    .string()
-    .required(`${fieldLabels.unidadeFilho} é obrigatória`),
+  unidadeFilho: yup.string().required(`${fieldLabels.unidadeFilho} é obrigatória`),
 });
 
 export default function RegisterPrinterForm() {
@@ -66,31 +47,31 @@ export default function RegisterPrinterForm() {
   });
 
   const onSubmit = async (data) => {
-    await createUser(data);
+    console.log("Form data submitted:", data);
     reset();
   };
 
   return (
     <div id="registerPrinter-card">
       <header id="form-header">Cadastrar impressora</header>
-      <form data-testid='form' onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div id="input-group">
-          {Object.values(fieldLabels).map((field) => (
-            <div id="input-line" key={field}>
+          {Object.entries(fieldLabels).map(([key, label]) => (
+            <div id="input-line" key={key}>
               <div id="input-box">
                 <label>
-                  {field.charAt(0).toUpperCase() + field.slice(1)}
+                  {label.charAt(0).toUpperCase() + label.slice(1)}
                   <span>*</span>
                 </label>
                 <input
-                  {...register(field)}
+                  {...register(key)}
                   placeholder={
-                    field.includes("data")
+                    label.includes("data")
                       ? "DD/MM/AAAA"
-                      : field.charAt(0).toUpperCase() + field.slice(1)
-                  } // Alteração aqui
+                      : label.charAt(0).toUpperCase() + label.slice(1)
+                  } 
                 />
-                <span>{errors[field]?.message}</span>
+                <span>{errors[key]?.message}</span>
               </div>
             </div>
           ))}
