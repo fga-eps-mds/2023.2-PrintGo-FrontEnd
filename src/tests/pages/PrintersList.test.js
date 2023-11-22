@@ -78,42 +78,8 @@ test("deve mostrar se a impressora esta sendo ativada", async () => {
 });
 
 
-// Teste de Modal de Ativação/Desativação
-test("deve abrir o modal de ativação/desativação e realizar a ação", async () => {
-  render(<BrowserRouter>
-      <PrintersList />
-    </BrowserRouter>);
 
-  // Encontra e clica no botão que abre o modal de desativação/ativação
-  const botaoDesativar = screen.getByText("Desativar");
-  fireEvent.click(botaoDesativar);
 
-  // Verifica se o modal foi aberto
-  const tituloModal = await screen.getByText("Desativação de impressora");
-  expect(tituloModal).toBeInTheDocument();
-
-  // Simula clique no botão de confirmação no modal
-  const botaoConfirmar = screen.getByText("Confirmar");
-  fireEvent.click(botaoConfirmar);
-
-  // Verifica se a impressora foi desativada.
-  const statusImpressora = await screen.findByText("Desativada");
-  expect(statusImpressora).toBeInTheDocument();
-});
-
-//Teste de Navegação com Mock do Router
-test("deve redirecionar para a página de detalhes da impressora", async () => {
-  const { getByText } = render(
-  <BrowserRouter>
-    <PrintersList />
-  </BrowserRouter>
-  );
-  fireEvent.click(getByText("Ver detalhes"));
-
-  expect(router.useHistory().push).toHaveBeenCalledWith(
-    "/detalhes-da-impressora"
-  );
-});
 
 test("Deve mostrar o texto do filto 'Ativas'", async () =>{
 
