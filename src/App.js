@@ -7,7 +7,6 @@ import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
 import ChangePassword from "./pages/ChangePassword";
 import PrintersList from "./pages/PrintersList";
-
 import ViewPrinter from "./pages/ViewPrinter";
 
 

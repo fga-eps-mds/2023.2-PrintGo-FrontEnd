@@ -78,34 +78,34 @@ export default function ViewPrinter(){
 
     return(
         <>
-            <Navbar />
-            <div id="container-viewprinter">
-                <div id="viewprinter-left-content"></div>
-                <div id="viewprinter-right-content">
-                    <div id="viewprinter-card">
-                        <div id="viewprinter-info-group">
-                            <header id="viewprinter-card-header">
-                                <img alt="" src={voltar_vector}></img>
-                                <a href="">Voltar</a>
-                            </header>
-                            <p id="viewprinter-info-header">
-                              {patternData.tipo} - {patternData.marca} - {patternData.modelo}
-                            </p>
-                            <div id="viewprinter-info-line">
-                                {Object.entries(infoLabels).map(([key, label]) => (
-                                  <div key={key} id="viewprinter-info-box">
-                                    <label>{label}</label>
-                                    <p>{printerData && printerData[key]}</p>
-                                  </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="elipse-viewprinter">
-                        <img alt= "elipse"  src={ellipse}></img>
-                    </div>
+          <Navbar />
+          <div id="container-viewprinter">
+            <div id="viewprinter-left-content"></div>
+            <div id="viewprinter-right-content">
+              <div id="viewprinter-card">
+                <div id="viewprinter-info-group">
+                  <header id="viewprinter-card-header">
+                    <img alt="" src={voltar_vector}></img>
+                    <a href="/impressorascadastradas">Voltar</a>
+                  </header>
+                  <p id="viewprinter-info-header">
+                    {patternData.tipo} - {patternData.marca} - {patternData.modelo}
+                  </p>
+                  <div id="viewprinter-info-line">
+                    {Object.entries(infoLabels).map(([key, label]) => (
+                      <div key={key} id="viewprinter-info-box">
+                        <label>{label}</label>
+                        <p>{printerData && printerData[key]}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
+              </div>
+              <div className="elipse-viewprinter">
+                <img alt= "elipse"  src={ellipse}></img>
+              </div>
             </div>
+          </div>
         </>
     );
 }
