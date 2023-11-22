@@ -23,3 +23,14 @@ test('Deve fechar o modal ao clicar no botão "Cancelar"', () => {
     expect(setOpenModal).toHaveBeenCalledTimes(1);
     expect(setOpenModal).toHaveBeenCalledWith(false);
 });
+
+test('Deve fechar o modal ao clicar no botão "X"', () => {
+    const setOpenModal = jest.fn();
+    render(<Modal setOpenModal={setOpenModal} />);
+  
+    const closeButton = screen.getByText('X');
+    fireEvent.click(closeButton);
+  
+    expect(setOpenModal).toHaveBeenCalledTimes(1);
+    expect(setOpenModal).toHaveBeenCalledWith(false);
+});
