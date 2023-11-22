@@ -6,6 +6,8 @@ import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
 import ChangePassword from "./pages/ChangePassword";
+import PrintersList from "./pages/PrintersList";
+
 
 function App() {
   return (
@@ -17,7 +19,8 @@ function App() {
         <Route path="/contato" element={<Contact />} />
         <Route path="/quemsomos" element={<AboutUs />} />
         <Route path="/mudarsenha" element={<ChangePassword />} />
-      </Routes>
+        <Route path="/impressorascadastradas" element={<PrintersList/>}/>
+    </Routes>
     </BrowserRouter>
   );
 }
