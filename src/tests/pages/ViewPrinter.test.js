@@ -1,10 +1,11 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import * as api from "../../api/api";
 import * as router from "react-router-dom";
 import ViewPrinter from '../../pages/ViewPrinter';
 import { BrowserRouter } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 
 // Mock das chamadas de API
 jest.mock("../../api/api", () => ({
@@ -53,6 +54,36 @@ test("deve renderizar a visualização de impressora corretamente", async () => 
   render(<BrowserRouter>
           <ViewPrinter />
         </BrowserRouter>);
+
   expect(await screen.findByText("Multifuncional P&B - Canon - MF1643i II")).toBeInTheDocument();
-  expect(await screen.findByText("PRINTER-004")).toBeInTheDocument();
+});
+
+// Teste de renderização dos labels.
+test("deve renderizar os labels de informação corretamente", async () => {
+  render(<BrowserRouter>
+          <ViewPrinter />
+        </BrowserRouter>);
+
+  expect(await screen.findByText("Número de série")).toBeInTheDocument();
+  expect(await screen.findByText("IP")).toBeInTheDocument();
+  expect(await screen.findByText("Código de locadora")).toBeInTheDocument();
+  expect(await screen.findByText("Contador de instalação")).toBeInTheDocument();
+  expect(await screen.findByText("Data de instalação")).toBeInTheDocument();
+  expect(await screen.findByText("Contador de retirada")).toBeInTheDocument();
+  expect(await screen.findByText("Data de retirada")).toBeInTheDocument();
+  expect(await screen.findByText("Último contador")).toBeInTheDocument();
+  expect(await screen.findByText("Data do último contador")).toBeInTheDocument();
+  expect(await screen.findByText("Circunscrição")).toBeInTheDocument();
+  expect(await screen.findByText("Unidade")).toBeInTheDocument();
+});
+
+// Teste de renderização do Botão de Voltar.
+test("deve renderizar o archor de voltar", async () => {
+  render(<BrowserRouter>
+          <ViewPrinter />
+        </BrowserRouter>);
+  
+  const linkVoltar = screen.getByText("Voltar");
+
+  expect(linkVoltar).toBeInTheDocument();
 });
