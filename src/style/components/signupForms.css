@@ -112,19 +112,19 @@
     filter: brightness(1.8);
 }
 
-#cancelar-bnt {
+#cancel-bnt {
     background-color: #003366;
     transition: background-color 0.3s, filter 0.3s;
 }
 
-#registrar-bnt {
+#register-bnt {
     margin-left: 8px;
     transition: background-color 0.3s, filter 0.3s;
     background-color: #006633;
 }
 
 
-#registrar-bnt:disabled {
+#register-bnt:disabled {
     background-color: #6C6C6C !important;
     opacity: 65%;
     cursor: not-allowed;
@@ -154,9 +154,9 @@
 
 @media (max-width: 900px) {
     #signup-card {
-        width: 90%; /* Ajuste a largura do formulário conforme necessário */
-        margin: 0 auto; /* Centraliza o formulário horizontalmente */
-        padding: 1rem; /* Ajuste o preenchimento conforme necessário */
+        width: 90%; /* Adjust the form width as needed*/
+        margin: 0 auto; /* Centers the form horizontally*/
+        padding: 1rem; /* Adjust padding as needed */
     }
 
     #input-line {

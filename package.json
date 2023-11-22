@@ -13,6 +13,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.47.0",
+    "react-icons": "^4.11.0",
     "react-router-dom": "^6.17.0",
     "react-scripts": "5.0.1",
     "shelljs": "^0.8.5",
@@ -27,7 +28,7 @@
     "test:watch": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint  --ext .{tjs,jsx}",
-    "mock": "node ./scripts/server.js"
+    "dev": "docker-compose -d docker-compose.yml up"
   },
   "eslintConfig": {
     "extends": [

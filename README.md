@@ -1,86 +1,67 @@
-# PrintGo Frontend
+# 2023.2-PrintGo-FrontEnd
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fga-eps-mds_2023.2-PrintGo-FrontEnd&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fga-eps-mds_2023.2-PrintGo-FrontEnd)
+<div align="center">
+     <img src="assets/logoPrintGo.svg" height="350px" width="350px">
+</div>
 
-[![codecov](https://codecov.io/gh/fga-eps-mds/2023.2-PrintGo-FrontEnd/graph/badge.svg?token=Lw95zaXoXc)](https://codecov.io/gh/fga-eps-mds/2023.2-PrintGo-FrontEnd)
+# 1. Clone o projeto
+git clone git@github.com:fga-eps-mds/2023.2-PrintGo-FrontEnd.git
 
-## Available Scripts
+# 2. Entre na pasta do projeto
+cd 2023.2-PrintGo-FrontEnd
 
-In the project directory, you can run:
+# Construa a imagem do docker 
+```bash 
+sudo docker build -t frontprintgo .
+```
+# Execute o container
+```bash 
+sudo docker run -p 3000:3000 frontprintgo 
+```
+# Caso os comando acima falhem, utilize:
+```bash 
+sudo docker-compose up --build
+```
+```bash 
+sudo docker-compose up
+```
+=======
+# Caso prefira usar yarn eh n tenha
+npm i -g yarn
 
-### `npm start`
+# Instalar dependencias
+yarn
+    #ou
+npm i
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+cp .env.dev .env
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Rode o docker compose do projeto
+docker-compose up --build
+    # --build somente eh necessario na primeira vez que estiver rodando
+    # depois `docker-compose up` ja resolve
+    # em linux talvez seja necessario a execucao em modo root `sudo docker-compose up`
+    # voce pode também caso queria adicionar um -d ao final para liberar o o terminal `docker-compose up -d`
+    # Para finalizar o servico execute no root do projeto `docker-compose down`
 
-### `npm test`
+# finalizado execução do docker faca o migrate da base de dados
+yarn db:migrate
+    #ou
+npm run db:migrate
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Contribuir
 
-### `npm run build`
+Para contribuir com esse projeto é importante seguir nosso [Guia de Contribuição](https://fga-eps-mds.github.io/2023.2-PrintGo-Doc/guia_de_contribuicao/) do repositório e seguir nosso [Código de Conduta](https://fga-eps-mds.github.io/2023.2-PrintGo-Doc/codigo_conduta/).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Ambientes
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [Documentação](https://github.com/fga-eps-mds/2023.2-PrintGo-Doc)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [Front-End](https://github.com/fga-eps-mds/2023.2-PrintGo-FrontEnd)
 
-### `npm run eject`
+- [Back-End: UserService](https://github.com/fga-eps-mds/2023.2-PrintGo-UserService)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- [Back-End: OcurrenceService](https://github.com/fga-eps-mds/2023.2-PrintGo-OcurrenceService)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-### Rodar Mock Server
-
-#### Pré-requisito
-
-**json-server**
-
-Caso não tenha instalado, rode:
-
-`npm i -g json-server`
-
-
-
-
+- [Back-End: PrinterService](https://github.com/fga-eps-mds/2023.2-PrintGo-PrinterService)

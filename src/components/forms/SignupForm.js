@@ -99,7 +99,7 @@ export default function SignupForm(){
                         <div id="input-box">
                             <label>Confirmar E-mail<span>*</span></label>
                             <input {...register("emailConfirmar", {required: true})} placeholder="Confirmar Email" />
-                            <span>{errors.emailConfirmar?.message}</span>
+                            <span data-testid="email-error">{errors.emailConfirmar?.message}</span>
                         </div>
                     </div>
 
@@ -145,8 +145,8 @@ export default function SignupForm(){
                 </div>
 
                 <div id="buttons">
-                    <button className="form-button" type="button" id="cancelar-bnt" >CANCELAR</button>
-                    <button className="form-button" type="submit" id="registrar-bnt" disabled={!isValid}>REGISTRAR</button>
+                    <button className="form-button" type="button" id="cancel-bnt" >CANCELAR</button>
+                    <button className="form-button" type="submit" id="register-bnt" disabled={!isValid}>REGISTRAR</button>
                 </div>
             </form>
             <div className="elipse-signup">
