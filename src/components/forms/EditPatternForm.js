@@ -1,14 +1,35 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import "../../style/components/printerPatternForm.css";
 import elipse6 from "../../assets/elipse6.svg";
+import userEvent from "@testing-library/user-event";
 
 const fieldLabels = {
   tipo: "Tipo",
   marca: "Marca",
   modelo: "Modelo",
+  snmp: {
+    modeloImpressora: "Modelo da impressora",
+    numeroSerie: "Número de série",
+    versaoFirmware: "Versão do Firmware",
+    tempoAtivo: "Tempo ativo do sistema",
+    totalDigitalizacoes: "Total de digitalizações",
+    totalCopiasPB: "Total de cópias P&B",
+    totalCopiasColorido: "Total de cópias coloridas",
+    totalImpressoesPB: "Total de impressões P&B",
+    totalImpressoesColorido: "Total de impressoões coloridas",
+    totalGeral: "Total geral",
+    enderecoIP: "Endereço IP",
+  },
+};
+
+
+const testObject = {
+  tipo: "teste",
+  marca: "Marcateste",
+  modelo: "Modeloteste",
   snmp: {
     modeloImpressora: "Modelo da impressora",
     numeroSerie: "Número de série",
@@ -72,6 +93,7 @@ export default function EditPatternForm() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isValid },
     reset,
   } = useForm({
@@ -84,6 +106,12 @@ export default function EditPatternForm() {
 
     reset();
   };
+
+  useEffect(() => {
+    Object.entries(testObject).forEach(([key, value]) => {
+      setValue(key, value);
+    });
+  }, [setValue]);
 
   return (
     <div id="printer-pattern-signup-card">
@@ -100,7 +128,6 @@ export default function EditPatternForm() {
                   </label>
                   <input
                     {...register(field)}
-                    //style={{ width: '200px'}}  // Adjust the width as needed
                     placeholder={`Digite ${fieldLabels[field].toLowerCase()}`}
                   />
                   <span>{errors[field]?.message}</span>
