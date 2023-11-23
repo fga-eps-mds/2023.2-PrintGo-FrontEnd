@@ -42,10 +42,10 @@ export default function EditPrinterForm() {
     handleSubmit,
     formState: { errors},
     reset
-  } = useForm({ resolver: yupResolver(editPrinterSchema), mode: "onChange" });
+  } = useForm({ resolver: yupResolver(editPrinterSchema), mode: "onSubmit" });
 
   const onSubmit = async (data) => {
-    await createUser(data);
+    console.log(data);
     reset();
   }
 
@@ -59,15 +59,15 @@ export default function EditPrinterForm() {
       </header>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div id="input-group">
-          {Object.values(fieldLabels).map((field) => (
-            <div id="input-line" key={field.id}>
+          {Object.entries(fieldLabels).map(([key,field]) => (
+            <div id="input-line" key={key}>
               <div id="input-box">
                 <label>{field.charAt(0).toUpperCase() + field.slice(1)}<span>*</span></label>
                 <input
-                    {...register(field)}
+                    {...register(key)}
                     placeholder={field.includes('data') ? 'DD/MM/AAAA' : field.charAt(0).toUpperCase() + field.slice(1)} // Alteração aqui
                 />
-                <span>{errors[field]?.message}</span>
+                <span>{errors[key]?.message}</span>
               </div>
             </div>
           ))}
