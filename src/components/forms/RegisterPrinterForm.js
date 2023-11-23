@@ -1,10 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
+
 import "../../style/components/registerPrinterForms.css";
 import elipse6 from "../../assets/elipse6.svg";
-
+import { getPrinterSchema } from "../utils/yupSchema";
 
 const fieldLabels = {
   padrao: "Padrão",
@@ -21,22 +21,10 @@ const fieldLabels = {
   unidadeFilho: "Unidade Filho",
 };
 
-const registerPrinterSchema = yup.object().shape({
-  padrao: yup.string().required(`${fieldLabels.padrao} é obrigatório`),
-  ip: yup.string().required(`${fieldLabels.ip} é obrigatório`),
-  numeroSerie: yup.string().required(`${fieldLabels.numeroSerie} é obrigatório`),
-  codigoLocadora: yup.string().required(`${fieldLabels.codigoLocadora} é obrigatório`),
-  contadorInstalacao: yup.string().required(`${fieldLabels.contadorInstalacao} é obrigatório`),
-  dataInstalacao: yup.string().required(`${fieldLabels.dataInstalacao} é obrigatória`),
-  contadorRetirada: yup.string().required(`${fieldLabels.contadorRetirada} é obrigatório`),
-  dataRetirada: yup.string().required(`${fieldLabels.dataRetirada} é obrigatória`),
-  ultimoContador: yup.string().required(`${fieldLabels.ultimoContador} é obrigatório`),
-  dataUltimoContador: yup.string().required(`${fieldLabels.dataUltimoContador} é obrigatória`),
-  unidadePai: yup.string().required(`${fieldLabels.unidadePai} é obrigatória`),
-  unidadeFilho: yup.string().required(`${fieldLabels.unidadeFilho} é obrigatória`),
-});
+
 
 export default function RegisterPrinterForm() {
+  const registerPrinterSchema = getPrinterSchema(fieldLabels);
   const {
     register,
     handleSubmit,
