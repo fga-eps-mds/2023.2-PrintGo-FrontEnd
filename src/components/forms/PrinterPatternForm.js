@@ -1,9 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import "../../style/components/printerPatternForm.css";
 import elipse6 from "../../assets/elipse6.svg";
+import { getRegisterPrinterSchema } from "../utils/yupSchema";
 
 const fieldLabels = {
   tipo: "Tipo",
@@ -24,51 +24,9 @@ const fieldLabels = {
   },
 };
 
-const registerPrinterSchema = yup.object().shape({
-  tipo: yup.string().required(`${fieldLabels.tipo} é obrigatório`),
-  marca: yup.string().required(`${fieldLabels.marca} é obrigatório`),
-  modelo: yup.string().required(`${fieldLabels.modelo} é obrigatório`),
-  snmp: yup
-    .object()
-    .shape({
-      modeloImpressora: yup
-        .string()
-        .required(`${fieldLabels.snmp.modeloImpressora} é obrigatório`),
-      numeroSerie: yup
-        .string()
-        .required(`${fieldLabels.snmp.numeroSerie} é obrigatório`),
-      versaoFirmware: yup
-        .string()
-        .required(`${fieldLabels.snmp.versaoFirmware} é obrigatório`),
-      tempoAtivo: yup
-        .string()
-        .required(`${fieldLabels.snmp.tempoAtivo} é obrigatório`),
-      totalDigitalizacoes: yup
-        .string()
-        .required(`${fieldLabels.snmp.totalDigitalizacoes} é obrigatório`),
-      totalCopiasPB: yup
-        .string()
-        .required(`${fieldLabels.snmp.totalCopiasPB} é obrigatório`),
-      totalCopiasColorido: yup
-        .string()
-        .required(`${fieldLabels.snmp.totalCopiasColorido} é obrigatório`),
-      totalImpressoesPB: yup
-        .string()
-        .required(`${fieldLabels.snmp.totalImpressoesPB} é obrigatório`),
-      totalImpressoesColorido: yup
-        .string()
-        .required(`${fieldLabels.snmp.totalImpressoesColorido} é obrigatório`),
-      totalGeral: yup
-        .string()
-        .required(`${fieldLabels.snmp.totalGeral} é obrigatório`),
-      enderecoIP: yup
-        .string()
-        .required(`${fieldLabels.snmp.enderecoIP} é obrigatório`),
-    })
-    .required("SNMP é obrigatório"),
-});
 
 export default function PrinterPatternForm() {
+  const registerPrinterSchema = getRegisterPrinterSchema(fieldLabels);
   const {
     register,
     handleSubmit,
