@@ -72,7 +72,7 @@ export default function PrinterPatternForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
     reset,
   } = useForm({
     resolver: yupResolver(registerPrinterSchema),
@@ -81,7 +81,6 @@ export default function PrinterPatternForm() {
 
   const onSubmit = async (data) => {
     console.log(data);
-
     reset();
   };
 
@@ -91,81 +90,45 @@ export default function PrinterPatternForm() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div id="printer-pattern-input-group">
           <div id="printer-pattern-input-box">
+            {/* Campos Principais */}
             <div id="printer-pattern-fields">
-              {["tipo", "marca", "modelo"].map((field) => (
-                <div id="printer-pattern-input-line" key={field.id}>
+              {Object.entries(fieldLabels).filter(([key]) => key !== "snmp").map(([key, label]) => (
+                <div id="printer-pattern-input-line" key={key}>
                   <label>
-                    {fieldLabels[field]}
+                    {label}
                     <span>*</span>
                   </label>
                   <input
-                    {...register(field)}
-                    //style={{ width: '200px'}}  // Adjust the width as needed
-                    placeholder={`Digite ${fieldLabels[field].toLowerCase()}`}
+                    {...register(key)}
+                    placeholder={`Digite ${label.toLowerCase()}`}
                   />
-                  <span>{errors[field]?.message}</span>
+                  <span>{errors[key]?.message}</span>
                 </div>
               ))}
             </div>
 
-            {/* SNMP Fields */}
+            {/* Campos SNMP */}
             <div id="printer-pattern-snmp-fields">
               <label>SNMP</label>
-              {Object.keys(fieldLabels.snmp).map((subField) => (
-                <div id="snmp-fields-input-line" key={`sub-${subField.id}`}>
+              {Object.entries(fieldLabels.snmp).map(([subKey, subLabel]) => (
+                <div id="snmp-fields-input-line" key={subKey}>
                   <label>
-                    {fieldLabels.snmp[subField]}
+                    {subLabel}
                     <span>*</span>
                   </label>
-                  {[
-                    "modeloImpressora",
-                    "numeroSerie",
-                    "versaoFirmware",
-                    "tempoAtivo",
-                    "totalDigitalizacoes",
-                    "totalCopiasPB",
-                    "totalCopiasColorido",
-                    "totalImpressoesPB",
-                    "totalImpressoesColorido",
-                    "totalGeral",
-                    "enderecoIP",
-                  ].includes(subField) ? (
-                    <input
-                      {...register(`snmp.${subField}`)}
-                      //style={{ width: '200px' }}  // Adjust the width as needed
-                      placeholder="Código OID"
-                    />
-                  ) : (
-                    <input
-                      {...register(`snmp.${subField}`)}
-                      style={{ width: "200px" }} // Adjust the width as needed
-                      placeholder={`Digite ${fieldLabels.snmp[
-                        subField
-                      ].toLowerCase()}`}
-                    />
-                  )}
-                  <span>{errors[`snmp.${subField}`]?.message}</span>
+                  <input
+                    {...register(`snmp.${subKey}`)}
+                    placeholder="Código OID"
+                  />
+                  <span>{errors[`snmp.${subKey}`]?.message}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
         <div id="printer-pattern-buttons">
-          <button
-            className="printer-pattern-form-button"
-            type="button"
-            id="cancelar-bnt"
-          >
-            CANCELAR
-          </button>
-          <button
-            className="printer-pattern-form-button"
-            type="submit"
-            id="registrar-bnt"
-            disabled={!isValid}
-          >
-            REGISTRAR
-          </button>
+          <button className="printer-pattern-form-button" type="button" id="cancelar-bnt">CANCELAR</button>
+          <button className="printer-pattern-form-button" type="submit" id="registrar-bnt">REGISTRAR</button>
         </div>
       </form>
       <div className="elipse-pattern">
@@ -174,3 +137,5 @@ export default function PrinterPatternForm() {
     </div>
   );
 }
+export { fieldLabels };
+
