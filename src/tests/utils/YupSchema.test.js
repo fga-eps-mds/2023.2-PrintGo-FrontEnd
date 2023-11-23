@@ -1,4 +1,4 @@
-import { getPrinterSchema } from '../../components/utils/YupSchema'; // Substitua pelo caminho correto
+import { getPrinterSchema , getRegisterPrinterSchema } from '../../components/utils/YupSchema';
 
 describe('getPrinterSchema', () => {
   const printerFieldLabels = {
@@ -44,6 +44,75 @@ describe('getPrinterSchema', () => {
     };
 
     const schema = getPrinterSchema(printerFieldLabels);
+    await expect(schema.validate(invalidData)).rejects.toThrow();
+  });
+});
+
+describe('getRegisterPrinterSchema', () => {
+  const fieldLabels = {
+    tipo: "Tipo",
+    marca: "Marca",
+    modelo: "Modelo",
+    snmp: {
+      modeloImpressora: "Modelo da Impressora",
+      numeroSerie: "Número de Série",
+      versaoFirmware: "Versão do Firmware",
+      tempoAtivo: "Tempo Ativo",
+      totalDigitalizacoes: "Total de Digitalizações",
+      totalCopiasPB: "Total de Cópias P&B",
+      totalCopiasColorido: "Total de Cópias Coloridas",
+      totalImpressoesPB: "Total de Impressões P&B",
+      totalImpressoesColorido: "Total de Impressões Coloridas",
+      totalGeral: "Total Geral",
+      enderecoIP: "Endereço IP",
+    }
+  };
+
+  it('validates correctly with valid data', async () => {
+    const validData = {
+      tipo: 'Laser',
+      marca: 'Marca Teste',
+      modelo: 'Modelo Teste',
+      snmp: {
+        modeloImpressora: 'Modelo Impressora Teste',
+        numeroSerie: '12345678',
+        versaoFirmware: 'v1.0.0',
+        tempoAtivo: '100 horas',
+        totalDigitalizacoes: '1000',
+        totalCopiasPB: '500',
+        totalCopiasColorido: '500',
+        totalImpressoesPB: '1000',
+        totalImpressoesColorido: '1000',
+        totalGeral: '4000',
+        enderecoIP: '192.168.1.1',
+      }
+    };
+
+    const schema = getRegisterPrinterSchema(fieldLabels);
+    await expect(schema.validate(validData)).resolves.toEqual(validData);
+  });
+
+  it('rejects with invalid data', async () => {
+    const invalidData = {
+      tipo: '',
+      marca: '',
+      modelo: '',
+      snmp: {
+        modeloImpressora: '',
+        numeroSerie: '',
+        versaoFirmware: '',
+        tempoAtivo: '',
+        totalDigitalizacoes: '',
+        totalCopiasPB: '',
+        totalCopiasColorido: '',
+        totalImpressoesPB: '',
+        totalImpressoesColorido: '',
+        totalGeral: '',
+        enderecoIP: '',
+      }
+    };
+
+    const schema = getRegisterPrinterSchema(fieldLabels);
     await expect(schema.validate(invalidData)).rejects.toThrow();
   });
 });
