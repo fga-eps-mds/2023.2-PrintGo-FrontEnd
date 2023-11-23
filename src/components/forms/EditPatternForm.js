@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import "../../style/components/printerPatternForm.css";
 import elipse6 from "../../assets/elipse6.svg";
-import userEvent from "@testing-library/user-event";
 
 const fieldLabels = {
   tipo: "Tipo",
