@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "../../style/components/printerPatternForm.css";
 import elipse6 from "../../assets/elipse6.svg";
-import { getRegisterPrinterSchema } from "../utils/yupSchema";
+import { getRegisterPrinterSchema } from "../utils/YupSchema";
 
 const fieldLabels = {
   tipo: "Tipo",

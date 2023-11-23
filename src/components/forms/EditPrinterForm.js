@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import "../../style/components/editPrinterForms.css";
 import elipse6 from '../../assets/elipse6.svg';
-import { getPrinterSchema } from "../utils/yupSchema";
+import { getPrinterSchema } from "../utils/YupSchema";
 
 const fieldLabels = {
   padrao: 'Padrão',
