@@ -40,7 +40,7 @@
 .printerslist-header-search-filter {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   width: fit-content;
   height: 100%;
   gap: 20px;

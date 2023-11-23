@@ -1,0 +1,16 @@
+#editPrinter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#editPrinter-container img {
+  margin-left: 4vw;
+  width: 45vw;
+}
+
+@media (max-width: 900px) {
+  #editPrinter-container img {
+    display: auto;
+  }
+}
