@@ -1,8 +1,7 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { createUser } from "../../api/api";
 import "../../style/components/editPrinterForms.css";
 import elipse6 from '../../assets/elipse6.svg';
 
@@ -21,6 +20,21 @@ const fieldLabels = {
   unidadeFilho: 'Unidade Filho',
 };
 
+const testObject = {
+  padrao: 'teste',
+  ip: '1111111',
+  numeroSerie: '222222222',
+  codigoLocadora: '333333333',
+  contadorInstalacao: '444444444',
+  dataInstalacao: '01/01/2000',
+  contadorRetirada: '555555555',
+  dataRetirada: '02/02/2002',
+  ultimoContador: '666666666',
+  dataUltimoContador: '03/03/2003',
+  unidadePai: 'pai',
+  unidadeFilho: 'filho',
+};
+
 const editPrinterSchema = yup.object().shape({
   padrao: yup.string().required(`${fieldLabels.padrao} é obrigatório`),
   ip: yup.string().required(`${fieldLabels.ip} é obrigatório`),
@@ -37,12 +51,16 @@ const editPrinterSchema = yup.object().shape({
 });
 
 export default function EditPrinterForm() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors},
-    reset
-  } = useForm({ resolver: yupResolver(editPrinterSchema), mode: "onSubmit" });
+  const { register, setValue, handleSubmit, formState: { errors }, reset } = useForm({
+    resolver: yupResolver(editPrinterSchema),
+    mode: "onSubmit"
+  });
+
+  useEffect(() => {
+    Object.entries(testObject).forEach(([key, value]) => {
+      setValue(key, value);
+    });
+  }, [setValue]);
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -59,13 +77,13 @@ export default function EditPrinterForm() {
       </header>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div id="input-group">
-          {Object.entries(fieldLabels).map(([key,field]) => (
+          {Object.entries(fieldLabels).map(([key, field]) => (
             <div id="input-line" key={key}>
               <div id="input-box">
                 <label>{field.charAt(0).toUpperCase() + field.slice(1)}<span>*</span></label>
                 <input
                     {...register(key)}
-                    placeholder={field.includes('data') ? 'DD/MM/AAAA' : field.charAt(0).toUpperCase() + field.slice(1)} // Alteração aqui
+                    placeholder={field.includes('data') ? 'DD/MM/AAAA' : field.charAt(0).toUpperCase() + field.slice(1)}
                 />
                 <span>{errors[key]?.message}</span>
               </div>
