@@ -101,3 +101,6 @@ export default function EditPrinterForm() {
     </div>
   );
 }
+
+
+export { fieldLabels, testObject };

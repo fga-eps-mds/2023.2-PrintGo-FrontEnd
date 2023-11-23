@@ -9,9 +9,7 @@ jest.mock('axios', () => ({
   // Sua implementação mock, se necessário
 }));
 
-jest.mock('../../api/api', () => ({
-    createUser: jest.fn(), // Mock createUser function
-  }));
+
 
 describe('RegisterPrinterForm', () => {
   beforeEach(() => {
