@@ -1,0 +1,16 @@
+#edit-user-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#edit-user-container img{
+    margin-left: 10vw;
+    margin-top: 3vh;
+}
+
+@media (max-width: 900px) {
+    #edit-user-container img{
+        display: none;
+    }
+}
