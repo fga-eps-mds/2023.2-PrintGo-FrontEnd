@@ -32,7 +32,6 @@ export default function Contact() {
     <>
       <NavbarSimple />
       <div className="Main-page-contact">
-        <h1>Contato</h1>
         <div className="Contact-principal">
           <div className="Box-contact">
             <p>Contato</p>
