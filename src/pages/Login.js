@@ -34,12 +34,11 @@ export default function Login() {
 
     try {
       const token = await login(email, password);
-      console.log(token);
-      localStorage.setItem("jwt", token);
-      navigate("/home");
+      localStorage.setItem('jwt', token);
+      navigate('/home');
     } catch (error) {
-      console.log(error);
-      setLoginError("E-mail ou senha incorreto.");
+      console.error(error);
+      setLoginError('E-mail ou senha incorreto.');
     }
   };
 

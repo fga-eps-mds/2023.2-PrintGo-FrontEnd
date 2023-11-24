@@ -10,11 +10,7 @@ export default function Contact() {
   const [email, setEmail] = useState("");
   const [assunto, setAssunto] = useState("");
 
-  function handleEnviar() {
-    // Here you can handle the data such as validating and sending it to a server
-    console.log("Nome:", nome);
-    console.log("E-mail:", email);
-    console.log("Assunto:", assunto);
+  function handleEnviar(){
 
     const templateParams = {
       from_name: nome,
@@ -22,24 +18,14 @@ export default function Contact() {
       message: assunto,
     };
 
-    emailjs
-      .send(
-        "service_amwcg9n",
-        "template_5l6g71s",
-        templateParams,
-        "az5Vq1c-iMacr4p-z"
-      )
-      .then(
-        (response) => {
-          console.log("SUCCESS!", response.status, response.text);
-          setAssunto("");
-          setEmail("");
-          setNome("");
-        },
-        (err) => {
-          console.log("FAILED...", err);
-        }
-      );
+    emailjs.send("service_amwcg9n","template_5l6g71s",templateParams,"az5Vq1c-iMacr4p-z")
+    .then((response) => {
+        setAssunto('');
+        setEmail('');
+        setNome('');
+    }, (err) => {
+
+    })
   }
 
   return (
