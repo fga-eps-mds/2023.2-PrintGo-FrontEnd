@@ -79,7 +79,7 @@ export default function ViewPrinter(){
                     {Object.entries(infoLabels).map(([key, label]) => (
                       <div key={key} id="viewprinter-info-box">
                         <label>{label}</label>
-                        <p>{printerData && printerData[key]}</p>
+                        <p>{printerData?.[key]}</p>
                       </div>
                     ))}
                   </div>
