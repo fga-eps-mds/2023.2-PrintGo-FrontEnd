@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import "../style/pages/printersList.css";
 import { Link } from "react-router-dom";
 import Search from '../assets/Search.svg';
@@ -7,37 +7,27 @@ import engine from '../assets/engine.svg';
 import Input from '../components/Input'; 
 import Modal from '../components/ui/Modal';
 import Navbar from "../components/navbar/Navbar";
+import { getPrinters, togglePrinter } from "../services/printerService";
+
 
 
 export default function PrintersList() {
-  const [impressoras, setImpressoras] = useState([
-    {
-      id_impressora: 1,
-      modelo: 'HP InkJet 50',
-      numeroSerie: 'HPInkJet-1234-ABCD',
-      ip: '987.654.32',
-      codigo_loc: 'PRINTER-002',
-      unidade_pai: '1°DRP',
-      unidade_filha: '2ª DM',
-      contador: '83',
-      data: '07/11/23',
-      ativada: false,
-      imagem: 'caminho/para/imagem1.jpg', 
-    },
-    {
-      id_impressora: 2,
-      modelo: 'Epson LaserJet',
-      numeroSerie: 'EpsonLaser-5678-EFGH',
-      ip: '340.90.98',
-      codigo_loc: 'PRINTER-003',
-      unidade_pai: '2°DRP',
-      unidade_filha: '3ª DM',
-      contador: '88',
-      data: '08/11/23',
-      ativada: true,
-      imagem: 'caminho/para/imagem2.jpg',
-    },
-  ]);
+  const [impressoras, setImpressoras] = useState([]);
+
+  useEffect( () => {
+    async function fetchData() {
+        try {
+            const data = await getPrinters();
+            if (data.type ==='success' && data.data) {
+              setPrinters(data.data);
+              console.log(data.data);
+            }
+        } catch (error) {
+            console.error('Erro ao obter lista de impressoras:', error);
+          }
+    }
+    fetchData();
+  }, []);
 
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
@@ -45,6 +35,7 @@ export default function PrintersList() {
   const [modalTitle, setModalTitle] = useState('');
   const [modalBodytext, setModalBodytext] = useState('');
   const [selectedPrinter, setSelectedPrinter] = useState(null);
+  const [printers, setPrinters] = useState([]);
 
 
 // modal para desativar impressora
@@ -64,17 +55,18 @@ export default function PrintersList() {
   }
 
   //ativa e desativa impressora
-  const printerToggle = () => {
-    const updatedImpressoras = impressoras.map(printer => {
-      if (printer.id_impressora === selectedPrinter.id_impressora) {
-        return { ...printer, ativada: !printer.ativada };
-      }
-      return printer;
-    });
+  async function printerToggle() {
+    try {
+      const data = await togglePrinter(selectedPrinter.id, selectedPrinter.status);
 
-    setImpressoras(updatedImpressoras);
-    setModalOpen(false);
-  };
+      if (data.type === 'success') {
+        window.location.reload(false);
+        setModalOpen(false);
+      }
+    } catch (error) {
+      setModalOpen(false);
+    }
+  }
 
   //qual filtro esta sendo aplicado
   function filterBeingShown(filter){
@@ -88,35 +80,40 @@ export default function PrintersList() {
     }
   }
   
+  function extractDate(dateString) {
+    const data = new Date(dateString);
+
+    const dia = String(data.getDate()).padStart(2, '0');
+    const mes = String(data.getMonth() + 1).padStart(2, '0'); // Meses são zero-indexed
+    const ano = String(data.getFullYear()).slice(2); // Obtendo os dois últimos dígitos do ano
+
+    return `${dia}/${mes}/${ano}`;
+  }
 
   //filtros para busca de impressora
   const filteredPrinters = useMemo(() => {
-    return impressoras.filter(impressora => {
+    return printers.filter(printer => {
       const searchLower = search.toLowerCase();
       const {
-        codigo_loc,
-        unidade_pai,
-        unidade_filha,
+        codigoLocadora,
         ip,
         modelo,
         numeroSerie,
-      } = impressora;
+      } = printer;
   
       return (
         search === '' ||
-        codigo_loc.toLowerCase().includes(searchLower) ||
-        unidade_pai.toLowerCase().includes(searchLower) ||
-        unidade_filha.toLowerCase().includes(searchLower) ||
+        codigoLocadora.toLowerCase().includes(searchLower) ||
         ip.toLowerCase().includes(searchLower) ||
         modelo.toLowerCase().includes(searchLower) ||
         numeroSerie.toLowerCase().includes(searchLower)
       );
-    }).filter(impressora => {
+    }).filter(printer => {
       return filter === 'all' ||
-             (filter === 'active' && impressora.ativada) ||
-             (filter === 'deactivated' && !impressora.ativada);
+             (filter === 'active' && printer.status === "ATIVO") ||
+             (filter === 'deactivated' && printer.status === "DESATIVADO");
     });
-  }, [impressoras, search, filter]);
+  }, [printers, search, filter]);
 
   return (
     <>
@@ -156,36 +153,36 @@ export default function PrintersList() {
           </div>
         </div>
 
-        {filteredPrinters.map(impressora => (
-          <div key={impressora.id_impressora} className="printerslist-printer" style={{ color: impressora.ativada ? '' : 'gray' }}>
+        {filteredPrinters.map(printer => (
+          <div key={printer.id} className="printerslist-printer" style={{ color: printer.status === "ATIVO" ? '' : 'gray' }}>
             <div className="printerslist-model">
-              <h4>{impressora.modelo}</h4>
-              {!impressora.ativada && <h5>Desativada</h5>}
+              <h4>{printer.padrao.modelo}</h4>
+              {printer.status === 'DESATIVADO' && <h5>Desativada</h5>}
             </div>
             
-            <div className="printerslist-identification" style={{ color: impressora.ativada ? '' : 'gray' }}> 
-              <h6>{impressora.numeroSerie}</h6>
-              <h6>IP: {impressora.ip}</h6>
-              <h6>{impressora.codigo_loc}</h6> 
+            <div className="printerslist-identification" style={{ color: printer.status === "ATIVO" ? '' : 'gray' }}> 
+              <h6>S/N: {printer.numeroSerie}</h6>
+              <h6>IP: {printer.ip}</h6>
+              <h6>{printer.codigoLocadora}</h6> 
             </div>
             
-            <div className="printerslist-location-counter" style={{ color: impressora.ativada ? '' : 'gray' }}>
-              <h6>{impressora.unidade_pai}</h6>
-              <h6>{impressora.unidade_filha}</h6>
-              <h6>{impressora.contador}</h6>
+            <div className="printerslist-location-counter" style={{ color: printer.status === "ATIVO" ? '' : 'gray' }}>
+              {/* <h6>{printer.unidade_pai}</h6>
+              <h6>{printer.unidade_filha}</h6> */}
+              <h6>{printer.contadorInstalacao}</h6>
             </div>
             
-            <div className="printerslist-counter-date" style={{ color: impressora.ativada ? '' : 'gray' }}>
-              <h6>Data do último contador: {impressora.data}</h6>
+            <div className="printerslist-counter-date" style={{ color: printer.status === "ATIVO" ? '' : 'gray' }}>
+              <h6>Data do último contador: {extractDate(printer.dataUltimoContador)}</h6>
             </div>
             
             <div className="printerslist-engine">
               <img alt="" src={engine} />
               <div tabIndex="0" className="printerslist-engine-dropdown">
                 <div className="printerslist-printer-dropdown">
-                  {impressora.ativada 
-                    ? <Link to="#" tabIndex="0" onClick={() => modalDeactivatePrinter(impressora)}>Desativar</Link>
-                    : <Link to="#" tabIndex="0" onClick={() => modalActivePrinter(impressora)}>Ativar</Link>
+                  {printer.status === "ATIVO"
+                    ? <Link to="#" tabIndex="0" onClick={() => modalDeactivatePrinter(printer)}>Desativar</Link>
+                    : <Link to="#" tabIndex="0" onClick={() => modalActivePrinter(printer)}>Ativar</Link>
                   }
                   <Link to="#" tabIndex="0">Editar</Link>
                 </div>
