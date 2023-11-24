@@ -1,0 +1,91 @@
+.homepage {
+  position: relative;
+  background-color: var(--color-white);
+  width: inherit;
+  height: 100vh;
+  overflow: hidden;
+  text-align: left;
+  font-size: 64px;
+  color: var(--color-darkslateblue);
+  font-family: var(--font-jost);
+  padding-top: 1rem;
+}
+.right-content-home {
+  padding: 15px;
+  height: 80vh;
+  width: 50vw;
+}
+.left-content-home {
+  height: 100vh;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.aligned-content {
+  align-self: end;
+  width: 45vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.containter-button-home {
+  display: flex;
+  flex-direction: column;
+  height: 53px;
+  width: 38vw;
+  align-self: self-end;
+}
+
+.page-text-home {
+  width: 38vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: self-end;
+}
+
+.home-text {
+  font-size: 32px;
+  text-align: center;
+  margin-top: 1px;
+  color: #036;
+}
+
+.elipse-home {
+  height: 31.7vh;
+  width: inherit;
+  overflow: hidden;
+}
+
+.elipse-home img {
+  height: 31.7vh;
+}
+.content-home {
+  display: flex;
+}
+
+.printgo-logo {
+  text-align: center;
+  color: #036;
+}
+
+#saibamais {
+  color: #036;
+  text-decoration: none;
+}
+
+.learn-more {
+  font-size: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 53px;
+  width: auto;
+  align-self: flex-start;
+}
