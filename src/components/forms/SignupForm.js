@@ -5,10 +5,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as yup from "yup";
 import elipse6 from '../../assets/elipse6.svg';
-import { getLotacoes } from "../../services/lotacaoService";
-import { getPoliceUnits } from "../../services/policeUnitService";
+import { getUnidades } from "../../services/unidadeService";
 import { createUser } from "../../services/userService";
 import "../../style/components/signupForms.css";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 
 const signupSchema = yup.object().shape({
@@ -35,28 +35,22 @@ const signupSchema = yup.object().shape({
     .test('cpfOrCnpj', 'CPF ou CNPJ inválido', value => {
         return value.length === 11 || value.length === 14;
     }),
-    lotacao_id: yup.string().required('Lotação é obrigatória'),
+    unidade_id: yup.string().required('Lotação é obrigatória'),
     isAdmin: yup.boolean(),
   });
 
 export default function SignupForm(){
-    const [lotacao, setLotacao] = useState([]);
-    const [lotacaoInList, setLotacaoInList] = useState([]);
-    const [policieUnit, setPolicieUnit] = useState([]);
+    const [unidade, setUnidade] = useState([]);
+    const [unidadeInList, setUnidadeInList] = useState([]);
     const [displayLotacoes, setDisplayLotacoes] = useState(false);
 
     useEffect( () => {
         async function setData() {
             try {
-                const [dataLotacao, dataPolicieUnit] = await Promise.all([
-                    getLotacoes(),
-                    getPoliceUnits()
-                ])
-                if (dataLotacao.type ==='success' && dataLotacao.data) {
-                    setLotacao(dataLotacao.data);
-                }
-                if (dataPolicieUnit.type ==='success' && dataPolicieUnit.data) {
-                    setPolicieUnit(dataPolicieUnit.data);
+                const dataUnidades = await getUnidades();
+                
+                if (dataUnidades.type ==='success' && dataUnidades.data) {
+                    setUnidade(dataUnidades.data);
                 }
 
             } catch (error) {
@@ -70,11 +64,16 @@ export default function SignupForm(){
     const {
         register,
         handleSubmit,
-        formState: { errors, isValid }, 
+        formState: { errors, isValid, isSubmitting }, 
         reset
     } = useForm({resolver: yupResolver(signupSchema), mode: "onChange"})
 
     const onSubmit = async (data) =>  {
+
+        setTimeout(() => {
+            console.log("3 segundos se passaram.");
+        }, 3000);  // 3000 milissegundos = 3 segundos
+        
         data.cargos = ["USER"];
         if (data.isAdmin) {
             data.cargos.push("ADMIN");
@@ -88,10 +87,12 @@ export default function SignupForm(){
         }
     }
 
-    const handlePoliceUnitChange = (event) => {
+    const handleWorkstationChange = (event) => {
+
         if(event.target.value) {
+            const listChildWorkstations = unidade.find(uni => uni.id === event.target.value).child_workstations;
             setDisplayLotacoes(true);
-            setLotacaoInList(lotacao.filter(lot => lot.unidade_pai_id === event.target.value))
+            setUnidadeInList(listChildWorkstations);
         }else {
             setDisplayLotacoes(false);
         }
@@ -147,28 +148,28 @@ export default function SignupForm(){
                     </div>
                     <div id="input-line">
                         <div id="input-box">
-                            <label>Unidade de Policia<span>*</span></label>
-                            <select onChange={handlePoliceUnitChange}>
+                            <label>Unidade de pai<span>*</span></label>
+                            <select onChange={handleWorkstationChange}>
                                 <option value="">Selecione a Unidade de policia</option>
-                                {policieUnit?.map((unit) => (
+                                {unidade?.map((unit) => (
                                 <option key={unit.id} value={unit.id}>
-                                    {unit.nome}
+                                    {unit.name}
                                 </option>
                                 ))}
                             </select>
                         </div>
                         {displayLotacoes && (
                             <div id="input-box">
-                                <label>Lotação Relacionadas <span>*</span></label>
-                                <select {...register("lotacao_id", {required: "Lotação é obrigatória"})}>
+                                <label>Unidade Filha <span>*</span></label>
+                                <select {...register("unidade_id", {required: "Lotação é obrigatória"})}>
                                     <option value="">Selecione a Lotação</option>
-                                    {lotacaoInList?.map((lotacao) => (
-                                    <option key={lotacao.id} value={lotacao.id}>
-                                        {lotacao.nome}
+                                    {unidadeInList?.map((unidade) => (
+                                    <option key={unidade.id} value={unidade.id}>
+                                        {unidade.name}
                                     </option>
                                     ))}
                                 </select>
-                                <span>{errors.lotacao_id?.message}</span>
+                                <span>{errors.unidade_id?.message}</span>
                             </div>
                         )}
                     </div>
@@ -188,7 +189,13 @@ export default function SignupForm(){
 
                 <div id="buttons">
                     <button className="form-button" type="button" id="cancel-bnt" >CANCELAR</button>
-                    <button className="form-button" type="submit" id="register-bnt" disabled={!isValid}>REGISTRAR</button>
+                    <button className="form-button" type="submit" id="register-bnt" disabled={!isValid || isSubmitting}>
+                        {isSubmitting && (
+                            <ReloadIcon id="animate-spin"/>
+                        )}
+
+                        {!isSubmitting ? 'REGISTRAR': "CADASTRANDO"}
+                    </button>
                 </div>
             </form>
             <div className="elipse-signup">
