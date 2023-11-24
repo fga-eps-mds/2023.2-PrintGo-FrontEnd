@@ -20,7 +20,7 @@ export default function Home() {
               <div className="containter-button-home">
                 <div className="learn-more">
                   <Button textColor="#036" bgColor="white" borderColor="#036">
-                    Saiba mais
+                    <a id="saibamais" href="/quemsomos">Saiba mais</a>
                   </Button>
                 </div>
               </div>

@@ -186,3 +186,6 @@ reports/*
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/node,react,yarn,sonarqube
+
+# remove yarn lock
+yarn.lock

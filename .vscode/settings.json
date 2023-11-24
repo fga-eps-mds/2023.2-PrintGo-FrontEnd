@@ -1,0 +1,6 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "fga-eps-mds-1",
+        "projectKey": "fga-eps-mds_2023.2-PrintGo-FrontEnd"
+    }
+}
