@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-//import { getPrinterData } from "../api/api";
+import React, { useState } from "react";
 import '../style/pages/viewPrinter.css';
 import ellipse from '../assets/login_ellipse.svg';
 import voltar_vector from '../assets/voltar_vector.svg';
@@ -23,7 +22,7 @@ export default function ViewPrinter(){
     }
 
     // Estado para armazenar os dados do padrão.
-    const [patternData, setPatternData] = useState(
+    const [patternData] = useState(
       {
         id: "",
         tipo: "Multifuncional P&B",
@@ -43,7 +42,7 @@ export default function ViewPrinter(){
     );
 
     // Estado para armazenar os dados da impressora.
-    const [printerData, setPrinterData] = useState(
+    const [printerData] = useState(
       {
         id: "",
         padrao_id: "",
@@ -60,21 +59,6 @@ export default function ViewPrinter(){
         unidade: "2ª Delegacia Municipal de Goiânia"
       }
     );
-
-    /*
-    useEffect( () => {
-        // Função para buscar os dados na API.
-        async function fetchPrinterData() {
-            try {
-                const data = await getPrinterData();
-                setPrinterData(); // Atualiza o estado com os dados recebidos.
-            } catch (error) {
-                console.error('Erro ao obter os dados do serviço:', error);
-            }
-        }
-        fetchPrinterData(); // Chame a função de busca.
-    }, []);
-    */
 
     return(
         <>
