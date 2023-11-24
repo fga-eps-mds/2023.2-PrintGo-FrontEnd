@@ -58,14 +58,14 @@ export default function ChangePassword() {
     <>
       <Navbar />
       <div className="change-password-container">
-        <div className="image-container">
+        <div className="change-password-image-container">
           <img src={ChangePasswordPeople} alt="Pessoas" />
         </div>
-        <div className="form-container">
-          <form className="form" onSubmit={handleSubmit}>
-            <div className="input-container">
-              <div className="form-title">Mudar senha</div>
-              <div className="form-group">
+        <div className="change-password-form-container">
+          <form className="change-password-form" onSubmit={handleSubmit}>
+            <div className="change-password-input-container">
+              <div className="change-password-form-title">Mudar senha</div>
+              <div className="change-password-form-group">
                 <div className="input-form-container">
                   <label className="label-change-password">Nova Senha</label>
                   <input
@@ -91,9 +91,8 @@ export default function ChangePassword() {
                   />
                 </div>
               </div>
-              <div className="button-container">
+              <div className="change-password-button-container">
                 <button
-                  className="button"
                   type="submit"
                 >
                   Confirmar
