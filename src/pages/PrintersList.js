@@ -12,7 +12,6 @@ import { getPrinters, togglePrinter } from "../services/printerService";
 
 
 export default function PrintersList() {
-  const [impressoras, setImpressoras] = useState([]);
 
   useEffect( () => {
     async function fetchData() {

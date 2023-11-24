@@ -22,7 +22,7 @@ export default function ViewPrinter(){
     }
 
     // Estado para armazenar os dados do padrão.
-    const [patternData] = useState(
+    const [patternData, setPatternData] = useState(
       {
         id: "",
         tipo: "Multifuncional P&B",
@@ -42,7 +42,7 @@ export default function ViewPrinter(){
     );
 
     // Estado para armazenar os dados da impressora.
-    const [printerData] = useState(
+    const [printerData, setPrinterData] = useState(
       {
         id: "",
         padrao_id: "",

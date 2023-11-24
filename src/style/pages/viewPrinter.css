@@ -114,8 +114,6 @@
     height: 100vh;
 }
 
-/**/
-
 @media (max-width: 1210px) {
     .container-viewprinter{
         display: flex;
