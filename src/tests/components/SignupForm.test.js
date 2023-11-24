@@ -1,16 +1,14 @@
 import React from 'react';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import SignupForm from '../../components/forms/SignupForm';
-import { getLotacoes } from "../../services/lotacaoService";
+import { getUnidades } from "../../services/unidadeService";
 import { createUser } from "../../services/userService";
-import { getPoliceUnits } from "../../services/policeUnitService";
 
 import '@testing-library/jest-dom/extend-expect';
 
 jest.mock('../../api/api', () => ({
-  getLotacoes: jest.fn(),
+  getUnidades: jest.fn(),
   createUser: jest.fn(),
-  getPoliceUnits: jest.fn(),
 }));
 
 describe('SignupForm', () => {
