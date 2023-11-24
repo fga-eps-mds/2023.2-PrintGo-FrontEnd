@@ -5,15 +5,16 @@ body {
 
 .login-right-content{
   width: 60vw;
-  height: 100vh;
   display: flex;
   justify-content: flex-end;
+  
 }
 .container-login {
   display: flex;
   gap: 12.375rem;
   
   background-color: transparent !important;
+  
 }
 
 .login-box {
@@ -137,7 +138,6 @@ body {
   bottom: 2px;
   color:#003366;
   overflow: hidden;
-
 }
 
 .ellipse-login img{
