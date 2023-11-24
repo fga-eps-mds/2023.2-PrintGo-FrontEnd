@@ -104,50 +104,50 @@ export default function SignupForm(){
             <header id="form-header">
                 Cadastro
             </header>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div id="input-group">
-                    <div id="input-line">
-                        <div id="input-box">
+            <form id="signup-form"onSubmit={handleSubmit(onSubmit)}>
+                <div id="signup-input-group">
+                    <div id="signup-input-line">
+                        <div id="signup-input-box">
                             <label>Nome<span>*</span></label>
                             <input {...register("nome", {required: true} )} placeholder="Nome" />
                             <span>{errors.nome?.message}</span>
                         </div>
 
-                        <div id="input-box">
+                        <div id="signup-input-box">
                             <label>Documento<span>*</span></label>
                             <input {...register("documento", {required: true})} placeholder="CPF ou CNPF" />
                             <span>{errors.documento?.message}</span>
                         </div>
                     </div>
-                    <div id="input-line">
-                        <div id="input-box">
+                    <div id="signup-input-line">
+                        <div id="signup-input-box">
                             <label>E-mail<span>*</span></label>
                             <input {...register("email", {required: true} )} type="email" placeholder="Email" />
                             <span>{errors.email?.message}</span>
                         </div>
 
-                        <div id="input-box">
+                        <div id="signup-input-box">
                             <label>Confirmar E-mail<span>*</span></label>
                             <input {...register("emailConfirmar", {required: true})} placeholder="Confirmar Email" />
                             <span data-testid="email-error">{errors.emailConfirmar?.message}</span>
                         </div>
                     </div>
 
-                    <div id="input-line">
-                        <div id="input-box">
+                    <div id="signup-input-line">
+                        <div id="signup-input-box">
                             <label>Senha<span>*</span></label>
                             <input {...register("senha", {required: true})} placeholder="Senha" type="password"/>
                             <span>{errors.senha?.message}</span>
                             <p id="input-description">A senha deve conter pelo menos 8 caracteres, 1 letra maiúscula, 1 minuscula, 1 número e um caractere especial</p>
                         </div>
-                        <div id="input-box">
+                        <div id="signup-input-box">
                             <label>Confirmar Senha<span>*</span></label>
                             <input {...register("senhaConfirmar", {required: true})} placeholder="Confirmar Senha" type="password"/>
                             <span>{errors.senhaConfirmar?.message}</span>
                         </div>
                     </div>
-                    <div id="input-line">
-                        <div id="input-box">
+                    <div id="signup-input-line">
+                        <div id="signup-input-box">
                             <label>Unidade de pai<span>*</span></label>
                             <select onChange={handleWorkstationChange}>
                                 <option value="">Selecione a Unidade de policia</option>
@@ -159,7 +159,7 @@ export default function SignupForm(){
                             </select>
                         </div>
                         {displayLotacoes && (
-                            <div id="input-box">
+                            <div id="signup-input-box">
                                 <label>Unidade Filha <span>*</span></label>
                                 <select {...register("unidade_id", {required: "Lotação é obrigatória"})}>
                                     <option value="">Selecione a Lotação</option>
@@ -173,9 +173,9 @@ export default function SignupForm(){
                             </div>
                         )}
                     </div>
-                    <div id="input-line">
-                        <div id="input-box">
-                            <div id="input-checkbox">
+                    <div id="signup-input-line">
+                        <div id="signup-input-box">
+                            <div id="signup-input-checkbox">
                                 <input
                                     id="checkbox"
                                     type="checkbox"
@@ -187,7 +187,7 @@ export default function SignupForm(){
                     </div>
                 </div>
 
-                <div id="buttons">
+                <div id="signup-buttons">
                     <button className="form-button" type="button" id="cancel-bnt" >CANCELAR</button>
                     <button className="form-button" type="submit" id="register-bnt" disabled={!isValid || isSubmitting}>
                         {isSubmitting && (

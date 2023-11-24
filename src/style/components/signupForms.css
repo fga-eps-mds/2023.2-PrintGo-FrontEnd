@@ -2,18 +2,22 @@
     background-color: #FFFFFF;
     border-radius: 10px;
     display: flex;
-    width: 30vw;
-    height: 100%;
+    width: 48vw;
+    height: 89vh;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-    padding: 1rem 5rem;
+    /*padding: 1rem 5rem;*/
     margin-right: 8vw;
     margin-top: 2%;
     margin-bottom: 1vh;
+
 }
 
+#signup-form{
+    width: 43vw;
+}
 @keyframes spin {
     from {
         transform: rotate(0deg);
@@ -34,21 +38,24 @@
     margin-bottom: 16px;
 }
 
-#input-group {
+#signup-input-group {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 16px 0;
+    width: 43vw;
+    
 }
 
-#input-line {
+#signup-input-line {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 10px; 
+    width: 43vw;
+    
 }
 
-#input-box {
+#signup-input-box {
     flex: 1;
     min-width: 100px; /* Largura mínima para cada input */
     display: flex;
@@ -57,36 +64,37 @@
     margin-bottom: 16px;
     padding: 0 10px;
     box-sizing: border-box;
+    
 }
 
 #label-checkbox {
     top: 10rem;
 }
 
-#input-box label {
+#signup-input-box label {
     color: #003366;
     display: block;
     margin-bottom: 5px;
 }
 
-#input-box span {
+#signup-input-box span {
     color: #9f0805;
 }
 
-#input-checkbox {
+#signup-input-checkbox {
     margin-top: 2rem;
     display: flex;
     align-items: center;
 }
 
-#input-checkbox input {
+#signup-input-checkbox input {
     margin:0 12px 0 0;
     vertical-align: middle;
     position: relative;
     top: -3px;
 }
 
-#input-box input{
+#signup-input-box input{
     font-size: 16px;
     border: 1px solid #003366;
     border-color: #003366;
@@ -94,7 +102,7 @@
     padding: 5px;
 }
 
-#input-box select{
+#signup-input-box select{
     font-size: 16px;
     font-size: 1rem;border: 1px solid #003366;
     border-color: #003366;
@@ -103,9 +111,11 @@
     color: #6C6C6C;
 }
 
-#buttons {
+#signup-buttons {
+    
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .form-button {
