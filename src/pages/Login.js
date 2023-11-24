@@ -3,7 +3,7 @@ import "../style/pages/login.css";
 import pessoas from "../assets/pessoas.svg";
 import login_ellipse from "../assets/login_ellipse.svg";
 import NavbarSimple from "../components/navbar/NavbarSimple";
-
+import { Link } from "react-router-dom";
 import { login } from "../api/api";
 import { useNavigate } from "react-router-dom";
 
@@ -34,11 +34,11 @@ export default function Login() {
 
     try {
       const token = await login(email, password);
-      localStorage.setItem('jwt', token);
-      navigate('/home');
+      localStorage.setItem("jwt", token);
+      navigate("/home");
     } catch (error) {
       console.error(error);
-      setLoginError('E-mail ou senha incorreto.');
+      setLoginError("E-mail ou senha incorreto.");
     }
   };
 
@@ -90,7 +90,7 @@ export default function Login() {
                       type="submit"
                       disabled={!isFormValid}
                     >
-                      LOGIN
+                      <Link to="//homeCompleta">LOGIN</Link>
                     </button>
                   </div>
                   <div className="button-login-container">

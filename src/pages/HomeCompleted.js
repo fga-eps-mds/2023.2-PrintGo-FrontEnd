@@ -1,5 +1,5 @@
 import React from "react";
-import "../style/pages/home.css";
+import "../style/pages/homeCompleted.css";
 import Button from "../components/Button";
 import home_image from "../assets/home_image.svg";
 import elipse from "../assets/home_elipse.svg";
