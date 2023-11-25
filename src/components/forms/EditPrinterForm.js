@@ -79,7 +79,7 @@ export default function EditPrinterForm() {
         </div>
         <div id="buttons">
           <button className="form-button" type="button" id="cancelar-bnt">CANCELAR</button>
-          <button className="form-button" type="submit" id="editar-bnt">EDITAR</button>
+          <button className="form-button" type="submit" id="editar-bnt">SALVAR</button>
         </div>
       </form>
       <div className="elipse-signup">
