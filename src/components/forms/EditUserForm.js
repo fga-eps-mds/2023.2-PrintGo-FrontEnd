@@ -14,6 +14,7 @@ const fieldLabels = {
     nome: 'Nome',
     documento: 'Documento',
     email: 'E-mail',
+    confirmarEmail: 'Confirmar E-mail',
     unidadePai: 'Unidade Pai',
     unidadeFilha: 'Unidade Filho'
 };
@@ -22,6 +23,7 @@ const testObject = {
     nome: 'João da Silva',
     documento: '222.222.222-10',
     email: 'joao@gmail.com',
+    confirmarEmail: 'joao@gmail.com',
     unidadePai: 'Unidade pai',
     unidadeFilha: 'Unidade filho'
 };
