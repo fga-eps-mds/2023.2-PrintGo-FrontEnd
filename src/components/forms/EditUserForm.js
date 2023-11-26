@@ -15,8 +15,8 @@ const fieldLabels = {
     documento: 'Documento',
     email: 'E-mail',
     confirmarEmail: 'Confirmar E-mail',
-    unidadePai: 'Unidade Pai',
-    unidadeFilha: 'Unidade Filho'
+    unidadePai: 'Selecione Unidade Pai',
+    unidadeFilha: 'Selecione Unidade Filho'
 };
 
 const testObject = {
@@ -136,7 +136,7 @@ export default function EditUserForm(){
                 {Object.entries(fieldLabels).map(([key, field]) => (
                     <div id="input-line" key={key}>
                     <div id="input-box">
-                        <label>{field.charAt(0).toUpperCase() + field.slice(1)}<span>*</span></label>
+                        <label>{field.charAt(0).toUpperCase() + field.slice(1)}<span>*</span></label> 
                         {key === 'unidadePai' || key === 'unidadeFilha' ? (
                         <select
                             {...register(key)}
@@ -147,7 +147,7 @@ export default function EditUserForm(){
                             }
                             value={key === 'unidadePai' ? selectedUnidadePai : selectedUnidadeFilho}
                         >
-                            <option value="">Selecione uma unidade</option>
+                            <option value=''>Selecione uma unidade</option>
                             {unidade.map((option) => (
                             <option key={option.id} value={option.id}>
                                 {option.name}
