@@ -60,6 +60,8 @@ export default function EditUserForm(){
     const [unidade, setUnidade] = useState([]);
     const [unidadeInList, setUnidadeInList] = useState([]);
     const [displayLotacoes, setDisplayLotacoes] = useState(false);
+    const [selectedUnidadePai, setSelectedUnidadePai] = useState('');
+    const [selectedUnidadeFilho, setSelectedUnidadeFilho] = useState('');
 
     const {
         register,
@@ -129,20 +131,39 @@ export default function EditUserForm(){
             <header id="edit-user-form-header">
                 Editar usuário
             </header>
-            <form id="edit-user-form"onSubmit={handleSubmit(onSubmit)}>
+            <form id="edit-user-form" onSubmit={handleSubmit(onSubmit)}>
                 <div id="edit-user-input-group">
-                    {Object.entries(fieldLabels).map(([key, field]) => (
-                        <div id="input-line" key={key}>
-                            <div id="input-box">
-                                <label>{field.charAt(0).toUpperCase() + field.slice(1)}<span>*</span></label>
-                                <input
-                                    {...register(key)}
-                                    placeholder={field.includes('data') ? 'DD/MM/AAAA' : field.charAt(0).toUpperCase() + field.slice(1)}
-                                />
-                                <span>{errors[key]?.message}</span>
-                            </div>
-                        </div>
-                    ))}
+                {Object.entries(fieldLabels).map(([key, field]) => (
+                    <div id="input-line" key={key}>
+                    <div id="input-box">
+                        <label>{field.charAt(0).toUpperCase() + field.slice(1)}<span>*</span></label>
+                        {key === 'unidadePai' || key === 'unidadeFilha' ? (
+                        <select
+                            {...register(key)}
+                            onChange={(e) =>
+                            key === 'unidadePai'
+                                ? (setSelectedUnidadePai(e.target.value), handleWorkstationChange(e))
+                                : setSelectedUnidadeFilho(e.target.value)
+                            }
+                            value={key === 'unidadePai' ? selectedUnidadePai : selectedUnidadeFilho}
+                        >
+                            <option value="">Selecione uma unidade</option>
+                            {unidade.map((option) => (
+                            <option key={option.id} value={option.id}>
+                                {option.name}
+                            </option>
+                            ))}
+                        </select>
+                        ) : (
+                        <input
+                            {...register(key)}
+                            placeholder={field.includes('data') ? 'DD/MM/AAAA' : field.charAt(0).toUpperCase() + field.slice(1)}
+                        />
+                        )}
+                        <span>{errors[key]?.message}</span>
+                    </div>
+                    </div>
+                ))}
                 </div>
 
                 <div id="edit-user-buttons">
