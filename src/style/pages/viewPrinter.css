@@ -35,18 +35,28 @@
 
 /* Header */
 
-#viewprinter-card #card-header {
+#viewprinter-card-header {
     width: 100%;
     margin-top: 10px;
     display: block;
 }
 
+/*
 #viewprinter-card #card-header a {
     font-weight: bold;
     font-size: 22px;
     color: #003366;
     margin-left: 8px;
     text-decoration: none;
+}
+*/
+
+#viewprinter-card-header a {
+  font-weight: bold;
+  font-size: 22px;
+  color: #003366;
+  margin-left: 8px;
+  text-decoration: none;
 }
 
 /* Infos */
