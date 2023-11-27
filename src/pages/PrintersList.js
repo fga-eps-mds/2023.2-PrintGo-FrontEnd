@@ -34,38 +34,7 @@ export default function PrintersList() {
   const [modalTitle, setModalTitle] = useState('');
   const [modalBodytext, setModalBodytext] = useState('');
   const [selectedPrinter, setSelectedPrinter] = useState(null);
-  const [printers, setPrinters] = useState([
-    {
-      "id": 1,
-      "padrao": {
-        "modelo": "HP Inkjet"
-      },
-      "ip": "192.168.1.100",
-      "numeroSerie": "ABC123456",
-      "codigoLocadora": "L123",
-      "contadorInstalacao": 500,
-      "dataInstalacao": "2023-11-24T10:00:00.000Z",
-      "dataUltimoContador": "2023-11-25T15:30:00.000Z",
-      "unidadeId": 789,
-      "status": "ATIVO",
-    },
-    {
-      "id": 2,
-      "padrao": {
-        "modelo": "Epson Laserjet"
-      },
-      "ip": "192.168.1.101",
-      "numeroSerie": "XYZ789012",
-      "codigoLocadora": "L456",
-      "contadorInstalacao": 700,
-      "dataInstalacao": "2023-11-22T14:45:00.000Z",
-      "dataUltimoContador": "2023-11-25T12:45:00.000Z",
-      "unidadeId": 789,
-      "status": "DESATIVADO",
-    }
-    
-
-  ]);
+  const [printers, setPrinters] = useState([]);
 
 
 // modal para desativar impressora
