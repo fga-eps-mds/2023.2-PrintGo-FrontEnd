@@ -96,7 +96,7 @@ export default function PrintersList() {
       const {
         codigoLocadora,
         ip,
-        modelo,
+        padrao,
         numeroSerie,
       } = printer;
   
@@ -104,7 +104,7 @@ export default function PrintersList() {
         search === '' ||
         codigoLocadora.toLowerCase().includes(searchLower) ||
         ip.toLowerCase().includes(searchLower) ||
-        modelo.toLowerCase().includes(searchLower) ||
+        padrao.modelo.toLowerCase().includes(searchLower) ||
         numeroSerie.toLowerCase().includes(searchLower)
       );
     }).filter(printer => {
