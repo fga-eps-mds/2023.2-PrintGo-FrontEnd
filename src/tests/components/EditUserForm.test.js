@@ -152,4 +152,10 @@ describe('EditUserForm Tests', () => {
 
   });
 
+  test('renders additional info if condition is true', () => {
+    render(<EditUserForm {...props} />);
+  
+    expect(screen.getByText('Additional Info')).toBeInTheDocument();
+  });
+
 });
