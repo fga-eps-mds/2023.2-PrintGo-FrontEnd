@@ -108,9 +108,11 @@ export default function SignupForm(){
                 <div id="signup-input-group">
                     <div id="signup-input-line">
                         <div id="signup-input-box">
-                            <label htmlFor="nome">Nome<span>*</span></label>
-                            <input {...register("nome", {required: true} )} id="nome" placeholder="Nome" />
-                            <span>{errors.nome?.message}</span>
+                            <label>
+                                Nome<span>*</span>
+                                <input {...register("nome", {required: true} )} placeholder="Nome" />
+                                <span>{errors.nome?.message}</span>
+                            </label>
                         </div>
 
                         <div id="signup-input-box">
