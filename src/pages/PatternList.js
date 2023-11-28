@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import "../style/pages/printersList.css";
+import "../style/pages/patternList.css";
 import { Link } from "react-router-dom";
 import Search from '../assets/Search.svg';
 import Filter from '../assets/Filter.svg';
@@ -25,24 +25,59 @@ export default function PatternList() {
         tipo: "Multifuncional Colorida", 
         modelo: "PIXMA MG3620",
         marca: "Canon",
-        ativado: true
+        status: "ATIVO"
       },
       {
         id_padrao: 2,
         tipo: "Laser",
         modelo: "LaserJet Pro M404dn",
         marca: "HP",
-        ativado: true
+        status: "ATIVO"
       },
       {
         id_padrao: 3,
         tipo: "Jato de Tinta",
         modelo: "EcoTank L3150",
         marca: "Epson",
-        ativado: false
+        status: "DESATIVADO"
       },
     ]
   )
+
+  //qual filtro esta sendo aplicado
+  function filterBeingShown(filter){
+
+    if (filter === 'all') {
+      return 'Todas';
+    } else if (filter === 'active') {
+      return 'Ativas';
+    } else {
+      return 'Desativadas';
+    }
+  }
+
+  //filtros para busca de impressora
+  const filteredPatterns = useMemo(() => {
+    return patterns.filter(pattern => {
+      const searchLower = search.toLowerCase();
+      const {
+        tipo,
+        modelo,
+        marca,
+      } = pattern;
+  
+      return (
+        search === '' ||
+        tipo.toLowerCase().includes(searchLower) ||
+        modelo.toLowerCase().includes(searchLower) ||
+        marca.toLowerCase().includes(searchLower)
+      );
+    }).filter(pattern => {
+      return filter === 'all' ||
+             (filter === 'active' && pattern.status === "ATIVO") ||
+             (filter === 'deactivated' && pattern.status === "DESATIVADO");
+    });
+  }, [patterns, search, filter]);
 
   return (
     <>
@@ -61,11 +96,7 @@ export default function PatternList() {
         <div className="patternlist-header">
           <div className="patternlist-header-title">
             <h2>Padrões de Impressoras Cadastradas</h2>
-            {
-              (filter === 'all' && (<h4>Todas</h4>)) ||
-              (filter === 'active' && (<h4>Ativas</h4>)) ||
-              (filter === 'deactivated' && (<h4>Desativadas</h4>))
-            }
+            <h4 data-testid="filter_beign_shown">{filterBeingShown(filter)}</h4>
           </div>
           
           <div className="patternlist-header-search-filter">
@@ -88,29 +119,11 @@ export default function PatternList() {
           </div>
         </div>
 
-        {patterns.filter((pattern) => {
-          // Filtro de pesquisa.
-          return search.toLowerCase() === ''
-          ? pattern.ativado || !pattern.ativado
-          : pattern.tipo.toLocaleLowerCase().includes(search) ||
-            pattern.modelo.toLocaleLowerCase().includes(search) ||
-            pattern.marca.toLocaleLowerCase().includes(search)
-
-        }).filter((pattern) => {
-          // Filtro por estado.
-          if (filter === 'active') {
-            return pattern.ativado;
-          } else if (filter === 'deactivated') {
-            return !pattern.ativado;
-          } else {
-            return pattern.ativado || !pattern.ativado;
-          }
-
-        }).map((pattern) => (
-          <div key={pattern.id_padrao} className="patternlist-pattern" style={{ color: pattern.ativado ? '' : 'gray'}}>
+        {filteredPatterns.map(pattern => (
+          <div key={pattern.id_padrao} className="patternlist-pattern" style={{ color: pattern.status === "ATIVO" ? '' : 'gray' }}>
             <div className="patternlist-model">
               <h4>Padrão {pattern.marca} - {pattern.modelo} - {pattern.tipo}</h4>
-              {!pattern.ativado && (<h5>Desativada</h5>)}
+              {pattern.status === 'DESATIVADO' && <h5>Desativado</h5>}
             </div>
             
             <div className="patternlist-engine">
