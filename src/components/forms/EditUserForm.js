@@ -139,21 +139,25 @@ export default function EditUserForm(){
                         <label>{field.charAt(0).toUpperCase() + field.slice(1)}<span>*</span></label> 
                         {key === 'unidadePai' || key === 'unidadeFilha' ? (
                         <select
-                            {...register(key)}
-                            onChange={(e) =>
-                            key === 'unidadePai'
-                                ? (setSelectedUnidadePai(e.target.value), handleWorkstationChange(e))
-                                : setSelectedUnidadeFilho(e.target.value)
+                        {...register(key)}
+                        onChange={(e) => {
+                            if (key === 'unidadePai') {
+                                setSelectedUnidadePai(e.target.value);
+                                handleWorkstationChange(e);
+                            } else {
+                                setSelectedUnidadeFilho(e.target.value);
                             }
-                            value={key === 'unidadePai' ? selectedUnidadePai : selectedUnidadeFilho}
-                        >
-                            <option value=''>Selecione uma unidade</option>
-                            {unidade.map((option) => (
+                        }}
+                        value={key === 'unidadePai' ? selectedUnidadePai : selectedUnidadeFilho}
+                    >
+                        <option value=''>Selecione uma unidade</option>
+                        {unidade.map((option) => (
                             <option key={option.id} value={option.id}>
                                 {option.name}
                             </option>
-                            ))}
-                        </select>
+                        ))}
+                    </select>
+                    
                         ) : (
                         <input
                             {...register(key)}
