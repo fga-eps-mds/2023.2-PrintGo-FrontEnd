@@ -192,6 +192,17 @@ describe('EditUserForm Tests', () => {
       expect(screen.getByText('Failed to load data')).toBeInTheDocument();
     });
   });
+
+  test('updates component when props change', () => {
+    const { rerender } = render(<EditUserForm prop={false} />);
+    
+    // Change props
+    rerender(<EditUserForm prop={true} />);
+    
+    // Assert the new state or behavior
+    expect(screen.getByText('New Behavior')).toBeInTheDocument();
+  });
+  
   
   
 
