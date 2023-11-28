@@ -108,11 +108,9 @@ export default function SignupForm(){
                 <div id="signup-input-group">
                     <div id="signup-input-line">
                         <div id="signup-input-box">
-                            <label>
-                                Nome<span>*</span>
-                                <input {...register("nome", {required: true} )} placeholder="Nome" />
-                                <span>{errors.nome?.message}</span>
-                            </label>
+                            <label htmlFor="nome">Nome<span>*</span></label>
+                            <input id="nome" {...register("nome", {required: true} )} placeholder="Nome" />
+                            <span>{errors.nome?.message}</span>
                         </div>
 
                         <div id="signup-input-box">
@@ -123,28 +121,28 @@ export default function SignupForm(){
                     </div>
                     <div id="signup-input-line">
                         <div id="signup-input-box">
-                            <label>E-mail<span>*</span></label>
-                            <input {...register("email", {required: true} )} type="email" placeholder="Email" />
+                            <label htmlFor="email">E-mail<span>*</span></label>
+                            <input id="email" {...register("email", {required: true} )} type="email" placeholder="Email" />
                             <span>{errors.email?.message}</span>
                         </div>
 
                         <div id="signup-input-box">
-                            <label>Confirmar E-mail<span>*</span></label>
-                            <input {...register("emailConfirmar", {required: true})} placeholder="Confirmar Email" />
+                            <label htmlFor="confirmarEmail" >Confirmar E-mail<span>*</span></label>
+                            <input id="confirmarEmail" {...register("emailConfirmar", {required: true})} placeholder="Confirmar Email" />
                             <span data-testid="email-error">{errors.emailConfirmar?.message}</span>
                         </div>
                     </div>
 
                     <div id="signup-input-line">
                         <div id="signup-input-box">
-                            <label>Senha<span>*</span></label>
-                            <input {...register("senha", {required: true})} placeholder="Senha" type="password"/>
+                            <label htmlFor="senha" >Senha<span>*</span></label>
+                            <input id="senha" {...register("senha", {required: true})} placeholder="Senha" type="password"/>
                             <span>{errors.senha?.message}</span>
                             <p id="input-description">A senha deve conter pelo menos 8 caracteres, 1 letra maiúscula, 1 minuscula, 1 número e um caractere especial</p>
                         </div>
                         <div id="signup-input-box">
-                            <label>Confirmar Senha<span>*</span></label>
-                            <input {...register("senhaConfirmar", {required: true})} placeholder="Confirmar Senha" type="password"/>
+                            <label htmlFor="confirmarSenha" >Confirmar Senha<span>*</span></label>
+                            <input id="confirmarSenha" {...register("senhaConfirmar", {required: true})} placeholder="Confirmar Senha" type="password"/>
                             <span>{errors.senhaConfirmar?.message}</span>
                         </div>
                     </div>
