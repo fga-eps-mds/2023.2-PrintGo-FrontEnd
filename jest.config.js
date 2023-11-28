@@ -9,6 +9,7 @@ module.exports = {
     moduleNameMapper: {
       "^@/(.*)$": "<rootDir>/src/$1",
       "\\.(css|less|scss)$": "identity-obj-proxy",
+      "axios": "axios/dist/node/axios.cjs"
     },
     testEnvironment: "jsdom",
     
