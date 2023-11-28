@@ -158,4 +158,32 @@ describe('EditUserForm Tests', () => {
     expect(screen.getByText('Additional Info')).toBeInTheDocument();
   });
 
+  test('calls custom function on button click', () => {
+    const customFunctionMock = jest.fn();
+    render(<EditUserForm onCustomFunction={customFunctionMock} />);
+    
+    fireEvent.click(screen.getByText('Custom Button'));
+    expect(customFunctionMock).toHaveBeenCalled();
+  });
+
+  test('calls custom function on button click', () => {
+    const customFunctionMock = jest.fn();
+    render(<EditUserForm onCustomFunction={customFunctionMock} />);
+
+    
+    fireEvent.click(screen.getByText('Custom Button'));
+    expect(customFunctionMock).toHaveBeenCalled();
+  });
+  
+  test('loads data on component mount', async () => {
+    // Mock API call
+    render(<EditUserForm />);
+    
+    await waitFor(() => {
+      expect(screen.getByText('Loaded Data')).toBeInTheDocument();
+    });
+  });
+  
+  
+
 });
