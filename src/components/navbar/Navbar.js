@@ -52,6 +52,8 @@ const Navbar = () => {
             <div className="dropdown-printers-navbar">
               <Link to="/cadastroimpressora">Cadastro de impressora</Link>
               <Link to="/editarimpressora">Edição de impressora</Link>
+              <Link to="/padraoimpressora">Cadastro de padrão de impressora de impressora</Link>
+              <Link to="/impressorascadastradas">Impressoras cadastradas</Link>
             </div>
           )}
         </button>
