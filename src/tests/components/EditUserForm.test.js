@@ -32,7 +32,7 @@ describe('EditUserForm Tests', () => {
 
     fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'Test User' } });
     fireEvent.change(screen.getByLabelText('E-mail'), { target: { value: 'test@example.com' } });
-    // Add similar events for other inputs
+   
 
     fireEvent.click(screen.getByText('REGISTRAR'));
 
@@ -40,7 +40,7 @@ describe('EditUserForm Tests', () => {
       expect(createUser).toHaveBeenCalledWith(expect.objectContaining({
         nome: 'Test User',
         email: 'test@example.com'
-        // Add your other form fields here
+        
       }));
     });
   });
@@ -52,19 +52,19 @@ describe('EditUserForm Tests', () => {
     await waitFor(() => {
       expect(screen.getByText('Nome é obrigatório')).toBeInTheDocument();
       expect(screen.getByText('Email é obrigatório')).toBeInTheDocument();
-      // Add more assertions for other fields
+     
     });
   });
 
   test('tests dropdown interactions', async () => {
     render(<EditUserForm />);
 
-    // Select a unit
+   
     fireEvent.change(screen.getByLabelText('Selecione Unidade Pai'), {
       target: { value: '1' },
     });
 
-    // Check if child workstations are displayed
+    
     await waitFor(() => {
       expect(screen.getByLabelText('Selecione Unidade Filho')).toHaveOption('3', 'Unidade 3');
     });
@@ -83,7 +83,7 @@ describe('EditUserForm Tests', () => {
     createUser.mockRejectedValue(new Error('API submission error'));
     render(<EditUserForm />);
 
-    // Fill in the form and submit
+
     fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'Test User' } });
     fireEvent.change(screen.getByLabelText('E-mail'), { target: { value: 'test@example.com' } });
     fireEvent.click(screen.getByText('REGISTRAR'));
@@ -93,5 +93,63 @@ describe('EditUserForm Tests', () => {
     });
   });
 
-  // Add more tests for other scenarios and edge cases
+  test('updates fields with testObject values', async () => {
+    render(<EditUserForm />);
+    await waitFor(() => {
+        expect(screen.getByLabelText('Nome').value).toBe('João da Silva');
+        expect(screen.getByLabelText('E-mail').value).toBe('joao@gmail.com');
+        expect(screen.getByLabelText('Confirmar E-mail').value).toBe('joao@gmail.com');
+        expect(screen.getByLabelText('Documento').value).toBe('222.222.222-10');
+    });
+  });
+
+  test('validates email format correctly', async () => {
+    render(<EditUserForm />);
+    fireEvent.change(screen.getByLabelText('E-mail'), { target: { value: 'invalidemail' } });
+    fireEvent.click(screen.getByText('REGISTRAR'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Email inválido')).toBeInTheDocument();
+    });
+  });
+
+  test('checks password match validation', async () => {
+    render(<EditUserForm />);
+    fireEvent.change(screen.getByLabelText('Senha'), { target: { value: 'Password123!' } });
+    fireEvent.change(screen.getByLabelText('Confirmar Senha'), { target: { value: 'Different123!' } });
+    fireEvent.click(screen.getByText('REGISTRAR'));
+
+    await waitFor(() => {
+      expect(screen.getByText('As senhas devem coincidir')).toBeInTheDocument();
+    });
+  });
+
+  test('checks document field validation', async () => {
+    render(<EditUserForm />);
+    fireEvent.change(screen.getByLabelText('Documento'), { target: { value: '123' } });
+    fireEvent.click(screen.getByText('REGISTRAR'));
+
+    await waitFor(() => {
+      expect(screen.getByText('CPF ou CNPJ inválido')).toBeInTheDocument();
+    });
+  });
+
+  test('handles successful user creation', async () => {
+    createUser.mockResolvedValue({ type: 'success' });
+    render(<EditUserForm />);
+
+
+    fireEvent.click(screen.getByText('REGISTRAR'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Usuario cadastrado com sucesso!')).toBeInTheDocument();
+    });
+  });
+
+  test('handles cancel button click', () => {
+    render(<EditUserForm />);
+    fireEvent.click(screen.getByText('CANCELAR'));
+
+  });
+
 });
