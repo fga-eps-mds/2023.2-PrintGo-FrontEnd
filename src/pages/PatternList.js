@@ -1,15 +1,23 @@
-import React, { useState } from "react";
-import "../style/pages/patternList.css";
-import { Link } from "react-router-dom"
+import React, { useState, useMemo, useEffect } from "react";
+import "../style/pages/printersList.css";
+import { Link } from "react-router-dom";
 import Search from '../assets/Search.svg';
 import Filter from '../assets/Filter.svg';
 import Engine from '../assets/engine.svg';
-import Input from "../components/Input";
-// import Modal from '../components/ui/Modal';
+import Input from '../components/Input'; 
+import Modal from '../components/ui/Modal';
 import Navbar from "../components/navbar/Navbar";
 
 export default function PatternList() {
   
+  
+
+  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState('all');
+  // const [modalOpen, setModalOpen] = useState(false);
+  // const [modalTitle, setModalTitle] = useState('');
+  // const [modalBodytext, setModalBodytext] = useState('');
+  // const [selectedPattern, setSelectedPattern] = useState();
   const [patterns, setPatterns] = useState(
     [
       {
@@ -35,13 +43,6 @@ export default function PatternList() {
       },
     ]
   )
-
-  const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState('all');
-  // const [modalOpen, setModalOpen] = useState(false);
-  // const [modalTitle, setModalTitle] = useState('');
-  // const [modalBodytext, setModalBodytext] = useState('');
-  // const [selectedPattern, setSelectedPattern] = useState();
 
   return (
     <>
@@ -69,18 +70,18 @@ export default function PatternList() {
           
           <div className="patternlist-header-search-filter">
             <Input
-              onChange={(e) => setSearch(e.target.value.toLowerCase())}
+              onChange={(e) => setSearch(e.target.value)}
             />
-            <img alt="" src={Search} />
+            <img alt="Search" src={Search} />
 
             <div className="patternlist-filter">
               <img alt="" src={Filter} className="patternlist-filter"></img>
             
               <div className="patternlist-filter-dropdown-container">
                 <div className="patternlist-dropdown-filter">
-                  <Link to="#" onClick={() => {setFilter('all')}}>Todas</Link>
-                  <Link to="#" onClick={() => {setFilter('active')}}>Ativas</Link>
-                  <Link to="#" onClick={() => {setFilter('deactivated')}}>Desativas</Link>
+                  <Link to="#" onClick={() => setFilter('all')}>Todas</Link>
+                  <Link to="#" onClick={() => setFilter('active')}>Ativas</Link>
+                  <Link to="#" onClick={() => setFilter('deactivated')}>Desativas</Link>
                 </div>
               </div>
             </div>
@@ -111,22 +112,6 @@ export default function PatternList() {
               <h4>Padrão {pattern.marca} - {pattern.modelo} - {pattern.tipo}</h4>
               {!pattern.ativado && (<h5>Desativada</h5>)}
             </div>
-            
-            {/* <div className="patternlist-identification" style={{ color: pattern.ativada ? '' : 'gray' }}> 
-              <h6>{pattern.numeroSerie}</h6>
-              <h6>IP: {pattern.ip}</h6>
-              <h6>{pattern.codigo_loc}</h6> 
-            </div> */}
-            
-            {/* <div className="patternlist-location-counter" style={{ color: pattern.ativada ? '' : 'gray' }}>
-              <h6>{pattern.unidade_pai}</h6>
-              <h6>{pattern.unidade_filha}</h6>
-              <h6>{pattern.contador}</h6>
-            </div> */}
-            
-            {/* <div className="patternlist-counter-date" style={{ color: pattern.ativada ? '' : 'gray' }}>
-              <h6>Data do último contador: {pattern.data}</h6>
-            </div> */}
             
             <div className="patternlist-engine">
               <img 
