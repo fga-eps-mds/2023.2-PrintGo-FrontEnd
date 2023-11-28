@@ -116,8 +116,8 @@ export default function SignupForm(){
                         </div>
 
                         <div id="signup-input-box">
-                            <label>Documento<span>*</span></label>
-                            <input {...register("documento", {required: true})} placeholder="CPF ou CNPJ" />
+                            <label htmlFor="documento">Documento<span>*</span></label>
+                            <input id="documento" {...register("documento", {required: true})} placeholder="CPF ou CNPJ" />
                             <span>{errors.documento?.message}</span>
                         </div>
                     </div>
