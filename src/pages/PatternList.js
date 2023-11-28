@@ -10,14 +10,12 @@ import Navbar from "../components/navbar/Navbar";
 
 export default function PatternList() {
   
-  
-
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
-  // const [modalOpen, setModalOpen] = useState(false);
-  // const [modalTitle, setModalTitle] = useState('');
-  // const [modalBodytext, setModalBodytext] = useState('');
-  // const [selectedPattern, setSelectedPattern] = useState();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState('');
+  const [modalBodytext, setModalBodytext] = useState('');
+  const [selectedPattern, setSelectedPattern] = useState();
   const [patterns, setPatterns] = useState(
     [
       {
@@ -43,6 +41,22 @@ export default function PatternList() {
       },
     ]
   )
+
+  // modal para desativar impressora
+  const modalDeactivatePattern = (pattern) => {
+    setSelectedPattern(pattern);
+    setModalTitle("Desativação de padrão");
+    setModalBodytext("Você tem certeza que deseja desativar o padrão?");
+    setModalOpen(true);
+  }
+
+  //modal para ativar impressora
+  const modalActivePattern= (pattern) => {
+    setSelectedPattern(pattern);
+    setModalTitle("Ativação de padrão");
+    setModalBodytext("Você tem certeza que deseja reativar o padrão?");
+    setModalOpen(true);
+  }
 
   //qual filtro esta sendo aplicado
   function filterBeingShown(filter){
@@ -81,83 +95,69 @@ export default function PatternList() {
 
   return (
     <>
-      <Navbar />
-      <div className="patternlist-container"> 
-      {/* ativar futuramente
-        {modalOpen && (
-          <Modal 
-            setOpenModal={setModalOpen} 
-            title={modalTitle} 
-            bodytext={modalBodytext}
-            onConfirm={printerToggle}
-          />
-        )}
-      */}
-        <div className="patternlist-header">
-          <div className="patternlist-header-title">
-            <h2>Padrões de Impressoras Cadastradas</h2>
-            <h4 data-testid="filter_beign_shown">{filterBeingShown(filter)}</h4>
-          </div>
-          
-          <div className="patternlist-header-search-filter">
-            <Input
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <img alt="Search" src={Search} />
 
-            <div className="patternlist-filter">
-              <img alt="" src={Filter} className="patternlist-filter"></img>
+      {modalOpen && (
+        <Modal 
+          setOpenModal={setModalOpen} 
+          title={modalTitle} 
+          bodytext={modalBodytext}
+        />
+      )}
+
+      <>
+
+        <Navbar />
+        <div className="patternlist-container"> 
+          <div className="patternlist-header">
+            <div className="patternlist-header-title">
+              <h2>Padrões de Impressoras Cadastradas</h2>
+              <h4 data-testid="filter_beign_shown">{filterBeingShown(filter)}</h4>
+            </div>
             
-              <div className="patternlist-filter-dropdown-container">
-                <div className="patternlist-dropdown-filter">
-                  <Link to="#" onClick={() => setFilter('all')}>Todas</Link>
-                  <Link to="#" onClick={() => setFilter('active')}>Ativas</Link>
-                  <Link to="#" onClick={() => setFilter('deactivated')}>Desativas</Link>
+            <div className="patternlist-header-search-filter">
+              <Input
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <img alt="Search" src={Search} />
+
+              <div className="patternlist-filter">
+                <img alt="" src={Filter} className="patternlist-filter"></img>
+              
+                <div className="patternlist-filter-dropdown-container">
+                  <div className="patternlist-dropdown-filter">
+                    <Link to="#" onClick={() => setFilter('all')}>Todas</Link>
+                    <Link to="#" onClick={() => setFilter('active')}>Ativas</Link>
+                    <Link to="#" onClick={() => setFilter('deactivated')}>Desativas</Link>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {filteredPatterns.map(pattern => (
-          <div key={pattern.id_padrao} className="patternlist-pattern" style={{ color: pattern.status === "ATIVO" ? '' : 'gray' }}>
-            <div className="patternlist-model">
-              <h4>Padrão {pattern.marca} - {pattern.modelo} - {pattern.tipo}</h4>
-              {pattern.status === 'DESATIVADO' && <h5>Desativado</h5>}
-            </div>
-            
-            <div className="patternlist-engine">
-              <img 
-                alt="" 
-                src={Engine}
-              />
-              <div tabIndex="0" className="patternlist-engine-dropdown">
-                  <div  className="patternlist-pattern-dropdown">
-                      {
-                        /*
-                        (pattern.ativada && 
-                          ( <Link to="#" tabIndex="0" onClick={() => {modalDeactivatePrinter(pattern)}}>
-                              Desativar
-                            </Link>
-                          )
-                        ) || (!pattern.ativada &&
-                          ( <Link to="#" tabIndex="0" onClick={() => {modalActivePrinter(pattern)}}>
-                              Ativar
-                            </Link>
-                          )
-                        ) 
-                        */
+          {filteredPatterns.map(pattern => (
+            <div key={pattern.id_padrao} className="patternlist-pattern" style={{ color: pattern.status === "ATIVO" ? '' : 'gray' }}>
+              <div className="patternlist-model">
+                <h4>Padrão {pattern.marca} - {pattern.modelo} - {pattern.tipo}</h4>
+                {pattern.status === 'DESATIVADO' && <h5>Desativado</h5>}
+              </div>
+              
+              <div className="patternlist-engine">
+                <img alt="" src={Engine}/>
+                <div tabIndex="0" className="patternlist-engine-dropdown">
+                    <div  className="patternlist-pattern-dropdown">
+                      {pattern.status === "ATIVO"
+                        ? <Link to="#" tabIndex="0" onClick={() => modalDeactivatePattern(pattern)}>Desativar</Link>
+                        : <Link to="#" tabIndex="0" onClick={() => modalActivePattern(pattern)}>Ativar</Link>
                       }
-                    <Link to="#" tabIndex="0">Editar</Link>
-                  </div>
-              </div> 
+                      <Link to="#" tabIndex="0">Editar</Link>
+                    </div>
+                </div> 
+              </div>
             </div>
-
-
-          </div>
-        ))
-        }
-      </div>
+          ))
+          }
+        </div>
+      </>
     </>
   );
 }
