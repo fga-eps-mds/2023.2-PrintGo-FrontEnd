@@ -90,7 +90,7 @@ export default function Login() {
                       type="submit"
                       disabled={!isFormValid}
                     >
-                      <Link to="//homeCompleta">LOGIN</Link>
+                      <Link to="/homeCompleta">LOGIN</Link>
                     </button>
                   </div>
                   <div className="button-login-container">
