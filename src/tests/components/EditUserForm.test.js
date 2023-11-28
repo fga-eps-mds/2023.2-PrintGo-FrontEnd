@@ -184,6 +184,15 @@ describe('EditUserForm Tests', () => {
     });
   });
   
+  test('displays error message on API failure', async () => {
+    // Mock API failure
+    render(<EditUserForm />);
+    
+    await waitFor(() => {
+      expect(screen.getByText('Failed to load data')).toBeInTheDocument();
+    });
+  });
+  
   
 
 });
