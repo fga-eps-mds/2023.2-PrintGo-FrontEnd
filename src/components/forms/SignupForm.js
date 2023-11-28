@@ -148,7 +148,7 @@ export default function SignupForm(){
                     </div>
                     <div id="signup-input-line">
                         <div id="signup-input-box">
-                            <label>Unidade pai<span>*</span></label>
+                            <label htmlFor="unidadePai">Unidade pai<span>*</span></label>
                             <select onChange={handleWorkstationChange}>
                                 <option value="">Selecione a Unidade de policia</option>
                                 {unidade?.map((unit) => (
@@ -160,10 +160,7 @@ export default function SignupForm(){
                         </div>
                         {displayLotacoes && (
                             <div id="signup-input-box">
-                                <label>
-                                    Unidade Filha 
-                                    <span>*</span>
-                                </label>
+                                <label>Unidade Filha<span>*</span></label>
                                 <select {...register("unidade_id", {required: "Lotação é obrigatória"})}>
                                     <option value="">Selecione a Lotação</option>
                                     {unidadeInList?.map((unidade) => (
