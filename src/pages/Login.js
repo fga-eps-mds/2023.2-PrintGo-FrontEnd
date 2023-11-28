@@ -47,6 +47,7 @@ export default function Login() {
   return (
     <>
       <NavbarSimple />
+      
       <div className="container-login">
         <img src={pessoas} alt="Pessoas" className="persons" />
         <div className="login-right-content">
