@@ -50,8 +50,8 @@ const Navbar = () => {
           Impressoras <FiChevronDown />
           {printerDropdownOpen && (
             <div className="dropdown-printers-navbar">
-              <Link to="#">Cadastro de impressora</Link>
-              <Link to="#">Edição de impressora</Link>
+              <Link to="/cadastroimpressora">Cadastro de impressora</Link>
+              <Link to="/editarimpressora">Edição de impressora</Link>
             </div>
           )}
         </button>
