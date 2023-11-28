@@ -52,7 +52,7 @@ export default function Contact() {
               />
             </div>
             <div className="Subject-input">
-              <label>Assunto</label>
+              <label htmlFor="assunto">Assunto</label>
               <textarea
                 placeholder="Assunto"
                 className="Larger-input"
