@@ -203,6 +203,16 @@ describe('EditUserForm Tests', () => {
     expect(screen.getByText('New Behavior')).toBeInTheDocument();
   });
   
+  test('handles empty data correctly', () => {
+    render(<EditUserForm data={[]} />);
+    
+    expect(screen.getByText('No data available')).toBeInTheDocument();
+  });
+
+  test('cleans up on unmount', () => {
+    const { unmount } = render(<EditUserForm />);
+    unmount();
+  });
   
   
 
