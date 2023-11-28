@@ -108,8 +108,8 @@ export default function SignupForm(){
                 <div id="signup-input-group">
                     <div id="signup-input-line">
                         <div id="signup-input-box">
-                            <label>Nome<span>*</span></label>
-                            <input {...register("nome", {required: true} )} placeholder="Nome" />
+                            <label htmlFor="nome">Nome<span>*</span></label>
+                            <input {...register("nome", {required: true} )} id="nome" placeholder="Nome" />
                             <span>{errors.nome?.message}</span>
                         </div>
 
@@ -160,7 +160,10 @@ export default function SignupForm(){
                         </div>
                         {displayLotacoes && (
                             <div id="signup-input-box">
-                                <label>Unidade Filha <span>*</span></label>
+                                <label>
+                                    Unidade Filha 
+                                    <span>*</span>
+                                </label>
                                 <select {...register("unidade_id", {required: "Lotação é obrigatória"})}>
                                     <option value="">Selecione a Lotação</option>
                                     {unidadeInList?.map((unidade) => (
