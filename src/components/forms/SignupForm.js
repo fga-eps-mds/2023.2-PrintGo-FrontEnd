@@ -160,7 +160,7 @@ export default function SignupForm(){
                         </div>
                         {displayLotacoes && (
                             <div id="signup-input-box">
-                                <label>Unidade Filha<span>*</span></label>
+                                <label htmlFor="unidadeFilha">Unidade Filha<span>*</span></label>
                                 <select {...register("unidade_id", {required: "Lotação é obrigatória"})}>
                                     <option value="">Selecione a Lotação</option>
                                     {unidadeInList?.map((unidade) => (
@@ -181,7 +181,7 @@ export default function SignupForm(){
                                     type="checkbox"
                                     {...register("isAdmin")}
                                 />
-                                <label id="label-checkbox">Usuário é administrador?</label>
+                                <label htmlFor="label-checkbox" id="label-checkbox">Usuário é administrador?</label>
                             </div>
                         </div>
                     </div>
