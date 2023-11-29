@@ -4,6 +4,7 @@ import '@testing-library/jest-dom';
 import EditUserForm from '../../components/forms/EditUserForm';
 import { getUnidades, createUser } from "../../services/unidadeService";
 
+
 // Mocking the external services
 jest.mock("../../services/unidadeService", () => ({
   getUnidades: jest.fn(),
@@ -213,7 +214,23 @@ describe('EditUserForm Tests', () => {
     const { unmount } = render(<EditUserForm />);
     unmount();
   });
-  
+
+  test('delays a console log by 3 seconds on form submit', async () => {
+    jest.useFakeTimers();
+    jest.spyOn(global, 'setTimeout');
+
+    render(<EditUserForm />);
+
+    fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'Test User' } });
+    fireEvent.change(screen.getByLabelText('E-mail'), { target: { value: 'test@example.com' } });
+    fireEvent.click(screen.getByText('REGISTRAR'));
+
+    await waitFor(() => {
+      expect(setTimeout).toHaveBeenCalledTimes(1);
+      expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 3000);
+    });
+
+  });
   
 
 });
