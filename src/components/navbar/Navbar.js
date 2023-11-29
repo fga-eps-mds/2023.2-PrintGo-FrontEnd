@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Importe o Link
 import "../../style/components/navbar.css";
 import logo from "../../assets/logo 3.svg";
@@ -8,6 +8,7 @@ import { FiChevronDown } from "react-icons/fi";
 const Navbar = () => {
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [printerDropdownOpen, setPrinterDropdownOpen] = useState(false);
+
 
   const toggleUserDropdown = () => {
     setUserDropdownOpen(!userDropdownOpen)
@@ -39,7 +40,7 @@ const Navbar = () => {
           {userDropdownOpen && (
             <div className="dropdown-users-navbar">
               <Link to="/cadastro">Cadastro de usuário</Link>
-              <Link to="#">Edição de usuário</Link>
+              <Link to="/editarusuario">Edição de usuário</Link>
             </div>
           )}
         </button>
@@ -50,8 +51,10 @@ const Navbar = () => {
           Impressoras <FiChevronDown />
           {printerDropdownOpen && (
             <div className="dropdown-printers-navbar">
-              <Link to="#">Cadastro de impressora</Link>
-              <Link to="#">Edição de impressora</Link>
+              <Link to="/cadastroimpressora">Cadastro de impressora</Link>
+              <Link to="/padraoimpressora">Cadastro de padrão de impressora</Link>
+              <Link to="/impressorascadastradas">Impressoras cadastradas</Link>
+              <Link to="#">Padrões de impressora cadastrados</Link>
             </div>
           )}
         </button>
