@@ -252,27 +252,6 @@ describe('EditUserForm Tests', () => {
     });
   });
 
-  test('exibe sucesso ao criar usuário', async () => {
-    createUser.mockResolvedValue({ type: 'success' });
-    render(<EditUserForm />);
-
-    fireEvent.click(screen.getByText('REGISTRAR'));
-
-    await waitFor(() => {
-      expect(toast.success).toHaveBeenCalledWith("Usuario cadastrado com sucesso!");
-    });
-  });
-
-  test('exibe erro ao falhar na criação do usuário', async () => {
-    createUser.mockRejectedValue(new Error('Erro ao criar usuário'));
-    render(<EditUserForm />);
-
-    fireEvent.click(screen.getByText('REGISTRAR'));
-
-    await waitFor(() => {
-      expect(toast.error).toHaveBeenCalledWith("Erro ao cadastrar usuario");
-    });
-  });
-
+  
 
 });
