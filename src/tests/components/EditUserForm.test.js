@@ -3,12 +3,19 @@ import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import EditUserForm from '../../components/forms/EditUserForm';
 import { getUnidades, createUser } from "../../services/unidadeService";
-
+import { toast } from 'react-toastify';
 
 // Mocking the external services
 jest.mock("../../services/unidadeService", () => ({
   getUnidades: jest.fn(),
   createUser: jest.fn()
+}));
+
+jest.mock('react-toastify', () => ({
+  toast: {
+    success: jest.fn(),
+    error: jest.fn()
+  }
 }));
 
 describe('EditUserForm Tests', () => {
@@ -231,6 +238,41 @@ describe('EditUserForm Tests', () => {
     });
 
   });
-  
+
+  test('adiciona cargos corretamente ao objeto data', async () => {
+    createUser.mockResolvedValue({ type: 'success' });
+    render(<EditUserForm />);
+    fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'Test User' } });
+    fireEvent.click(screen.getByText('REGISTRAR'));
+    await waitFor(() => {
+      expect(createUser).toHaveBeenCalledWith(expect.objectContaining({
+        nome: 'Test User',
+        cargos: expect.arrayContaining(['USER']) // ou ['USER', 'ADMIN'] se isAdmin for true
+      }));
+    });
+  });
+
+  test('exibe sucesso ao criar usuário', async () => {
+    createUser.mockResolvedValue({ type: 'success' });
+    render(<EditUserForm />);
+
+    fireEvent.click(screen.getByText('REGISTRAR'));
+
+    await waitFor(() => {
+      expect(toast.success).toHaveBeenCalledWith("Usuario cadastrado com sucesso!");
+    });
+  });
+
+  test('exibe erro ao falhar na criação do usuário', async () => {
+    createUser.mockRejectedValue(new Error('Erro ao criar usuário'));
+    render(<EditUserForm />);
+
+    fireEvent.click(screen.getByText('REGISTRAR'));
+
+    await waitFor(() => {
+      expect(toast.error).toHaveBeenCalledWith("Erro ao cadastrar usuario");
+    });
+  });
+
 
 });
