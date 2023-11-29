@@ -2,12 +2,15 @@ import React from 'react';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import EditUserForm from '../../components/forms/EditUserForm';
-import { getUnidades, createUser } from "../../services/userService";
 
-jest.mock('../../services/userService');
+jest.mock('../../services/userService', () => ({
+  getUnidades:jest.fn(),
+  createUser:jest.fn()
+}));
 
-const mockGetUnidades = getUnidades;
-const mockCreateUser = createUser;
+
+const mockGetUnidades = require('../../services/userService').getUnidades;
+const mockCreateUser = require('../../services/userService').createUser;
 
 describe('EditUserForm', () => {
     beforeEach(() => {
