@@ -58,8 +58,6 @@ const editUserSchema = yup.object().shape({
 
 export default function EditUserForm(){
     const [unidade, setUnidade] = useState([]);
-    const [unidadeInList, setUnidadeInList] = useState([]);
-    const [displayLotacoes, setDisplayLotacoes] = useState(false);
     const [selectedUnidadePai, setSelectedUnidadePai] = useState('');
     const [selectedUnidadeFilho, setSelectedUnidadeFilho] = useState('');
 
