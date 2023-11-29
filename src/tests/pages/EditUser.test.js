@@ -51,3 +51,14 @@ test('Image is rendered', () => {
 
   expect(imagem).toBeInTheDocument();
 });
+
+test('background is rendered', () => {
+  render(
+    <BrowserRouter>
+      <EditUserPage/>
+    </BrowserRouter>
+  );
+
+  const divElement = document.querySelector('#edit-user-container')
+  expect(divElement).toBeInTheDocument();
+});
