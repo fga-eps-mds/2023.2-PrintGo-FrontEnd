@@ -9,6 +9,22 @@
     margin-top: 3vh;
 }
 
+#change-password {
+    background-color:#003366;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    width: 18vw;
+    height: 8vh;
+    margin-left: 0.5rem;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+
+}
+
+
+
 @media (max-width: 900px) {
     #edit-user-container img{
         display: none;

@@ -9,6 +9,8 @@ import { getUnidades } from "../../services/unidadeService";
 import { createUser } from "../../services/userService";
 import "../../style/components/editUserForms.css";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { useNavigate } from 'react-router-dom';
+
 
 const fieldLabels = {
     nome: 'Nome',
@@ -62,6 +64,11 @@ export default function EditUserForm(){
     const [selectedUnidadeFilho, setSelectedUnidadeFilho] = useState('');
     const [displayLotacoes,setDisplayLotacoes] = useState ('');
     const [unidadeList, setUnidadeInList] = useState ('');
+    const navigate = useNavigate();
+    const redirectToChangePassword = () => {
+        navigate('/mudarsenha'); 
+    };
+
 
     const {
         register,
@@ -93,7 +100,7 @@ export default function EditUserForm(){
         });
     }, [setValue]);
 
-    
+ 
 
     const onSubmit = async (data) =>  {
 
@@ -168,6 +175,15 @@ export default function EditUserForm(){
                     </div>
                     </div>
                 ))}
+
+            <button 
+                id="change-password" 
+                type="button" 
+               
+                onClick={redirectToChangePassword}
+            >
+                MUDAR SENHA
+            </button>
                 </div>
 
                 <div id="edit-user-buttons">
