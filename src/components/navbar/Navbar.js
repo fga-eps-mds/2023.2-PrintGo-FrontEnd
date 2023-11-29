@@ -54,7 +54,7 @@ const Navbar = () => {
               <Link to="/cadastroimpressora">Cadastro de impressora</Link>
               <Link to="/padraoimpressora">Cadastro de padrão de impressora</Link>
               <Link to="/impressorascadastradas">Impressoras cadastradas</Link>
-              <Link to="#">Padrões de impressora cadastrados</Link>
+              <Link to="/padroescadastrados">Padrões cadastrados</Link>
             </div>
           )}
         </button>

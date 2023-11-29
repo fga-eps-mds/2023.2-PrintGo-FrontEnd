@@ -32,7 +32,7 @@ function App() {
         <Route path="/editarpadrao" element={<EditPattern />} />
         <Route path="/impressorascadastradas" element={<PrintersList />} />
         <Route path="/homecompleta" element={<HomeCompleted />} />
-        <Route path="/listapadroes" element={<PatternList />} />
+        <Route path="/padroescadastrados" element={<PatternList />} />
       </Routes>
     </BrowserRouter>
   );
