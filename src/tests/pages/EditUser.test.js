@@ -38,3 +38,16 @@ test('EditUserForm renders correctly', () => {
     );
   expect(wrapper.baseElement).toBeInTheDocument()
 });
+
+
+test('Image is rendered', () => {
+  render(
+    <BrowserRouter>
+      <EditUserPage/>
+    </BrowserRouter>);
+
+  const imagem = screen.getByRole("img")
+
+
+  expect(imagem).toBeInTheDocument();
+});
