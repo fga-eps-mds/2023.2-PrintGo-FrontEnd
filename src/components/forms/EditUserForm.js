@@ -60,6 +60,8 @@ export default function EditUserForm(){
     const [unidade, setUnidade] = useState([]);
     const [selectedUnidadePai, setSelectedUnidadePai] = useState('');
     const [selectedUnidadeFilho, setSelectedUnidadeFilho] = useState('');
+    const [displayLotacoes,setDisplayLotacoes] = useState ('');
+    const [unidadeList, setUnidadeInList] = useState ('');
 
     const {
         register,
