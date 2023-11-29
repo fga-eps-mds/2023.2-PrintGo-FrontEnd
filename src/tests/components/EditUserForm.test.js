@@ -20,25 +20,25 @@ describe('EditUserForm', () => {
         jest.resetAllMocks();
     });
 
-    it('renders correctly', () => {
+    test('renders correctly', () => {
         render(<EditUserForm />);
         expect(screen.getByText('Editar usuário')).toBeInTheDocument();
         // Verificar outros elementos...
     });
 
-    it('initial state and values are set correctly', () => {
+    test('initial state and values are set correctly', () => {
         render(<EditUserForm />);
         // Verificações do estado inicial...
     });
 
-    it('allows user interaction and form inputs', async () => {
+    test('allows user interaction and form inputs', async () => {
         render(<EditUserForm />);
         userEvent.type(screen.getByLabelText('Nome'), 'João da Silva');
         userEvent.type(screen.getByLabelText('Documento'), '222.222.222-10');
         // Outras interações...
     });
 
-    it('validates form inputs correctly', async () => {
+    test('validates form inputs correctly', async () => {
         render(<EditUserForm />);
         userEvent.click(screen.getByText('REGISTRAR'));
         await waitFor(() => {
@@ -47,7 +47,7 @@ describe('EditUserForm', () => {
         });
     });
 
-    it('makes an API call on form submission', async () => {
+    test('makes an API call on form submission', async () => {
         render(<EditUserForm />);
         // Preenche o formulário...
         userEvent.click(screen.getByText('REGISTRAR'));
@@ -56,7 +56,7 @@ describe('EditUserForm', () => {
         });
     });
 
-    it('handles API response correctly', async () => {
+    test('handles API response correctly', async () => {
         render(<EditUserForm />);
         // Preenche o formulário...
         userEvent.click(screen.getByText('REGISTRAR'));
@@ -65,21 +65,21 @@ describe('EditUserForm', () => {
         });
     });
 
-    it('renders select or input based on key value', () => {
+    test('renders select or input based on key value', () => {
       render(<EditUserForm />);
       // Teste para linhas 53: verificar se os selects para 'unidadePai' e 'unidadeFilha' são renderizados
       expect(screen.getByLabelText('Selecione Unidade Pai')).toBeInTheDocument();
       expect(screen.getByLabelText('Selecione Unidade Filho')).toBeInTheDocument();
   });
 
-  it('updates state on unidadePai selection', async () => {
+  test('updates state on unidadePai selection', async () => {
       render(<EditUserForm />);
       // Teste para linhas 60 a 62: selecionar uma unidade pai e verificar a mudança de estado
       fireEvent.change(screen.getByLabelText('Selecione Unidade Pai'), { target: { value: 'some-unit-id' } });
       // Verificar a atualização correspondente no estado do componente...
   });
 
-  it('shows error messages for invalid inputs', async () => {
+  test('shows error messages for invalid inputs', async () => {
       render(<EditUserForm />);
       // Teste para linha 70: verificar a renderização de mensagens de erro para campos inválidos
       userEvent.click(screen.getByText('REGISTRAR'));
@@ -89,20 +89,20 @@ describe('EditUserForm', () => {
       });
   });
 
-  it('renders input boxes', () => {
+  test('renders input boxes', () => {
       render(<EditUserForm />);
       // Teste para linha 71: verificar se as caixas de entrada são renderizadas
       expect(screen.getByTestId('input-box')).toBeInTheDocument();
   });
 
-  it('renders buttons with correct text', () => {
+  test('renders buttons with correct text', () => {
       render(<EditUserForm />);
       // Teste para linhas 74 e 75: verificar a renderização dos botões
       expect(screen.getByText('CANCELAR')).toBeInTheDocument();
       expect(screen.getByText('REGISTRAR')).toBeInTheDocument();
   });
 
-  it('changes register button text on submitting', async () => {
+  test('changes register button text on submitting', async () => {
       render(<EditUserForm />);
       // Teste para linhas 76,77,78: verificar mudança de texto no botão durante a submissão
       userEvent.click(screen.getByText('REGISTRAR'));
@@ -112,13 +112,13 @@ describe('EditUserForm', () => {
       });
   });
 
-  it('renders elipse image', () => {
+  test('renders elipse image', () => {
       render(<EditUserForm />);
       // Teste para linha 82: verificar se a imagem da elipse é renderizada
       expect(screen.getByAltText('elipse')).toBeInTheDocument();
   });
 
-  it('displays toast messages on form submission', async () => {
+  test('displays toast messages on form submission', async () => {
       render(<EditUserForm />);
       // Teste para linhas 88,89 e 90: verificar exibição de mensagens toast após submissão
       userEvent.type(screen.getByLabelText('Nome'), 'João da Silva');
@@ -129,7 +129,7 @@ describe('EditUserForm', () => {
       });
   });
 
-  it('resets form on successful submission', async () => {
+  test('resets form on successful submission', async () => {
       render(<EditUserForm />);
       // Teste para linha 96: verificar se o formulário é resetado após submissão bem-sucedida
       userEvent.type(screen.getByLabelText('Nome'), 'João da Silva');
@@ -139,7 +139,7 @@ describe('EditUserForm', () => {
       });
   });
 
-  it('handles errors in data fetching', async () => {
+  test('handles errors in data fetching', async () => {
       mockGetUnidades.mockRejectedValue(new Error('Erro ao obter opções do serviço'));
       render(<EditUserForm />);
       // Teste para linhas 98 e 99: verificar o tratamento de erros na busca de dados
