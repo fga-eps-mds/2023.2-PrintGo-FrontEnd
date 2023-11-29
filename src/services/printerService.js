@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const API_URL = "http://localhost:8001";
-//const API_URL = "https://2023-2-print-go-printer-service.vercel.app";
 
 export async function getPrinters() {
   try {
