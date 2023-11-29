@@ -144,7 +144,7 @@ describe('EditUserForm', () => {
       render(<EditUserForm />);
       // Teste para linhas 98 e 99: verificar o tratamento de erros na busca de dados
       await waitFor(() => {
-          // Verificar se o componente lida corretamente com o erro...
+         
       });
   });
 
