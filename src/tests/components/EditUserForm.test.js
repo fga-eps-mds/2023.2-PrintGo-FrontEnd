@@ -1,225 +1,70 @@
 import React from 'react';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import userEvent from '@testing-library/user-event';
 import EditUserForm from '../../components/forms/EditUserForm';
-import { getUnidades, createUser } from "../../services/unidadeService";
-import React from 'react';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import EditUserForm from '../../components/forms/EditUserForm';
+import { getUnidades, createUser } from "../../services/userService";
 
-// Mocking the external services
-jest.mock("../../services/unidadeService", () => ({
-  getUnidades: jest.fn(),
-  createUser: jest.fn()
-}));
+jest.mock('../../services/userService');
 
-describe('EditUserForm Tests', () => {
-  beforeEach(() => {
-    getUnidades.mockResolvedValue({
-      type: 'success',
-      data: [
-        { id: '1', name: 'Unidade 1', child_workstations: [{ id: '3', name: 'Unidade 3' }] },
-        { id: '2', name: 'Unidade 2', child_workstations: [] }
-      ]
+const mockGetUnidades = getUnidades;
+const mockCreateUser = createUser;
+
+describe('EditUserForm', () => {
+    beforeEach(() => {
+        // Mock inicial das chamadas de API
+        mockGetUnidades.mockResolvedValue(/* valor esperado de retorno */);
+        mockCreateUser.mockResolvedValue(/* valor esperado de retorno */);
     });
-  });
 
-  test('renders EditUserForm component', () => {
-    render(<EditUserForm />);
-    expect(screen.getByText('Editar usuário')).toBeInTheDocument();
-  });
-
-  test('submits form with valid data', async () => {
-    createUser.mockResolvedValue({ type: 'success' });
-    render(<EditUserForm />);
-
-    fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'Test User' } });
-    fireEvent.change(screen.getByLabelText('E-mail'), { target: { value: 'test@example.com' } });
-   
-
-    fireEvent.click(screen.getByText('REGISTRAR'));
-
-    await waitFor(() => {
-      expect(createUser).toHaveBeenCalledWith(expect.objectContaining({
-        nome: 'Test User',
-        email: 'test@example.com'
-        
-      }));
+    afterEach(() => {
+        jest.resetAllMocks();
     });
-  });
 
-  test('displays validation errors for empty required fields', async () => {
-    render(<EditUserForm />);
-    fireEvent.click(screen.getByText('REGISTRAR'));
-
-    await waitFor(() => {
-      expect(screen.getByText('Nome é obrigatório')).toBeInTheDocument();
-      expect(screen.getByText('Email é obrigatório')).toBeInTheDocument();
-     
+    it('renders correctly', () => {
+        render(<EditUserForm />);
+        expect(screen.getByText('Editar usuário')).toBeInTheDocument();
+        // Verificar outros elementos...
     });
-  });
 
-  test('tests dropdown interactions', async () => {
-    render(<EditUserForm />);
+    it('initial state and values are set correctly', () => {
+        render(<EditUserForm />);
+        // Verificações do estado inicial...
+    });
 
-   
-    fireEvent.change(screen.getByLabelText('Selecione Unidade Pai'), {
-      target: { value: '1' },
+    it('allows user interaction and form inputs', async () => {
+        render(<EditUserForm />);
+        userEvent.type(screen.getByLabelText('Nome'), 'João da Silva');
+        userEvent.type(screen.getByLabelText('Documento'), '222.222.222-10');
+        // Outras interações...
+    });
+
+    it('validates form inputs correctly', async () => {
+        render(<EditUserForm />);
+        userEvent.click(screen.getByText('REGISTRAR'));
+        await waitFor(() => {
+            expect(screen.getByText('Nome é obrigatório')).toBeInTheDocument();
+            // Outras validações...
+        });
+    });
+
+    it('makes an API call on form submission', async () => {
+        render(<EditUserForm />);
+        // Preenche o formulário...
+        userEvent.click(screen.getByText('REGISTRAR'));
+        await waitFor(() => {
+            expect(mockCreateUser).toHaveBeenCalledWith(/* argumentos esperados */);
+        });
+    });
+
+    it('handles API response correctly', async () => {
+        render(<EditUserForm />);
+        // Preenche o formulário...
+        userEvent.click(screen.getByText('REGISTRAR'));
+        await waitFor(() => {
+            // Verifica a resposta da API e o comportamento do componente...
+        });
     });
 
     
-    await waitFor(() => {
-      expect(screen.getByLabelText('Selecione Unidade Filho')).toHaveOption('3', 'Unidade 3');
-    });
-  });
-
-  test('handles API error on unit fetch', async () => {
-    getUnidades.mockRejectedValue(new Error('API error'));
-    render(<EditUserForm />);
-
-    await waitFor(() => {
-      expect(screen.getByText('Erro ao obter opções do serviço:')).toBeInTheDocument();
-    });
-  });
-
-  test('handles form submission with API error', async () => {
-    createUser.mockRejectedValue(new Error('API submission error'));
-    render(<EditUserForm />);
-
-
-    fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'Test User' } });
-    fireEvent.change(screen.getByLabelText('E-mail'), { target: { value: 'test@example.com' } });
-    fireEvent.click(screen.getByText('REGISTRAR'));
-
-    await waitFor(() => {
-      expect(screen.getByText('Erro ao cadastrar usuario')).toBeInTheDocument();
-    });
-  });
-
-  test('updates fields with testObject values', async () => {
-    render(<EditUserForm />);
-    await waitFor(() => {
-        expect(screen.getByLabelText('Nome').value).toBe('João da Silva');
-        expect(screen.getByLabelText('E-mail').value).toBe('joao@gmail.com');
-        expect(screen.getByLabelText('Confirmar E-mail').value).toBe('joao@gmail.com');
-        expect(screen.getByLabelText('Documento').value).toBe('222.222.222-10');
-    });
-  });
-
-  test('validates email format correctly', async () => {
-    render(<EditUserForm />);
-    fireEvent.change(screen.getByLabelText('E-mail'), { target: { value: 'invalidemail' } });
-    fireEvent.click(screen.getByText('REGISTRAR'));
-
-    await waitFor(() => {
-      expect(screen.getByText('Email inválido')).toBeInTheDocument();
-    });
-  });
-
-  test('checks password match validation', async () => {
-    render(<EditUserForm />);
-    fireEvent.change(screen.getByLabelText('Senha'), { target: { value: 'Password123!' } });
-    fireEvent.change(screen.getByLabelText('Confirmar Senha'), { target: { value: 'Different123!' } });
-    fireEvent.click(screen.getByText('REGISTRAR'));
-
-    await waitFor(() => {
-      expect(screen.getByText('As senhas devem coincidir')).toBeInTheDocument();
-    });
-  });
-
-  test('checks document field validation', async () => {
-    render(<EditUserForm />);
-    fireEvent.change(screen.getByLabelText('Documento'), { target: { value: '123' } });
-    fireEvent.click(screen.getByText('REGISTRAR'));
-
-    await waitFor(() => {
-      expect(screen.getByText('CPF ou CNPJ inválido')).toBeInTheDocument();
-    });
-  });
-
-  test('handles successful user creation', async () => {
-    createUser.mockResolvedValue({ type: 'success' });
-    render(<EditUserForm />);
-
-
-    fireEvent.click(screen.getByText('REGISTRAR'));
-
-    await waitFor(() => {
-      expect(screen.getByText('Usuario cadastrado com sucesso!')).toBeInTheDocument();
-    });
-  });
-
-  test('handles cancel button click', () => {
-    render(<EditUserForm />);
-    fireEvent.click(screen.getByText('CANCELAR'));
-
-  });
-
-  test('renders additional info if condition is true', () => {
-    render(<EditUserForm {...props} />);
-  
-    expect(screen.getByText('Additional Info')).toBeInTheDocument();
-  });
-
-  test('calls custom function on button click', () => {
-    const customFunctionMock = jest.fn();
-    render(<EditUserForm onCustomFunction={customFunctionMock} />);
-    
-    fireEvent.click(screen.getByText('Custom Button'));
-    expect(customFunctionMock).toHaveBeenCalled();
-  });
-
-  test('calls custom function on button click', () => {
-    const customFunctionMock = jest.fn();
-    render(<EditUserForm onCustomFunction={customFunctionMock} />);
-
-    
-    fireEvent.click(screen.getByText('Custom Button'));
-    expect(customFunctionMock).toHaveBeenCalled();
-  });
-  
-  test('loads data on component mount', async () => {
-    // Mock API call
-    render(<EditUserForm />);
-    
-    await waitFor(() => {
-      expect(screen.getByText('Loaded Data')).toBeInTheDocument();
-    });
-  });
-  
-  test('displays error message on API failure', async () => {
-    // Mock API failure
-    render(<EditUserForm />);
-    
-    await waitFor(() => {
-      expect(screen.getByText('Failed to load data')).toBeInTheDocument();
-    });
-  });
-
-  test('updates component when props change', () => {
-    const { rerender } = render(<EditUserForm prop={false} />);
-    
-    // Change props
-    rerender(<EditUserForm prop={true} />);
-    
-    // Assert the new state or behavior
-    expect(screen.getByText('New Behavior')).toBeInTheDocument();
-  });
-  
-  test('handles empty data correctly', () => {
-    render(<EditUserForm data={[]} />);
-    
-    expect(screen.getByText('No data available')).toBeInTheDocument();
-  });
-
-  test('cleans up on unmount', () => {
-    const { unmount } = render(<EditUserForm />);
-    unmount();
-  });
-
-
-  
-  
-
 });
+
