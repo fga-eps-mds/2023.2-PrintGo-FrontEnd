@@ -104,51 +104,51 @@ export default function SignupForm(){
             <header id="form-header">
                 Cadastro
             </header>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div id="input-group">
-                    <div id="input-line">
-                        <div id="input-box">
-                            <label>Nome<span>*</span></label>
-                            <input {...register("nome", {required: true} )} placeholder="Nome" />
+            <form id="signup-form"onSubmit={handleSubmit(onSubmit)}>
+                <div id="signup-input-group">
+                    <div id="signup-input-line">
+                        <div id="signup-input-box">
+                            <label htmlFor="nome">Nome<span>*</span></label>
+                            <input id="nome" {...register("nome", {required: true} )} placeholder="Nome" />
                             <span>{errors.nome?.message}</span>
                         </div>
 
-                        <div id="input-box">
-                            <label>Documento<span>*</span></label>
-                            <input {...register("documento", {required: true})} placeholder="CPF ou CNPF" />
+                        <div id="signup-input-box">
+                            <label htmlFor="documento">Documento<span>*</span></label>
+                            <input id="documento" {...register("documento", {required: true})} placeholder="CPF ou CNPJ" />
                             <span>{errors.documento?.message}</span>
                         </div>
                     </div>
-                    <div id="input-line">
-                        <div id="input-box">
-                            <label>E-mail<span>*</span></label>
-                            <input {...register("email", {required: true} )} type="email" placeholder="Email" />
+                    <div id="signup-input-line">
+                        <div id="signup-input-box">
+                            <label htmlFor="email">E-mail<span>*</span></label>
+                            <input id="email" {...register("email", {required: true} )} type="email" placeholder="Email" />
                             <span>{errors.email?.message}</span>
                         </div>
 
-                        <div id="input-box">
-                            <label>Confirmar E-mail<span>*</span></label>
-                            <input {...register("emailConfirmar", {required: true})} placeholder="Confirmar Email" />
+                        <div id="signup-input-box">
+                            <label htmlFor="confirmarEmail" >Confirmar E-mail<span>*</span></label>
+                            <input id="confirmarEmail" {...register("emailConfirmar", {required: true})} placeholder="Confirmar Email" />
                             <span data-testid="email-error">{errors.emailConfirmar?.message}</span>
                         </div>
                     </div>
 
-                    <div id="input-line">
-                        <div id="input-box">
-                            <label>Senha<span>*</span></label>
-                            <input {...register("senha", {required: true})} placeholder="Senha" type="password"/>
+                    <div id="signup-input-line">
+                        <div id="signup-input-box">
+                            <label htmlFor="senha" >Senha<span>*</span></label>
+                            <input id="senha" {...register("senha", {required: true})} placeholder="Senha" type="password"/>
                             <span>{errors.senha?.message}</span>
                             <p id="input-description">A senha deve conter pelo menos 8 caracteres, 1 letra maiúscula, 1 minuscula, 1 número e um caractere especial</p>
                         </div>
-                        <div id="input-box">
-                            <label>Confirmar Senha<span>*</span></label>
-                            <input {...register("senhaConfirmar", {required: true})} placeholder="Confirmar Senha" type="password"/>
+                        <div id="signup-input-box">
+                            <label htmlFor="confirmarSenha" >Confirmar Senha<span>*</span></label>
+                            <input id="confirmarSenha" {...register("senhaConfirmar", {required: true})} placeholder="Confirmar Senha" type="password"/>
                             <span>{errors.senhaConfirmar?.message}</span>
                         </div>
                     </div>
-                    <div id="input-line">
-                        <div id="input-box">
-                            <label>Unidade de pai<span>*</span></label>
+                    <div id="signup-input-line">
+                        <div id="signup-input-box">
+                            <label htmlFor="unidadePai">Unidade pai<span>*</span></label>
                             <select onChange={handleWorkstationChange}>
                                 <option value="">Selecione a Unidade de policia</option>
                                 {unidade?.map((unit) => (
@@ -159,8 +159,8 @@ export default function SignupForm(){
                             </select>
                         </div>
                         {displayLotacoes && (
-                            <div id="input-box">
-                                <label>Unidade Filha <span>*</span></label>
+                            <div id="signup-input-box">
+                                <label htmlFor="unidadeFilha">Unidade Filha<span>*</span></label>
                                 <select {...register("unidade_id", {required: "Lotação é obrigatória"})}>
                                     <option value="">Selecione a Lotação</option>
                                     {unidadeInList?.map((unidade) => (
@@ -173,21 +173,21 @@ export default function SignupForm(){
                             </div>
                         )}
                     </div>
-                    <div id="input-line">
-                        <div id="input-box">
-                            <div id="input-checkbox">
+                    <div id="signup-input-line">
+                        <div id="signup-input-box">
+                            <div id="signup-input-checkbox">
                                 <input
                                     id="checkbox"
                                     type="checkbox"
                                     {...register("isAdmin")}
                                 />
-                                <label id="label-checkbox">Usuário é administrador?</label>
+                                <label htmlFor="label-checkbox" id="label-checkbox">Usuário é administrador?</label>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div id="buttons">
+                <div id="signup-buttons">
                     <button className="form-button" type="button" id="cancel-bnt" >CANCELAR</button>
                     <button className="form-button" type="submit" id="register-bnt" disabled={!isValid || isSubmitting}>
                         {isSubmitting && (
