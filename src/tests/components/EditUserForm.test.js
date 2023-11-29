@@ -165,8 +165,14 @@ describe('EditUserForm', () => {
          fireEvent.click(screen.getByText('REGISTRAR'));
 
          await waitFor(() =>{
+            expect(screen.getByTestId('animate-spin')).toBeInTheDocument();
             expect(screen.getByAltText('CADASTRANDO')).toBeInTheDocument();
          });
+
+         await waitFor(() =>{
+          expect(screen.queryByTestId('animate-spin')).not.toBeInTheDocument();
+          expect(screen.getByText('REGISTRAR')).toBeInTheDocument();
+       });
 
     });
 
