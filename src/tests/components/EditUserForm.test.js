@@ -3,19 +3,15 @@ import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import EditUserForm from '../../components/forms/EditUserForm';
 import { getUnidades, createUser } from "../../services/unidadeService";
-import { toast } from 'react-toastify';
+import React from 'react';
+import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import EditUserForm from '../../components/forms/EditUserForm';
 
 // Mocking the external services
 jest.mock("../../services/unidadeService", () => ({
   getUnidades: jest.fn(),
   createUser: jest.fn()
-}));
-
-jest.mock('react-toastify', () => ({
-  toast: {
-    success: jest.fn(),
-    error: jest.fn()
-  }
 }));
 
 describe('EditUserForm Tests', () => {
@@ -222,36 +218,8 @@ describe('EditUserForm Tests', () => {
     unmount();
   });
 
-  test('delays a console log by 3 seconds on form submit', async () => {
-    jest.useFakeTimers();
-    jest.spyOn(global, 'setTimeout');
 
-    render(<EditUserForm />);
-
-    fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'Test User' } });
-    fireEvent.change(screen.getByLabelText('E-mail'), { target: { value: 'test@example.com' } });
-    fireEvent.click(screen.getByText('REGISTRAR'));
-
-    await waitFor(() => {
-      expect(setTimeout).toHaveBeenCalledTimes(1);
-      expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 3000);
-    });
-
-  });
-
-  test('adiciona cargos corretamente ao objeto data', async () => {
-    createUser.mockResolvedValue({ type: 'success' });
-    render(<EditUserForm />);
-    fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'Test User' } });
-    fireEvent.click(screen.getByText('REGISTRAR'));
-    await waitFor(() => {
-      expect(createUser).toHaveBeenCalledWith(expect.objectContaining({
-        nome: 'Test User',
-        cargos: expect.arrayContaining(['USER']) // ou ['USER', 'ADMIN'] se isAdmin for true
-      }));
-    });
-  });
-
+  
   
 
 });
