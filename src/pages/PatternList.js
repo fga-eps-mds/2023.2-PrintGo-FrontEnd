@@ -58,6 +58,20 @@ export default function PatternList() {
     setModalOpen(true);
   }
 
+  //ativa e desativa impressora
+  const patternToggle = () => {
+    const updatedPattern = patterns.map(pattern => {
+      if (pattern.id_padrao === selectedPattern.id_padrao) {
+        return { ...pattern, ativada: !pattern.ativada };
+      }
+      return pattern;
+    });
+
+    setPatterns(updatedPattern);
+    setModalOpen(false);
+  };
+
+
   //qual filtro esta sendo aplicado
   function filterBeingShown(filter){
 
@@ -149,7 +163,7 @@ export default function PatternList() {
                         ? <Link to="#" tabIndex="0" onClick={() => modalDeactivatePattern(pattern)}>Desativar</Link>
                         : <Link to="#" tabIndex="0" onClick={() => modalActivePattern(pattern)}>Ativar</Link>
                       }
-                      <Link to="#" tabIndex="0">Editar</Link>
+                      <Link to="/editarpadrao" tabIndex="0">Editar</Link>
                     </div>
                 </div> 
               </div>
