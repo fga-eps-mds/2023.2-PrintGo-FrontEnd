@@ -3,6 +3,9 @@ import { Bar } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 import Navbar from '../components/navbar/Navbar';
 import Filter from '../assets/Filter.svg';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
 
 // Dados iniciais 
 const initialData = {
@@ -83,11 +86,11 @@ const ChartComponent = () => {
         labels: ['Impressora A', 'Impressora B', 'Impressora C'],
         datasets: [
           {
-            label: 'Contagem Manual - Impressões',
+            label: 'Contagem Manual - Total',
             data: [1000, 800, 1200],
           },
           {
-            label: 'Contagem Contadora - Impressões',
+            label: 'Contagem Contadora - Total',
             data: [980, 820, 1180],
           },
         ],
@@ -98,11 +101,20 @@ const ChartComponent = () => {
         labels: ['Impressora A', 'Impressora B', 'Impressora C'],
         datasets: [
           {
-            label: 'Contagem Manual - Cópias',
+            label: 'Contagem Manual (Cópias)',
             data: [200, 150, 250],
           },
           {
-            label: 'Contagem Contadora - Cópias',
+            label: 'Contagem Contadora (Cópias)',
+            data: [190, 145, 245],
+          },
+
+          {
+            label: 'Contagem Manual (Impressões)',
+            data: [200, 150, 250],
+          },
+          {
+            label: 'Contagem Contadora (Impressões)',
             data: [190, 145, 245],
           },
         ],
@@ -148,6 +160,46 @@ const ChartComponent = () => {
     setFilter(newFilter);
   };
 
+   // Função para gerar o relatório em PDF
+   const generatePDFReport = () => {
+    // Cria um novo documento PDF
+    const doc = new jsPDF();
+
+    // Define a data atual
+    const currentDate = new Date().toLocaleDateString();
+
+    // Adiciona título ao relatório
+    doc.setFontSize(16);
+    doc.text('Relatório de Contagem de Impressões', 10, 10);
+
+    // Adiciona data ao relatório
+    doc.setFontSize(12);
+    doc.text(`Data do Relatório: ${currentDate}`, 10, 20);
+
+    // Dados para a tabela de relatório
+    const reportData = [];
+    data.labels.forEach((label, index) => {
+      const manualImpressions = data.datasets[0].data[index];
+      const counterImpressions = data.datasets[2].data[index];
+      const difference = manualImpressions - counterImpressions;
+      reportData.push([label, manualImpressions, counterImpressions, difference]);
+    });
+
+    // Define as colunas da tabela de relatório
+    const tableColumns = ['Impressora', 'Contagem Manual', 'Contagem Contadora', 'Diferença'];
+
+    // Adiciona a tabela de relatório ao documento PDF
+    doc.autoTable({
+      head: [tableColumns],
+      body: reportData,
+      startY: 30,
+    });
+
+    // Salva o documento PDF com um nome único
+    const fileName = `relatorio_impressoras_${currentDate.replace(/\//g, '-')}.pdf`;
+    doc.save(fileName);
+  };
+
   return (
     <div>
       <Navbar />
@@ -155,6 +207,7 @@ const ChartComponent = () => {
         <div className="printerslist-header-title">
           <h2>Discrepância entre Dados de Impressoras</h2>
           <h4>Filtrar por:</h4>
+          <button onClick={generatePDFReport}>Gerar Relatório em PDF</button>
         </div>
         <div className="printerslist-header-search-filter">
           <div className="printerslist-filter">
