@@ -115,8 +115,10 @@
   flex-direction: column;
 }
 
-.printerslist-model h4{
+.printerslist-model a {
   width: 20vw;
+  color: #003366;
+  text-decoration: none;
   margin: 0;
   padding-left: 1rem;
 }
