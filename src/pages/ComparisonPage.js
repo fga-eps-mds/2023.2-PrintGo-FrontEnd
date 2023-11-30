@@ -1,54 +1,157 @@
-import React from 'react';
-import '../style/pages/comparisonPage.css';
+import React, { useState, useEffect } from 'react';
+import { Bar } from 'react-chartjs-2';
+import Chart from 'chart.js/auto';
+import Navbar from '../components/navbar/Navbar';
+import Filter from '../assets/Filter.svg';
 
-// Dados mockados
-const printersData = [
-  {
-    id: 1,
-    modelo: 'Impressora A',
-    contagemManual: 1000,
-    contagemContadora: 980,
-  },
-  {
-    id: 2,
-    modelo: 'Impressora B',
-    contagemManual: 800,
-    contagemContadora: 820,
-  },
-  {
-    id: 3,
-    modelo: 'Impressora C',
-    contagemManual: 1200,
-    contagemContadora: 1180,
-  },
-];
+// Dados iniciais 
+const initialData = {
+  labels: [],
+  datasets: [
+    {
+      label: 'Contagem Manual',
+      backgroundColor: 'rgba(75,192,192,0.2)',
+      borderColor: 'rgba(75,192,192,1)',
+      borderWidth: 1,
+      data: [],
+    },
+    {
+      label: 'Contagem Contadora',
+      backgroundColor: 'rgba(255,99,132,0.2)',
+      borderColor: 'rgba(255,99,132,1)',
+      borderWidth: 1,
+      data: [],
+    },
+  ],
+};
 
-export default function ComparisonPage() {
+const ChartComponent = () => {
+  const [data, setData] = useState(initialData);
+  const [filter, setFilter] = useState('totalImpressoes'); // Estado inicial do filtro
+
+  // Simula a atualização dos dados a cada 5 minutos (substitua por sua lógica de obtenção de dados)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Substituir esta lógica pela obtenção real dos dados SNMP
+      const newData = {
+        labels: ['Impressora A', 'Impressora B', 'Impressora C'],
+        datasets: [
+          {
+            label: 'Contagem Manual',
+            data: [1000, 800, 1200], // Substituir pelos valores reais
+          },
+          {
+            label: 'Contagem Contadora',
+            data: [980, 820, 1180], // Substituir pelos valores reais
+          },
+        ],
+      };
+      setData(newData);
+    }, 50000); // Atualiza a cada 5 minutos
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Função para atualizar os dados com base no filtro selecionado
+  const handleFilterChange = (newFilter) => {
+    let newData = null;
+    if (newFilter === 'totalImpressoes') {
+      // Substituir pelos dados reais para total de impressões
+      newData = {
+        labels: ['Impressora A', 'Impressora B', 'Impressora C'],
+        datasets: [
+          {
+            label: 'Contagem Manual',
+            data: [1000, 800, 1200],
+          },
+          {
+            label: 'Contagem Contadora',
+            data: [980, 820, 1180],
+          },
+        ],
+      };
+    } else if (newFilter === 'numeroCopias') {
+      // Substituir pelos dados reais para número de cópias
+      newData = {
+        labels: ['Impressora A', 'Impressora B', 'Impressora C'],
+        datasets: [
+          {
+            label: 'Contagem Manual',
+            data: [500, 400, 600],
+          },
+          {
+            label: 'Contagem Contadora',
+            data: [490, 410, 590],
+          },
+        ],
+      };
+    } else if (newFilter === 'impressoesColoridas') {
+      // Substituir pelos dados reais para impressões coloridas e preto e branco
+      newData = {
+        labels: ['Impressora A', 'Impressora B', 'Impressora C'],
+        datasets: [
+          {
+            label: 'Contagem Manual - Colorido',
+            backgroundColor: 'rgba(75,192,192,0.2)',
+            borderColor: 'rgba(75,192,192,1)',
+            borderWidth: 1,
+            data: [200, 150, 300],
+          },
+          {
+            label: 'Contagem Manual - Preto e Branco',
+            backgroundColor: 'rgba(255,99,132,0.2)',
+            borderColor: 'rgba(255,99,132,1)',
+            borderWidth: 1,
+            data: [800, 650, 900],
+          },
+          {
+            label: 'Contagem Contadora - Colorido',
+            backgroundColor: 'rgba(75,192,192,0.2)',
+            borderColor: 'rgba(75,192,192,1)',
+            borderWidth: 1,
+            data: [190, 145, 295],
+          },
+          {
+            label: 'Contagem Contadora - Preto e Branco',
+            backgroundColor: 'rgba(255,99,132,0.2)',
+            borderColor: 'rgba(255,99,132,1)',
+            borderWidth: 1,
+            data: [790, 645, 895],
+          },
+        ],
+      };
+    }
+
+    setData(newData);
+    setFilter(newFilter);
+  };
+
   return (
-    <div className="comparison-container">
-      <h1>Discrepância entre Dados de Impressoras</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Modelo</th>
-            <th>Contagem Manual</th>
-            <th>Contagem Contadora</th>
-            <th>Discrepância</th>
-          </tr>
-        </thead>
-        <tbody>
-          {printersData.map((printer) => (
-            <tr key={printer.id}>
-              <td>{printer.id}</td>
-              <td>{printer.modelo}</td>
-              <td>{printer.contagemManual}</td>
-              <td>{printer.contagemContadora}</td>
-              <td>{printer.contagemManual - printer.contagemContadora}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div>
+      <Navbar />
+      <div className="printerslist-header">
+        <div className="printerslist-header-title">
+          <h2>Discrepância entre Dados de Impressoras</h2>
+          <h4>Filtrar por:</h4>
+        </div>
+        <div className="printerslist-header-search-filter">
+          <input type="text" placeholder="Pesquisar..." />
+          <div className="printerslist-filter">
+            <img src={Filter} alt="Filter" />
+            <div className="printerslist-filter-dropdown-container">
+              <div className="printerslist-dropdown-filter">
+                <button onClick={() => handleFilterChange('totalImpressoes')}>Filtro 1</button>
+                <button onClick={() => handleFilterChange('numeroCopias')}>Filtro 2</button>
+                <button onClick={() => handleFilterChange('impressoesColoridas')}>Filtro 3</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h1>Gráfico de Contagem de Impressões</h1>
+      <Bar data={data} />
     </div>
   );
-}
+};
+
+export default ChartComponent;
