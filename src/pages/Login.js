@@ -3,9 +3,8 @@ import "../style/pages/login.css";
 import pessoas from "../assets/pessoas.svg";
 import login_ellipse from "../assets/login_ellipse.svg";
 import NavbarSimple from "../components/navbar/NavbarSimple";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../api/api";
-import { useNavigate } from 'react-router-dom';
 
 
 export default function Login() {
