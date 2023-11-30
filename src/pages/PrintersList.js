@@ -34,7 +34,27 @@ export default function PrintersList() {
   const [modalTitle, setModalTitle] = useState('');
   const [modalBodytext, setModalBodytext] = useState('');
   const [selectedPrinter, setSelectedPrinter] = useState(null);
-  const [printers, setPrinters] = useState([]);
+  const [printers, setPrinters] = useState([
+    {
+      id: "1",
+      padrao: {
+        tipo: "Multifuncional P&B",
+        marca: "Canon",
+        modelo: "MF1643i II",
+      },
+      ip: "192.168.15.1",
+      numeroSerie: "XXXX-000000",
+      codigoLocadora: "PRINTER-004",
+      contadorInstalacao: 0,
+      ultimoContador: 0,
+      dataInstalacao: "2023-11-30T12:00:00Z",
+      dataUltimoContador: "2023-11-30T12:00:00Z",
+      contadorRetirada: 0,
+      dataRetirada: "12/10/2023",
+      unidadeId: "1",
+      status: "ATIVO"
+    }
+  ]);
 
 
 // modal para desativar impressora
@@ -156,7 +176,11 @@ export default function PrintersList() {
           </div>
 
           {filteredPrinters.map(printer => (
-            <div key={printer.id} className="printerslist-printer" style={{ color: printer.status === "ATIVO" ? '' : 'gray' }}>
+            <div 
+              key={printer.id} 
+              className="printerslist-printer" 
+              style={{ color: printer.status === "ATIVO" ? '' : 'gray' }}
+            >
               <div className="printerslist-model">
                 <h4>{printer.padrao.modelo}</h4>
                 {printer.status === 'DESATIVADO' && <h5>Desativada</h5>}

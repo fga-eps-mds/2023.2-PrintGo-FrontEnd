@@ -24,7 +24,7 @@ export default function ViewPrinter(){
     // Estado para armazenar os dados da impressora.
     const [printer, setPrinter] = useState(
       {
-        id: "",
+        id: "1",
         padrao: {
           tipo: "Multifuncional P&B",
           marca: "Canon",
@@ -35,12 +35,12 @@ export default function ViewPrinter(){
         codigoLocadora: "PRINTER-004",
         contadorInstalacao: 0,
         ultimoContador: 0,
-        dataInstalacao: "12/10/2023",
-        dataUltimoContador: "20/11/2023",
+        dataInstalacao: "2023-11-30T12:00:00Z",
+        dataUltimoContador: "2023-11-30T12:00:00Z",
         contadorRetirada: 0,
         dataRetirada: "12/10/2023",
-        circunscricao: "1ª Delegacia Regional de Goiânia",
-        unidade: "2ª Delegacia Municipal de Goiânia"
+        unidadeId: "1",
+        status: "ATIVO"
       }
     );
 
