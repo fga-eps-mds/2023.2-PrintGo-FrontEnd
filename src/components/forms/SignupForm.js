@@ -1,10 +1,14 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import * as yup from "yup";
-import { getLotacoes, createUser } from "../../api/api";
-import "../../style/components/signupForms.css";
 import elipse6 from '../../assets/elipse6.svg';
+import { getUnidades } from "../../services/unidadeService";
+import { createUser } from "../../services/userService";
+import "../../style/components/signupForms.css";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 
 const signupSchema = yup.object().shape({
@@ -31,127 +35,173 @@ const signupSchema = yup.object().shape({
     .test('cpfOrCnpj', 'CPF ou CNPJ inválido', value => {
         return value.length === 11 || value.length === 14;
     }),
-    lotacao_id: yup.string().required('Lotação é obrigatória'),
+    unidade_id: yup.string().required('Lotação é obrigatória'),
     isAdmin: yup.boolean(),
   });
 
 export default function SignupForm(){
-    const [lotacao, setLotacao] = useState([]);
+    const [unidade, setUnidade] = useState([]);
+    const [unidadeInList, setUnidadeInList] = useState([]);
+    const [displayLotacoes, setDisplayLotacoes] = useState(false);
 
     useEffect( () => {
-        async function setLotacoes() {
+        async function setData() {
             try {
-                const data = await getLotacoes();
-                if (data.type ==='success' && data.data) {
-                    setLotacao(data.data);
+                const dataUnidades = await getUnidades();
+                
+                if (dataUnidades.type ==='success' && dataUnidades.data) {
+                    setUnidade(dataUnidades.data);
                 }
+
             } catch (error) {
                 console.error('Erro ao obter opções do serviço:', error);
               }
         }
-        setLotacoes();
+        setData();
       }, []);
    
     
     const {
         register,
         handleSubmit,
-        formState: { errors, isValid }, 
+        formState: { errors, isValid, isSubmitting }, 
         reset
     } = useForm({resolver: yupResolver(signupSchema), mode: "onChange"})
 
     const onSubmit = async (data) =>  {
+
+        setTimeout(() => {
+            console.log("3 segundos se passaram.");
+        }, 3000);  // 3000 milissegundos = 3 segundos
+        
         data.cargos = ["USER"];
         if (data.isAdmin) {
             data.cargos.push("ADMIN");
         }
-        await createUser(data);
-        reset()
+        const response = await createUser(data);
+        if(response.type === 'success'){
+            toast.success("Usuario cadastrado com sucesso!")
+            reset()
+        } else {
+            toast.error("Erro ao cadastrar usuario")
+        }
     }
+
+    const handleWorkstationChange = (event) => {
+
+        if(event.target.value) {
+            const listChildWorkstations = unidade.find(uni => uni.id === event.target.value).child_workstations;
+            setDisplayLotacoes(true);
+            setUnidadeInList(listChildWorkstations);
+        }else {
+            setDisplayLotacoes(false);
+        }
+    };
+
 
     return(
         <div id="signup-card">
             <header id="form-header">
                 Cadastro
             </header>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div id="input-group">
-                    <div id="input-line">
-                        <div id="input-box">
-                            <label>Nome<span>*</span></label>
-                            <input {...register("nome", {required: true} )} placeholder="Nome" />
+            <form id="signup-form"onSubmit={handleSubmit(onSubmit)}>
+                <div id="signup-input-group">
+                    <div id="signup-input-line">
+                        <div id="signup-input-box">
+                            <label htmlFor="nome">Nome<span>*</span></label>
+                            <input id="nome" {...register("nome", {required: true} )} placeholder="Nome" />
                             <span>{errors.nome?.message}</span>
                         </div>
 
-                        <div id="input-box">
-                            <label>Documento<span>*</span></label>
-                            <input {...register("documento", {required: true})} placeholder="CPF ou CNPF" />
+                        <div id="signup-input-box">
+                            <label htmlFor="documento">Documento<span>*</span></label>
+                            <input id="documento" {...register("documento", {required: true})} placeholder="CPF ou CNPJ" />
                             <span>{errors.documento?.message}</span>
                         </div>
                     </div>
-                    <div id="input-line">
-                        <div id="input-box">
-                            <label>E-mail<span>*</span></label>
-                            <input {...register("email", {required: true} )} type="email" placeholder="Email" />
+                    <div id="signup-input-line">
+                        <div id="signup-input-box">
+                            <label htmlFor="email">E-mail<span>*</span></label>
+                            <input id="email" {...register("email", {required: true} )} type="email" placeholder="Email" />
                             <span>{errors.email?.message}</span>
                         </div>
 
-                        <div id="input-box">
-                            <label>Confirmar E-mail<span>*</span></label>
-                            <input {...register("emailConfirmar", {required: true})} placeholder="Confirmar Email" />
+                        <div id="signup-input-box">
+                            <label htmlFor="confirmarEmail" >Confirmar E-mail<span>*</span></label>
+                            <input id="confirmarEmail" {...register("emailConfirmar", {required: true})} placeholder="Confirmar Email" />
                             <span data-testid="email-error">{errors.emailConfirmar?.message}</span>
                         </div>
                     </div>
 
-                    <div id="input-line">
-                        <div id="input-box">
-                            <label>Senha<span>*</span></label>
-                            <input {...register("senha", {required: true})} placeholder="Senha" type="password"/>
+                    <div id="signup-input-line">
+                        <div id="signup-input-box">
+                            <label htmlFor="senha" >Senha<span>*</span></label>
+                            <input id="senha" {...register("senha", {required: true})} placeholder="Senha" type="password"/>
                             <span>{errors.senha?.message}</span>
                             <p id="input-description">A senha deve conter pelo menos 8 caracteres, 1 letra maiúscula, 1 minuscula, 1 número e um caractere especial</p>
                         </div>
-                        <div id="input-box">
-                            <label>Confirmar Senha<span>*</span></label>
-                            <input {...register("senhaConfirmar", {required: true})} placeholder="Confirmar Senha" type="password"/>
+                        <div id="signup-input-box">
+                            <label htmlFor="confirmarSenha" >Confirmar Senha<span>*</span></label>
+                            <input id="confirmarSenha" {...register("senhaConfirmar", {required: true})} placeholder="Confirmar Senha" type="password"/>
                             <span>{errors.senhaConfirmar?.message}</span>
                         </div>
                     </div>
-                    <div id="input-line">
-                        <div id="input-box">
-                            <label>Lotação <span>*</span></label>
-                            <select {...register("lotacao_id", {required: "Lotação é obrigatória"})}>
-                                <option value="">Selecione a Lotação</option>
-                                {lotacao?.map((lotacao) => (
-                                <option key={lotacao.id} value={lotacao.id}>
-                                    {lotacao.nome}
+                    <div id="signup-input-line">
+                        <div id="signup-input-box">
+                            <label htmlFor="unidadePai">Unidade pai<span>*</span></label>
+                            <select onChange={handleWorkstationChange}>
+                                <option value="">Selecione a Unidade de policia</option>
+                                {unidade?.map((unit) => (
+                                <option key={unit.id} value={unit.id}>
+                                    {unit.name}
                                 </option>
                                 ))}
                             </select>
-                            <span>{errors.lotacao_id?.message}</span>
                         </div>
+                        {displayLotacoes && (
+                            <div id="signup-input-box">
+                                <label htmlFor="unidadeFilha">Unidade Filha<span>*</span></label>
+                                <select {...register("unidade_id", {required: "Lotação é obrigatória"})}>
+                                    <option value="">Selecione a Lotação</option>
+                                    {unidadeInList?.map((unidade) => (
+                                    <option key={unidade.id} value={unidade.id}>
+                                        {unidade.name}
+                                    </option>
+                                    ))}
+                                </select>
+                                <span>{errors.unidade_id?.message}</span>
+                            </div>
+                        )}
                     </div>
-                    <div id="input-line">
-                        <div id="input-box">
-                            <div id="input-checkbox">
+                    <div id="signup-input-line">
+                        <div id="signup-input-box">
+                            <div id="signup-input-checkbox">
                                 <input
                                     id="checkbox"
                                     type="checkbox"
                                     {...register("isAdmin")}
                                 />
-                                <label id="label-checkbox">Usuário é administrador?</label>
+                                <label htmlFor="label-checkbox" id="label-checkbox">Usuário é administrador?</label>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div id="buttons">
+                <div id="signup-buttons">
                     <button className="form-button" type="button" id="cancel-bnt" >CANCELAR</button>
-                    <button className="form-button" type="submit" id="register-bnt" disabled={!isValid}>REGISTRAR</button>
+                    <button className="form-button" type="submit" id="register-bnt" disabled={!isValid || isSubmitting}>
+                        {isSubmitting && (
+                            <ReloadIcon id="animate-spin"/>
+                        )}
+
+                        {!isSubmitting ? 'REGISTRAR': "CADASTRANDO"}
+                    </button>
                 </div>
             </form>
             <div className="elipse-signup">
                 <img alt= "elipse"  src={elipse6}></img>
             </div>
+            <ToastContainer />
         </div>
     );
 }

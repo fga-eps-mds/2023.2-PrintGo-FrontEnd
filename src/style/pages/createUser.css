@@ -6,6 +6,7 @@
 
 #signup-container img{
     margin-left: 10vw;
+    margin-top: 3vh;
 }
 
 @media (max-width: 900px) {

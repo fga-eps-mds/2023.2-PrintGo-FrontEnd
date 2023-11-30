@@ -8,6 +8,7 @@
   font-size: 64px;
   color: var(--color-darkslateblue);
   font-family: var(--font-jost);
+  padding-top: 1rem;
 }
 .right-content-home{
   padding: 15px;
@@ -76,7 +77,10 @@
   
 }
 
-
+#saibamais {
+  color: #036;
+  text-decoration: none;
+}
 
 .learn-more {
   font-size: 20px;
