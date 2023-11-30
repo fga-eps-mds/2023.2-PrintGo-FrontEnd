@@ -33,6 +33,12 @@
     margin-bottom: 1vh;
 }
 
+#viewprinter-loading-text {
+  color: #003366;
+  display: block;
+  font-size: 20px;
+}
+
 /* Header */
 
 #viewprinter-card-header {
@@ -62,6 +68,7 @@
 
 #viewprinter-info-header {
     display: block;
+    margin-bottom: 20px;
     width: 100%;
     color: #003366;
     font-size: 30px;
