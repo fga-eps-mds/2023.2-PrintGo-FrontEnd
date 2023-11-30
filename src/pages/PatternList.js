@@ -43,30 +43,37 @@ export default function PatternList() {
   )
 
   const modalDeactivatePattern = (pattern) => {
-    setSelectedPattern(pattern);
-    setModalTitle("Desativação de padrão");
-    setModalBodytext("Você tem certeza que deseja desativar o padrão?");
-    setModalOpen(true);
+    if (pattern) {
+      setSelectedPattern(pattern);
+      setModalTitle("Desativação de padrão");
+      setModalBodytext("Você tem certeza que deseja desativar o padrão?");
+      setModalOpen(true);
+    }
   }
-
+  
   const modalActivePattern = (pattern) => {
-    setSelectedPattern(pattern);
-    setModalTitle("Ativação de padrão");
-    setModalBodytext("Você tem certeza que deseja reativar o padrão?");
-    setModalOpen(true);
+    if (pattern) {
+      setSelectedPattern(pattern);
+      setModalTitle("Ativação de padrão");
+      setModalBodytext("Você tem certeza que deseja reativar o padrão?");
+      setModalOpen(true);
+    }
   }
-
+  
   const patternToggle = () => {
-    const updatedPatterns = patterns.map(pattern => {
-      if (pattern.id_padrao === selectedPattern.id_padrao) {
-        return { ...pattern, status: pattern.status === "ATIVO" ? "DESATIVADO" : "ATIVO" };
-      }
-      return pattern;
-    });
-
-    setPatterns(updatedPatterns);
+    if (selectedPattern) {
+      const updatedPatterns = patterns.map(pattern => {
+        if (pattern.id_padrao === selectedPattern.id_padrao) {
+          return { ...pattern, status: pattern.status === "ATIVO" ? "DESATIVADO" : "ATIVO" };
+        }
+        return pattern;
+      });
+  
+      setPatterns(updatedPatterns);
+    }
     setModalOpen(false);
   };
+  
 
   //qual filtro esta sendo aplicado
   function filterBeingShown(filter){
