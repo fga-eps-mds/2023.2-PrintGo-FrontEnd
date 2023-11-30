@@ -11,7 +11,6 @@ import "../../style/components/editUserForms.css";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useNavigate } from 'react-router-dom';
 
-
 const fieldLabels = {
     nome: 'Nome',
     documento: 'Documento',
@@ -69,7 +68,6 @@ export default function EditUserForm(){
         navigate('/mudarsenha'); 
     };
 
-
     const {
         register,
         setValue,
@@ -99,8 +97,6 @@ export default function EditUserForm(){
             setValue(key, value);
         });
     }, [setValue]);
-
- 
 
     const onSubmit = async (data) =>  {
 
@@ -184,6 +180,7 @@ export default function EditUserForm(){
             >
                 MUDAR SENHA
             </button>
+
                 </div>
 
                 <div id="edit-user-buttons">
