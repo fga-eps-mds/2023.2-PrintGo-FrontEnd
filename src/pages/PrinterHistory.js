@@ -10,9 +10,24 @@ function HistoryModal({ isOpen, history, onClose }) {
   return (
     <div className="modal-backdrop">
       <div className="modal-content">
-        <h2>{`Multifuncional P&B - ${history.model}`}</h2>
-        <p>Número de série: {history.serialNumber}</p>
-        <p>IP: {history.ip}</p>
+        <h2>Detalhes da Impressora</h2>
+        <div className="modal-section">
+          <p><strong>Número de série:</strong> {history.serialNumber}</p>
+          <p><strong>IP:</strong> {history.ip}</p>
+          <p><strong>Código de locadora:</strong> {history.rentalCode}</p>
+          <p><strong>Data de instalação:</strong> {history.installationDate}</p>
+          <p><strong>Impressões coloridas (Impressora):</strong> {history.coloredPrints}</p>
+          <p><strong>Impressões coloridas (Locadora):</strong> {history.coloredPrintsRental}</p>
+          <p><strong>Contador de instalação:</strong> {history.installationCounter}</p>
+          <p><strong>Data de retirada:</strong> {history.withdrawalDate || '-'}</p>
+          <p><strong>Impressões preto/branco (Impressora):</strong> {history.bwPrints}</p>
+          <p><strong>Impressões preto/branco (Locadora):</strong> {history.bwPrintsRental}</p>
+          <p><strong>Contador de retirada:</strong> {history.withdrawalCounter}</p>
+          <p><strong>Data do último contador:</strong> {history.lastCounterDate || '-'}</p>
+          <p><strong>Último contador:</strong> {history.lastCounter}</p>
+          <p><strong>Unidade filha:</strong> {history.childUnit}</p>
+          <p><strong>Unidade pai:</strong> {history.parentUnit}</p>
+        </div>
         <button onClick={onClose}>Fechar</button>
       </div>
     </div>
@@ -23,13 +38,25 @@ function HistoryModal({ isOpen, history, onClose }) {
 HistoryModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   history: PropTypes.shape({
-    model: PropTypes.string,
-    serialNumber: PropTypes.string,
-    ip: PropTypes.string,
-    // Adicione outras propriedades usadas pelo seu modal aqui
-  }),
+    serialNumber: PropTypes.string.isRequired,
+    ip: PropTypes.string.isRequired,
+    rentalCode: PropTypes.string.isRequired,
+    installationDate: PropTypes.string.isRequired,
+    coloredPrints: PropTypes.number.isRequired,
+    coloredPrintsRental: PropTypes.number.isRequired,
+    installationCounter: PropTypes.number.isRequired,
+    withdrawalDate: PropTypes.string,
+    bwPrints: PropTypes.number.isRequired,
+    bwPrintsRental: PropTypes.number.isRequired,
+    withdrawalCounter: PropTypes.number.isRequired,
+    lastCounterDate: PropTypes.string,
+    lastCounter: PropTypes.number.isRequired,
+    childUnit: PropTypes.string.isRequired,
+    parentUnit: PropTypes.string.isRequired,
+  }).isRequired,
   onClose: PropTypes.func.isRequired,
 };
+
 
 // Componente da página PrinterHistory
 export default function PrinterHistory() {
