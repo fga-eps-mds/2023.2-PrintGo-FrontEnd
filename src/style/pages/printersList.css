@@ -1,205 +1,156 @@
-/* Container  */
+/* Container */
 .printerslist-container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  text-align: left;
+  background-color: #f7f7f7; /* Cor de fundo semelhante */
 }
 
 /* Header */
-.printerslist-header{ 
-  height: 10vh; 
-  color: #ffffff;
+.printerslist-header { 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #003366;
-  padding-left: 20px;
-  padding-right: 40px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-top: 0.2rem;
-}
-
-.printerslist-header-title {
-  display: flex;
-  flex-direction: column;
+  background-color: #003366; /* Cor do cabeçalho */
+  color: #ffffff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra no cabeçalho */
 }
 
 .printerslist-header-title h2 {
-  margin: 0px;
-  font-size: 35px;
+  margin: 0;
+  font-size: 24px; /* Tamanho do título ajustado */
 }
 
 .printerslist-header-title h4 {
-  margin: 0px;
-  font-size: 20px;
-  padding-left: 20px;
+  margin-top: 4px; /* Espaço entre o título e o filtro */
+  font-size: 18px; /* Tamanho do filtro ajustado */
+  color: #bbb; /* Cor mais suave para o filtro */
 }
 
+/* Filtro e barra de pesquisa */
 .printerslist-header-search-filter {
+  position: relative; /* Posição relativa para posicionar corretamente o dropdown */
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  width: fit-content;
-  height: 100%;
-  gap: 20px;
+  gap: 10px;
 }
 
-.printerslist-header-search-filter Input {
-  height: 2.4vh;
-  width: 20vw;
-  margin-bottom: 8px;
+.printerslist-header-search-filter input {
+  height: 40px;
+  width: 250px; /* Largura adequada para a barra de pesquisa */
+  padding: 0 15px;
+  font-size: 16px; /* Tamanho de fonte legível para a pesquisa */
+  border-radius: 4px;
+  border: 1px solid #ddd;
 }
 
 .printerslist-filter {
-  display: block;
+  position: relative; /* Posição relativa para o dropdown */
 }
 
-/* Filter dropdown */
+.printerslist-filter img {
+  width: 24px;
+  height: auto;
+}
 
-.printerslist-filter:hover {
-  cursor: pointer;
+/* Dropdown do filtro */
+.printerslist-filter-dropdown-container {
+  position: absolute; /* Posicionamento absoluto para o dropdown */
+  top: 100%; /* Posiciona o dropdown logo abaixo do filtro */
+  right: 0;
+  background-color: #ffffff;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border-radius: 4px;
+  z-index: 2; /* Garante que o dropdown apareça acima dos outros elementos */
 }
 
 .printerslist-dropdown-filter {
-  display: none;
-  position: absolute;
-  right: 0px;
-  background-color: #f9f9f9;
-  min-width: 100px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  display: none; /* Inicialmente oculto */
+}
+
+.printerslist-filter:hover .printerslist-dropdown-filter {
+  display: block; /* Mostra o dropdown quando o mouse passa por cima */
 }
 
 .printerslist-dropdown-filter a {
+  display: block;
+  padding: 10px 20px;
+  font-size: 16px; /* Tamanho da fonte dos links do dropdown */
   color: #003366;
   text-decoration: none;
-  display: block;
-  font-size: 20px;
-  padding: 4px 4px;
+  border-radius: 4px;
 }
 
 .printerslist-dropdown-filter a:hover {
   background-color: #003366;
-  color: #fff;
+  color: #ffffff;
 }
-
-.printerslist-filter:hover .printerslist-dropdown-filter {
-  display: flex;
-  flex-direction: column;
-}
-
 /* Impressora */
 .printerslist-printer {
-  height: 18vh; 
-  width: 100vw;
-  color: #003366;
-  font-size: 25px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  box-shadow: 0 5px 5px -3px black;
+  background-color: #ffffff;
+  margin-bottom: px; /* Espaço reduzido entre as impressoras */
+  padding: 10px; /* Você pode ajustar isso também se necessário */
+  border-radius: 4px; /* Bordas arredondadas */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra dos cartões */
 }
 
-.printerslist-printer h6{
+.printerslist-printer h4, .printerslist-printer h6 {
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  font-weight: lighter;
+  color: #333; /* Cor do texto */
 }
 
-/* Modelo */
-.printerslist-model{
-  display: flex;
-  flex-direction: column;
+.printerslist-printer h5 {
+  color: #BF1B1B; /* Cor para impressora desativada */
 }
 
-.printerslist-model h4{
-  width: 20vw;
-  margin: 0;
-  padding-left: 1rem;
-}
-
-.printerslist-model h5{
-  padding-top: 0.8rem;
-  padding-left: 1rem;
-  color: #BF1B1B;
-  margin: 0;
-}
-
-/* Identificação */
-.printerslist-identification{
-  display: flex;
-  flex-direction: column;
-  height: 15vh;
-  width: 30vw;
-  justify-content: space-around;
-  padding-left: 1rem;
-}
-
-/* Localização e contador */
-.printerslist-location-counter{ 
-  display: flex;
-  flex-direction: column;
-  height: 15vh;
-  width: 15vw;
-  justify-content: space-around;
-  padding-left: 1rem;
-}
-
-/* Data do contador */
-.printerslist-counter-date {
-  height: 15vh;
-  width: 25vw;
-  display: flex;
-  align-items: center;
-}
-
-.printerslist-counter-date h4 {
-  margin: 0;
-  font-weight: lighter;
-}
-
-/* Dropdown impressora */
-.printerslist-engine { 
-  display: flex;
-  flex-direction: column;
-  height: 6vh;
-  width: 4vw;
-  margin-right: 20px;
+/* Dropdown da engrenagem */
+.printerslist-engine {
+  position: relative; /* Ajuste para a posição relativa */
   cursor: pointer;
+  display: flex;
+  align-items: center; /* Centraliza verticalmente o ícone da engrenagem */
+  justify-content: center; /* Centraliza horizontalmente o ícone da engrenagem */
 }
 
-.printerslist-printer-dropdown {
-  display: none;
-  position: absolute;
-  right: 0px;
-  background-color: #f9f9f9;
-  min-width: 180px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+.printerslist-engine img {
+  width: 24px; /* Tamanho do ícone da engrenagem */
+  height: auto;
+}
+
+.printerslist-engine-dropdown {
+  display: none; /* Inicialmente oculto */
+  position: absolute; /* Absoluto para posicionamento específico */
+  right: 0;
+  top: 100%; /* Posiciona o dropdown logo abaixo do ícone */
+  background-color: #ffffff;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border-radius: 4px;
   z-index: 1;
 }
 
+.printerslist-engine:hover .printerslist-engine-dropdown {
+  display: block; /* Mostra o dropdown quando o mouse passa por cima */
+}
+
 .printerslist-printer-dropdown a {
+  display: block;
+  padding: 10px 20px; /* Espaçamento interno do link */
+  font-size: 16px; /* Tamanho da fonte do link */
   color: #003366;
   text-decoration: none;
-  display: block;
-  font-size: 20px;
-  padding: 4px 4px;
+  border-radius: 4px; /* Bordas arredondadas */
 }
 
 .printerslist-printer-dropdown a:hover {
   background-color: #003366;
-  color: #fff;
+  color: #ffffff;
 }
 
-.printerslist-engine:hover .printerslist-printer-dropdown {
-  display: flex;
-  flex-direction: column;
+/* Ajuste global de tamanho de fonte para legibilidade */
+.printerslist-printer h4,
+.printerslist-printer h5,
+.printerslist-printer h6 {
+  font-size: 16px; /* Ajuste para um tamanho de fonte maior */
 }
 
-/* Modal */
-.deactivate-modal-buttons {
-  display: none;
-}

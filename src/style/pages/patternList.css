@@ -1,206 +1,156 @@
 /* Container */
-.patternlist-container{
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  text-align: left;
-}
-
-/* Header */
-.patternlist-header{
-  height: 10vh;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #003366;
-  padding-left: 20px;
-  padding-right: 40px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.patternlist-header-title {
-    display: flex;
-    flex-direction: column;
-}
-
-.patternlist-header-title h2 {
-    margin: 0px;
-    font-size: 35px;
-}
-
-.patternlist-header-title h4 {
-    margin: 0px;
-    font-size: 20px;
-    padding-left: 20px;
-}
-
-.patternlist-header-search-filter {
+.patternlist-container {
+    background-color: #FFFF; /* Cor de fundo semelhante */
+  }
+  
+  /* Header */
+  .patternlist-header { 
     display: flex;
     align-items: center;
-    justify-content: end;
-    width: fit-content;
-    height: 100%;
-    gap: 20px;
-}
-
-.patternlist-header-search-filter input{
-    height: 2.4vh;
-    width: 20vw;
-    margin-bottom: 8px;
-}
-
-.patternlist filter {
+    justify-content: space-between;
+    background-color: #003366; /* Cor do cabeçalho */
+    color: #ffffff;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra no cabeçalho */
+  }
+  
+  .patternlist-header-title h2 {
+    margin: 0;
+    font-size: 24px; /* Tamanho do título ajustado */
+  }
+  
+  .patternlist-header-title h4 {
+    margin-top: 4px; /* Espaço entre o título e o filtro */
+    font-size: 18px; /* Tamanho do filtro ajustado */
+    color: #bbb; /* Cor mais suave para o filtro */
+  }
+  
+  /* Filtro e barra de pesquisa */
+  .patternlist-header-search-filter {
+    position: relative; /* Posição relativa para posicionar corretamente o dropdown */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .patternlist-header-search-filter input {
+    height: 40px;
+    width: 250px; /* Largura adequada para a barra de pesquisa */
+    padding: 0 15px;
+    font-size: 16px; /* Tamanho de fonte legível para a pesquisa */
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+  
+  .patternlist-filter img {
+    width: 24px;
+    height: auto;
+  }
+  
+  /* Dropdown do filtro */
+  .patternlist-filter-dropdown-container {
+    position: absolute; /* Posicionamento absoluto para o dropdown */
+    top: 100%; /* Posiciona o dropdown logo abaixo do filtro */
+    right: 0;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    z-index: 2; /* Garante que o dropdown apareça acima dos outros elementos */
+  }
+  
+  .patternlist-dropdown-filter {
+    display: none; /* Inicialmente oculto */
+  }
+  
+  .patternlist-filter:hover .patternlist-dropdown-filter {
+    display: block; /* Mostra o dropdown quando o mouse passa por cima */
+  }
+  
+  .patternlist-dropdown-filter a {
     display: block;
-}
-
-/* Filter dropdown */
-.patternlist-filter:hover{
-    cursor: pointer;
-}
-
-.patternlist-dropdown-filter {
-  display: none;
-  position: absolute;
-  right: 0px;
-  background-color: #f9f9f9;
-  min-width: 100px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.patternlist-dropdown-filter a{
+    padding: 10px 20px;
+    font-size: 16px; /* Tamanho da fonte dos links do dropdown */
     color: #003366;
     text-decoration: none;
-    display: block;
-    font-size: 20px;
-    padding: 4px 4px;
-}
-
-.patternlist-dropdown-filter a:hover{
+    border-radius: 4px;
+  }
+  
+  .patternlist-dropdown-filter a:hover {
     background-color: #003366;
-    color: #fff;
-}
-
-.patternlist-filter:hover .patternlist-dropdown-filter {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Padrão */
-.patternlist-pattern {
-    height:18vh;
-    width: 100vw;
-    color: #003366;
-    font-size: 25px;
+    color: #ffffff;
+  }
+  
+  /* Lista de Padrões */
+  .patternlist-pattern {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 5px 5px -3px black;
-    padding-left: 20px;
-    padding-right: 20px;
+    background-color: #ffffff;
+    margin-bottom: 5px; /* Espaço reduzido entre os padrões */
+    padding: 20px; /* Padding uniforme */
+    border-radius: 4px; /* Bordas arredondadas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra dos cartões */
+  }
+  
+  .patternlist-pattern h4, .patternlist-pattern h5, .patternlist-pattern h6 {
+    margin: 0;
+    color: #333; /* Cor do texto */
+  }
+  
+  .patternlist-pattern h5 {
+    color: #BF1B1B; /* Cor para status desativado */
+    margin-top: 4px;
+  }
+  
+  /* Dropdown da engrenagem */
+  .patternlist-engine {
+    position: relative; /* Ajuste para a posição relativa */
     cursor: pointer;
-}
-
-.patternlist-pattern h6 {
-    margin: 0;
     display: flex;
-    flex-direction: column;
-    font-weight: lighter;
-}
-
-.patternlist-model{
-    display: flex;
-    flex-direction: column;
-}
-
-.patternlist-model h4{
-    width: 60vw;
-    margin: 0;
-    padding-left: lrem;
-}
-
-.patternlist-model h5{
-    padding-top: 0.8rem;
-    padding-left: lrem;
-    color: #BF1B1B;
-    margin: 0;
-}
-
-/* 
-.patternlist-identification {
-    display: flex;
-    flex-direction: column;
-    height: 15vh;
-    width: 30vw;
-    justify-content: space-around;
-    padding-left: lrem;
-}
-
-.patternlist-location-counter{
-    display: flex;
-    height: 15vh;
-    width: 15vw;
-    justify-content: space-around;
-    padding-left: lrem;
-
-}
-
-.patternlist-counter-date{
-    height: 15vh;
-    width: 25vw;
-    display: flex;
-    align-items: center;
-}
-
-.patternlist-counter-date h4{
-    margin:0;
-    font-weight: lighter;
-} 
-*/
-
-/* Dropdown padrão */
-.patternlist-engine {
-    display: flex;
-    flex-direction: column;
-    height: 4vh;
-    width: 4vw;
-    margin-right: 40px;
-    cursor: pointer;
-}
-
-
-.patternlist-pattern-dropdown {
-    display: none;
-    position: absolute;
-    right: 0px;
-    background-color: #f9f9f9;
-    min-width: 180px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    align-items: center; /* Centraliza verticalmente o ícone da engrenagem */
+    justify-content: center; /* Centraliza horizontalmente o ícone da engrenagem */
+  }
+  
+  .patternlist-engine img {
+    width: 24px; /* Tamanho do ícone da engrenagem */
+    height: auto;
+  }
+  
+  .patternlist-engine-dropdown {
+    display: none; /* Inicialmente oculto */
+    position: absolute; /* Absoluto para posicionamento específico */
+    right: 0;
+    top: 100%; /* Posiciona o dropdown logo abaixo do ícone */
+    background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 4px;
     z-index: 1;
-}
-
-.patternlist-pattern-dropdown a{
+  }
+  
+  .patternlist-engine:hover .patternlist-engine-dropdown {
+    display: block; /* Mostra o dropdown quando o mouse passa por cima */
+  }
+  
+  .patternlist-pattern-dropdown a {
+    display: block;
+    padding: 10px 20px; /* Espaçamento interno do link */
+    font-size: 16px; /* Tamanho da fonte do link */
     color: #003366;
     text-decoration: none;
-    display: block;
-    font-size: 20px;
-    padding: 4px 4px;
-}
-
-.patternlist-pattern-dropdown a:hover{
+    border-radius: 4px; /* Bordas arredondadas */
+  }
+  
+  .patternlist-pattern-dropdown a:hover {
     background-color: #003366;
-    color: #fff;
-}
-
-.patternlist-engine:hover .patternlist-pattern-dropdown{
-    display: flex;
-    flex-direction: column;
-}
-
-/* Modal */
-.deactivate-modal-buttons{
-    display: none;
-}
-
+    color: #ffffff;
+  }
+  
+  /* Global font size adjustment for readability */
+  .patternlist-pattern h4,
+  .patternlist-pattern h5,
+  .patternlist-pattern h6 {
+    font-size: 16px; /* Ajuste para um tamanho de fonte maior */
+  }
+  
+ 
+  

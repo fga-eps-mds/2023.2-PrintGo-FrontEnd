@@ -189,6 +189,7 @@ export default function PrintersList() {
                     : <Link to="#" tabIndex="0" onClick={() => modalActivePrinter(impressora)}>Ativar</Link>
                   }
                   <Link to="/editarimpressora" tabIndex="0">Editar</Link>
+                  <Link to="/historicoimpressora" tabIndex="0">Histórico de Localização</Link>
                 </div>
               </div> 
             </div>
