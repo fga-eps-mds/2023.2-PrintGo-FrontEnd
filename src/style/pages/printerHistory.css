@@ -144,3 +144,14 @@
 
 
 
+.back-button {
+  margin-left: px; /* Adiciona margem à esquerda */
+  padding: 5px 5px; /* Padding para tornar o botão maior */
+  background-color: #003366; /* Cor de fundo do botão */
+  border: none; /* Remove a borda padrão */
+  border-radius: 4px; /* Bordas arredondadas */
+  cursor: pointer; /* Muda o cursor para indicar que é clicável */
+  font-size: 1rem; /* Tamanho da fonte do botão */
+  color: #FFFF; /* Cor do texto do botão */
+  font-weight: 600;
+}

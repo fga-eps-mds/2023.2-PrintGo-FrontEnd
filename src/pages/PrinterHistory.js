@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Navbar from '../components/navbar/Navbar';
 import '../style/pages/printerHistory.css';
-
+import { useNavigate } from 'react-router-dom';
 // Componente do Modal
 function HistoryModal({ isOpen, history, onClose }) {
   if (!isOpen) return null;
@@ -63,6 +63,7 @@ export default function PrinterHistory() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedHistory, setSelectedHistory] = useState({});
+  const navigate = useNavigate();
   
   const printerHistoryData = [
     // Substitua com os dados reais do seu aplicativo
@@ -81,12 +82,17 @@ export default function PrinterHistory() {
     setIsModalOpen(true);
   };
 
+  const goBack = () => {
+    navigate(-1); 
+  };
+
   return (
     <>
       <Navbar />
+      
       <div className="printerHistory-container">
         <div className="header-container">
-          <h1>Histórico de Localização</h1>
+        <button onClick={goBack} className="back-button">Voltar</button><h1>Histórico de Localização</h1>
           <input
             type="text"
             placeholder="Pesquisar"
