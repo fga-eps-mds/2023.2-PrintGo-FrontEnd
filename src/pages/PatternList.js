@@ -42,7 +42,6 @@ export default function PatternList() {
     ]
   )
 
-  // modal para desativar impressora
   const modalDeactivatePattern = (pattern) => {
     setSelectedPattern(pattern);
     setModalTitle("Desativação de padrão");
@@ -50,27 +49,24 @@ export default function PatternList() {
     setModalOpen(true);
   }
 
-  //modal para ativar impressora
-  const modalActivePattern= (pattern) => {
+  const modalActivePattern = (pattern) => {
     setSelectedPattern(pattern);
     setModalTitle("Ativação de padrão");
     setModalBodytext("Você tem certeza que deseja reativar o padrão?");
     setModalOpen(true);
   }
 
-  //ativa e desativa impressora
   const patternToggle = () => {
-    const updatedPattern = patterns.map(pattern => {
+    const updatedPatterns = patterns.map(pattern => {
       if (pattern.id_padrao === selectedPattern.id_padrao) {
-        return { ...pattern, ativada: !pattern.ativada };
+        return { ...pattern, status: pattern.status === "ATIVO" ? "DESATIVADO" : "ATIVO" };
       }
       return pattern;
     });
 
-    setPatterns(updatedPattern);
+    setPatterns(updatedPatterns);
     setModalOpen(false);
   };
-
 
   //qual filtro esta sendo aplicado
   function filterBeingShown(filter){
@@ -115,6 +111,7 @@ export default function PatternList() {
           setOpenModal={setModalOpen} 
           title={modalTitle} 
           bodytext={modalBodytext}
+          onConfirm={patternToggle}
         />
       )}
 
@@ -161,13 +158,13 @@ export default function PatternList() {
                     <div  className="patternlist-pattern-dropdown">
                       {pattern.status === "ATIVO"
                         ? <Link to="#" tabIndex="0" onClick={() => modalDeactivatePattern(pattern)}>Desativar</Link>
-                        : <Link to="#" tabIndex="0" onClick={() => modalActivePattern(pattern)}>Ativar</Link>
-                      }
+                        : <Link to="#" tabIndex="0" onClick={(onConfirm) => modalActivePattern(pattern)}>Ativar</Link>
+                      } 
                       <Link to="/editarpadrao" tabIndex="0">Editar</Link>
                     </div>
                 </div> 
               </div>
-            </div>
+             </div>
           ))
           }
         </div>
