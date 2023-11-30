@@ -37,7 +37,7 @@ const counterSchema = yup.object().shape({
         .typeError('Data inválida'),
     horaEmissao: yup.string()
         .required('O horário de emissão é obrigatória')
-        .matches(/^([01][0-9]|2[0-3]):[0-5][0-9]$/, 'Horário inválido. Use o formato hh:mm'),
+        .matches(/^([01]\d|2[0-3]):[0-5]\d$/, 'Horário inválido. Use o formato hh:mm'),
     relatorioPDF: yup.mixed()
         .test('required', 'O relatório PDF é obrigatório', (value) => {
             // Verifica se o campo de arquivo foi preenchido
@@ -73,9 +73,7 @@ export default function CounterForm() {
                             <input {...register("serial", { required: true })} placeholder="Número de série" />
                             <span data-testid="serial-test">{errors.serial?.message}</span>
                             <div id="arquivo-instrucional">
-                                <a href="#" download>
-                                    <img alt="" src={ download_pdf }></img>
-                                    Arquivo instrucional
+                                <a href="#" download><img alt="" src={ download_pdf }></img>Arquivo instrucional
                                 </a>
                             </div>
                         </div>
