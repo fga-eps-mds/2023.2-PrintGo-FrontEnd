@@ -15,6 +15,7 @@ import PrintersList from "./pages/PrintersList";
 import HomeCompleted from "./pages/HomeCompleted";
 import PatternList from "./pages/PatternList";
 import PrinterHistory from "./pages/PrinterHistory";
+import ComparisonPage from "./pages/ComparisonPage";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/homecompleta" element={<HomeCompleted />} />
         <Route path="/listapadroes" element={<PatternList />} />
         <Route path="/historicoimpressora" element={<PrinterHistory />} />
+        <Route path="/comparacaocontador" element={<ComparisonPage />} />
       </Routes>
     </BrowserRouter>
   );

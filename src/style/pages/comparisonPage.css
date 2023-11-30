@@ -1,0 +1,30 @@
+.comparison-container {
+    padding: 20px;
+  }
+  
+  .printers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .printer-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .data {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .data > div {
+    margin: 10px;
+  }
+  
+  .discrepancy.visible {
+    color: red; /* Destaca a discrepância */
+  }
+  
