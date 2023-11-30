@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // Importe o Link
+import { Link } from "react-router-dom"; 
 import "../../style/components/navbar.css";
 import logo from "../../assets/logo 3.svg";
 
@@ -8,6 +8,7 @@ import { FiChevronDown } from "react-icons/fi";
 const Navbar = () => {
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [printerDropdownOpen, setPrinterDropdownOpen] = useState(false);
+  const [counterDropdownOpen, setCounterDropdownOpen] = useState(false);
 
 
   const toggleUserDropdown = () => {
@@ -17,6 +18,11 @@ const Navbar = () => {
   const togglePrinterDropdown = () => {
     setPrinterDropdownOpen(!printerDropdownOpen)
   }
+
+  const toggleCounterDropdown = () => {
+    setCounterDropdownOpen(!counterDropdownOpen)
+  }
+
 
   return (
     <div className="container-navbar">
@@ -55,6 +61,17 @@ const Navbar = () => {
               <Link to="/padraoimpressora">Cadastro de padrão de impressora</Link>
               <Link to="/impressorascadastradas">Impressoras cadastradas</Link>
               <Link to="/listapadroes">Padrões de impressora cadastrados</Link>
+            </div>
+          )}
+        </button>
+      </div>
+
+      <div className="dropdown-navbar-counters">
+        <button className="counters-navbar" onClick={toggleCounterDropdown}>
+          Contadores <FiChevronDown />
+          {counterDropdownOpen && (
+            <div className="dropdown-counters-navbar">
+              <Link to="/comparacaocontador">Contagem de Impressões</Link>
             </div>
           )}
         </button>

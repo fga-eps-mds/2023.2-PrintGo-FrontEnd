@@ -206,7 +206,7 @@ const ChartComponent = () => {
       <Navbar />
       <div className="printerslist-header">
         <div className="printerslist-header-title">
-          <h2>Discrepância entre Dados de Impressoras</h2>
+          <h2>Gráfico de Contagem de Impressões</h2>
           <h4>Filtrar por:</h4>
           <button className="button-style report-button" onClick={generatePDFReport}>Gerar Relatório em PDF</button>
         </div>
@@ -223,7 +223,6 @@ const ChartComponent = () => {
           </div>
         </div>
       </div>
-      <h1>Gráfico de Contagem de Impressões</h1>
       <Bar data={data} />
     </div>
   );
