@@ -34,3 +34,12 @@ export async function togglePrinter(id, status) {
     return { type: 'error', error };
   }
 }
+
+export async function getPatterns() {
+  try {
+    const response = await axios.get(`${API_URL}/padrao`);
+    return { type: 'success', data: response.data};
+  } catch (error) {
+    return { type: 'error', error };
+  }
+}

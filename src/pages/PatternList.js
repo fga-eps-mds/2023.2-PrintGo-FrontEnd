@@ -7,9 +7,10 @@ import Engine from '../assets/engine.svg';
 import Input from '../components/Input'; 
 import Modal from '../components/ui/Modal';
 import Navbar from "../components/navbar/Navbar";
+import { getPatterns, togglePattern } from "../services/printerservice";
 
 export default function PatternList() {
-  
+
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
   const [modalOpen, setModalOpen] = useState(false);
