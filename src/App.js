@@ -14,6 +14,7 @@ import EditPattern from "./pages/EditPattern";
 import PrintersList from "./pages/PrintersList";
 import HomeCompleted from "./pages/HomeCompleted";
 import PatternList from "./pages/PatternList";
+import PrinterHistory from "./pages/PrinterHistory";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/impressorascadastradas" element={<PrintersList />} />
         <Route path="/homecompleta" element={<HomeCompleted />} />
         <Route path="/listapadroes" element={<PatternList />} />
+        <Route path="/historicoimpressora" element={<PrinterHistory />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,0 +1,110 @@
+.printerHistory-container {
+    padding: 20px;
+    background-color: #003366; /* Cor de fundo da página */
+    font-family: 'Arial', sans-serif; /* Define a fonte usada na página */
+    color:#FFFF;
+  }
+  
+  .history-list {
+    max-width: 100%; /* Largura máxima da lista */
+    margin: auto;
+    background-color: #fff; /* Cor de fundo para cada item da lista */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra externa */
+    border-radius: 4px; /* Bordas arredondadas */
+    overflow: hidden; /* Garante que a sombra interna não saia fora dos limites */
+  }
+  
+  .history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e6e6e6; /* Linha divisória entre os itens */
+  }
+  
+  .history-item:last-child {
+    border-bottom: none; /* Remove a borda do último item */
+  }
+  
+  .history-date {
+    flex: 1; /* Permite que a data ocupe o espaço necessário */
+    color:#003366; /* Cor do texto da data */
+    font-size: 1rem; /* Tamanho da fonte */
+    margin-right: 20px; /* Espaço à direita da data */
+    font-weight: 600;
+  }
+  
+  .history-location {
+    flex: 2; /* Dá mais espaço para a localização */
+    color:#003366; /* Cor do texto da localização */
+    font-size: 1rem; /* Tamanho da fonte */
+  }
+  
+  .details-button {
+    padding: 10px 25px;
+    background-color: #FFFF; /* Cor do botão Detalhes */
+    border: none;
+    color: #003366;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem; /* Tamanho da fonte */
+    cursor: pointer;
+    border-radius: 4px; /* Bordas arredondadas para o botão */
+   
+  }
+  
+  /* Adiciona uma sombra interna na parte superior e inferior da lista */
+  .history-list:before,
+  .history-list:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 10px;
+    z-index: 1;
+  }
+  
+  .history-list:before {
+    top: 0;
+    box-shadow: 0 10px 10px -10px #333; /* Sombra superior */
+  }
+  
+  .history-list:after {
+    bottom: 0;
+    box-shadow: 0 -10px 10px -10px #333; /* Sombra inferior */
+  }
+  
+
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  h2 {
+    margin-top: 0.8rem; /* Espaço acima do nome da impressora */
+    margin-bottom: 0; /* Remove a margem padrão abaixo do h2 */
+    font-size: 18px; /* Tamanho menor do que o título */
+    color: #FFFF; /* Uma cor mais suave */
+    font-weight: normal; /* Menos ênfase do que o título */
+  }
+  
+  .search-input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 200px; /* Um tamanho pequeno para a caixa de pesquisa */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+
+  
