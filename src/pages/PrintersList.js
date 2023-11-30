@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import "../style/pages/printersList.css";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Search from '../assets/Search.svg';
 import Filter from '../assets/Filter.svg';
 import engine from '../assets/engine.svg';
@@ -50,13 +50,50 @@ export default function PrintersList() {
       dataInstalacao: "2023-11-30T12:00:00Z",
       dataUltimoContador: "2023-11-30T12:00:00Z",
       contadorRetirada: 0,
-      dataRetirada: "12/10/2023",
+      dataRetirada: "2023-11-30T12:00:00Z",
       unidadeId: "1",
       status: "ATIVO"
+    },
+    {
+      id: "2",
+      padrao: {
+        tipo: "Impressora Laser Colorida",
+        marca: "HP",
+        modelo: "LaserJet Pro M404dn",
+      },
+      ip: "192.168.15.2",
+      numeroSerie: "YYYY-111111",
+      codigoLocadora: "PRINTER-005",
+      contadorInstalacao: 10,
+      ultimoContador: 5,
+      dataInstalacao: "2023-11-25T10:30:00Z",
+      dataUltimoContador: "2023-11-28T14:45:00Z",
+      contadorRetirada: 2,
+      dataRetirada: "2023-12-05T08:20:00Z",
+      unidadeId: "2",
+      status: "ATIVO",
+    },
+    {
+      id: "3",
+      padrao: {
+        tipo: "Scanner",
+        marca: "Epson",
+        modelo: "Perfection V600",
+      },
+      ip: "192.168.15.3",
+      numeroSerie: "ZZZZ-222222",
+      codigoLocadora: "PRINTER-006",
+      contadorInstalacao: 3,
+      ultimoContador: 1,
+      dataInstalacao: "2023-11-20T15:45:00Z",
+      dataUltimoContador: "2023-11-22T09:10:00Z",
+      contadorRetirada: 0,
+      dataRetirada: null,
+      unidadeId: "3",
+      status: "INATIVO",
     }
   ]);
 
-  const viewPrinter = () => Navigate("/visualizarimpressora")
 
 // modal para desativar impressora
   const modalDeactivatePrinter = (printer) => {
@@ -181,10 +218,15 @@ export default function PrintersList() {
               key={printer.id} 
               className="printerslist-printer" 
               style={{ color: printer.status === "ATIVO" ? '' : 'gray' }}
-              onClick={viewPrinter}
             >
+              
               <div className="printerslist-model">
-                <h4>{printer.padrao.modelo}</h4>
+                <Link 
+                  to={`/visualizarimpressora/${encodeURIComponent(btoa(JSON.stringify(printer)))}`}
+                  style={{ color: printer.status === "ATIVO" ? '' : 'gray' }}
+                >
+                  {printer.padrao.modelo}
+                </Link>
                 {printer.status === 'DESATIVADO' && <h5>Desativada</h5>}
               </div>
               
