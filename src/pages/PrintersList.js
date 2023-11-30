@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import "../style/pages/printersList.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Search from '../assets/Search.svg';
 import Filter from '../assets/Filter.svg';
 import engine from '../assets/engine.svg';
@@ -56,6 +56,7 @@ export default function PrintersList() {
     }
   ]);
 
+  const viewPrinter = () => Navigate("/visualizarimpressora")
 
 // modal para desativar impressora
   const modalDeactivatePrinter = (printer) => {
@@ -180,6 +181,7 @@ export default function PrintersList() {
               key={printer.id} 
               className="printerslist-printer" 
               style={{ color: printer.status === "ATIVO" ? '' : 'gray' }}
+              onClick={viewPrinter}
             >
               <div className="printerslist-model">
                 <h4>{printer.padrao.modelo}</h4>
