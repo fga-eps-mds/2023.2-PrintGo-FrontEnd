@@ -11,37 +11,27 @@ import { getPatterns, togglePattern } from "../services/printerservice";
 
 export default function PatternList() {
 
+  useEffect( () => {
+    async function fetchData() {
+      try {
+        const data = await getPatterns();
+        if (data.type === 'success' && data.data) {
+          setPatterns(data.data);
+          console.log(data.data);
+        }
+      } catch (error) {
+        console.error('Erro ao obter lista de padrões', error);
+      }
+    }
+  }, []);
+
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
   const [modalOpen, setModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalBodytext, setModalBodytext] = useState('');
   const [selectedPattern, setSelectedPattern] = useState();
-  const [patterns, setPatterns] = useState(
-    [
-      {
-        id_padrao: 1,
-        tipo: "Multifuncional Colorida", 
-        modelo: "PIXMA MG3620",
-        marca: "Canon",
-        status: "ATIVO"
-      },
-      {
-        id_padrao: 2,
-        tipo: "Laser",
-        modelo: "LaserJet Pro M404dn",
-        marca: "HP",
-        status: "ATIVO"
-      },
-      {
-        id_padrao: 3,
-        tipo: "Jato de Tinta",
-        modelo: "EcoTank L3150",
-        marca: "Epson",
-        status: "DESATIVADO"
-      },
-    ]
-  )
+  const [patterns, setPatterns] = useState([]);
 
   // modal para desativar impressora
   const modalDeactivatePattern = (pattern) => {
