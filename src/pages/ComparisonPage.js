@@ -4,6 +4,7 @@ import Chart from 'chart.js/auto';
 import Navbar from '../components/navbar/Navbar';
 import Filter from '../assets/Filter.svg';
 import jsPDF from 'jspdf';
+import '../style/pages/comparisonPage.css'
 import 'jspdf-autotable';
 
 
@@ -207,16 +208,16 @@ const ChartComponent = () => {
         <div className="printerslist-header-title">
           <h2>Discrepância entre Dados de Impressoras</h2>
           <h4>Filtrar por:</h4>
-          <button onClick={generatePDFReport}>Gerar Relatório em PDF</button>
+          <button className="button-style report-button" onClick={generatePDFReport}>Gerar Relatório em PDF</button>
         </div>
         <div className="printerslist-header-search-filter">
           <div className="printerslist-filter">
             <img src={Filter} alt="Filter" />
             <div className="printerslist-filter-dropdown-container">
               <div className="printerslist-dropdown-filter">
-                <button onClick={() => handleFilterChange('totalImpressoes')}>Filtro 1</button>
-                <button onClick={() => handleFilterChange('numeroCopias')}>Filtro 2</button>
-                <button onClick={() => handleFilterChange('impressoesColoridas')}>Filtro 3</button>
+                <button className="button-style filter-button" onClick={() => handleFilterChange('totalImpressoes')}>Filtro 1</button>
+                <button className="button-style filter-button" onClick={() => handleFilterChange('numeroCopias')}>Filtro 2</button>
+                <button className="button-style filter-button" onClick={() => handleFilterChange('impressoesColoridas')}>Filtro 3</button>
               </div>
             </div>
           </div>
