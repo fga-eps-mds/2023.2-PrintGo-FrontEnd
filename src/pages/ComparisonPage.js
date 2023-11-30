@@ -9,16 +9,30 @@ const initialData = {
   labels: [],
   datasets: [
     {
-      label: 'Contagem Manual',
+      label: 'Contagem Manual - Impressões',
       backgroundColor: 'rgba(75,192,192,0.2)',
       borderColor: 'rgba(75,192,192,1)',
       borderWidth: 1,
       data: [],
     },
     {
-      label: 'Contagem Contadora',
+      label: 'Contagem Manual - Cópias',
       backgroundColor: 'rgba(255,99,132,0.2)',
       borderColor: 'rgba(255,99,132,1)',
+      borderWidth: 1,
+      data: [],
+    },
+    {
+      label: 'Contagem Contadora - Impressões',
+      backgroundColor: 'rgba(0,255,0,0.2)',
+      borderColor: 'rgba(0,255,0,1)',
+      borderWidth: 1,
+      data: [],
+    },
+    {
+      label: 'Contagem Contadora - Cópias',
+      backgroundColor: 'rgba(255,0,0,0.2)',
+      borderColor: 'rgba(255,0,0,1)',
       borderWidth: 1,
       data: [],
     },
@@ -37,12 +51,20 @@ const ChartComponent = () => {
         labels: ['Impressora A', 'Impressora B', 'Impressora C'],
         datasets: [
           {
-            label: 'Contagem Manual',
+            label: 'Contagem Manual - Impressões',
             data: [1000, 800, 1200], // Substituir pelos valores reais
           },
           {
-            label: 'Contagem Contadora',
+            label: 'Contagem Manual - Cópias',
+            data: [200, 150, 250], // Substituir pelos valores reais
+          },
+          {
+            label: 'Contagem Contadora - Impressões',
             data: [980, 820, 1180], // Substituir pelos valores reais
+          },
+          {
+            label: 'Contagem Contadora - Cópias',
+            data: [190, 145, 245], // Substituir pelos valores reais
           },
         ],
       };
@@ -61,11 +83,11 @@ const ChartComponent = () => {
         labels: ['Impressora A', 'Impressora B', 'Impressora C'],
         datasets: [
           {
-            label: 'Contagem Manual',
+            label: 'Contagem Manual - Impressões',
             data: [1000, 800, 1200],
           },
           {
-            label: 'Contagem Contadora',
+            label: 'Contagem Contadora - Impressões',
             data: [980, 820, 1180],
           },
         ],
@@ -76,12 +98,12 @@ const ChartComponent = () => {
         labels: ['Impressora A', 'Impressora B', 'Impressora C'],
         datasets: [
           {
-            label: 'Contagem Manual',
-            data: [500, 400, 600],
+            label: 'Contagem Manual - Cópias',
+            data: [200, 150, 250],
           },
           {
-            label: 'Contagem Contadora',
-            data: [490, 410, 590],
+            label: 'Contagem Contadora - Cópias',
+            data: [190, 145, 245],
           },
         ],
       };
@@ -91,30 +113,30 @@ const ChartComponent = () => {
         labels: ['Impressora A', 'Impressora B', 'Impressora C'],
         datasets: [
           {
-            label: 'Contagem Manual - Colorido',
+            label: 'Contagem Manual - Impressões Coloridas',
             backgroundColor: 'rgba(75,192,192,0.2)',
             borderColor: 'rgba(75,192,192,1)',
             borderWidth: 1,
             data: [200, 150, 300],
           },
           {
-            label: 'Contagem Manual - Preto e Branco',
+            label: 'Contagem Manual - Impressões Preto e Branco',
             backgroundColor: 'rgba(255,99,132,0.2)',
             borderColor: 'rgba(255,99,132,1)',
             borderWidth: 1,
             data: [800, 650, 900],
           },
           {
-            label: 'Contagem Contadora - Colorido',
-            backgroundColor: 'rgba(75,192,192,0.2)',
-            borderColor: 'rgba(75,192,192,1)',
+            label: 'Contagem Contadora - Impressões Coloridas',
+            backgroundColor: 'rgba(0,255,0,0.2)',
+            borderColor: 'rgba(0,255,0,1)',
             borderWidth: 1,
             data: [190, 145, 295],
           },
           {
-            label: 'Contagem Contadora - Preto e Branco',
-            backgroundColor: 'rgba(255,99,132,0.2)',
-            borderColor: 'rgba(255,99,132,1)',
+            label: 'Contagem Contadora - Impressões Preto e Branco',
+            backgroundColor: 'rgba(255,0,0,0.2)',
+            borderColor: 'rgba(255,0,0,1)',
             borderWidth: 1,
             data: [790, 645, 895],
           },
@@ -135,7 +157,6 @@ const ChartComponent = () => {
           <h4>Filtrar por:</h4>
         </div>
         <div className="printerslist-header-search-filter">
-          <input type="text" placeholder="Pesquisar..." />
           <div className="printerslist-filter">
             <img src={Filter} alt="Filter" />
             <div className="printerslist-filter-dropdown-container">
