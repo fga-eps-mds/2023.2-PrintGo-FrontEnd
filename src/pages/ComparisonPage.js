@@ -215,9 +215,9 @@ const ChartComponent = () => {
             <img src={Filter} alt="Filter" />
             <div className="printerslist-filter-dropdown-container">
               <div className="printerslist-dropdown-filter">
-                <button className="button-style filter-button" onClick={() => handleFilterChange('totalImpressoes')}>Filtro 1</button>
-                <button className="button-style filter-button" onClick={() => handleFilterChange('numeroCopias')}>Filtro 2</button>
-                <button className="button-style filter-button" onClick={() => handleFilterChange('impressoesColoridas')}>Filtro 3</button>
+                <button className="button-style filter-button" onClick={() => handleFilterChange('totalImpressoes')}>Total de Impressões</button>
+                <button className="button-style filter-button" onClick={() => handleFilterChange('numeroCopias')}>Cópias e Impressões</button>
+                <button className="button-style filter-button" onClick={() => handleFilterChange('impressoesColoridas')}>Colorido  e P&B</button>
               </div>
             </div>
           </div>
