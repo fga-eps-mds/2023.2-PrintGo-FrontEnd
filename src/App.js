@@ -29,7 +29,7 @@ function App() {
         <Route path="/padraoImpressora" element={<PatternPrinter />} />
         <Route path="/editarPadrao" element={<EditPattern />} />
         <Route path="/impressorascadastradas" element={<PrintersList/>}/>
-        <Route path="/visualizarimpressora" element={<ViewPrinter/>}/>
+        <Route path="/visualizarimpressora/:printerData" element={<ViewPrinter/>}/>
       </Routes>
     </BrowserRouter>
   );
