@@ -28,7 +28,7 @@ function HistoryModal({ isOpen, history, onClose }) {
           <p><strong>Unidade filha:</strong> {history.childUnit}</p>
           <p><strong>Unidade pai:</strong> {history.parentUnit}</p>
         </div>
-        <button onClick={onClose}>Fechar</button>
+        <button className = "close-button"onClick={onClose}>Fechar</button>
       </div>
     </div>
   );

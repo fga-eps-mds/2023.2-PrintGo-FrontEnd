@@ -127,3 +127,20 @@
 
   }
   
+  /* Estilo para o botão de fechar */
+.close-button {
+  top: 1px;
+  right: 10px;
+  border: none;
+  background-color: #003366;
+  font-size: 15px; 
+  font-weight: 500;
+  cursor: pointer;
+  width: 10vw;
+  color: white;
+  height: 6vh;
+  border-radius: 15px;
+}
+
+
+
