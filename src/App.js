@@ -12,7 +12,6 @@ import EditPrinter from "./pages/EditPrinter";
 import PatternPrinter from "./pages/PatternPrinter";
 import EditPattern from "./pages/EditPattern";
 import PrintersList from "./pages/PrintersList";
-import HomeCompleted from "./pages/HomeCompleted";
 import PatternList from "./pages/PatternList";
 
 function App() {
@@ -31,7 +30,6 @@ function App() {
         <Route path="/padraoimpressora" element={<PatternPrinter />} />
         <Route path="/editarpadrao" element={<EditPattern />} />
         <Route path="/impressorascadastradas" element={<PrintersList />} />
-        <Route path="/homecompleta" element={<HomeCompleted />} />
         <Route path="/listapadroes" element={<PatternList />} />
       </Routes>
     </BrowserRouter>
