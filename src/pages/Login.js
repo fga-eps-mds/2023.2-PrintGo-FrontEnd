@@ -36,6 +36,7 @@ export default function Login() {
     try {
       const token = await login(email, password);
       localStorage.setItem("jwt", token);
+      console.log(token);
       navigate("/home");
     } catch (error) {
       console.error(error);
@@ -92,7 +93,7 @@ export default function Login() {
                       type="submit"
                       disabled={!isFormValid}
                     >
-                      <Link to="/homeCompleta">LOGIN</Link>
+                      LOGIN
                     </button>
                   </div>
                   <div className="button-login-container">

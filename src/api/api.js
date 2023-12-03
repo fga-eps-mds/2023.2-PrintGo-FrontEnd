@@ -7,7 +7,7 @@ export async function login(email, password) {
   };
 
   try {
-      const response = await api.post('/user/login', data);
+      const response = await api.post('/login', data);
       return response.data.token;
   } catch (error) {
     console.error('Erro ao fazer login:', error);
