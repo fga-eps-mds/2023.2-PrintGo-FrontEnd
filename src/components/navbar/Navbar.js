@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // Importe o Link
+import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import "../../style/components/navbar.css";
 import logo from "../../assets/logo 3.svg";
 import { decodeToken } from "react-jwt";
@@ -10,6 +11,7 @@ const Navbar = () => {
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [printerDropdownOpen, setPrinterDropdownOpen] = useState(false);
 
+  let navigate = useNavigate();
 
   const toggleUserDropdown = () => {
     setUserDropdownOpen(!userDropdownOpen)
@@ -20,8 +22,12 @@ const Navbar = () => {
   }
 
   const token = localStorage.getItem("jwt");
-
   const user = decodeToken(token);
+
+  const userLogOut = () => {
+    localStorage.clear();
+    navigate("/");
+  }
 
   return (
     <div className="container-navbar">
@@ -69,13 +75,25 @@ const Navbar = () => {
       </div>
       )}
 
-      <div className="button-login-navbar">
-        <Link to="/login">
-          <button>
-            Login
-          </button>
-        </Link>
-      </div>
+      { !user && (
+        <div className="button-login-navbar">
+          <Link to="/login">
+            <button>
+              Login
+            </button>
+          </Link>
+        </div>
+      )}
+
+      { user && (
+        <div className="navbar-user-leave">
+          <Link onClick={userLogOut}>
+            <button>
+              Sair
+            </button>
+          </Link>
+        </div>
+      )}
 
     </div>
   );

@@ -1,3 +1,4 @@
+/* Container navbar */
 .container-navbar {
   width: 100%;
   background-color: #ffff;
@@ -9,12 +10,17 @@
 .container-navbar img {
   width: 18vw;
   height: 7vh;
+  justify-self: flex-start;
 }
 
+
+/* Link buttons */
 .button-navbar{
   display: flex;
+  justify-self: flex-start;
   align-items: center;
 }
+
 .button-navbar button {
   background-color: #ffff;
   color: #003366;
@@ -23,6 +29,7 @@
   padding-right: 75px;
   cursor: pointer;
 }
+
 .button-navbar a {
   text-decoration: none;
   color: #003366;
@@ -33,8 +40,10 @@
   cursor: pointer;
 }
 
+/* Users dropdown */
 .dropdown-navbar-users {
   display: flex;
+  justify-self: flex-start;
   align-items: center;
   margin-left: 0.1px;
 }
@@ -81,6 +90,7 @@
   color: #006633;
 }
 
+/* Printers dropdown */
 .printers-navbar {
   background-color: #ffff;
   color: #003366;
@@ -93,6 +103,7 @@
 .dropdown-printers-navbar {
   display: none;
   position: absolute;
+  justify-self: flex-start;
   background-color: #f9f9f9;
   min-width: 180px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -128,6 +139,7 @@
 
 }
 
+/* Login */
 .button-login-navbar button {
   font-size: 18px;
   font-weight: 500;
@@ -140,6 +152,7 @@
   margin-top: 0.35rem;
   margin-left: 10rem;
   cursor: pointer;
+  justify-content: flex-end;
 }
 
 .button-login-navbar a {
@@ -150,4 +163,29 @@
 .button-login-navbar :hover {
   color: #006633;
   border-color: #006633;
+}
+
+/* Logged user */
+.navbar-user-leave {
+  justify-self: flex-end;
+  align-self: center;
+  font-size: 18px;
+  
+}
+
+.navbar-user-leave button {
+  background-color: #ffff;
+  color: #003366;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar-user-leave a {
+  text-decoration: none;
+}
+
+.navbar-user-leave a:visited {
+  color: #003366;
 }
