@@ -3,12 +3,12 @@ import "../style/pages/home.css";
 import Button from "../components/Button";
 import home_image from "../assets/home_image.svg";
 import elipse from "../assets/home_elipse.svg";
-import NavbarSimple from "../components/navbar/NavbarSimple";
+import Navbar from "../components/navbar/Navbar";
 
 export default function Home() {
   return (
     <>
-      <NavbarSimple />
+      <Navbar />
       <div className="homepage">
         <div className="content-home">
           <div className="left-content-home">

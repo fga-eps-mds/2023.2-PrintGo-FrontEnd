@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Importe o Link
 import "../../style/components/navbar.css";
 import logo from "../../assets/logo 3.svg";
+import { decodeToken } from "react-jwt";
 
 import { FiChevronDown } from "react-icons/fi";
 
@@ -17,6 +18,10 @@ const Navbar = () => {
   const togglePrinterDropdown = () => {
     setPrinterDropdownOpen(!printerDropdownOpen)
   }
+
+  const token = localStorage.getItem("jwt");
+
+  const user = decodeToken(token);
 
   return (
     <div className="container-navbar">
@@ -34,18 +39,21 @@ const Navbar = () => {
         </button>
       </div>
 
-      <div className="dropdown-navbar-users">
-        <button className="users-navbar" onClick={toggleUserDropdown}>
-          Usuários <FiChevronDown />
-          {userDropdownOpen && (
-            <div className="dropdown-users-navbar">
-              <Link to="/cadastro">Cadastro de usuário</Link>
-              <Link to="/editarusuario">Edição de usuário</Link>
-            </div>
-          )}
-        </button>
-      </div>
+      { user && (
+        <div className="dropdown-navbar-users">
+          <button className="users-navbar" onClick={toggleUserDropdown}>
+            Usuários <FiChevronDown />
+            {userDropdownOpen && (
+              <div className="dropdown-users-navbar">
+                <Link to="/cadastro">Cadastro de usuário</Link>
+                <Link to="/editarusuario">Edição de usuário</Link>
+              </div>
+            )}
+          </button>
+        </div>
+      )}
 
+      { user && (
       <div className="dropdown-navbar-printers">
         <button className="printers-navbar" onClick={togglePrinterDropdown}>
           Impressoras <FiChevronDown />
@@ -59,6 +67,7 @@ const Navbar = () => {
           )}
         </button>
       </div>
+      )}
     </div>
   );
 };
