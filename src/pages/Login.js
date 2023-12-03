@@ -6,6 +6,7 @@ import NavbarSimple from "../components/navbar/NavbarSimple";
 import { Link } from "react-router-dom";
 import { login } from "../api/api";
 import { useNavigate } from 'react-router-dom';
+import {decodeToken} from "react-jwt";
 
 
 export default function Login() {
@@ -36,7 +37,8 @@ export default function Login() {
     try {
       const token = await login(email, password);
       localStorage.setItem("jwt", token);
-      console.log(token);
+      const user = decodeToken(token);
+      console.log(user.nome)
       navigate("/home");
     } catch (error) {
       console.error(error);
