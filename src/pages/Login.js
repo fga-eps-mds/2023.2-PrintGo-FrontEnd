@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "../style/pages/login.css";
 import pessoas from "../assets/pessoas.svg";
 import login_ellipse from "../assets/login_ellipse.svg";
-import NavbarSimple from "../components/navbar/NavbarSimple";
 import { login } from "../api/api";
 import { useNavigate } from 'react-router-dom';
 import { decodeToken } from "react-jwt";
+import Navbar from "../components/navbar/Navbar";
 
 
 export default function Login() {
@@ -53,7 +53,7 @@ export default function Login() {
 
   return (
     <>
-      <NavbarSimple />
+      <Navbar />
       
       <div className="container-login">
         <img src={pessoas} alt="Pessoas" className="persons" />
