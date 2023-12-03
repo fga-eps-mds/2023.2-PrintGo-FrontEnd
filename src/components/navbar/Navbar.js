@@ -68,6 +68,15 @@ const Navbar = () => {
         </button>
       </div>
       )}
+
+      <div className="button-login-navbar">
+        <Link to="/login">
+          <button>
+            Login
+          </button>
+        </Link>
+      </div>
+
     </div>
   );
 };

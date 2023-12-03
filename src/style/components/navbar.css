@@ -127,3 +127,27 @@
   color: #006633;
 
 }
+
+.button-login-navbar button {
+  font-size: 18px;
+  font-weight: 500;
+  color: #003366;
+  width: 12vw;
+  height: 5vh;
+  border-radius: 35px;
+  border-color: #003366;
+  background-color: #ffff;
+  margin-top: 0.35rem;
+  margin-left: 10rem;
+  cursor: pointer;
+}
+
+.button-login-navbar a {
+  text-decoration: none;
+  color: #003366;
+}
+
+.button-login-navbar :hover {
+  color: #006633;
+  border-color: #006633;
+}
