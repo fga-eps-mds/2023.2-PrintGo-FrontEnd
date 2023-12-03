@@ -87,6 +87,9 @@ const Navbar = () => {
 
       { user && (
         <div className="navbar-user-info">
+          <div className="navbar-user-message">
+            Olá, {user.nome}!
+          </div>
           <Link className="navbar-user-leave" onClick={userLogOut}>
             <button>
               Sair

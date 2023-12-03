@@ -166,6 +166,7 @@
   height: 70%;
   border-radius: 35px;
   border-color: #003366;
+  padding: 10px;
   background-color: #ffff;
   cursor: pointer;
 }
@@ -179,25 +180,37 @@
 .navbar-user-info {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   width: 100%;
-  align-self: center;
+  height: 100%;
   font-size: 18px;
+  color: #003366;
   margin-right: 9vw;
+}
+
+.navbar-user-message {
+  margin-top: 3px;
+  display: flex;
+  padding-right: 25px;
+}
+
+.navbar-user-leave {
+  margin-top: 2px;
+  text-decoration: none;
 }
 
 .navbar-user-leave button {
   background-color: #ffff;
-  color: #003366;
-  padding: 10px;
   font-size: 18px;
+  color: #003366;
   border: none;
   cursor: pointer;
 }
 
-.navbar-user-leave a {
-  text-decoration: none;
-}
-
 .navbar-user-leave a:visited {
   color: #003366;
+}
+
+.navbar-user-leave :hover {
+  color: #006633;
 }
