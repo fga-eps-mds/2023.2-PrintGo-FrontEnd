@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../style/components/navbar.css";
 import logo from "../../assets/logo 3.svg";
+import LoggedUser from "../../assets/loggeduser.svg";
 import { decodeToken } from "react-jwt";
 
 import { FiChevronDown } from "react-icons/fi";
@@ -88,6 +89,7 @@ const Navbar = () => {
       { user && (
         <div className="navbar-user-info">
           <div className="navbar-user-message">
+            <img alt="loggeduser" src={LoggedUser}/>
             Olá, {user.nome}!
           </div>
           <Link className="navbar-user-leave" onClick={userLogOut}>
