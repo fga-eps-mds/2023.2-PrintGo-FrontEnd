@@ -125,10 +125,10 @@
     margin-top: 20px;
 }
 
-.form-button {
+.singup-form-button {
     display: inline-block;
     flex-direction: column;
-    color: #ffffff ;
+    color: #ffffff;
     border: none;
     padding: 10px 30px;
     border-radius: 50px;
@@ -139,23 +139,23 @@
 }
 
 
-.form-button:hover {
+.signup-form-button:hover {
     filter: brightness(1.8);
 }
 
-#cancel-bnt {
+#signup-cancel-bnt {
     background-color: #003366;
     transition: background-color 0.3s, filter 0.3s;
 }
 
-#register-bnt {
+#signup-register-bnt {
     margin-left: 8px;
     transition: background-color 0.3s, filter 0.3s;
     background-color: #006633;
 }
 
 
-#register-bnt:disabled {
+#signup-register-bnt:disabled {
     background-color: #6C6C6C !important;
     opacity: 65%;
     cursor: not-allowed;
