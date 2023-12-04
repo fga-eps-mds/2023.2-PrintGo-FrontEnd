@@ -3,8 +3,7 @@
     border-radius: 10px;
     display: flex;
     min-width: fit-content;
-    min-height: 80vh;
-    height: fit-content;
+    min-height: fit-content;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -15,9 +14,18 @@
 
 }
 
-#signup-form{
-    width: fit-content;
+#form-header {
+  font-size: 48px;
+  color: #003366;
+  margin-top: 20px;
+  margin-bottom: 16px;
 }
+
+#signup-form{
+    min-width: fit-content;
+    height: fit-content;
+}
+
 @keyframes spin {
     from {
         transform: rotate(0deg);
@@ -32,28 +40,19 @@
     margin-right: 4px;
 }
 
-#form-header {
-    font-size: 48px;
-    color: #003366;
-    margin-top: 20px;
-    margin-bottom: 16px;
-}
-
 #signup-input-group {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 43vw;
-    
+    width: 100%;
 }
 
 #signup-input-line {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    gap: 10px; 
-    width: 43vw;
-    
+    gap: 20px;
+    width: 100%;
 }
 
 #signup-input-box {
@@ -63,7 +62,6 @@
     width: 250px;
     flex-direction: column;
     margin-bottom: 16px;
-    padding: 0 10px;
     box-sizing: border-box;
     
 }
@@ -100,7 +98,6 @@
     border: 1px solid #003366;
     border-color: #003366;
     border-radius: 10px;
-    padding: 5px;
 }
 
 #signup-input-box select{
@@ -113,7 +110,6 @@
 }
 
 #signup-buttons {
-    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -160,21 +156,4 @@
 #input-description {
     color: #6C6C6C;
     font-size: 15px;
-}
-
-.elipse-signup{
-    position: fixed; 
-    width: 50vw;
-    height: 100vh;
-    top:0;
-    right: 0;
-    z-index: -1;
-    bottom: 2px;
-    color:#003366;
-    overflow: hidden;
-
-}
-  
-.elipse-signup img{
-  height: 150vh;
 }

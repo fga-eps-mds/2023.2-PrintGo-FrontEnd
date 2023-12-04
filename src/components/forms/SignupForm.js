@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as yup from "yup";
-import elipse6 from '../../assets/elipse6.svg';
 import { getUnidades } from "../../services/unidadeService";
 import { createUser } from "../../services/userService";
 import "../../style/components/signupForms.css";
@@ -104,9 +103,9 @@ export default function SignupForm(){
 
     return(
         <div id="signup-card">
-            <header id="form-header">
+            <div id="form-header">
                 Cadastro
-            </header>
+            </div>
             <form id="signup-form"onSubmit={handleSubmit(onSubmit)}>
                 <div id="signup-input-group">
                     <div id="signup-input-line">
@@ -204,9 +203,6 @@ export default function SignupForm(){
                     </button>
                 </div>
             </form>
-            <div className="elipse-signup">
-                <img alt= "elipse"  src={elipse6}></img>
-            </div>
             <ToastContainer />
         </div>
     );
