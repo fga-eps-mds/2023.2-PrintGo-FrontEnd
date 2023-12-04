@@ -161,20 +161,22 @@ export default function SignupForm(){
                                 ))}
                             </select>
                         </div>
-                        {displayLotacoes && (
-                            <div id="signup-input-box">
-                                <label htmlFor="unidadeFilha">Unidade Filha<span>*</span></label>
-                                <select {...register("unidade_id", {required: "Lotação é obrigatória"})}>
-                                    <option value="">Selecione a Lotação</option>
-                                    {unidadeInList?.map((unidade) => (
-                                    <option key={unidade.id} value={unidade.id}>
-                                        {unidade.name}
-                                    </option>
-                                    ))}
-                                </select>
-                                <span>{errors.unidade_id?.message}</span>
-                            </div>
-                        )}
+                        <div id="signup-input-box">
+                          {displayLotacoes && (
+                            <>
+                              <label htmlFor="unidadeFilha">Unidade Filha<span>*</span></label>
+                              <select {...register("unidade_id", {required: "Lotação é obrigatória"})}>
+                                  <option value="">Selecione a Lotação</option>
+                                  {unidadeInList?.map((unidade) => (
+                                  <option key={unidade.id} value={unidade.id}>
+                                      {unidade.name}
+                                  </option>
+                                  ))}
+                              </select>
+                              <span>{errors.unidade_id?.message}</span>
+                            </>
+                          )}
+                        </div>
                     </div>
                     <div id="signup-input-line">
                         <div id="signup-input-box">
@@ -187,6 +189,7 @@ export default function SignupForm(){
                                 <label htmlFor="label-checkbox" id="label-checkbox">Usuário é administrador?</label>
                             </div>
                         </div>
+                        <div id="signup-input-box"></div>
                     </div>
                 </div>
 

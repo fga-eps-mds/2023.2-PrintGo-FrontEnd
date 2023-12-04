@@ -2,8 +2,9 @@
     background-color: #FFFFFF;
     border-radius: 10px;
     display: flex;
-    width: 48vw;
-    height: 89vh;
+    min-width: fit-content;
+    min-height: 80vh;
+    height: fit-content;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -15,7 +16,7 @@
 }
 
 #signup-form{
-    width: 43vw;
+    width: fit-content;
 }
 @keyframes spin {
     from {
@@ -34,6 +35,7 @@
 #form-header {
     font-size: 48px;
     color: #003366;
+    margin-top: 20px;
     margin-bottom: 16px;
 }
 
@@ -47,7 +49,7 @@
 
 #signup-input-line {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
     gap: 10px; 
     width: 43vw;
@@ -115,6 +117,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 50px;
+    margin-top: 20px;
 }
 
 .form-button {
@@ -155,7 +159,7 @@
 
 #input-description {
     color: #6C6C6C;
-    font-size: 10px;
+    font-size: 15px;
 }
 
 .elipse-signup{
@@ -169,20 +173,8 @@
     color:#003366;
     overflow: hidden;
 
-  }
+}
   
-  .elipse-signup img{
-    height: 150vh;
-  }
-
-@media (max-width: 900px) {
-    #signup-card {
-        width: 90%; /* Adjust the form width as needed*/
-        margin: 0 auto; /* Centers the form horizontally*/
-        padding: 1rem; /* Adjust padding as needed */
-    }
-
-    #input-line {
-        display:block;
-    }
+.elipse-signup img{
+  height: 150vh;
 }
