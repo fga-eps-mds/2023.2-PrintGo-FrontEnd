@@ -110,7 +110,7 @@ export default function SignupForm(){
     return(
         <div id="signup-card">
             <div id="form-header">
-                Cadastro
+                Cadastro de usuário
             </div>
             <form id="signup-form"onSubmit={handleSubmit(onSubmit)}>
                 <div id="signup-input-group">
