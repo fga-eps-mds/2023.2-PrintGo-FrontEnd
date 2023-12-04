@@ -47,7 +47,7 @@ export default function ForgottenPasswordForm(){
     }
 
     return(
-        <div id="signup-card">
+        <div id="forgotpassword-card">
             <div id="center-container">
                 <header id="form-header">
                     Esqueci minha senha
@@ -56,16 +56,16 @@ export default function ForgottenPasswordForm(){
                     Para redefinir sua senha, informe o email cadastrado na sua conta e lhe enviaremos um link de recuperação.<span></span>
                 </p>
             </div>
-            <form id="signup-form"onSubmit={handleSubmit(onSubmit)}>
-                <div id="signup-input-group">
-                    <div id="signup-input-box">
+            <form id="forgotpassword-form"onSubmit={handleSubmit(onSubmit)}>
+                <div id="forgotpassword-input-group">
+                    <div id="forgotpassword-input-box">
                         <label>Email Cadastrado</label>
                         <input id="email" {...register("email", {required: true} )} type="email" placeholder="Email" />
                         <span>{errors.email?.message}</span>
                     </div>
                 </div>
 
-                <div id="signup-buttons">
+                <div id="forgotpassword-buttons">
                     <button className="form-button" type="submit" id="register-bnt" disabled={isSubmitting}>
                         {isSubmitting && (
                             <ReloadIcon id="animate-spin"/>
@@ -75,7 +75,7 @@ export default function ForgottenPasswordForm(){
                     </button>
                 </div>
             </form>
-            <div className="elipse-signup">
+            <div className="elipse-forgotpassword">
                 <img alt= "elipse"  src={elipse6}></img>
             </div>
             <ToastContainer />
