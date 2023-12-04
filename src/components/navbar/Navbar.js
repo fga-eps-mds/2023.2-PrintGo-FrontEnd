@@ -45,46 +45,38 @@ const Navbar = () => {
         </button>
 
         { user && (
-          <div className="navbar-users">
-            <button className="navbar-users-button" onClick={toggleUserDropdown}>
-              Usuários <FiChevronDown />
-              {userDropdownOpen && (
-                <div className="navbar-users-dropdown">
-                  <Link to="/cadastro">Cadastro de usuário</Link>
-                  <Link to="/editarusuario">Edição de usuário</Link>
-                </div>
-              )}
-            </button>
-          </div>
-        )}
-
-        { user && (
-        <div className="navbar-printers">
-          <button className="navbar-printers-button" onClick={togglePrinterDropdown}>
-            Impressoras <FiChevronDown />
-            {printerDropdownOpen && (
-              <div className="navbar-printers-dropdown">
-                <Link to="/cadastroimpressora">Cadastro de impressora</Link>
-                <Link to="/padraoimpressora">Cadastro de padrão de impressora</Link>
-                <Link to="/impressorascadastradas">Impressoras cadastradas</Link>
-                <Link to="/listapadroes">Padrões de impressora cadastrados</Link>
+          <>
+            { user.cargos.includes('ADMIN') && (
+              <div className="navbar-users">
+                <button className="navbar-users-button" onClick={toggleUserDropdown}>
+                  Usuários <FiChevronDown />
+                  {userDropdownOpen && (
+                    <div className="navbar-users-dropdown">
+                      <Link to="/cadastro">Cadastro de usuário</Link>
+                      <Link to="/editarusuario">Edição de usuário</Link>
+                    </div>
+                  )}
+                </button>
               </div>
             )}
-          </button>
-        </div>
+
+            <div className="navbar-printers">
+              <button className="navbar-printers-button" onClick={togglePrinterDropdown}>
+                Impressoras <FiChevronDown />
+                {printerDropdownOpen && (
+                  <div className="navbar-printers-dropdown">
+                    <Link to="/cadastroimpressora">Cadastro de impressora</Link>
+                    <Link to="/padraoimpressora">Cadastro de padrão de impressora</Link>
+                    <Link to="/impressorascadastradas">Impressoras cadastradas</Link>
+                    <Link to="/listapadroes">Padrões de impressora cadastrados</Link>
+                  </div>
+                )}
+              </button>
+            </div>
+          </>
         )}
 
       </div>
-
-      { !user && (
-        <div className="navbar-login">
-          <Link to="/login" className="button-login-navbar">
-            <button>
-              Login
-            </button>
-          </Link>
-        </div>
-      )}
 
       { user && (
         <div className="navbar-user-info">
@@ -95,6 +87,16 @@ const Navbar = () => {
           <Link className="navbar-user-leave" onClick={userLogOut}>
             <button>
               Sair
+            </button>
+          </Link>
+        </div>
+      )}
+
+      { !user && (
+        <div className="navbar-login">
+          <Link to="/login" className="button-login-navbar">
+            <button>
+              Login
             </button>
           </Link>
         </div>
