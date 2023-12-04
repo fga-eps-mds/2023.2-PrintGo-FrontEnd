@@ -38,6 +38,7 @@ const signupSchema = yup.object().shape({
     }),
     unidade_id: yup.string().required('Lotação é obrigatória'),
     isAdmin: yup.boolean(),
+    isLocadora: yup.boolean(),
   });
 
 export default function SignupForm(){
@@ -74,16 +75,21 @@ export default function SignupForm(){
     const onSubmit = async (data) =>  {
 
         data.cargos = ["USER"];
+
         if (data.isAdmin) {
             data.cargos.push("ADMIN");
         }
+        if (data.isLocadora) {
+            data.cargos.push("LOCADORA");
+        }
+
         const response = await createUser(data);
         if(response.type === 'success'){
             toast.success("Usuario cadastrado com sucesso!")
             setTimeout(() => {
                 reset();
                 navigate('/');
-            }, 3000); 
+            }, 3000);
         } else {
             toast.error("Erro ao cadastrar usuario")
         }
@@ -150,7 +156,7 @@ export default function SignupForm(){
                     </div>
                     <div id="signup-input-line">
                         <div id="signup-input-box">
-                            <label htmlFor="unidadePai">Unidade pai<span>*</span></label>
+                            <label htmlFor="unidadePai">Unidade Pai<span>*</span></label>
                             <select onChange={handleWorkstationChange}>
                                 <option value="">Selecione a Unidade de policia</option>
                                 {unidade?.map((unit) => (
@@ -188,13 +194,22 @@ export default function SignupForm(){
                                 <label htmlFor="label-checkbox" id="label-checkbox">Usuário é administrador?</label>
                             </div>
                         </div>
-                        <div id="signup-input-box"></div>
+                        <div id="signup-input-box">
+                            <div id="signup-input-checkbox">
+                                <input
+                                    id="checkbox"
+                                    type="checkbox"
+                                    {...register("isLocadora")}
+                                />
+                                <label htmlFor="label-checkbox" id="label-checkbox">Locadora?</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div id="signup-buttons">
-                    <button className="form-button" type="button" id="cancel-bnt" >CANCELAR</button>
-                    <button className="form-button" type="submit" id="register-bnt" disabled={!isValid || isSubmitting}>
+                    <button className="singup-form-button" type="button" id="signup-cancel-bnt">CANCELAR</button>
+                    <button className="singup-form-button" type="submit" id="signup-register-bnt" disabled={!isValid || isSubmitting}>
                         {isSubmitting && (
                             <ReloadIcon id="animate-spin"/>
                         )}
