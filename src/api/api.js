@@ -15,16 +15,11 @@ export async function login(email, password) {
   }
 }
 
-export async function changePassword(newPassword, newPasswordConfirmation) {
+export async function changePassword(data) {
   const token = localStorage.getItem('jwt')
 
   const headers = {
     'Authorization': token
-  }
-
-  const data = {
-    novaSenha: newPassword,
-    confirmacaoNovaSenha: newPasswordConfirmation,
   }
 
   try {

@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import home_image from "../assets/home_image.svg";
 import elipse from "../assets/home_elipse.svg";
 import Navbar from "../components/navbar/Navbar";
+import { ToastContainer } from 'react-toastify';
 
 export default function Home() {
   return (
@@ -33,6 +34,8 @@ export default function Home() {
             <img className="home-image" alt="" src={home_image} />
           </div>
         </div>
+        <ToastContainer />
+
       </div>
     </>
   );

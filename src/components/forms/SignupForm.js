@@ -9,6 +9,8 @@ import { getUnidades } from "../../services/unidadeService";
 import { createUser } from "../../services/userService";
 import "../../style/components/signupForms.css";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { useNavigate } from 'react-router-dom';
+
 
 
 const signupSchema = yup.object().shape({
@@ -40,6 +42,8 @@ const signupSchema = yup.object().shape({
   });
 
 export default function SignupForm(){
+    const navigate = useNavigate();
+
     const [unidade, setUnidade] = useState([]);
     const [unidadeInList, setUnidadeInList] = useState([]);
     const [displayLotacoes, setDisplayLotacoes] = useState(false);
@@ -70,10 +74,6 @@ export default function SignupForm(){
 
     const onSubmit = async (data) =>  {
 
-        setTimeout(() => {
-            console.log("3 segundos se passaram.");
-        }, 3000);  // 3000 milissegundos = 3 segundos
-        
         data.cargos = ["USER"];
         if (data.isAdmin) {
             data.cargos.push("ADMIN");
@@ -82,6 +82,7 @@ export default function SignupForm(){
         if(response.type === 'success'){
             toast.success("Usuario cadastrado com sucesso!")
             reset()
+            navigate('/')
         } else {
             toast.error("Erro ao cadastrar usuario")
         }
