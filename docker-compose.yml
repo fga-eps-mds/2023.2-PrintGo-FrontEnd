@@ -5,9 +5,11 @@ services:
     container_name: app-front
     image: app-front
     build: 
-        context: .
-        target: development
+      context: .
+      target: development
     volumes: 
       - ./src:/app/src
     ports: 
       - 3000:3000 
+    env_file:
+      - .env 
