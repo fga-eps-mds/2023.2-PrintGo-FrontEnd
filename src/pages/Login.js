@@ -26,7 +26,6 @@ export default function Login() {
     } else {
       setError(null);
     }
-
     setEmail(event.target.value);
   };
 
@@ -102,7 +101,7 @@ export default function Login() {
                     </button>
                   </div>
                   <div className="button-login-container">
-                    <button className="button-login" type="button">
+                    <button className="button-login" type="button" onClick={() => navigate("/recuperarSenha")}>
                       Recuperar senha
                     </button>
                   </div>

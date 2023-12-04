@@ -81,8 +81,10 @@ export default function SignupForm(){
         const response = await createUser(data);
         if(response.type === 'success'){
             toast.success("Usuario cadastrado com sucesso!")
-            reset()
-            navigate('/')
+            setTimeout(() => {
+                reset();
+                navigate('/');
+            }, 3000); 
         } else {
             toast.error("Erro ao cadastrar usuario")
         }

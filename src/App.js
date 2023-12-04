@@ -13,6 +13,7 @@ import PatternPrinter from "./pages/PatternPrinter";
 import EditPattern from "./pages/EditPattern";
 import PrintersList from "./pages/PrintersList";
 import PatternList from "./pages/PatternList";
+import ForgottenPasswordPage from "./pages/ForgottenPassword";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/contato" element={<Contact />} />
         <Route path="/quemsomos" element={<AboutUs />} />
         <Route path="/mudarsenha" element={<ChangePassword />} />
+        <Route path="/recuperarSenha" element={<ForgottenPasswordPage />} />
         <Route path="/cadastroimpressora" element={<RegisterPrinter />} />
         <Route path="/editarimpressora" element={<EditPrinter />} />
         <Route path="/padraoimpressora" element={<PatternPrinter />} />
