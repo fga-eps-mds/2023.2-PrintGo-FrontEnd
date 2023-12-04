@@ -82,11 +82,17 @@
 }
 
 #signup-input-box input{
-  height: 30px;
+  min-height: 30px;
   font-size: 16px;
   border: 1px solid #003366;
   border-color: #003366;
   border-radius: 10px;
+}
+
+#signup-input-description {
+  color: #6C6C6C;
+  font-size: 14px;
+  height: 50px;
 }
 
 #signup-input-checkbox {
@@ -153,9 +159,4 @@
     background-color: #6C6C6C !important;
     opacity: 65%;
     cursor: not-allowed;
-}
-
-#input-description {
-    color: #6C6C6C;
-    font-size: 15px;
 }

@@ -140,7 +140,7 @@ export default function SignupForm(){
                             <label htmlFor="senha" >Senha<span>*</span></label>
                             <input id="senha" {...register("senha", {required: true})} placeholder="Senha" type="password"/>
                             <span>{errors.senha?.message}</span>
-                            <p id="input-description">A senha deve conter pelo menos 8 caracteres, 1 letra maiúscula, 1 minuscula, 1 número e um caractere especial</p>
+                            <p id="signup-input-description">A senha deve conter pelo menos 8 caracteres, 1 letra maiúscula, 1 minuscula, 1 número e um caractere especial</p>
                         </div>
                         <div id="signup-input-box">
                             <label htmlFor="confirmarSenha" >Confirmar Senha<span>*</span></label>
