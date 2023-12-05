@@ -25,7 +25,7 @@
 
 /* Form container */
 #edit-user-form{
-  width: 100%
+  width: 100%;
 }
 
 @keyframes spin {
@@ -42,6 +42,7 @@
   margin-right: 4px;
 }
 
+/* Campos de informação */
 #edit-user-input-group {
   display: flex;
   flex-wrap: wrap;
@@ -66,61 +67,55 @@
   width: 250px;
   flex-direction: column;
   margin-bottom: 16px;
-  padding: 0 10px;
   box-sizing: border-box;
-    
+}
+
+#edit-user-input-box label {
+  color: #003366;
+  display: block;
+  margin-bottom: 5px;
+}
+
+#edit-user-input-box span {
+  color: #9f0805;
 }
 
 #label-checkbox {
     top: 10rem;
 }
 
-#edit-user-input-box label {
-    color: #003366;
-    display: block;
-    margin-bottom: 5px;
-}
-
-#edit-user-input-box span {
-    color: #9f0805;
-}
-
-#input-description {
-  color: #6C6C6C;
-  font-size: 10px;
-}
-
 #edit-user-input-checkbox {
-    margin-top: 2rem;
-    display: flex;
-    align-items: center;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
 }
 
 #edit-user-input-checkbox input {
-    margin:0 12px 0 0;
-    vertical-align: middle;
-    position: relative;
-    top: -3px;
+  margin:0 12px 0 0;
+  vertical-align: middle;
+  position: relative;
+  top: -3px;
 }
 
 #edit-user-input-box input{
-    font-size: 16px;
-    border: 1px solid #003366;
-    border-color: #003366;
-    border-radius: 10px;
-    padding: 5px;
+  min-height: 30px;
+  font-size: 16px;
+  border: 1px solid #003366;
+  border-color: #003366;
+  border-radius: 10px;
 }
 
 #edit-user-input-box select{
-    font-size: 16px;
-    font-size: 1rem;border: 1px solid #003366;
-    border-color: #003366;
-    border-radius: 10px;
-    padding: 5px;
-    color: #6C6C6C;
+  font-size: 16px;
+  font-size: 1rem;border: 1px solid #003366;
+  border-color: #003366;
+  border-radius: 10px;
+  padding: 5px;
+  color: #6C6C6C;
 }
 
-.form-button {
+/* Botôes */
+.edit-user-form-button {
   display: inline-block;
   flex-direction: column;
   color: #ffffff ;
@@ -131,51 +126,41 @@
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 20px;
+  width: 180px;
 }
 
 #edit-user-change-password {
-  margin-left: 10px;
   background-color: #003366;
   transition: background-color 0.3s, filter 0.3s;
+  margin-bottom: 0px;
 }
 
 #edit-user-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 50px;
   margin-top: 80px;
 }
 
 .form-button:hover {
-    filter: brightness(1.8);
+  filter: brightness(1.8);
 }
 
 #edit-user-cancel-bnt {
-    background-color: #003366;
-    transition: background-color 0.3s, filter 0.3s;
+  background-color: #003366;
+  transition: background-color 0.3s, filter 0.3s;
 }
 
 #edit-user-register-bnt {
-    margin-left: 8px;
-    transition: background-color 0.3s, filter 0.3s;
-    background-color: #006633;
+  margin-left: 8px;
+  transition: background-color 0.3s, filter 0.3s;
+  background-color: #006633;
 }
 
 
 #edit-user-register-bnt:disabled {
-    background-color: #6C6C6C !important;
-    opacity: 65%;
-    cursor: not-allowed;
-}
-
-@media (max-width: 900px) {
-    #edit-user-card {
-        width: 90%; /* Adjust the form width as needed*/
-        margin: 0 auto; /* Centers the form horizontally*/
-        padding: 1rem; /* Adjust padding as needed */
-    }
-
-    #input-line {
-        display:block;
-    }
+  background-color: #6C6C6C !important;
+  opacity: 65%;
+  cursor: not-allowed;
 }

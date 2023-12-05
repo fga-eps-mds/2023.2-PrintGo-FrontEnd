@@ -22,22 +22,12 @@ const editUserSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref('email'), null], 'Os emails devem coincidir')
     .required('Email é obrigatória'),
-  senha: yup.string().required('Senha é obrigatória')
-  .matches(
-    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-    'A senha não segue o padrão a baixo'
-  ),
-  senhaConfirmar: yup
-    .string()
-    .oneOf([yup.ref('senha'), null], 'As senhas devem coincidir')
-    .required('Senha é obrigatória'),
   documento: yup.string()
   .matches(/^(\d{11}|\d{14})$/, 'CPF ou CNPJ inválido')
   .test('cpfOrCnpj', 'CPF ou CNPJ inválido', value => {
       return value.length === 11 || value.length === 14;
   }),
   unidade_id: yup.string().required('Lotação é obrigatória'),
-  isAdmin: yup.boolean(),
 });
 
 export default function EditUserForm(){
@@ -47,8 +37,8 @@ export default function EditUserForm(){
     documento: 'Documento',
     email: 'E-mail',
     confirmarEmail: 'Confirmar E-mail',
-    unidadePai: 'Selecione Unidade Pai',
-    unidadeFilha: 'Selecione Unidade Filho'
+    unidadePai: 'Unidade Pai',
+    unidadeFilha: 'Unidade Filho'
   };
 
   const token = localStorage.getItem("jwt");
@@ -134,16 +124,12 @@ export default function EditUserForm(){
       console.log("3 segundos se passaram.");
     }, 3000);  // 3000 milissegundos = 3 segundos
     
-    data.cargos = ["USER"];
-    if (data.isAdmin) {
-      data.cargos.push("ADMIN");
-    }
     const response = await createUser(data);
     if(response.type === 'success'){
-      toast.success("Usuario cadastrado com sucesso!")
+      toast.success("Usuario salvo com sucesso!")
       reset()
     } else {
-      toast.error("Erro ao cadastrar usuario")
+      toast.error("Erro ao salvar usuario")
     }
   }
 
@@ -166,64 +152,79 @@ export default function EditUserForm(){
       </header>
       <form id="edit-user-form" onSubmit={handleSubmit(onSubmit)}>
         <div id="edit-user-input-group">
-          {Object.entries(fieldLabels).map(([key, field]) => (
-            <div id="edit-user-input-line" key={key}>
+          <div id="edit-user-input-line">
               <div id="edit-user-input-box">
-                { (key !== 'unidadeFilha' || displayLotacoes) && (
-                  <>
-                  <label>{field.charAt(0).toUpperCase() + field.slice(1)}<span>*</span></label>
-                    {key === 'unidadePai' || (key === 'unidadeFilha') ? (
-                      <select
-                        {...register(key)}
-                        onChange={(e) => {
-                          if (key === 'unidadePai') {
-                            setSelectedUnidadePai(e.target.value);
-                            handleWorkstationChange(e);
-                          } else {
-                            setSelectedUnidadeFilho(e.target.value);
-                          }
-                        }}
-                        value={key === 'unidadePai' ? selectedUnidadePai : selectedUnidadeFilho}
-                      >
-                        <option value=''>Selecione uma unidade</option>
-                        { key === 'unidadePai' ?
-                          unidadeList.map((option) => (
-                            <option key={option.id} value={option.id}>
-                              {option.name}
-                            </option>
-                          ))
-                          :
-                          unidadeFilhoList.map((option) => (
-                            <option key={option.id} value={option.id}>
-                              {option.name}
-                            </option>
-                          ))
-                        }
-                      </select>
-                  
-                      ) : (
-                      <input
-                        {...register(key)}
-                        placeholder={field.includes('data') ? 'DD/MM/AAAA' : field.charAt(0).toUpperCase() + field.slice(1)}
-                        value={userData[key]}
-                      />
-                    )}
+                  <label htmlFor="nome">Nome<span>*</span></label>
+                  <input id="nome" {...register("nome", {required: true} )} placeholder="Nome" value={userData?.nome}/>
+                  <span>{errors.nome?.message}</span>
+              </div>
 
-                  <span>{errors[key]?.message}</span>
+              <div id="edit-user-input-box">
+                  <label htmlFor="documento">Documento<span>*</span></label>
+                  <input id="documento" {...register("documento", {required: true})} placeholder="CPF ou CNPJ" value={userData?.documento}/>
+                  <span>{errors.documento?.message}</span>
+              </div>
+          </div>
+
+          <div id="edit-user-input-line">
+              <div id="edit-user-input-box">
+                  <label htmlFor="email">E-mail<span>*</span></label>
+                  <input id="email" {...register("email", {required: true} )} type="email" placeholder="Email" value={userData?.email}/>
+                  <span>{errors.email?.message}</span>
+              </div>
+
+              <div id="edit-user-input-box">
+                  <label htmlFor="confirmarEmail" >Confirmar E-mail<span>*</span></label>
+                  <input id="confirmarEmail" {...register("emailConfirmar", {required: true})} placeholder="Confirmar Email" />
+                  <span data-testid="email-error">{errors.emailConfirmar?.message}</span>
+              </div>
+          </div>
+
+          <div id="edit-user-input-line">
+            <div id="edit-user-input-box">
+              <label htmlFor="confirmarEmail" >Senha</label>
+              <button className="form-button" id="edit-user-change-password" type="button" onClick={redirectToChangePassword}>
+                MUDAR SENHA
+              </button>
+            </div>
+            <div id="edit-user-input-box"></div>
+          </div>
+
+          <div id="edit-user-input-line">
+              <div id="edit-user-input-box">
+                  <label htmlFor="unidadePai">Unidade Pai<span>*</span></label>
+                  <select onChange={handleWorkstationChange}>
+                      <option value="">Selecione a Unidade de policia</option>
+                      {unidadeList?.map((unidade) => (
+                      <option key={unidade.id} value={unidade.id}>
+                          {unidade.name}
+                      </option>
+                      ))}
+                  </select>
+              </div>
+              <div id="edit-user-input-box">
+                {displayLotacoes && (
+                  <>
+                    <label htmlFor="unidadeFilha">Unidade Filha<span>*</span></label>
+                    <select {...register("unidade_id", {required: "Lotação é obrigatória"})}>
+                        <option value="">Selecione a Lotação</option>
+                        {unidadeFilhoList?.map((unidade) => (
+                        <option key={unidade.id} value={unidade.id}>
+                            {unidade.name}
+                        </option>
+                        ))}
+                    </select>
+                    <span>{errors.unidade_id?.message}</span>
                   </>
                 )}
               </div>
-            </div>
-          ))}
+          </div>
 
-          <button id="change-password" type="button" onClick={redirectToChangePassword}>
-            MUDAR SENHA
-          </button>
         </div>
 
         <div id="edit-user-buttons">
-          <button className="form-button" type="button" id="edit-user-cancel-bnt" >CANCELAR</button>
-          <button className="form-button" type="submit" id="edit-user-register-bnt" disabled={!isValid || isSubmitting}>
+          <button className="edit-user-form-button" type="button" id="edit-user-cancel-bnt" >CANCELAR</button>
+          <button className="edit-user-form-button" type="submit" id="edit-user-register-bnt" disabled={!isValid || isSubmitting}>
             {isSubmitting && (
               <ReloadIcon id="animate-spin"/>
             )}
