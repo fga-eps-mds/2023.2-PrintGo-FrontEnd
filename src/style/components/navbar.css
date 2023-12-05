@@ -141,6 +141,14 @@
   height: 100%;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+}
+
+.navbar-login button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
 }
 
 .button-login-navbar {
@@ -156,6 +164,7 @@
   text-decoration: none;
   color: #003366;
 }
+
 
 .button-login-navbar button {
   font-size: 18px;
