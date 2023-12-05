@@ -85,6 +85,7 @@ export default function EditUserForm(){
       reset
   } = useForm({resolver: yupResolver(editUserSchema), mode: "onChange"})
 
+  // Puxe os dados das unidades policiais.
   useEffect( () => {
     async function fetchWorkStationData() {
         try {
@@ -101,7 +102,7 @@ export default function EditUserForm(){
     fetchWorkStationData();
   }, []);
   
-
+  // Puxe os dados do usuário logado.
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -153,66 +154,66 @@ export default function EditUserForm(){
 
 
   return(
-      <div id="edit-user-card">
-          <header id="edit-user-form-header">
-              Editar usuário
-          </header>
-          <form id="edit-user-form" onSubmit={handleSubmit(onSubmit)}>
-              <div id="edit-user-input-group">
-                {Object.entries(fieldLabels).map(([key, field]) => (
-                    <div id="edit-user-input-line" key={key}>
-                        <div id="edit-user-input-box">
-                            <label>{field.charAt(0).toUpperCase() + field.slice(1)}<span>*</span></label>
-                                {key === 'unidadePai' || (key === 'unidadeFilha') ? (
-                                  <select
-                                      {...register(key)}
-                                      onChange={(e) => {
-                                          if (key === 'unidadePai') {
-                                              setSelectedUnidadePai(e.target.value);
-                                              handleWorkstationChange(e);
-                                          } else {
-                                              setSelectedUnidadeFilho(e.target.value);
-                                          }
-                                      }}
-                                      value={key === 'unidadePai' ? selectedUnidadePai : selectedUnidadeFilho}
-                                  >
-                                  <option value=''>Selecione uma unidade</option>
-                                  {unidade.map((option) => (
-                                      <option key={option.id} value={option.id}>
-                                          {option.name}
-                                      </option>
-                                  ))}
-                                  </select>
-                              
-                                  ) : (
-                                  <input
-                                      {...register(key)}
-                                      placeholder={field.includes('data') ? 'DD/MM/AAAA' : field.charAt(0).toUpperCase() + field.slice(1)}
-                                  />
-                                )}
+    <div id="edit-user-card">
+      <header id="edit-user-form-header">
+        Editar usuário
+      </header>
+      <form id="edit-user-form" onSubmit={handleSubmit(onSubmit)}>
+        <div id="edit-user-input-group">
+          {Object.entries(fieldLabels).map(([key, field]) => (
+            <div id="edit-user-input-line" key={key}>
+              <div id="edit-user-input-box">
+                <label>{field.charAt(0).toUpperCase() + field.slice(1)}<span>*</span></label>
+                  {key === 'unidadePai' || (key === 'unidadeFilha') ? (
+                    <select
+                      {...register(key)}
+                      onChange={(e) => {
+                        if (key === 'unidadePai') {
+                          setSelectedUnidadePai(e.target.value);
+                          handleWorkstationChange(e);
+                        } else {
+                          setSelectedUnidadeFilho(e.target.value);
+                        }
+                      }}
+                      value={key === 'unidadePai' ? selectedUnidadePai : selectedUnidadeFilho}
+                    >
+                    <option value=''>Selecione uma unidade</option>
+                    {unidade.map((option) => (
+                      <option key={option.id} value={option.id}>
+                        {option.name}
+                      </option>
+                    ))}
+                    </select>
+                
+                    ) : (
+                    <input
+                      {...register(key)}
+                      placeholder={field.includes('data') ? 'DD/MM/AAAA' : field.charAt(0).toUpperCase() + field.slice(1)}
+                    />
+                  )}
 
-                            <span>{errors[key]?.message}</span>
-                        </div>
-                    </div>
-                ))}
-
-                <button id="change-password" type="button" onClick={redirectToChangePassword}>
-                    MUDAR SENHA
-                </button>
+                <span>{errors[key]?.message}</span>
               </div>
+            </div>
+          ))}
 
-              <div id="edit-user-buttons">
-                  <button className="form-button" type="button" id="edit-user-cancel-bnt" >CANCELAR</button>
-                  <button className="form-button" type="submit" id="edit-user-register-bnt" disabled={!isValid || isSubmitting}>
-                      {isSubmitting && (
-                          <ReloadIcon id="animate-spin"/>
-                      )}
+          <button id="change-password" type="button" onClick={redirectToChangePassword}>
+            MUDAR SENHA
+          </button>
+        </div>
 
-                      {!isSubmitting ? 'SALVAR': "SALVANDO"}
-                  </button>
-              </div>
-          </form>
-          <ToastContainer />
-      </div>
+        <div id="edit-user-buttons">
+          <button className="form-button" type="button" id="edit-user-cancel-bnt" >CANCELAR</button>
+          <button className="form-button" type="submit" id="edit-user-register-bnt" disabled={!isValid || isSubmitting}>
+            {isSubmitting && (
+              <ReloadIcon id="animate-spin"/>
+            )}
+
+            {!isSubmitting ? 'SALVAR': "SALVANDO"}
+          </button>
+        </div>
+      </form>
+      <ToastContainer />
+    </div>
   );
 }
