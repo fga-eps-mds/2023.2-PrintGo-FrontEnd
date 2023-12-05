@@ -2,14 +2,14 @@ import React from "react";
 import "../style/pages/changePassword.css";
 import ChangePasswordPeople from "../assets/change-password-people.svg";
 import elipse6 from "../assets/elipse6.svg";
-import { changePassword } from "../api/api";
 import Navbar from "../components/navbar/Navbar";
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { recoverPassword } from "../services/userService";
 
 const passwordSchema = yup.object().shape({
   novaSenha: yup.string()
@@ -24,8 +24,10 @@ const passwordSchema = yup.object().shape({
 });
 
 
-export default function ChangePassword() {
+export default function RecoverPasswordPage() {
   const navigate = useNavigate();
+  const location = useLocation()
+  const params = new URLSearchParams(location.search)
 
   const {
     register,
@@ -35,14 +37,15 @@ export default function ChangePassword() {
   } = useForm({resolver: yupResolver(passwordSchema), mode: "onChange"})
   
   const submitChangePassword = async (data) => {
-    const response = await changePassword(data);
+    const token = params.get("token");
+    const response = await recoverPassword({token, senha: data.novaSenha});
     if (response.type === 'error') {
-      toast.error("Erro não foi possível alterar a senha! por favor tente novamente");
+      toast.error("Ocorreu um erro na atualização da senha! por favor tente novamente");
     } else {
       toast.success("Senha alterada com sucesso! redirecionando");
       setTimeout(() => {
         reset();
-        navigate('/');
+        navigate('/login');
       }, 3000); 
     }
   };

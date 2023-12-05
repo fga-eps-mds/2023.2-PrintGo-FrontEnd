@@ -101,7 +101,7 @@ export default function Login() {
                     </button>
                   </div>
                   <div className="button-login-container">
-                    <button className="button-login" type="button" onClick={() => navigate("/recuperarSenha")}>
+                    <button className="button-login" type="button" onClick={() => navigate("/esqueciMinhaSenha")}>
                       Recuperar senha
                     </button>
                   </div>

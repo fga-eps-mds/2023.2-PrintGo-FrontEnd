@@ -1,12 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as yup from "yup";
 import elipse6 from '../../assets/elipse6.svg';
-import { getUnidades } from "../../services/unidadeService";
-import { createUser } from "../../services/userService";
+import { forgottenPassword } from "../../services/userService";
 import "../../style/components/forgottenPasswordForms.css";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useNavigate } from 'react-router-dom';
@@ -26,24 +25,26 @@ export default function ForgottenPasswordForm(){
     const {
         register,
         handleSubmit,
-        formState: { errors, isSubmitting }, 
+        formState: { errors, isSubmitting, isValid }, 
         reset
     } = useForm({resolver: yupResolver(forgottenPasswordSchema), mode: "onChange"})
 
     const onSubmit = async (data) =>  {
+        toast.success("Email enviado com sucesso!", {
+            autoClose: 5000,
 
-    //     data.cargos = ["USER"];
-    //     if (data.isAdmin) {
-    //         data.cargos.push("ADMIN");
-    //     }
-    //     const response = await createUser(data);
-    //     if(response.type === 'success'){
-    //         toast.success("Usuario cadastrado com sucesso!")
-    //         reset()
-    //         navigate('/')
-    //     } else {
-    //         toast.error("Erro ao cadastrar usuario")
-    //     }
+        });
+        navigate('/');
+
+        const response = await forgottenPassword(data);
+        if(response.type === 'error') {
+            toast.error(response.error)
+        } else {
+            toast.success("Email enviado com sucesso!")
+            setTimeout(() => {
+                navigate('/');
+            }, 3000); 
+        }
     }
 
     return(
@@ -66,7 +67,7 @@ export default function ForgottenPasswordForm(){
                 </div>
 
                 <div id="forgotpassword-buttons">
-                    <button className="form-button" type="submit" id="register-bnt" disabled={isSubmitting}>
+                    <button className="form-button" type="submit" id="register-bnt" disabled={isSubmitting || !isValid}>
                         {isSubmitting && (
                             <ReloadIcon id="animate-spin"/>
                         )}
@@ -78,7 +79,6 @@ export default function ForgottenPasswordForm(){
             <div className="elipse-forgotpassword">
                 <img alt= "elipse"  src={elipse6}></img>
             </div>
-            <ToastContainer />
         </div>
     );
 }
