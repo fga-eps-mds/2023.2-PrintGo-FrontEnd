@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as yup from "yup";
-import elipse6 from '../../assets/elipse6.svg';
 import { getUnidades } from "../../services/unidadeService";
 import { createUser } from "../../services/userService";
 import "../../style/components/editUserForms.css";
@@ -140,66 +139,59 @@ export default function EditUserForm(){
             </header>
             <form id="edit-user-form" onSubmit={handleSubmit(onSubmit)}>
                 <div id="edit-user-input-group">
-                {Object.entries(fieldLabels).map(([key, field]) => (
-                    <div id="input-line" key={key}>
-                    <div id="input-box">
-                        <label>{field.charAt(0).toUpperCase() + field.slice(1)}<span>*</span></label> 
-                        {key === 'unidadePai' || key === 'unidadeFilha' ? (
-                        <select
-                        {...register(key)}
-                        onChange={(e) => {
-                            if (key === 'unidadePai') {
-                                setSelectedUnidadePai(e.target.value);
-                                handleWorkstationChange(e);
-                            } else {
-                                setSelectedUnidadeFilho(e.target.value);
-                            }
-                        }}
-                        value={key === 'unidadePai' ? selectedUnidadePai : selectedUnidadeFilho}
-                    >
-                        <option value=''>Selecione uma unidade</option>
-                        {unidade.map((option) => (
-                            <option key={option.id} value={option.id}>
-                                {option.name}
-                            </option>
-                        ))}
-                    </select>
-                    
-                        ) : (
-                        <input
-                            {...register(key)}
-                            placeholder={field.includes('data') ? 'DD/MM/AAAA' : field.charAt(0).toUpperCase() + field.slice(1)}
-                        />
-                        )}
-                        <span>{errors[key]?.message}</span>
-                    </div>
-                    </div>
-                ))}
+                  {Object.entries(fieldLabels).map(([key, field]) => (
+                      <div id="edit-user-input-line" key={key}>
+                          <div id="edit-user-input-box">
+                              <label>{field.charAt(0).toUpperCase() + field.slice(1)}<span>*</span></label>
+                                  {key === 'unidadePai' || (key === 'unidadeFilha') ? (
+                                    <select
+                                        {...register(key)}
+                                        onChange={(e) => {
+                                            if (key === 'unidadePai') {
+                                                setSelectedUnidadePai(e.target.value);
+                                                handleWorkstationChange(e);
+                                            } else {
+                                                setSelectedUnidadeFilho(e.target.value);
+                                            }
+                                        }}
+                                        value={key === 'unidadePai' ? selectedUnidadePai : selectedUnidadeFilho}
+                                    >
+                                    <option value=''>Selecione uma unidade</option>
+                                    {unidade.map((option) => (
+                                        <option key={option.id} value={option.id}>
+                                            {option.name}
+                                        </option>
+                                    ))}
+                                    </select>
+                                
+                                    ) : (
+                                    <input
+                                        {...register(key)}
+                                        placeholder={field.includes('data') ? 'DD/MM/AAAA' : field.charAt(0).toUpperCase() + field.slice(1)}
+                                    />
+                                  )}
 
-            <button 
-                id="change-password" 
-                type="button" 
-               
-                onClick={redirectToChangePassword}
-            >
-                MUDAR SENHA
-            </button>
+                              <span>{errors[key]?.message}</span>
+                          </div>
+                      </div>
+                  ))}
+
+                  <button id="change-password" type="button" onClick={redirectToChangePassword}>
+                      MUDAR SENHA
+                  </button>
                 </div>
 
                 <div id="edit-user-buttons">
-                    <button className="form-button" type="button" id="cancel-bnt" >CANCELAR</button>
-                    <button className="form-button" type="submit" id="register-bnt" disabled={!isValid || isSubmitting}>
+                    <button className="form-button" type="button" id="edit-user-cancel-bnt" >CANCELAR</button>
+                    <button className="form-button" type="submit" id="edit-user-register-bnt" disabled={!isValid || isSubmitting}>
                         {isSubmitting && (
                             <ReloadIcon id="animate-spin"/>
                         )}
 
-                        {!isSubmitting ? 'REGISTRAR': "CADASTRANDO"}
+                        {!isSubmitting ? 'SALVAR': "SALVANDO"}
                     </button>
                 </div>
             </form>
-            <div className="elipse-edit-user">
-                <img alt= "elipse"  src={elipse6}></img>
-            </div>
             <ToastContainer />
         </div>
     );
