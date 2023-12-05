@@ -32,7 +32,7 @@ const editUserSchema = yup.object().shape({
 
 export default function EditUserForm(){
 
-  const loggedUser = null;
+  let loggedUser = null;
   const token = localStorage.getItem("jwt");
   if (token) {
     loggedUser = decodeToken(token);
@@ -60,10 +60,6 @@ export default function EditUserForm(){
 
 
   const navigate = useNavigate();
-
-  const redirectToChangePassword = () => {
-    navigate('/mudarsenha'); 
-  };
 
 
   const {
@@ -101,9 +97,6 @@ export default function EditUserForm(){
         
         if (dataUnidades.type ==='success' && dataUnidades.data) {
           setUnidadeList(dataUnidades.data);
-          setSelectedUnidadeFilho(userData.unidade_id);
-          setSelectedUnidadePai(unidadeList.find(unidade => unidade.id === userData.unidade_id).parent_workstation.id);
-          console.log(selectedUnidadePai);
         }
 
       } catch (error) {
@@ -140,6 +133,9 @@ export default function EditUserForm(){
     }
   };
 
+  const redirectToChangePassword = () => {
+    navigate('/mudarsenha'); 
+  };
 
   return(
     <div id="edit-user-card">

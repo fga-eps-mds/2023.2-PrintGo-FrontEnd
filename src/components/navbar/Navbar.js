@@ -21,7 +21,7 @@ const Navbar = () => {
     setPrinterDropdownOpen(!printerDropdownOpen)
   }
 
-  const user = null;
+  let user = null;
   const token = localStorage.getItem("jwt");
   if (token) {
     user = decodeToken(token);
