@@ -5,10 +5,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as yup from "yup";
 import { getUnidades } from "../../services/unidadeService";
-import { createUser } from "../../services/userService";
+import { createUser, getUserById } from "../../services/userService";
 import "../../style/components/editUserForms.css";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useNavigate } from 'react-router-dom';
+import { decodeToken } from "react-jwt";
 
 
 const editUserSchema = yup.object().shape({
@@ -51,12 +52,7 @@ export default function EditUserForm(){
   };
 
   const testObject = {
-    nome: 'João da Silva',
-    documento: '222.222.222-10',
-    email: 'joao@gmail.com',
-    confirmarEmail: 'joao@gmail.com',
-    unidadePai: 'Unidade pai',
-    unidadeFilha: 'Unidade filho'
+		
   };
 
   const token = localStorage.getItem("jwt");
@@ -66,47 +62,44 @@ export default function EditUserForm(){
   const [selectedUnidadePai, setSelectedUnidadePai] = useState('');
   const [selectedUnidadeFilho, setSelectedUnidadeFilho] = useState('');
   const [displayLotacoes,setDisplayLotacoes] = useState ('');
-  const [unidadeList, setUnidadeInList] = useState ('');
-  const [userData, setUserData] = useState(null);
+  const [unidadeList, setUnidadeList] = useState ('');
+  const [userData, setUserData] = useState(
+    {
+      id: "clprii4r90001ah2ck99qcqam",
+      email: "admin@admin.com",
+      nome: "Admin",
+      senha: "$2a$10$1huqODjgG634l0iJgF4fqOcGDo2SLqvBjxl1kelp4plWxsVS31.Ou",
+      documento: "98937941023",
+      unidade_id: "cfa19c26-3b18-4659-b02e-51047e5b3d13",
+      cargos: [
+        "USER",
+        "ADMIN"
+      ]
+    }
+  );
 
 
   const navigate = useNavigate();
 
   const redirectToChangePassword = () => {
-      navigate('/mudarsenha'); 
+    navigate('/mudarsenha'); 
   };
 
 
   const {
-      register,
-      setValue,
-      handleSubmit,
-      formState: { errors, isValid, isSubmitting }, 
-      reset
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting }, 
+    reset
   } = useForm({resolver: yupResolver(editUserSchema), mode: "onChange"})
 
-  // Puxe os dados das unidades policiais.
-  useEffect( () => {
-    async function fetchWorkStationData() {
-        try {
-          const dataUnidades = await getUnidades();
-          
-          if (dataUnidades.type ==='success' && dataUnidades.data) {
-              setUnidade(dataUnidades.data);
-          }
 
-        } catch (error) {
-          console.error('Erro ao obter opções do serviço:', error);
-        }
-    }
-    fetchWorkStationData();
-  }, []);
-  
   // Puxe os dados do usuário logado.
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const data = await axios.get(loggedUser.id);
+        const data = await getUserById(loggedUser.id);
         
         if (data.type === 'success' && data.data) {
           setUserData(data.data);
@@ -115,41 +108,57 @@ export default function EditUserForm(){
         console.log('Erro ao buscar dados do usuário:', error);
       }
     }
-    if(loggedUser.id) {
+    if(loggedUser) {
       fetchUserData();
     }
-  }, [loggedUser.id])
+  }, [loggedUser])
 
+  // Puxe os dados das unidades policiais.
+  useEffect( () => {
+    async function fetchWorkStationData() {
+      try {
+        const dataUnidades = await getUnidades();
+        
+        if (dataUnidades.type ==='success' && dataUnidades.data) {
+          setUnidade(dataUnidades.data);
+        }
+
+      } catch (error) {
+        console.error('Erro ao obter opções do serviço:', error);
+      }
+    }
+    fetchWorkStationData();
+  }, []);
 
 
   const onSubmit = async (data) =>  {
 
-      setTimeout(() => {
-          console.log("3 segundos se passaram.");
-      }, 3000);  // 3000 milissegundos = 3 segundos
-      
-      data.cargos = ["USER"];
-      if (data.isAdmin) {
-          data.cargos.push("ADMIN");
-      }
-      const response = await createUser(data);
-      if(response.type === 'success'){
-          toast.success("Usuario cadastrado com sucesso!")
-          reset()
-      } else {
-          toast.error("Erro ao cadastrar usuario")
-      }
+    setTimeout(() => {
+      console.log("3 segundos se passaram.");
+    }, 3000);  // 3000 milissegundos = 3 segundos
+    
+    data.cargos = ["USER"];
+    if (data.isAdmin) {
+      data.cargos.push("ADMIN");
+    }
+    const response = await createUser(data);
+    if(response.type === 'success'){
+      toast.success("Usuario cadastrado com sucesso!")
+      reset()
+    } else {
+      toast.error("Erro ao cadastrar usuario")
+    }
   }
 
   const handleWorkstationChange = (event) => {
 
-      if(event.target.value) {
-          const listChildWorkstations = unidade.find(uni => uni.id === event.target.value).child_workstations;
-          setDisplayLotacoes(true);
-          setUnidadeInList(listChildWorkstations);
-      }else {
-          setDisplayLotacoes(false);
-      }
+    if(event.target.value) {
+      const listChildWorkstations = unidade.find(uni => uni.id === event.target.value).child_workstations;
+      setDisplayLotacoes(true);
+      setUnidadeList(listChildWorkstations);
+    }else {
+      setDisplayLotacoes(false);
+    }
   };
 
 
@@ -163,36 +172,49 @@ export default function EditUserForm(){
           {Object.entries(fieldLabels).map(([key, field]) => (
             <div id="edit-user-input-line" key={key}>
               <div id="edit-user-input-box">
-                <label>{field.charAt(0).toUpperCase() + field.slice(1)}<span>*</span></label>
-                  {key === 'unidadePai' || (key === 'unidadeFilha') ? (
-                    <select
-                      {...register(key)}
-                      onChange={(e) => {
-                        if (key === 'unidadePai') {
-                          setSelectedUnidadePai(e.target.value);
-                          handleWorkstationChange(e);
-                        } else {
-                          setSelectedUnidadeFilho(e.target.value);
+                { (key !== 'unidadeFilha' || displayLotacoes) && (
+                  <>
+                  <label>{field.charAt(0).toUpperCase() + field.slice(1)}<span>*</span></label>
+                    {key === 'unidadePai' || (key === 'unidadeFilha') ? (
+                      <select
+                        {...register(key)}
+                        onChange={(e) => {
+                          if (key === 'unidadePai') {
+                            setSelectedUnidadePai(e.target.value);
+                            handleWorkstationChange(e);
+                          } else {
+                            setSelectedUnidadeFilho(e.target.value);
+                          }
+                        }}
+                        value={key === 'unidadePai' ? selectedUnidadePai : selectedUnidadeFilho}
+                      >
+                        <option value=''>Selecione uma unidade</option>
+                        { key === 'unidadePai' ?
+                          unidade.map((option) => (
+                            <option key={option.id} value={option.id}>
+                              {option.name}
+                            </option>
+                          ))
+                          :
+                          unidadeList.map((option) => (
+                            <option key={option.id} value={option.id}>
+                              {option.name}
+                            </option>
+                          ))
                         }
-                      }}
-                      value={key === 'unidadePai' ? selectedUnidadePai : selectedUnidadeFilho}
-                    >
-                    <option value=''>Selecione uma unidade</option>
-                    {unidade.map((option) => (
-                      <option key={option.id} value={option.id}>
-                        {option.name}
-                      </option>
-                    ))}
-                    </select>
-                
-                    ) : (
-                    <input
-                      {...register(key)}
-                      placeholder={field.includes('data') ? 'DD/MM/AAAA' : field.charAt(0).toUpperCase() + field.slice(1)}
-                    />
-                  )}
+                      </select>
+                  
+                      ) : (
+                      <input
+                        {...register(key)}
+                        placeholder={field.includes('data') ? 'DD/MM/AAAA' : field.charAt(0).toUpperCase() + field.slice(1)}
+                        value={userData[key]}
+                      />
+                    )}
 
-                <span>{errors[key]?.message}</span>
+                  <span>{errors[key]?.message}</span>
+                  </>
+                )}
               </div>
             </div>
           ))}
