@@ -54,7 +54,6 @@ const Navbar = () => {
                   {userDropdownOpen && (
                     <div className="navbar-users-dropdown">
                       <Link to="/cadastro">Cadastro de usuário</Link>
-                      <Link to="/editarusuario">Edição de usuário</Link>
                     </div>
                   )}
                 </button>
@@ -84,7 +83,7 @@ const Navbar = () => {
         <div className="navbar-user-info">
           <div className="navbar-user-message">
             <img alt="loggeduser" src={LoggedUser}/>
-            Olá, {user.nome}!
+            <Link to={`/editarusuario/${user.id}`}>Olá, {user.nome}!</Link>
           </div>
           <Link className="navbar-user-leave" onClick={userLogOut}>
             <button>

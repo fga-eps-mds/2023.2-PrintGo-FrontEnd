@@ -216,10 +216,23 @@
 }
 
 .navbar-user-message {
+  width: 15vw;
+  height: 6vh;
   margin-top: 3px;
   display: flex;
   align-items: center;
-  padding-right: 25px;
+}
+
+.navbar-user-message a{
+  text-decoration: none;
+}
+
+.navbar-user-message a:hover{
+  text-decoration: underline;
+}
+
+.navbar-user-message a:visited{
+  color: #003366;
 }
 
 .navbar-user-message img {
@@ -228,8 +241,11 @@
 }
 
 .navbar-user-leave {
-  margin-top: 2px;
+  display: flex;
+  align-items: center;
   text-decoration: none;
+  margin-left: 2rem;
+  height: 7vh;
 }
 
 .navbar-user-leave button {
