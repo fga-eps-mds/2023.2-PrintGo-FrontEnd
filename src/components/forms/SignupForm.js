@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as yup from "yup";
 import { getUnidades } from "../../services/unidadeService";
@@ -89,7 +89,7 @@ export default function SignupForm(){
             setTimeout(() => {
                 reset();
                 navigate('/');
-            }, 3000);
+            }, 2000);
         } else {
             toast.error("Erro ao cadastrar usuario")
         }
@@ -218,7 +218,6 @@ export default function SignupForm(){
                     </button>
                 </div>
             </form>
-            <ToastContainer />
         </div>
     );
 }
