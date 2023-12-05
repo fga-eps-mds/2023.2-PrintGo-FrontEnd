@@ -51,18 +51,14 @@ export default function EditUserForm(){
     unidadeFilha: 'Selecione Unidade Filho'
   };
 
-  const testObject = {
-		
-  };
-
   const token = localStorage.getItem("jwt");
   const loggedUser = decodeToken(token);
 
-  const [unidade, setUnidade] = useState([]);
+  const [unidadeList, setUnidadeList] = useState([]);
   const [selectedUnidadePai, setSelectedUnidadePai] = useState('');
   const [selectedUnidadeFilho, setSelectedUnidadeFilho] = useState('');
   const [displayLotacoes,setDisplayLotacoes] = useState ('');
-  const [unidadeList, setUnidadeList] = useState ('');
+  const [unidadeFilhoList, setUnidadeFilhoList] = useState ('');
   const [userData, setUserData] = useState(
     {
       id: "clprii4r90001ah2ck99qcqam",
@@ -120,7 +116,7 @@ export default function EditUserForm(){
         const dataUnidades = await getUnidades();
         
         if (dataUnidades.type ==='success' && dataUnidades.data) {
-          setUnidade(dataUnidades.data);
+          setUnidadeList(dataUnidades.data);
         }
 
       } catch (error) {
@@ -128,6 +124,7 @@ export default function EditUserForm(){
       }
     }
     fetchWorkStationData();
+    setSelectedUnidadeFilho(userData.unidade_id);
   }, []);
 
 
@@ -153,9 +150,9 @@ export default function EditUserForm(){
   const handleWorkstationChange = (event) => {
 
     if(event.target.value) {
-      const listChildWorkstations = unidade.find(uni => uni.id === event.target.value).child_workstations;
+      const listChildWorkstations = unidadeList.find(uni => uni.id === event.target.value).child_workstations;
       setDisplayLotacoes(true);
-      setUnidadeList(listChildWorkstations);
+      setUnidadeFilhoList(listChildWorkstations);
     }else {
       setDisplayLotacoes(false);
     }
@@ -190,13 +187,13 @@ export default function EditUserForm(){
                       >
                         <option value=''>Selecione uma unidade</option>
                         { key === 'unidadePai' ?
-                          unidade.map((option) => (
+                          unidadeList.map((option) => (
                             <option key={option.id} value={option.id}>
                               {option.name}
                             </option>
                           ))
                           :
-                          unidadeList.map((option) => (
+                          unidadeFilhoList.map((option) => (
                             <option key={option.id} value={option.id}>
                               {option.name}
                             </option>
