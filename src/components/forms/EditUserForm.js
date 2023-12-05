@@ -32,17 +32,11 @@ const editUserSchema = yup.object().shape({
 
 export default function EditUserForm(){
 
-  const fieldLabels = {
-    nome: 'Nome',
-    documento: 'Documento',
-    email: 'E-mail',
-    confirmarEmail: 'Confirmar E-mail',
-    unidadePai: 'Unidade Pai',
-    unidadeFilha: 'Unidade Filho'
-  };
-
+  const loggedUser = null;
   const token = localStorage.getItem("jwt");
-  const loggedUser = decodeToken(token);
+  if (token) {
+    loggedUser = decodeToken(token);
+  }
 
   const [unidadeList, setUnidadeList] = useState([]);
   const [selectedUnidadePai, setSelectedUnidadePai] = useState('');
@@ -107,6 +101,9 @@ export default function EditUserForm(){
         
         if (dataUnidades.type ==='success' && dataUnidades.data) {
           setUnidadeList(dataUnidades.data);
+          setSelectedUnidadeFilho(userData.unidade_id);
+          setSelectedUnidadePai(unidadeList.find(unidade => unidade.id === userData.unidade_id).parent_workstation.id);
+          console.log(selectedUnidadePai);
         }
 
       } catch (error) {
@@ -114,7 +111,6 @@ export default function EditUserForm(){
       }
     }
     fetchWorkStationData();
-    setSelectedUnidadeFilho(userData.unidade_id);
   }, []);
 
 
