@@ -48,12 +48,41 @@
 }
 
 .navbar-users-button {
+  display: flex;
   background-color: #ffff;
   color: #003366;
   font-size: 18px;
   border: none;
   cursor: pointer;
   margin-bottom: 1px;
+}
+
+.navbar-users-button h4{
+  margin: 0;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+/* Printers dropdown */
+.navbar-printers {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-printers-button {
+  display: flex;
+  background-color: #ffff;
+  color: #003366;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 1px;
+}
+
+.navbar-printers-button h4{
+  margin: 0;
+  font-weight: normal;
+  font-size: 18px;
 }
 
 .navbar-users-dropdown {
@@ -88,20 +117,9 @@
   color: #006633;
 }
 
-/* Printers dropdown */
-.navbar-printers {
-  display: flex;
-  align-items: center;
-}
 
-.navbar-printers-button {
-  background-color: #ffff;
-  color: #003366;
-  font-size: 18px;
-  border: none;
-  cursor: pointer;
-  margin-bottom: 1px;
-}
+
+
 
 .navbar-printers-dropdown {
   display: none;
