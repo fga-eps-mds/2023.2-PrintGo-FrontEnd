@@ -49,11 +49,11 @@ const Navbar = () => {
             { user.cargos.includes('ADMIN') && (
               <div className="navbar-users">
                 <button className="navbar-users-button" onClick={toggleUserDropdown}>
-                  Usuários <FiChevronDown />
+                  <h4>Usuários</h4> 
+                  <FiChevronDown />
                   {userDropdownOpen && (
                     <div className="navbar-users-dropdown">
                       <Link to="/cadastro">Cadastro de usuário</Link>
-                      <Link to="/editarusuario">Edição de usuário</Link>
                     </div>
                   )}
                 </button>
@@ -62,7 +62,8 @@ const Navbar = () => {
 
             <div className="navbar-printers">
               <button className="navbar-printers-button" onClick={togglePrinterDropdown}>
-                Impressoras <FiChevronDown />
+                <h4>Impressoras</h4> 
+                <FiChevronDown />
                 {printerDropdownOpen && (
                   <div className="navbar-printers-dropdown">
                     <Link to="/cadastroimpressora">Cadastro de impressora</Link>
@@ -82,7 +83,7 @@ const Navbar = () => {
         <div className="navbar-user-info">
           <div className="navbar-user-message">
             <img alt="loggeduser" src={LoggedUser}/>
-            Olá, {user.nome}!
+            <Link to={`/editarusuario/${user.id}`}>Olá, {user.nome}!</Link>
           </div>
           <Link className="navbar-user-leave" onClick={userLogOut}>
             <button>

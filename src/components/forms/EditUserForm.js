@@ -8,7 +8,7 @@ import { getUnidades } from "../../services/unidadeService";
 import { createUser } from "../../services/userService";
 import "../../style/components/editUserForms.css";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 const fieldLabels = {
@@ -68,6 +68,7 @@ export default function EditUserForm(){
         navigate('/mudarsenha'); 
     };
 
+    const { id }  = useParams();
 
     const {
         register,
