@@ -9,6 +9,15 @@ export const createUser = async (user) => {
   }
 };
 
+export const getUserById = async (id) => {
+  try {
+    const response = await api.get(`/user/${user.id}`);
+    return response.data;
+  } catch(error) {
+    return { type: 'error', error };
+  }
+};
+
 export const forgottenPassword = async (email) => {
   try {
     const response = await api.post('/user/forgotten-password', email);
