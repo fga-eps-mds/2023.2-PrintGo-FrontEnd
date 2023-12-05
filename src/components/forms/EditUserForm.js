@@ -8,7 +8,7 @@ import { getUnidades } from "../../services/unidadeService";
 import { createUser } from "../../services/userService";
 import "../../style/components/editUserForms.css";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const fieldLabels = {
@@ -68,7 +68,8 @@ export default function EditUserForm(){
         navigate('/mudarsenha'); 
     };
 
-    const { id }  = useParams();
+    const token = localStorage.getItem("jwt");
+    const user = decodeToken(token);
 
     const {
         register,
@@ -94,11 +95,22 @@ export default function EditUserForm(){
         setData();
       }, []);
    
+
     useEffect(() => {
-        Object.entries(testObject).forEach(([key, value]) => {
-            setValue(key, value);
-        });
-    }, [setValue]);
+        const fetchUserData = async () => {
+            try {
+                const response = await axios.get(`/user/${user.id}`)
+                const userData = response.data
+                return userData
+            } catch(error) {
+                console.log('Erro ao buscar dados do usuário:', error)
+            }
+        }
+        if(user.id) {
+            const user = fetchUserData()
+            console.log(user)
+        }
+    }, [id])
 
  
 
