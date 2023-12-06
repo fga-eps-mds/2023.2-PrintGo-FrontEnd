@@ -5,6 +5,8 @@ import "../../style/components/printerPatternForm.css";
 import elipse6 from "../../assets/elipse6.svg";
 import { getRegisterPrinterSchema } from "../utils/YupSchema";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { createPadraoImpressora } from "../../services/printerService";
+import { toast } from "react-toastify";
 
 const fieldLabels = {
   tipo: "Tipo",
@@ -18,10 +20,10 @@ const fieldLabels = {
     totalDigitalizacoes: "Total de digitalizações",
     totalCopiasPB: "Total de cópias P&B",
     totalCopiasColoridas: "Total de cópias coloridas",
-    totalImpressoesPB: "Total de impressões P&B",
-    totalImpressoesColoridas: "Total de impressoões coloridas",
+    totalImpressoesPb: "Total de impressões P&B",
+    totalImpressoesColoridas: "Total de impressões coloridas",
     totalGeral: "Total geral",
-    enderecoIP: "Endereço IP",
+    enderecoIp: "Endereço IP",
   },
 };
 
@@ -39,15 +41,14 @@ export default function PrinterPatternForm() {
   });
 
   const onSubmit = async (data) => {
-    const convertedObject = {
-      tipo: data.tipo,
-      marca: data.marca,
-      modelo: data.modelo,
-      ...data.snmp 
-    };
-    
-    console.log(convertedObject);
-    // reset();
+    console.log(data);
+    const response = await createPadraoImpressora(data)
+    if(response.type === "success") {
+      toast.success("Padrao de impressora criado com sucesso!")
+      reset();
+    } else {
+      toast.error("Erro ao criar o padrao de impressora!")
+    }
   };
 
   return (
@@ -56,7 +57,6 @@ export default function PrinterPatternForm() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div id="printer-pattern-input-group">
           <div id="printer-pattern-input-box">
-            {/* Campos Principais */}
             <div id="printer-pattern-fields">
               {Object.entries(fieldLabels).filter(([key]) => key !== "snmp").map(([key, label]) => (
                 <div id="printer-pattern-input-line" key={key}>
@@ -75,17 +75,17 @@ export default function PrinterPatternForm() {
 
             <div id="printer-pattern-snmp-fields">
               <label htmlFor="snmp">SNMP</label>
-              {Object.entries(fieldLabels.snmp).map(([subKey, subLabel]) => (
-                <div id="snmp-fields-input-line" key={subKey}>
+              {Object.entries(fieldLabels.snmp).map(([key, label]) => (
+                <div id="snmp-fields-input-line" key={key}>
                   <label>
-                    {subLabel}
+                    {label}
                     <span>*</span>
                   </label>
                   <input
-                    {...register(`snmp.${subKey}`)}
+                    {...register(key)}
                     placeholder="Código OID"
                   />
-                  <span>{errors[`snmp.${subKey}`]?.message}</span>
+                  <span>{errors[key]?.message}</span>
                 </div>
               ))}
             </div>
@@ -93,7 +93,7 @@ export default function PrinterPatternForm() {
         </div>
         <div id="printer-pattern-buttons">
           <button className="printer-pattern-form-button" type="button" id="cancelar-bnt">CANCELAR</button>
-          <button className="form-button" type="submit" id="registrar-bnt" disabled={!isValid ||isSubmitting}>
+          <button className="form-button" type="submit" id="registrar-bnt" disabled={!isValid || isSubmitting}>
             {isSubmitting && (
               <ReloadIcon id="animate-spin"/>
             )}

@@ -25,44 +25,39 @@ export const getRegisterPrinterSchema = (fieldLabels) => {
   tipo: yup.string().required(`${fieldLabels.tipo} é obrigatório`),
   marca: yup.string().required(`${fieldLabels.marca} é obrigatório`),
   modelo: yup.string().required(`${fieldLabels.modelo} é obrigatório`),
-  snmp: yup
-    .object()
-    .shape({
-      modeloImpressora: yup
-        .string()
-        .required(`${fieldLabels.snmp.modeloImpressora} é obrigatório`),
-      numeroSerie: yup
-        .string()
-        .required(`${fieldLabels.snmp.numeroSerie} é obrigatório`),
-      versaoFirmware: yup
-        .string()
-        .required(`${fieldLabels.snmp.versaoFirmware} é obrigatório`),
-      tempoAtivo: yup
-        .string()
-        .required(`${fieldLabels.snmp.tempoAtivo} é obrigatório`),
-      totalDigitalizacoes: yup
-        .string()
-        .required(`${fieldLabels.snmp.totalDigitalizacoes} é obrigatório`),
-      totalCopiasPB: yup
-        .string()
-        .required(`${fieldLabels.snmp.totalCopiasPB} é obrigatório`),
-      totalCopiasColorido: yup
-        .string()
-        .required(`${fieldLabels.snmp.totalCopiasColorido} é obrigatório`),
-      totalImpressoesPB: yup
-        .string()
-        .required(`${fieldLabels.snmp.totalImpressoesPB} é obrigatório`),
-      totalImpressoesColorido: yup
-        .string()
-        .required(`${fieldLabels.snmp.totalImpressoesColorido} é obrigatório`),
-      totalGeral: yup
-        .string()
-        .required(`${fieldLabels.snmp.totalGeral} é obrigatório`),
-      enderecoIP: yup
-        .string()
-        .required(`${fieldLabels.snmp.enderecoIP} é obrigatório`),
-    })
-    .required("SNMP é obrigatório"),
+  modeloImpressora: yup
+    .string()
+    .required(`${fieldLabels.snmp.modeloImpressora} é obrigatório`),
+  numeroSerie: yup
+    .string()
+    .required(`${fieldLabels.snmp.numeroSerie} é obrigatório`),
+  versaoFirmware: yup
+    .string()
+    .required(`${fieldLabels.snmp.versaoFirmware} é obrigatório`),
+  tempoAtivoSistema: yup
+    .string()
+    .required(`${fieldLabels.snmp.tempoAtivoSistema} é obrigatório`),
+  totalDigitalizacoes: yup
+    .string()
+    .required(`${fieldLabels.snmp.totalDigitalizacoes} é obrigatório`),
+  totalCopiasPB: yup
+    .string()
+    .required(`${fieldLabels.snmp.totalCopiasPB} é obrigatório`),
+  totalCopiasColoridas: yup
+    .string()
+    .required(`${fieldLabels.snmp.totalCopiasColoridas} é obrigatório`),
+  totalImpressoesPb: yup
+    .string()
+    .required(`${fieldLabels.snmp.totalImpressoesPb} é obrigatório`),
+  totalImpressoesColoridas: yup
+    .string()
+    .required(`${fieldLabels.snmp.totalImpressoesColoridas} é obrigatório`),
+  totalGeral: yup
+    .string()
+    .required(`${fieldLabels.snmp.totalGeral} é obrigatório`),
+  enderecoIp: yup
+    .string()
+    .required(`${fieldLabels.snmp.enderecoIp} é obrigatório`),
   });
-};
+}
 

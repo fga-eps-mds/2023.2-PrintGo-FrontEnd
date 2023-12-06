@@ -66,3 +66,16 @@ export const createImpressora = async (printer) => {
     return { type: 'error', error };
   }
 };
+
+export const createPadraoImpressora = async (printerPattern) => {
+  try {
+    const response = await api.post('/printer/padrao/create', printerPattern);
+    console.log(response);
+    if(response.status !== 201) {
+      return { type: 'error', data: response.data};
+    }
+    return { type: 'success', data: response.data};
+  } catch (error) {
+    return { type: 'error', error };
+  }
+};
