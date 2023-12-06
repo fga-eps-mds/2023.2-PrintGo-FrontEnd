@@ -1,10 +1,9 @@
 import React from "react";
 import "../style/pages/home.css";
-import Button from "../components/Button";
 import home_image from "../assets/home_image.svg";
 import elipse from "../assets/home_elipse.svg";
 import Navbar from "../components/navbar/Navbar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
