@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import home_image from "../assets/home_image.svg";
 import elipse from "../assets/home_elipse.svg";
 import Navbar from "../components/navbar/Navbar";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -19,9 +20,11 @@ export default function Home() {
               </div>
               <div className="containter-button-home">
                 <div className="learn-more">
-                  <Button textColor="#036" bgColor="white" borderColor="#036">
-                    <a id="saibamais" href="/quemsomos">Saiba mais</a>
-                  </Button>
+                  <Link to="/quemsomos" className="button-saiba-mais">
+                    <button>
+                      Saiba Mais
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

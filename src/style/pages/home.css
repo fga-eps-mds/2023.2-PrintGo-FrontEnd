@@ -93,4 +93,36 @@
   align-self: flex-start;
 }
 
+.button-saiba-mais {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  text-decoration: none;
+  color: #003366;
+  margin-right: 9vw;
+}
 
+.button-saiba-mais a:visited {
+  text-decoration: none;
+  color: #003366;
+}
+
+
+.button-saiba-mais button {
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #003366;
+  width: 10vw;
+  height: 70%;
+  border-radius: 35px;
+  border-color: #003366;
+  padding: 10px;
+  background-color: #ffff;
+  cursor: pointer;
+}
+
+.button-saiba-mais :hover {
+  color: #006633;
+  border-color: #006633;
+}
