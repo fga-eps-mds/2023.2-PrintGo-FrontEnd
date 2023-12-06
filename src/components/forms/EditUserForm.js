@@ -1,14 +1,14 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as yup from "yup";
 import { getUnidades } from "../../services/unidadeService";
-import { createUser, getUserById } from "../../services/userService";
+import { getUserById, updateUser } from "../../services/userService";
 import "../../style/components/editUserForms.css";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { decodeToken } from "react-jwt";
 
 
@@ -28,7 +28,7 @@ const editUserSchema = yup.object().shape({
       return value.length === 11 || value.length === 14;
   }),
   unidade_id: yup.string().required('Lotação é obrigatória'),
-  unidade_pai: yup.string(),
+  unidade_pai: yup.string().strip(),
 });
 
 export default function EditUserForm(){
@@ -40,25 +40,12 @@ export default function EditUserForm(){
   }
 
   const [unidadeList, setUnidadeList] = useState();
-  const [selectedUnidadePai, setSelectedUnidadePai] = useState('');
-  const [selectedUnidadeFilho, setSelectedUnidadeFilho] = useState('');
   const [displayLotacoes,setDisplayLotacoes] = useState ('');
-  const [unidadeFilhoList, setUnidadeFilhoList] = useState ('');
-  const [userData, setUserData] = useState(
-    {
-      id: "clprii4r90001ah2ck99qcqam",
-      email: "admin@admin.com",
-      nome: "Admin",
-      senha: "$2a$10$1huqODjgG634l0iJgF4fqOcGDo2SLqvBjxl1kelp4plWxsVS31.Ou",
-      documento: "98937941023",
-      unidade_id: "cfa19c26-3b18-4659-b02e-51047e5b3d13",
-      cargos: [
-        "USER",
-        "ADMIN"
-      ]
-    }
-  );
+  const [unidadeFilhoList, setUnidadeFilhoList] = useState ();
+  const [userData, setUserData] = useState(null);
 
+  const memoUserData = useMemo(() => userData, [userData]);
+  const memoUnidadeList = useMemo(() => unidadeList, [unidadeList]);
 
   const navigate = useNavigate();
 
@@ -78,15 +65,15 @@ export default function EditUserForm(){
       try {
         const data = await getUserById(loggedUser.id);
         
-        if (data.type === 'success' && data.data) {
-          setUserData(data.data);
-
+        console.log(data);
+        if (data) {
+          setUserData(data);
         }
       } catch(error) {
         console.log('Erro ao buscar dados do usuário:', error);
       }
     }
-    if(loggedUser) {
+    if(loggedUser && !userData) {
       fetchUserData();
     }
   }, [loggedUser])
@@ -110,17 +97,25 @@ export default function EditUserForm(){
 
   
   useEffect(() => {
-    if (userData && unidadeList) {
+    if (memoUserData && memoUnidadeList && unidadeList) {
+      console.log(unidadeList);
       
       Object.keys(userData).forEach((key) => {
         setValue(key, userData[key] || "");
       })
       
-      let unidadePai = unidadeList.find(unidade => unidade.id === userData.unidade_id).parent_workstation;
-      console.log(unidadePai);
-      setValue("unidade_pai", unidadePai.id);
+      const unidadeFilha = unidadeList.find(unidade => unidade.id === userData.unidade_id);
+      
+      if (unidadeFilha) {
+        const unidadePai = unidadeFilha.parent_workstation;
+        setValue("unidade_pai", unidadePai.id);
+
+        const listChildWorkstations = unidadeList.find(unidade => unidade.id === unidadePai.id).child_workstations;
+        setUnidadeFilhoList(listChildWorkstations);
+        setDisplayLotacoes(true);
+      }
     }
-  }, [userData, unidadeList, setValue]);
+  }, [memoUserData, memoUnidadeList, setValue]);
   
   const onSubmit = async (data) =>  {
 
@@ -128,12 +123,15 @@ export default function EditUserForm(){
       console.log("3 segundos se passaram.");
     }, 3000);  // 3000 milissegundos = 3 segundos
     
-    const response = await createUser(data);
+    delete data["emailConfirmar"];
+    delete data["unidade_pai"];
+
+    const response = await updateUser(data, data.id);
     if(response.type === 'success'){
-      toast.success("Usuario salvo com sucesso!")
+      toast.success("Usuario atualizado com sucesso!");
       reset()
     } else {
-      toast.error("Erro ao salvar usuario")
+      toast.error("Erro ao atualizar usuário");
     }
   }
 
@@ -230,7 +228,9 @@ export default function EditUserForm(){
         </div>
 
         <div id="edit-user-buttons">
-          <button className="edit-user-form-button" type="button" id="edit-user-cancel-bnt" >CANCELAR</button>
+          <button className="edit-user-form-button" type="button" id="edit-user-cancel-bnt">
+            <Link to="/">CANCELAR</Link>
+          </button>
           <button className="edit-user-form-button" type="submit" id="edit-user-register-bnt" disabled={!isValid || isSubmitting}>
             {isSubmitting && (
               <ReloadIcon id="animate-spin"/>
