@@ -137,7 +137,7 @@ export default function EditUserForm(){
 
   const handleWorkstationChange = (event) => {
 
-    if(event.target.value) {
+    if(event.target.value && unidadeList) {
       const listChildWorkstations = unidadeList.find(uni => uni.id === event.target.value).child_workstations;
       setDisplayLotacoes(true);
       setUnidadeFilhoList(listChildWorkstations);
