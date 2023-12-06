@@ -148,6 +148,11 @@
     transition: background-color 0.3s, filter 0.3s;
 }
 
+#signup-cancel-bnt a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
 #signup-register-bnt {
     margin-left: 8px;
     transition: background-color 0.3s, filter 0.3s;

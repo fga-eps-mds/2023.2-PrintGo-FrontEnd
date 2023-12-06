@@ -8,7 +8,7 @@ import { getUnidades } from "../../services/unidadeService";
 import { createUser } from "../../services/userService";
 import "../../style/components/signupForms.css";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 
@@ -208,7 +208,11 @@ export default function SignupForm(){
                 </div>
 
                 <div id="signup-buttons">
-                    <button className="singup-form-button" type="button" id="signup-cancel-bnt">CANCELAR</button>
+                    <button className="singup-form-button" type="button" id="signup-cancel-bnt">
+                        <Link to="/">
+                            CANCELAR
+                        </Link>
+                    </button>
                     <button className="singup-form-button" type="submit" id="signup-register-bnt" disabled={!isValid || isSubmitting}>
                         {isSubmitting && (
                             <ReloadIcon id="animate-spin"/>
