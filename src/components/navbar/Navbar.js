@@ -27,9 +27,17 @@ const Navbar = () => {
     user = decodeToken(token);
   }
 
-  const userLogOut = () => {
-    localStorage.clear();
-    navigate("/");
+  const userLogOut = async (e) => {
+    e.preventDefault();
+    try{
+      localStorage.clear();
+      navigate("/");
+    }
+    catch(error){
+      console.log(error)
+    }
+    
+      
   }
 
   return (
