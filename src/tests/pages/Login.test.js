@@ -107,4 +107,13 @@ describe('Login Component', () => {
       expect(mockNavigate).toHaveBeenCalledWith('/home');
     });
   });
+
+  it("navega para a página 'esqueciMinhaSenha' quando é clicado", () => {
+    render(<Login/>);
+    const buttonElement = screen.getByText("Recuperar senha");
+    fireEvent.click(buttonElement);
+    let url = location.href;
+    url = url.replace("http://localhost/", "/")
+    expect(url).toBe("/esqueciMinhaSenha");
+  });
 });
