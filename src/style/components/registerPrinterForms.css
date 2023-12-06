@@ -95,8 +95,14 @@
   align-items: center;
 }
 
+.form-button:disabled {
+  background-color: #6C6C6C !important;
+  opacity: 65%;
+  cursor: not-allowed;
+}
+
 .form-button {
-  display: inline-block;
+  display: flex;
   flex-direction: column;
   color: #ffffff;
   border: none;
@@ -119,6 +125,7 @@
 
 #registrar-bnt.form-button {
   margin-left: 8px;
+  padding: 10px 10px;
   transition: background-color 0.3s, filter 0.3s;
   background-color: #006633;
 }
@@ -160,4 +167,18 @@
   #input-line {
     display: block;
   }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#animate-spin{
+    animation: spin 1s linear infinite;
+    margin-right: 4px;
 }
