@@ -8,7 +8,7 @@ export default function ForgottenPasswordPage() {
   return (
     <>
       <Navbar />
-      <div id="forgotpassword-container">
+      <div id="forgotpassword-container" data-testid="forgotpassword-container">
         <img alt="" src={signup_image} />
         <ForgottenPasswordForm />
         <div className="forgotpassword-elipse">
