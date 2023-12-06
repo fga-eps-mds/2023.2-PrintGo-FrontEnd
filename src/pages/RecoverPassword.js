@@ -3,26 +3,15 @@ import "../style/pages/changePassword.css";
 import ChangePasswordPeople from "../assets/change-password-people.svg";
 import elipse6 from "../assets/elipse6.svg";
 import Navbar from "../components/navbar/Navbar";
-import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { recoverPassword } from "../services/userService";
+import { getPasswordSchema } from "../components/utils/YupSchema";
 
-const passwordSchema = yup.object().shape({
-  novaSenha: yup.string()
-    .required('Senha é obrigatória')
-    .matches(
-      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      'A senha deve conter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial'
-    ),
-  confirmacaoNovaSenha: yup.string()
-    .oneOf([yup.ref('novaSenha'), null], 'As senhas devem corresponder')
-    .required('Confirmação de senha é obrigatória')
-});
-
+const passwordSchema = getPasswordSchema();
 
 export default function RecoverPasswordPage() {
   const navigate = useNavigate();
