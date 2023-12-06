@@ -160,7 +160,7 @@ export default function PatternList() {
               
               <div className="patternlist-engine">
                 <img alt="" src={Engine}/>
-                <div tabIndex="0" className="patternlist-engine-dropdown">
+                <div className="patternlist-engine-dropdown">
                     <div  className="patternlist-pattern-dropdown">
                       {pattern.status === "ATIVO"
                         ? <Link to="#" tabIndex="0" onClick={() => modalDeactivatePattern(pattern)}>Desativar</Link>
