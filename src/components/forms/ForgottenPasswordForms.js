@@ -56,7 +56,7 @@ export default function ForgottenPasswordForm(){
             <form id="forgotpassword-form"onSubmit={handleSubmit(onSubmit)}>
                 <div id="forgotpassword-input-group">
                     <div id="forgotpassword-input-box">
-                        <label>Email Cadastrado</label>
+                        <label htmlFor="emailCadastrado">Email Cadastrado</label>
                         <input id="email" {...register("email", {required: true} )} type="email" placeholder="Email" />
                         <span>{errors.email?.message}</span>
                     </div>

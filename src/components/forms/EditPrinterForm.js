@@ -5,7 +5,6 @@ import "../../style/components/editPrinterForms.css";
 import elipse6 from '../../assets/elipse6.svg';
 import { getPrinterSchema } from "../utils/YupSchema";
 import { Link } from "react-router-dom";
-import arrow from "../../assets/arrow-left.svg"
 
 const fieldLabels = {
   padrao: 'Padrão',
