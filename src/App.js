@@ -2,6 +2,7 @@ import React from "react";
 import {BrowserRouter, Routes , Route} from "react-router-dom"
 import Home from "./pages/Home"
 import CreateUserPage from "./pages/CreateUser";
+import EditUserPage from "./pages/EditUser";
 import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cadastro" element={<CreateUserPage />} />
+        <Route path="/editarusuario" element={<EditUserPage/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/contato" element={<Contact />} />
         <Route path="/quemsomos" element={<AboutUs />} />

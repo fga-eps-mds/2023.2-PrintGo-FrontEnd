@@ -1,10 +1,10 @@
-#signup-card {
+#edit-user-card {
     background-color: #FFFFFF;
     border-radius: 10px;
     display: flex;
     width: 48vw;
     height: 89vh;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     flex-direction: column;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
@@ -14,8 +14,12 @@
 
 }
 
-#signup-form{
+#edit-user-form{
     width: 43vw;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 @keyframes spin {
     from {
@@ -31,13 +35,13 @@
     margin-right: 4px;
 }
 
-#form-header {
+#edit-user-form-header {
     font-size: 48px;
     color: #003366;
     margin-bottom: 16px;
 }
 
-#signup-input-group {
+#edit-user-input-group {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -45,7 +49,7 @@
     
 }
 
-#signup-input-line {
+#edit-user-input-line {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -54,7 +58,7 @@
     
 }
 
-#signup-input-box {
+#edit-user-input-box {
     flex: 1;
     min-width: 100px; /* Largura mínima para cada input */
     display: flex;
@@ -70,30 +74,30 @@
     top: 10rem;
 }
 
-#signup-input-box label {
+#edit-user-input-box label {
     color: #003366;
     display: block;
     margin-bottom: 5px;
 }
 
-#signup-input-box span {
+#edit-user-input-box span {
     color: #9f0805;
 }
 
-#signup-input-checkbox {
+#edit-user-input-checkbox {
     margin-top: 2rem;
     display: flex;
     align-items: center;
 }
 
-#signup-input-checkbox input {
+#edit-user-input-checkbox input {
     margin:0 12px 0 0;
     vertical-align: middle;
     position: relative;
     top: -3px;
 }
 
-#signup-input-box input{
+#edit-user-input-box input{
     font-size: 16px;
     border: 1px solid #003366;
     border-color: #003366;
@@ -101,7 +105,7 @@
     padding: 5px;
 }
 
-#signup-input-box select{
+#edit-user-input-box select{
     font-size: 16px;
     font-size: 1rem;border: 1px solid #003366;
     border-color: #003366;
@@ -110,7 +114,7 @@
     color: #6C6C6C;
 }
 
-#signup-buttons {
+#edit-user-buttons {
     
     display: flex;
     align-items: center;
@@ -158,7 +162,7 @@
     font-size: 10px;
 }
 
-.elipse-signup{
+.elipse-edit-user{
     position: fixed; 
     width: 50vw;
     height: 100vh;
@@ -171,12 +175,12 @@
 
   }
   
-  .elipse-signup img{
+  .elipse-edit-user img{
     height: 150vh;
   }
 
 @media (max-width: 900px) {
-    #signup-card {
+    #edit-user-card {
         width: 90%; /* Adjust the form width as needed*/
         margin: 0 auto; /* Centers the form horizontally*/
         padding: 1rem; /* Adjust padding as needed */

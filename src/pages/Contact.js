@@ -32,7 +32,6 @@ export default function Contact() {
     <>
       <NavbarSimple />
       <div className="Main-page-contact">
-        <h1>Contato</h1>
         <div className="Contact-principal">
           <div className="Box-contact">
             <p>Contato</p>
@@ -53,7 +52,7 @@ export default function Contact() {
               />
             </div>
             <div className="Subject-input">
-              <label>Assunto</label>
+              <label htmlFor="assunto">Assunto</label>
               <textarea
                 placeholder="Assunto"
                 className="Larger-input"

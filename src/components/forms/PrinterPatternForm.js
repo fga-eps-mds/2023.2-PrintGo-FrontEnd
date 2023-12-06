@@ -67,7 +67,7 @@ export default function PrinterPatternForm() {
 
             {/* Campos SNMP */}
             <div id="printer-pattern-snmp-fields">
-              <label>SNMP</label>
+              <label htmlFor="snmp">SNMP</label>
               {Object.entries(fieldLabels.snmp).map(([subKey, subLabel]) => (
                 <div id="snmp-fields-input-line" key={subKey}>
                   <label>
