@@ -7,7 +7,7 @@ import engine from '../assets/engine.svg';
 import Input from '../components/Input'; 
 import Modal from '../components/ui/Modal';
 import Navbar from "../components/navbar/Navbar";
-import { getPrinters, togglePrinter } from "../services/printerService";
+import { getPadroes, getPrinters, togglePrinter } from "../services/printerService";
 import { extractDate } from "../utils/utils";
 
 export default function PrintersList() {
@@ -15,9 +15,11 @@ export default function PrintersList() {
   useEffect( () => {
     async function fetchData() {
         try {
-            const data = await getPrinters();
-            if (data.type ==='success' && data.data) {
-              setPrinters(data.data);
+            const [dataPrinters] = await Promise.all([
+                getPrinters()
+            ]) 
+            if (dataPrinters.type ==='success' && dataPrinters.data) {
+              setPrinters(dataPrinters.data);
             }
         } catch (error) {
             console.error('Erro ao obter lista de impressoras:', error);
@@ -33,63 +35,63 @@ export default function PrintersList() {
   const [modalBodytext, setModalBodytext] = useState('');
   const [selectedPrinter, setSelectedPrinter] = useState(null);
   const [printers, setPrinters] = useState([
-    {
-      id: "1",
-      padrao: {
-        tipo: "Multifuncional P&B",
-        marca: "Canon",
-        modelo: "MF1643i II",
-      },
-      ip: "192.168.15.1",
-      numeroSerie: "XXXX-000000",
-      codigoLocadora: "PRINTER-004",
-      contadorInstalacao: 0,
-      ultimoContador: 0,
-      dataInstalacao: "2023-11-30T12:00:00Z",
-      dataUltimoContador: "2023-11-30T12:00:00Z",
-      contadorRetirada: 0,
-      dataRetirada: "2023-11-30T12:00:00Z",
-      unidadeId: "1",
-      status: "ATIVO"
-    },
-    {
-      id: "2",
-      padrao: {
-        tipo: "Impressora Laser Colorida",
-        marca: "HP",
-        modelo: "LaserJet Pro M404dn",
-      },
-      ip: "192.168.15.2",
-      numeroSerie: "YYYY-111111",
-      codigoLocadora: "PRINTER-005",
-      contadorInstalacao: 10,
-      ultimoContador: 5,
-      dataInstalacao: "2023-11-25T10:30:00Z",
-      dataUltimoContador: "2023-11-28T14:45:00Z",
-      contadorRetirada: 2,
-      dataRetirada: "2023-12-05T08:20:00Z",
-      unidadeId: "2",
-      status: "ATIVO",
-    },
-    {
-      id: "3",
-      padrao: {
-        tipo: "Scanner",
-        marca: "Epson",
-        modelo: "Perfection V600",
-      },
-      ip: "192.168.15.3",
-      numeroSerie: "ZZZZ-222222",
-      codigoLocadora: "PRINTER-006",
-      contadorInstalacao: 3,
-      ultimoContador: 1,
-      dataInstalacao: "2023-11-20T15:45:00Z",
-      dataUltimoContador: "2023-11-22T09:10:00Z",
-      contadorRetirada: 0,
-      dataRetirada: null,
-      unidadeId: "3",
-      status: "INATIVO",
-    }
+    // {
+    //   id: "1",
+    //   padrao: {
+    //     tipo: "Multifuncional P&B",
+    //     marca: "Canon",
+    //     modelo: "MF1643i II",
+    //   },
+    //   ip: "192.168.15.1",
+    //   numeroSerie: "XXXX-000000",
+    //   codigoLocadora: "PRINTER-004",
+    //   contadorInstalacao: 0,
+    //   ultimoContador: 0,
+    //   dataInstalacao: "2023-11-30T12:00:00Z",
+    //   dataUltimoContador: "2023-11-30T12:00:00Z",
+    //   contadorRetirada: 0,
+    //   dataRetirada: "2023-11-30T12:00:00Z",
+    //   unidadeId: "1",
+    //   status: "ATIVO"
+    // },
+    // {
+    //   id: "2",
+    //   padrao: {
+    //     tipo: "Impressora Laser Colorida",
+    //     marca: "HP",
+    //     modelo: "LaserJet Pro M404dn",
+    //   },
+    //   ip: "192.168.15.2",
+    //   numeroSerie: "YYYY-111111",
+    //   codigoLocadora: "PRINTER-005",
+    //   contadorInstalacao: 10,
+    //   ultimoContador: 5,
+    //   dataInstalacao: "2023-11-25T10:30:00Z",
+    //   dataUltimoContador: "2023-11-28T14:45:00Z",
+    //   contadorRetirada: 2,
+    //   dataRetirada: "2023-12-05T08:20:00Z",
+    //   unidadeId: "2",
+    //   status: "ATIVO",
+    // },
+    // {
+    //   id: "3",
+    //   padrao: {
+    //     tipo: "Scanner",
+    //     marca: "Epson",
+    //     modelo: "Perfection V600",
+    //   },
+    //   ip: "192.168.15.3",
+    //   numeroSerie: "ZZZZ-222222",
+    //   codigoLocadora: "PRINTER-006",
+    //   contadorInstalacao: 3,
+    //   ultimoContador: 1,
+    //   dataInstalacao: "2023-11-20T15:45:00Z",
+    //   dataUltimoContador: "2023-11-22T09:10:00Z",
+    //   contadorRetirada: 0,
+    //   dataRetirada: null,
+    //   unidadeId: "3",
+    //   status: "INATIVO",
+    // }
   ]);
 
   const modalDeactivatePrinter = (printer) => {
@@ -109,6 +111,7 @@ export default function PrintersList() {
   async function printerToggle() {
     try {
       const data = await togglePrinter(selectedPrinter.id, selectedPrinter.status);
+      console.log(data);
 
       if (data.type === 'success') {
         window.location.reload(false);
@@ -221,8 +224,6 @@ export default function PrintersList() {
               </div>
               
               <div className="printerslist-location-counter" style={{ color: printer.status === "ATIVO" ? '' : 'gray' }}>
-                {/* <h6>{printer.unidade_pai}</h6>
-                <h6>{printer.unidade_filha}</h6> */}
                 <h6>{printer.contadorInstalacao}</h6>
               </div>
               
