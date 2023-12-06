@@ -94,7 +94,7 @@ export default function EditPatternForm() {
 
             {/* SNMP Fields */}
             <div id="printer-pattern-snmp-fields">
-              <label>SNMP</label>
+              <label htmlFor="snmp">SNMP</label>
               {Object.keys(fieldLabels.snmp).map((subField) => (
                 <div id="snmp-fields-input-line" key={`sub-${subField.id}`}>
                   <label>

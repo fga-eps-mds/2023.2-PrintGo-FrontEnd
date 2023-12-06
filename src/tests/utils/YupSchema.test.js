@@ -1,4 +1,4 @@
-import { getPrinterSchema , getRegisterPrinterSchema } from '../../components/utils/YupSchema';
+import { getPrinterSchema , getRegisterPrinterSchema , getPasswordSchema } from '../../components/utils/YupSchema';
 
 describe('getPrinterSchema', () => {
   const printerFieldLabels = {
@@ -114,5 +114,38 @@ describe('getRegisterPrinterSchema', () => {
 
     const schema = getRegisterPrinterSchema(fieldLabels);
     await expect(schema.validate(invalidData)).rejects.toThrow();
+  });
+});
+
+describe('getPasswordSchema', () => {
+
+  it('validates correctly with valid data', async () => {
+    const validData = {
+      novaSenha: 'Password@123',
+      confirmacaoNovaSenha: 'Password@123'
+    };
+
+    const schema = getPasswordSchema();
+    await expect(schema.validate(validData)).resolves.toEqual(validData);
+  });
+
+  it('rejects with invalid data', async () => {
+    const invalidData = {
+      novaSenha: 'pass', // senha muito curta e sem os requisitos necessários
+      confirmacaoNovaSenha: 'pass'
+    };
+
+    const schema = getPasswordSchema();
+    await expect(schema.validate(invalidData)).rejects.toThrow();
+  });
+
+  it('rejects when passwords do not match', async () => {
+    const mismatchedData = {
+      novaSenha: 'Password@123',
+      confirmacaoNovaSenha: 'Different@123'
+    };
+
+    const schema = getPasswordSchema();
+    await expect(schema.validate(mismatchedData)).rejects.toThrow();
   });
 });

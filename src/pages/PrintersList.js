@@ -88,6 +88,7 @@ export default function PrintersList() {
     }
   }
   
+  
 
   //filtros para busca de impressora
   const filteredPrinters = useMemo(() => {
@@ -187,7 +188,7 @@ export default function PrintersList() {
                     ? <Link to="#" tabIndex="0" onClick={() => modalDeactivatePrinter(impressora)}>Desativar</Link>
                     : <Link to="#" tabIndex="0" onClick={() => modalActivePrinter(impressora)}>Ativar</Link>
                   }
-                  <Link to="#" tabIndex="0">Editar</Link>
+                  <Link to="/editarimpressora" tabIndex="0">Editar</Link>
                 </div>
               </div> 
             </div>
