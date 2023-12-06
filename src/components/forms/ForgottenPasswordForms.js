@@ -29,13 +29,13 @@ export default function ForgottenPasswordForm(){
 
     const onSubmit = async (data) =>  {
         const response = await forgottenPassword(data);
-        if(response.type === 'error') {
-            toast.error(response.error)
-        } else {
+        if(response.type === 'success') {
             toast.success("Email enviado com sucesso!")
             setTimeout(() => {
                 navigate('/');
             }, 3000); 
+        } else {
+            toast.error("Ocorreu um erro ao enviar o email! Tente novamente")
         }
     }
 
