@@ -28,6 +28,7 @@ const editUserSchema = yup.object().shape({
       return value.length === 11 || value.length === 14;
   }),
   unidade_id: yup.string().required('Lotação é obrigatória'),
+  unidade_pai: yup.string(),
 });
 
 export default function EditUserForm(){
@@ -38,7 +39,7 @@ export default function EditUserForm(){
     loggedUser = decodeToken(token);
   }
 
-  const [unidadeList, setUnidadeList] = useState([]);
+  const [unidadeList, setUnidadeList] = useState();
   const [selectedUnidadePai, setSelectedUnidadePai] = useState('');
   const [selectedUnidadeFilho, setSelectedUnidadeFilho] = useState('');
   const [displayLotacoes,setDisplayLotacoes] = useState ('');
@@ -79,6 +80,7 @@ export default function EditUserForm(){
         
         if (data.type === 'success' && data.data) {
           setUserData(data.data);
+
         }
       } catch(error) {
         console.log('Erro ao buscar dados do usuário:', error);
@@ -106,7 +108,20 @@ export default function EditUserForm(){
     fetchWorkStationData();
   }, []);
 
-
+  
+  useEffect(() => {
+    if (userData && unidadeList) {
+      
+      Object.keys(userData).forEach((key) => {
+        setValue(key, userData[key] || "");
+      })
+      
+      let unidadePai = unidadeList.find(unidade => unidade.id === userData.unidade_id).parent_workstation;
+      console.log(unidadePai);
+      setValue("unidade_pai", unidadePai.id);
+    }
+  }, [userData, unidadeList, setValue]);
+  
   const onSubmit = async (data) =>  {
 
     setTimeout(() => {
@@ -147,13 +162,13 @@ export default function EditUserForm(){
           <div id="edit-user-input-line">
               <div id="edit-user-input-box">
                   <label htmlFor="nome">Nome<span>*</span></label>
-                  <input id="nome" {...register("nome", {required: true} )} placeholder="Nome" value={userData?.nome}/>
+                  <input id="nome" {...register("nome", {required: true} )} placeholder="Nome"/>
                   <span>{errors.nome?.message}</span>
               </div>
 
               <div id="edit-user-input-box">
                   <label htmlFor="documento">Documento<span>*</span></label>
-                  <input id="documento" {...register("documento", {required: true})} placeholder="CPF ou CNPJ" value={userData?.documento}/>
+                  <input id="documento" {...register("documento", {required: true})} placeholder="CPF ou CNPJ"/>
                   <span>{errors.documento?.message}</span>
               </div>
           </div>
@@ -161,7 +176,7 @@ export default function EditUserForm(){
           <div id="edit-user-input-line">
               <div id="edit-user-input-box">
                   <label htmlFor="email">E-mail<span>*</span></label>
-                  <input id="email" {...register("email", {required: true} )} type="email" placeholder="Email" value={userData?.email}/>
+                  <input id="email" {...register("email", {required: true} )} type="email" placeholder="Email"/>
                   <span>{errors.email?.message}</span>
               </div>
 
@@ -185,7 +200,7 @@ export default function EditUserForm(){
           <div id="edit-user-input-line">
               <div id="edit-user-input-box">
                   <label htmlFor="unidadePai">Unidade Pai<span>*</span></label>
-                  <select onChange={handleWorkstationChange}>
+                  <select {...register("unidade_pai")} onChange={handleWorkstationChange}>
                       <option value="">Selecione a Unidade de policia</option>
                       {unidadeList?.map((unidade) => (
                       <option key={unidade.id} value={unidade.id}>
