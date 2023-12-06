@@ -28,12 +28,6 @@ export default function ForgottenPasswordForm(){
     } = useForm({resolver: yupResolver(forgottenPasswordSchema), mode: "onChange"})
 
     const onSubmit = async (data) =>  {
-        toast.success("Email enviado com sucesso!", {
-            autoClose: 5000,
-
-        });
-        navigate('/');
-
         const response = await forgottenPassword(data);
         if(response.type === 'error') {
             toast.error(response.error)
