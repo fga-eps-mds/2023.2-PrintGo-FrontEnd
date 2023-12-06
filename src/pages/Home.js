@@ -22,19 +22,19 @@ export default function Home() {
                 <div className="learn-more">
                   <Link to="/quemsomos" className="button-saiba-mais">
                     <button>
-                      Saiba Mais
+                      <h4>Saiba Mais</h4>
                     </button>
                   </Link>
                 </div>
               </div>
             </div>
-            <div className="elipse-home">
-              <img alt="" src={elipse}></img>
-            </div>
           </div>
           <div className="right-content-home">
             <img className="home-image" alt="" src={home_image} />
           </div>
+        </div>
+        <div className="elipse-home">
+          <img alt="" src={elipse}></img>
         </div>
       </div>
     </>
