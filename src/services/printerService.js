@@ -1,11 +1,12 @@
-import axios from 'axios';
-
-const API_URL = "http://localhost:8001";
+import { api } from '../lib/api/config';
 
 export async function getPrinters() {
   try {
 
-    const response = await axios.get(`${API_URL}/impressora`);
+    const response = await api.get('/printer/impressora');
+    if(response.status !== 200) {
+      return { type: 'error', data: response.data};
+    }
     return { type: 'success', data: response.data};
   } catch (error) {
     return { type: 'error', error };
@@ -14,7 +15,22 @@ export async function getPrinters() {
 
 export async function getPadrao(id) {
   try {
-    const response = await axios.get(`${API_URL}/padrao/${id}`);
+    const response = await api.get(`/printer/padrao/${id}`);
+    if(response.status !== 200) {
+      return { type: 'error', data: response.data};
+    }
+    return { type: 'success', data: response.data };
+  } catch (error) {
+    return { type: 'error', error };
+  }
+}
+
+export async function getPadroes() {
+  try {
+    const response = await api.get('/printer/padrao');
+    if(response.status !== 200) {
+      return { type: 'error', data: response.data};
+    }
     return { type: 'success', data: response.data };
   } catch (error) {
     return { type: 'error', error };
@@ -28,9 +44,25 @@ export async function togglePrinter(id, status) {
   }
 
   try {
-    const response = await axios.patch(`${API_URL}/impressora`, data);
+    const response = await api.patch('/printer/impressora', data);
+    if(response.status !== 200) {
+      return { type: 'error', data: response.data};
+    }
     return { type: 'success', data: response.data };
   } catch (error) {
     return { type: 'error', error };
   }
 }
+
+export const createImpressora = async (printer) => {
+  try {
+    const response = await api.post('/printer/impressora/create', printer);
+    console.log(response);
+    if(response.status !== 201) {
+      return { type: 'error', data: response.data};
+    }
+    return { type: 'success', data: response.data};
+  } catch (error) {
+    return { type: 'error', error };
+  }
+};

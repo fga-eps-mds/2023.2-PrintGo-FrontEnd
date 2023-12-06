@@ -13,27 +13,31 @@ import PatternPrinter from "./pages/PatternPrinter";
 import EditPattern from "./pages/EditPattern";
 import PrintersList from "./pages/PrintersList";
 import ViewPrinter from "./pages/ViewPrinter";
+import { ToastContainer } from "react-toastify";
 
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cadastro" element={<CreateUserPage />} />
-        <Route path="/editarusuario" element={<EditUserPage/>}/>
-        <Route path="/login" element={<Login />} />
-        <Route path="/contato" element={<Contact />} />
-        <Route path="/quemsomos" element={<AboutUs />} />
-        <Route path="/mudarsenha" element={<ChangePassword />} />
-        <Route path="/cadastroImpressora" element={<RegisterPrinter />} />
-        <Route path="/editarImpressora" element={<EditPrinter />} />
-        <Route path="/padraoImpressora" element={<PatternPrinter />} />
-        <Route path="/editarPadrao" element={<EditPattern />} />
-        <Route path="/impressorascadastradas" element={<PrintersList/>}/>
-        <Route path="/visualizarimpressora/:printerData" element={<ViewPrinter/>}/>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cadastro" element={<CreateUserPage />} />
+          <Route path="/editarusuario" element={<EditUserPage/>}/>
+          <Route path="/login" element={<Login />} />
+          <Route path="/contato" element={<Contact />} />
+          <Route path="/quemsomos" element={<AboutUs />} />
+          <Route path="/mudarsenha" element={<ChangePassword />} />
+          <Route path="/padraoImpressora" element={<PatternPrinter />} />
+          <Route path="/editarPadrao" element={<EditPattern />} />
+          <Route path="/cadastroImpressora" element={<RegisterPrinter />} />
+          <Route path="/editarImpressora" element={<EditPrinter />} />
+          <Route path="/impressorascadastradas" element={<PrintersList/>}/>
+          <Route path="/visualizarimpressora/:printerData" element={<ViewPrinter/>}/>
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer/>
+    </>
   );
 }
 

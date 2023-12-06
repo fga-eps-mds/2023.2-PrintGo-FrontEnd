@@ -3,27 +3,27 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { toast } from "react-toastify";
 import elipse6 from "../../assets/elipse6.svg";
 import { createImpressora, getPadroes } from "../../services/printerService";
 import { getUnidades } from "../../services/unidadeService";
+import { getUsers } from "../../services/userService";
 import "../../style/components/registerPrinterForms.css";
 import { getPrinterSchema } from "../utils/YupSchema";
-import { getUsers } from "../../services/userService";
+import { toast } from "react-toastify";
 
 const fieldLabels = {
-  padrao_id: "Padrão",
-  ip: "IP",
   numeroSerie: "Número de Série",
+  ip: "IP",
+  padrao_id: "Padrão",
   codigoLocadora: "Código da Locadora",
   contadorInstalacao: "Contador de Instalação",
   dataInstalacao: "Data de Instalação",
-  contadorRetirada: "Contador de Retirada",
-  dataRetirada: "Data de Retirada",
+  contadorRetiradas: "Contador de Retirada",
+  dataContadorRetirada: "Data de Retirada",
   ultimoContador: "Último Contador",
   dataUltimoContador: "Data do Último Contador",
   unidadePai: "Unidade Pai",
-  unidadeFilho: "Unidade Filho",
+  unidadeId: "Unidade Filho",
 };
 
 
@@ -89,7 +89,10 @@ export default function RegisterPrinterForm() {
     mode: "onChange",
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data) => {    
+    data.dataInstalacao =  new Date(data.dataInstalacao).toISOString();
+    data.dataContadorRetirada =  new Date(data.dataContadorRetirada).toISOString();
+    data.dataUltimoContador =  new Date(data.dataUltimoContador).toISOString();
     console.log(data);
     const response = await createImpressora(data);
     if (response.type === "success") {
@@ -131,7 +134,7 @@ export default function RegisterPrinterForm() {
                     ))}
                   </select>
                 ) : key === "unidadePai" ? (
-                  <select {...register(key)} onChange={handleWorkstationChange}>
+                  <select onChange={handleWorkstationChange}>
                     <option value="">Selecione a unidade pai</option>
                     {unidades.map(option => (
                       <option key={option.id} value={option.id}>
@@ -139,7 +142,7 @@ export default function RegisterPrinterForm() {
                       </option>
                     ))}
                   </select>
-                ) : key === "unidadeFilho" ? (
+                ) : key === "unidadeId" ? (
                   <select {...register(key)}>
                     <option value="">Selecione a unidade filho</option>
                     {unidadeInList.map(option => (
@@ -151,11 +154,8 @@ export default function RegisterPrinterForm() {
                 ) : (
                   <input
                     {...register(key)}
-                    placeholder={
-                      label.includes("data")
-                        ? "DD/MM/AAAA"
-                        : label.charAt(0).toUpperCase() + label.slice(1)
-                    }
+                    type={key.includes('data') ? 'date': key === "ultimoContador" || key === "contadorRetiradas" || key === "contadorInstalacao" ? 'number' : 'text'}
+                    placeholder={label.charAt(0).toUpperCase() + label.slice(1)}
                   />
                 )}
                 <span>{errors[key]?.message}</span>
@@ -167,7 +167,7 @@ export default function RegisterPrinterForm() {
           <button className="form-button" type="button" id="cancelar-bnt">
             CANCELAR
           </button>
-          <button className="form-button" type="submit" id="registrar-bnt" disabled={!isValid ||isSubmitting}>
+          <button className="form-button" type="submit" id="registrar-bnt" disabled={!isValid || isSubmitting} >
             {isSubmitting && (
               <ReloadIcon id="animate-spin"/>
             )}

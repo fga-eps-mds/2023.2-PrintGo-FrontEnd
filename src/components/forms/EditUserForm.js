@@ -116,10 +116,8 @@ export default function EditUserForm(){
 
         if(event.target.value) {
             const listChildWorkstations = unidade.find(uni => uni.id === event.target.value).child_workstations;
-            setDisplayLotacoes(true);
-            setUnidadeInList(listChildWorkstations);
         }else {
-            setDisplayLotacoes(false);
+            let x= 0;
         }
     };
 

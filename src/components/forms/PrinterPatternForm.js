@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import "../../style/components/printerPatternForm.css";
 import elipse6 from "../../assets/elipse6.svg";
 import { getRegisterPrinterSchema } from "../utils/YupSchema";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 const fieldLabels = {
   tipo: "Tipo",
@@ -13,12 +14,12 @@ const fieldLabels = {
     modeloImpressora: "Modelo da impressora",
     numeroSerie: "Número de série",
     versaoFirmware: "Versão do Firmware",
-    tempoAtivo: "Tempo ativo do sistema",
+    tempoAtivoSistema: "Tempo ativo do sistema",
     totalDigitalizacoes: "Total de digitalizações",
     totalCopiasPB: "Total de cópias P&B",
-    totalCopiasColorido: "Total de cópias coloridas",
+    totalCopiasColoridas: "Total de cópias coloridas",
     totalImpressoesPB: "Total de impressões P&B",
-    totalImpressoesColorido: "Total de impressoões coloridas",
+    totalImpressoesColoridas: "Total de impressoões coloridas",
     totalGeral: "Total geral",
     enderecoIP: "Endereço IP",
   },
@@ -30,7 +31,7 @@ export default function PrinterPatternForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid, isSubmitting },
     reset,
   } = useForm({
     resolver: yupResolver(registerPrinterSchema),
@@ -38,8 +39,15 @@ export default function PrinterPatternForm() {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
-    reset();
+    const convertedObject = {
+      tipo: data.tipo,
+      marca: data.marca,
+      modelo: data.modelo,
+      ...data.snmp 
+    };
+    
+    console.log(convertedObject);
+    // reset();
   };
 
   return (
@@ -65,7 +73,6 @@ export default function PrinterPatternForm() {
               ))}
             </div>
 
-            {/* Campos SNMP */}
             <div id="printer-pattern-snmp-fields">
               <label htmlFor="snmp">SNMP</label>
               {Object.entries(fieldLabels.snmp).map(([subKey, subLabel]) => (
@@ -86,7 +93,12 @@ export default function PrinterPatternForm() {
         </div>
         <div id="printer-pattern-buttons">
           <button className="printer-pattern-form-button" type="button" id="cancelar-bnt">CANCELAR</button>
-          <button className="printer-pattern-form-button" type="submit" id="registrar-bnt">REGISTRAR</button>
+          <button className="form-button" type="submit" id="registrar-bnt" disabled={!isValid ||isSubmitting}>
+            {isSubmitting && (
+              <ReloadIcon id="animate-spin"/>
+            )}
+            {!isSubmitting ? 'REGISTRAR': "CADASTRANDO"}
+          </button>
         </div>
       </form>
       <div className="elipse-pattern">

@@ -184,3 +184,23 @@
   height: 100%;
   width: 100%;
 }
+
+@keyframes spin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+#animate-spin{
+  animation: spin 1s linear infinite;
+  margin-right: 4px;
+}
+
+#register-bnt:disabled {
+background-color: #006633 !important;
+opacity: 65%;
+cursor: not-allowed;
+}

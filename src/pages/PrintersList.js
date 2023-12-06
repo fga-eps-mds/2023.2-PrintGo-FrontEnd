@@ -8,8 +8,7 @@ import Input from '../components/Input';
 import Modal from '../components/ui/Modal';
 import Navbar from "../components/navbar/Navbar";
 import { getPrinters, togglePrinter } from "../services/printerService";
-
-
+import { extractDate } from "../utils/utils";
 
 export default function PrintersList() {
 
@@ -19,7 +18,6 @@ export default function PrintersList() {
             const data = await getPrinters();
             if (data.type ==='success' && data.data) {
               setPrinters(data.data);
-              console.log(data.data);
             }
         } catch (error) {
             console.error('Erro ao obter lista de impressoras:', error);
@@ -94,8 +92,6 @@ export default function PrintersList() {
     }
   ]);
 
-
-// modal para desativar impressora
   const modalDeactivatePrinter = (printer) => {
     setSelectedPrinter(printer);
     setModalTitle("Desativação de impressora");
@@ -103,7 +99,6 @@ export default function PrintersList() {
     setModalOpen(true);
   }
 
-  //modal para ativar impressora
   const modalActivePrinter = (printer) => {
     setSelectedPrinter(printer);
     setModalTitle("Ativação de impressora");
@@ -111,7 +106,6 @@ export default function PrintersList() {
     setModalOpen(true);
   }
 
-  //ativa e desativa impressora
   async function printerToggle() {
     try {
       const data = await togglePrinter(selectedPrinter.id, selectedPrinter.status);
@@ -135,16 +129,6 @@ export default function PrintersList() {
     } else {
       return 'Desativadas';
     }
-  }
-  
-  function extractDate(dateString) {
-    const data = new Date(dateString);
-
-    const dia = String(data.getDate()).padStart(2, '0');
-    const mes = String(data.getMonth() + 1).padStart(2, '0'); // Meses são zero-indexed
-    const ano = String(data.getFullYear()).slice(2); // Obtendo os dois últimos dígitos do ano
-
-    return `${dia}/${mes}/${ano}`;
   }
 
   //filtros para busca de impressora
