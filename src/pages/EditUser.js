@@ -10,7 +10,7 @@ export default function EditUserPage() {
     <>
       <Navbar />
       <div id="edit-user-container">
-        <img alt="" src={signup_image} />
+        <img alt="pessoas" src={signup_image} />
         <EditUserForm />
         <div className="elipse-edit-user">
             <img alt= "elipse"  src={elipse6}></img>
