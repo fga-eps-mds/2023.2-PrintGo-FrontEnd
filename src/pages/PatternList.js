@@ -60,15 +60,17 @@ export default function PatternList() {
 
   //ativa e desativa impressora
   const patternToggle = () => {
-    const updatedPattern = patterns.map(pattern => {
-      if (pattern.id_padrao === selectedPattern.id_padrao) {
-        return { ...pattern, ativada: !pattern.ativada };
-      }
-      return pattern;
-    });
-
-    setPatterns(updatedPattern);
-    setModalOpen(false);
+    if (patterns && selectedPattern) {
+       const updatedPattern = patterns.map(pattern => {
+        if (pattern.id_padrao === selectedPattern.id_padrao) {
+          return { ...pattern, ativada: !pattern.ativada };
+        }
+        return pattern;
+      });
+      
+      setPatterns(updatedPattern);
+      setModalOpen(false);
+    }
   };
 
 
@@ -115,6 +117,7 @@ export default function PatternList() {
           setOpenModal={setModalOpen} 
           title={modalTitle} 
           bodytext={modalBodytext}
+          onConfirm={patternToggle}
         />
       )}
 
