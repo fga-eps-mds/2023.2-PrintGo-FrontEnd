@@ -1,144 +1,136 @@
 .Main-page-contact {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .Main-page-contact h1 {
-    text-align: center;
-    color: #036;
-    font-size: 36px;
-  }
-  
-  .Main-page-contact p {
-    color: #036;
-    letter-spacing: 0.8px;
-  }
-  
-  .Contact-principal {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 50vw;
-    height: 74vh;
-    margin-top: 70px;
-  }
-  
-  .Box-contact {
-    border-radius: 0.7rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30vw;
-    height: 60vh;
-    box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.12),
-      0px 2px 2px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.12),
-      0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  }
-  
-  .Box-contact p {
-    font-size: 48px;
-    padding-left: 1.5rem;
-    height: 9vh;
-    line-height: normal;
-    justify-self: flex-start;
-    margin: 0;
-  }
-  
-  .button-div {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .Input-contact {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  
-    padding: 0.3rem;
-  }
-  
-  .input-contact-form {
-    height: 3vh !important;
-    width: 11vw !important;
-  }
-  
-  .Send-button {
-    color: #fff;
-    border-radius: 50px;
-    box-shadow: 1px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    width: 12vw;
-    border: none;
-    height: 3.5vh;
-    letter-spacing: 0.08rem;
-    font-weight: bold;
-    background-color: #006633;
-  }
-  
-  .Send-button:hover {
-    background-color: #034d1c;
-    cursor: pointer;
-  }
-  
-  .Subject-input {
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: column;
-    padding: 0.5rem;
-    align-items: flex-start;
-  }
-  
-  .Subject-input label {
-    color: #036;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: bold;
-    line-height: normal;
-    margin-left: 0.5vw;
-  }
-  
-  .Larger-input {
-    width: 25vw;
-    height: 18vh;
-    border: 1px solid #036;
-    border-color: #036;
-    border-radius: 7.5px;
-    padding-left: 5px;
-    outline: none;
-  }
-  
-  .ellipse-contact {
-    z-index: -100;
-    width: 28rem;
-    height: 42rem;
-    transform: rotate(-145.25deg);
-    flex-shrink: 0;
-    border-radius: 62.73281rem;
-    background: #036;
-    position: absolute;
-    top: 70%;
-    left: -15%;
-  }
-  
-  .elipse-contact {
-    margin-right: 50rem;
-    margin-bottom: 0rem;
-  }
-  .Image-contact {
-    width: 20vw;
-    height: 70vh;
-    position: absolute;
-    right: 1px;
-    top: 20px;
-    margin-top: 70px;
-  }
-  
-  .Image-contact img {
-    width: 20vw;
-    height: 70vh;
-  }
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Main-page-contact h1 {
+  text-align: center;
+  color: #036;
+  font-size: 36px;
+}
+
+.Main-page-contact p {
+  color: #036;
+  letter-spacing: 0.8px;
+}
+
+.Contact-principal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 50vw;
+  height: 74vh;
+  margin-top: 70px;
+}
+
+.Box-contact {
+  border-radius: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30vw;
+  height: 60vh;
+  box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.12),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.12),
+    0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.Box-contact p {
+  font-size: 48px;
+  padding-left: 1.5rem;
+  height: 9vh;
+  line-height: normal;
+  justify-self: flex-start;
+  margin: 0;
+}
+
+.button-div {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Input-contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  padding: 0.3rem;
+}
+
+.input-contact-form {
+  height: 3vh !important;
+  width: 11vw !important;
+}
+
+.Send-button {
+  color: #fff;
+  border-radius: 50px;
+  box-shadow: 1px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 12vw;
+  border: none;
+  height: 3.5vh;
+  letter-spacing: 0.08rem;
+  font-weight: bold;
+  background-color: #006633;
+}
+
+.Send-button:hover {
+  background-color: #034d1c;
+  cursor: pointer;
+}
+
+.Subject-input {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  align-items: flex-start;
+}
+
+.Subject-input label {
+  color: #036;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: bold;
+  line-height: normal;
+  margin-left: 0.5vw;
+}
+
+.Larger-input {
+  width: 25vw;
+  height: 18vh;
+  border: 1px solid #036;
+  border-color: #036;
+  border-radius: 7.5px;
+  padding-left: 5px;
+  outline: none;
+}
+
+.elipse-contact {
+  display: flex;
+  align-items: end;
+  z-index: -1;
+  position: fixed;
+  height: fit-content;
+  bottom: 0px;
+  left: 0px;
+}
+
+.Image-contact {
+  width: 20vw;
+  height: 80vh;
+  position: absolute;
+  top: 20px;
+  margin-top: 70px;
+  right: 200px;
+}
+
+.Image-contact img {
+  width: 20vw;
+  height: 80vh;
+}
   

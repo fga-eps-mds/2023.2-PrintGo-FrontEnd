@@ -54,7 +54,7 @@ export default function Contact() {
             <div className="Subject-input">
               <label htmlFor="assunto">Assunto</label>
               <textarea
-                placeholder="Assunto"
+                placeholder="Digite o assunto"
                 className="Larger-input"
                 value={assunto}
                 onChange={(e) => setAssunto(e.target.value)}
