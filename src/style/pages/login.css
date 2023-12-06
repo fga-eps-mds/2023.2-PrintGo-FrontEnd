@@ -12,7 +12,7 @@ body {
 .container-login {
   display: flex;
   gap: 12.375rem;
-  
+  width: 100vw;
   background-color: transparent !important;
   
 }

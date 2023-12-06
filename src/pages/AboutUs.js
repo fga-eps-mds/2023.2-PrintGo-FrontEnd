@@ -2,12 +2,12 @@ import React from "react";
 import "../style/pages/aboutUs.css";
 import PoliciaCivilLogo from "../assets/PoliciaCivilLogo.svg";
 import elipse from "../assets/home_elipse.svg";
-import NavbarSimple from "../components/navbar/NavbarSimple";
+import Navbar from "../components/navbar/Navbar";
 
 export default function AboutUs() {
   return (
     <>
-      <NavbarSimple />
+      <Navbar />
       <div className="container-about-us">
         <div className="texto">
           <h2 className="h2-label">Quem Somos</h2>

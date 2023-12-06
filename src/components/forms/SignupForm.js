@@ -1,14 +1,15 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as yup from "yup";
-import elipse6 from '../../assets/elipse6.svg';
 import { getUnidades } from "../../services/unidadeService";
 import { createUser } from "../../services/userService";
 import "../../style/components/signupForms.css";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { useNavigate, Link } from 'react-router-dom';
+
 
 
 const signupSchema = yup.object().shape({
@@ -37,9 +38,12 @@ const signupSchema = yup.object().shape({
     }),
     unidade_id: yup.string().required('Lotação é obrigatória'),
     isAdmin: yup.boolean(),
+    isLocadora: yup.boolean(),
   });
 
 export default function SignupForm(){
+    const navigate = useNavigate();
+
     const [unidade, setUnidade] = useState([]);
     const [unidadeInList, setUnidadeInList] = useState([]);
     const [displayLotacoes, setDisplayLotacoes] = useState(false);
@@ -70,18 +74,22 @@ export default function SignupForm(){
 
     const onSubmit = async (data) =>  {
 
-        setTimeout(() => {
-            console.log("3 segundos se passaram.");
-        }, 3000);  // 3000 milissegundos = 3 segundos
-        
         data.cargos = ["USER"];
+
         if (data.isAdmin) {
             data.cargos.push("ADMIN");
         }
+        if (data.isLocadora) {
+            data.cargos.push("LOCADORA");
+        }
+
         const response = await createUser(data);
         if(response.type === 'success'){
             toast.success("Usuario cadastrado com sucesso!")
-            reset()
+            setTimeout(() => {
+                reset();
+                navigate('/');
+            }, 2000);
         } else {
             toast.error("Erro ao cadastrar usuario")
         }
@@ -101,9 +109,9 @@ export default function SignupForm(){
 
     return(
         <div id="signup-card">
-            <header id="form-header">
-                Cadastro
-            </header>
+            <div id="form-header">
+                Cadastro de usuário
+            </div>
             <form id="signup-form"onSubmit={handleSubmit(onSubmit)}>
                 <div id="signup-input-group">
                     <div id="signup-input-line">
@@ -138,7 +146,7 @@ export default function SignupForm(){
                             <label htmlFor="senha" >Senha<span>*</span></label>
                             <input id="senha" {...register("senha", {required: true})} placeholder="Senha" type="password"/>
                             <span>{errors.senha?.message}</span>
-                            <p id="input-description">A senha deve conter pelo menos 8 caracteres, 1 letra maiúscula, 1 minuscula, 1 número e um caractere especial</p>
+                            <p id="signup-input-description">A senha deve conter pelo menos 8 caracteres, 1 letra maiúscula, 1 minuscula, 1 número e um caractere especial</p>
                         </div>
                         <div id="signup-input-box">
                             <label htmlFor="confirmarSenha" >Confirmar Senha<span>*</span></label>
@@ -148,7 +156,7 @@ export default function SignupForm(){
                     </div>
                     <div id="signup-input-line">
                         <div id="signup-input-box">
-                            <label htmlFor="unidadePai">Unidade pai<span>*</span></label>
+                            <label htmlFor="unidadePai">Unidade Pai<span>*</span></label>
                             <select onChange={handleWorkstationChange}>
                                 <option value="">Selecione a Unidade de policia</option>
                                 {unidade?.map((unit) => (
@@ -158,20 +166,22 @@ export default function SignupForm(){
                                 ))}
                             </select>
                         </div>
-                        {displayLotacoes && (
-                            <div id="signup-input-box">
-                                <label htmlFor="unidadeFilha">Unidade Filha<span>*</span></label>
-                                <select {...register("unidade_id", {required: "Lotação é obrigatória"})}>
-                                    <option value="">Selecione a Lotação</option>
-                                    {unidadeInList?.map((unidade) => (
-                                    <option key={unidade.id} value={unidade.id}>
-                                        {unidade.name}
-                                    </option>
-                                    ))}
-                                </select>
-                                <span>{errors.unidade_id?.message}</span>
-                            </div>
-                        )}
+                        <div id="signup-input-box">
+                          {displayLotacoes && (
+                            <>
+                              <label htmlFor="unidadeFilha">Unidade Filha<span>*</span></label>
+                              <select {...register("unidade_id", {required: "Lotação é obrigatória"})}>
+                                  <option value="">Selecione a Lotação</option>
+                                  {unidadeInList?.map((unidade) => (
+                                  <option key={unidade.id} value={unidade.id}>
+                                      {unidade.name}
+                                  </option>
+                                  ))}
+                              </select>
+                              <span>{errors.unidade_id?.message}</span>
+                            </>
+                          )}
+                        </div>
                     </div>
                     <div id="signup-input-line">
                         <div id="signup-input-box">
@@ -184,12 +194,26 @@ export default function SignupForm(){
                                 <label htmlFor="label-checkbox" id="label-checkbox">Usuário é administrador?</label>
                             </div>
                         </div>
+                        <div id="signup-input-box">
+                            <div id="signup-input-checkbox">
+                                <input
+                                    id="checkbox"
+                                    type="checkbox"
+                                    {...register("isLocadora")}
+                                />
+                                <label htmlFor="label-checkbox" id="label-checkbox">Locadora?</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div id="signup-buttons">
-                    <button className="form-button" type="button" id="cancel-bnt" >CANCELAR</button>
-                    <button className="form-button" type="submit" id="register-bnt" disabled={!isValid || isSubmitting}>
+                    <button className="singup-form-button" type="button" id="signup-cancel-bnt">
+                        <Link to="/">
+                            CANCELAR
+                        </Link>
+                    </button>
+                    <button className="singup-form-button" type="submit" id="signup-register-bnt" disabled={!isValid || isSubmitting}>
                         {isSubmitting && (
                             <ReloadIcon id="animate-spin"/>
                         )}
@@ -198,10 +222,6 @@ export default function SignupForm(){
                     </button>
                 </div>
             </form>
-            <div className="elipse-signup">
-                <img alt= "elipse"  src={elipse6}></img>
-            </div>
-            <ToastContainer />
         </div>
     );
 }

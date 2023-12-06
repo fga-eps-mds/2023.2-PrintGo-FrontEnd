@@ -149,6 +149,21 @@
   height: 150vh;
 }
 
+#link-back {
+  color: #003366;
+  text-decoration: none;
+  margin-right: 30rem;
+  font-weight: bold;
+}
+
+
+#arrow {
+  width: 2px;
+  height: 2px;
+  color: #003366;
+}
+
+
 @media (max-width: 900px) {
   #editPrinter-card {
     width: 90%;

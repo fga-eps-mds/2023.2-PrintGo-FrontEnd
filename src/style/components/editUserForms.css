@@ -1,192 +1,171 @@
+/* Card */
 #edit-user-card {
-    background-color: #FFFFFF;
-    border-radius: 10px;
-    display: flex;
-    width: 48vw;
-    height: 89vh;
-    justify-content: start;
-    align-items: center;
-    flex-direction: column;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-    margin-right: 8vw;
-    margin-top: 2%;
-    margin-bottom: 1vh;
-
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  display: flex;
+  width: 32vw;
+  height: fit-content;
+  flex-direction: column;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  margin-right: 8vw;
+  margin-top: 6%;
+  padding-top: 30px;
+  padding-bottom: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
+/* Header */
+#edit-user-form-header {
+  font-size: 48px;
+  width: 100%;
+  color: #003366;
+  margin-bottom: 30px;
+}
+
+/* Form container */
 #edit-user-form{
-    width: 43vw;
-    height: 75vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  width: 100%;
 }
+
 @keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 #animate-spin{
-    animation: spin 1s linear infinite;
-    margin-right: 4px;
+  animation: spin 1s linear infinite;
+  margin-right: 4px;
 }
 
-#edit-user-form-header {
-    font-size: 48px;
-    color: #003366;
-    margin-bottom: 16px;
-}
-
+/* Campos de informação */
 #edit-user-input-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 43vw;
-    
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  
 }
 
 #edit-user-input-line {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px; 
-    width: 43vw;
-    
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px; 
+  width: 100%;
+  
 }
 
 #edit-user-input-box {
-    flex: 1;
-    min-width: 100px; /* Largura mínima para cada input */
-    display: flex;
-    width: 250px;
-    flex-direction: column;
-    margin-bottom: 16px;
-    padding: 0 10px;
-    box-sizing: border-box;
-    
+  flex: 1;
+  min-width: 100px; /* Largura mínima para cada input */
+  display: flex;
+  width: 250px;
+  flex-direction: column;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+#edit-user-input-box label {
+  color: #003366;
+  display: block;
+  margin-bottom: 5px;
+}
+
+#edit-user-input-box span {
+  color: #9f0805;
 }
 
 #label-checkbox {
     top: 10rem;
 }
 
-#edit-user-input-box label {
-    color: #003366;
-    display: block;
-    margin-bottom: 5px;
-}
-
-#edit-user-input-box span {
-    color: #9f0805;
-}
-
 #edit-user-input-checkbox {
-    margin-top: 2rem;
-    display: flex;
-    align-items: center;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
 }
 
 #edit-user-input-checkbox input {
-    margin:0 12px 0 0;
-    vertical-align: middle;
-    position: relative;
-    top: -3px;
+  margin:0 12px 0 0;
+  vertical-align: middle;
+  position: relative;
+  top: -3px;
 }
 
 #edit-user-input-box input{
-    font-size: 16px;
-    border: 1px solid #003366;
-    border-color: #003366;
-    border-radius: 10px;
-    padding: 5px;
+  min-height: 30px;
+  font-size: 16px;
+  border: 1px solid #003366;
+  border-color: #003366;
+  border-radius: 10px;
 }
 
 #edit-user-input-box select{
-    font-size: 16px;
-    font-size: 1rem;border: 1px solid #003366;
-    border-color: #003366;
-    border-radius: 10px;
-    padding: 5px;
-    color: #6C6C6C;
+  font-size: 16px;
+  font-size: 1rem;border: 1px solid #003366;
+  border-color: #003366;
+  border-radius: 10px;
+  padding: 5px;
+  color: #6C6C6C;
+}
+
+/* Botôes */
+.edit-user-form-button {
+  display: inline-block;
+  flex-direction: column;
+  color: #ffffff ;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  width: 180px;
+}
+
+#edit-user-change-password {
+  background-color: #003366;
+  transition: background-color 0.3s, filter 0.3s;
+  margin-bottom: 0px;
 }
 
 #edit-user-buttons {
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 80px;
 }
-
-.form-button {
-    display: inline-block;
-    flex-direction: column;
-    color: #ffffff ;
-    border: none;
-    padding: 10px 30px;
-    border-radius: 50px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
 
 .form-button:hover {
-    filter: brightness(1.8);
+  filter: brightness(1.8);
 }
 
-#cancel-bnt {
-    background-color: #003366;
-    transition: background-color 0.3s, filter 0.3s;
+#edit-user-cancel-bnt {
+  background-color: #003366;
+  transition: background-color 0.3s, filter 0.3s;
 }
 
-#register-bnt {
-    margin-left: 8px;
-    transition: background-color 0.3s, filter 0.3s;
-    background-color: #006633;
+#edit-user-cancel-bnt a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+#edit-user-register-bnt {
+  margin-left: 8px;
+  transition: background-color 0.3s, filter 0.3s;
+  background-color: #006633;
 }
 
 
-#register-bnt:disabled {
-    background-color: #6C6C6C !important;
-    opacity: 65%;
-    cursor: not-allowed;
-}
-
-#input-description {
-    color: #6C6C6C;
-    font-size: 10px;
-}
-
-.elipse-edit-user{
-    position: fixed; 
-    width: 50vw;
-    height: 100vh;
-    top:0;
-    right: 0;
-    z-index: -1;
-    bottom: 2px;
-    color:#003366;
-    overflow: hidden;
-
-  }
-  
-  .elipse-edit-user img{
-    height: 150vh;
-  }
-
-@media (max-width: 900px) {
-    #edit-user-card {
-        width: 90%; /* Adjust the form width as needed*/
-        margin: 0 auto; /* Centers the form horizontally*/
-        padding: 1rem; /* Adjust padding as needed */
-    }
-
-    #input-line {
-        display:block;
-    }
+#edit-user-register-bnt:disabled {
+  background-color: #6C6C6C !important;
+  opacity: 65%;
+  cursor: not-allowed;
 }
