@@ -28,7 +28,7 @@ const checkAuthentication = () => {
 const PrivateRoutes = () => {
 
     return(
-        checkAuthentication() ? <Outlet/> : <Navigate to="/login"/>
+        checkAuthentication() ? <Outlet data-testid="outlet"/> : <Navigate to="/login" data-testid="navigate"/>
     )
 }
 
