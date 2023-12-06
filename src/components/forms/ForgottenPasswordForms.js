@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as yup from "yup";
-import elipse6 from '../../assets/elipse6.svg';
 import { forgottenPassword } from "../../services/userService";
 import "../../style/components/forgottenPasswordForms.css";
 import { ReloadIcon } from "@radix-ui/react-icons";
@@ -25,8 +24,7 @@ export default function ForgottenPasswordForm(){
     const {
         register,
         handleSubmit,
-        formState: { errors, isSubmitting, isValid }, 
-        reset
+        formState: { errors, isSubmitting, isValid },
     } = useForm({resolver: yupResolver(forgottenPasswordSchema), mode: "onChange"})
 
     const onSubmit = async (data) =>  {
@@ -49,14 +47,12 @@ export default function ForgottenPasswordForm(){
 
     return(
         <div id="forgotpassword-card">
-            <div id="center-container">
-                <header id="form-header">
-                    Esqueci minha senha
-                </header>
-                <p id="header-description">
-                    Para redefinir sua senha, informe o email cadastrado na sua conta e lhe enviaremos um link de recuperação.<span></span>
-                </p>
-            </div>
+            <header id="forgotpassword-form-header">
+                Esqueci minha senha
+            </header>
+            <p id="forgotpassword-description">
+                Para redefinir sua senha, informe o email cadastrado na sua conta e lhe enviaremos um link de recuperação.<span></span>
+            </p>
             <form id="forgotpassword-form"onSubmit={handleSubmit(onSubmit)}>
                 <div id="forgotpassword-input-group">
                     <div id="forgotpassword-input-box">
@@ -67,7 +63,7 @@ export default function ForgottenPasswordForm(){
                 </div>
 
                 <div id="forgotpassword-buttons">
-                    <button className="form-button" type="submit" id="register-bnt" disabled={isSubmitting || !isValid}>
+                    <button className="forgotpassword-form-button" type="submit" id="forgotpassword-register-bnt" disabled={isSubmitting || !isValid}>
                         {isSubmitting && (
                             <ReloadIcon id="animate-spin"/>
                         )}
@@ -75,10 +71,7 @@ export default function ForgottenPasswordForm(){
                         {isSubmitting ? 'Enviando': "Confirmar"}
                     </button>
                 </div>
-            </form>
-            <div className="elipse-forgotpassword">
-                <img alt= "elipse"  src={elipse6}></img>
-            </div>
+            </form>   
         </div>
     );
 }

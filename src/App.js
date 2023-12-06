@@ -28,8 +28,6 @@ function App() {
             <Route path="/cadastro" element={<CreateUserPage />} />
             <Route path="/editarusuario" element={<EditUserPage/>}/>
             <Route path="/mudarsenha" element={<ChangePassword />} />
-            <Route path="/recuperarSenha" element={<RecoverPasswordPage/>} />
-            <Route path="/esqueciMinhaSenha" element={<ForgottenPasswordPage />} />
             <Route path="/cadastroimpressora" element={<RegisterPrinter />} />
             <Route path="/editarimpressora" element={<EditPrinter />} />
             <Route path="/padraoimpressora" element={<PatternPrinter />} />
@@ -41,6 +39,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/contato" element={<Contact />} />
           <Route path="/quemsomos" element={<AboutUs />} />
+          <Route path="/recuperarSenha" element={<RecoverPasswordPage/>} />
+          <Route path="/esqueciMinhaSenha" element={<ForgottenPasswordPage />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer />
