@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Search from '../assets/Search.svg';
 import Filter from '../assets/Filter.svg';
 import Engine from '../assets/engine.svg';
+import Profile from '../assets/Profile.svg'
 import Input from '../components/Input'; 
 import Modal from '../components/ui/Modal';
 import Navbar from "../components/navbar/Navbar";
@@ -12,7 +13,21 @@ export default function ListUsers() {
 
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
-  const [users, setUsers] = useState();
+  const [workstations, setWorkstations] = useState();
+  const [users, setUsers] = useState([
+    {
+      "id": "clpt3te7y000014hq5whhzg0c",
+      "email": "admin@admin.com",
+      "nome": "Administrador",
+      "senha": "opmawdiomaiowemfapwkf",
+      "documento": "05699128140",
+      "unidade_id": "bfcf915f-38ca-4754-b598-c085cfe0548a",
+      "cargos": [
+        "USER",
+        "ADMIN"
+      ]
+    },
+  ]);
 
   function filterBeingShown(filter) {
     if (filter === 'admins') {
@@ -20,7 +35,7 @@ export default function ListUsers() {
     } else if (filter === 'rentals'){
       return 'Locadoras'
     } else {
-      return 'Todas';
+      return 'Todos';
     }
   }
 
@@ -56,15 +71,16 @@ export default function ListUsers() {
 
           <div className="listusers-title">
             <h2>Usuários cadastrados</h2>
-            <h4>Todos</h4>
+            <h4>{filterBeingShown(filter)}</h4>
           </div>
           
           <div className="listusers-search">
+
             <Input/>
             <img alt="search" src={Search} />
+
             <div className="listusers-filter">
               <img alt="filter" src={Filter} />
-
               <div className="listusers-filter-dropdown-container">
                 <div className="listusers-filter-dropdown">
                   <Link to="#" onClick={() => setFilter('all')}>Todos</Link>
@@ -72,10 +88,44 @@ export default function ListUsers() {
                   <Link to="#" onClick={() => setFilter('rentals')}>Locadoras</Link>
                 </div>
               </div>
+
             </div>
           </div>
 
         </div>
+
+        {filtereredUsers.map(user => (
+          <div key={user.id} className="listusers-user">
+            <div className="listusers-user-image">
+              <img alt="user" src={Profile}/>
+            </div>
+
+            <div className="listusers-user-name-email">
+              <h3>{user.nome}</h3>
+              <h4>{user.email}</h4>
+            </div>
+
+            <div className="listusers-user-document">
+              <h4>{user.documento}</h4>
+            </div>
+
+            <div className="listusers-user-positions">
+              {user.cargos.map(cargo => (
+                <h4 key={cargo}>{cargo}</h4>
+              ))}
+            </div>
+
+            <div className="listusers-user-workstation">
+              {workstations ? (
+                <h4>{workstations.find(workstation => workstation.id === user.unidade_id).nome}</h4>
+              ) : (
+                <h4></h4>
+              )}
+              
+            </div>
+          </div>
+        ))}
+
       </div>
     </>
   )

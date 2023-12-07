@@ -77,3 +77,62 @@
   display: flex;
   flex-direction: column;
 }
+
+/* User */
+.listusers-user {
+  height: 18vh;
+  width: 100vw;
+  color: #003366;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.listusers-user-image {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  height: 100%;
+}
+
+.listusers-user-name-email {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 25vw;
+}
+
+.listusers-user-name-email h3 {
+  font-size: 28px;
+  margin: 0px;
+}
+
+.listusers-user-name-email h4 {
+  margin: 0px;
+}
+
+.listusers-user-document {
+  display: flex;
+  justify-content: center;
+  width: 10vw;
+}
+
+.listusers-user-positions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25vw;
+}
+
+.listusers-user-positions h4 {
+  margin: 0px;
+}
+
+.listusers-user-workstation {
+  display: flex;
+  justify-content: center;
+  width: 25vw;
+}
