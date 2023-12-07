@@ -5,6 +5,7 @@ import RecoverPasswordPage from "../../pages/RecoverPassword";
 import * as api from "../../api/api";
 import * as router from "react-router-dom";
 import { BrowserRouter } from 'react-router-dom';
+import { act } from 'react-dom/test-utils';
 
 
 
@@ -52,4 +53,28 @@ test('shows inputs', () => {
     expect(screen.getByText('Repita a senha')).toBeTruthy();
   
     // Testar erro de senhas não iguais
+});
+
+
+
+test('enables input fields and submit button when valid', async () => {
+    render(
+        <BrowserRouter>
+            <RecoverPasswordPage />
+        </BrowserRouter>
+    );
+    const passwordInput = screen.getByTestId('input-nova-senha');
+    const confirmPasswordInput = screen.getByTestId('input-repita-senha');
+    
+    fireEvent.change(passwordInput, { target: { value: 'validPassword' } });
+    fireEvent.change(confirmPasswordInput, { target: { value: 'validPassword' } });
+  
+   
+    
+    fireEvent.submit(screen.getByText('Confirmar'));
+    await act( async() => {
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+    });
+
+    expect(window.location.pathname).toBe('/');
 });
