@@ -21,3 +21,35 @@ test('renders ForgottenPasswordPage component', () => {
     
     expect(page).toBeInTheDocument();
 });
+
+test('enables input fields and submit button when valid', () => {
+    render(
+        <BrowserRouter>
+            <RecoverPasswordPage />
+        </BrowserRouter>
+    );
+    const passwordInput = screen.getByTestId('input-nova-senha');
+    const confirmPasswordInput = screen.getByTestId('input-repita-senha');
+    
+    fireEvent.change(passwordInput, { target: { value: 'validPassword' } });
+    fireEvent.change(confirmPasswordInput, { target: { value: 'validPassword' } });
+  
+    expect(passwordInput.disabled).toBeFalsy();
+    expect(confirmPasswordInput.disabled).toBeFalsy();
+    expect(screen.getByText('Confirmar').enabled).toBeFalsy();
+});
+
+test('shows inputs', () => {
+    render(
+        <BrowserRouter>
+            <RecoverPasswordPage />
+        </BrowserRouter>
+    )
+    
+    
+  
+    expect(screen.getByText('Nova Senha')).toBeInTheDocument();
+    expect(screen.getByText('Repita a senha')).toBeTruthy();
+  
+    // Testar erro de senhas não iguais
+});
