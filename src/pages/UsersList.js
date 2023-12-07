@@ -78,17 +78,24 @@ export default function ListUsers() {
 
   // Excluir usuário.
   async function deleteSelectedUser() {
-    try {
-      const response =  await deleteUser(selectedUser.id);
+    if (selectedUser) {
+      try {
+        const response =  await deleteUser(selectedUser.id);
 
-      if (response.type === 'success') {
-        fetchUserData();
-      } else {
-        toast.error('Erro ao excluir o usuário');
+        if (response.type === 'success') {
+          const index = users.findIndex(user => user.id === selectedUser.id);
+
+          if (index !== -1) {
+            // Remover o usuário da lista
+            users.splice(index, 1);
+          }
+        } else {
+          toast.error('Erro ao excluir o usuário');
+        }
+
+      } catch (error) {
+        console.error('Erro ao excluir o usuário:', error);
       }
-
-    } catch (error) {
-      console.error('Erro ao excluir o usuário:', error);
     }
   }
 
