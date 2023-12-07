@@ -80,3 +80,14 @@ export const getPasswordSchema = () => {
       .required('Confirmação de senha é obrigatória')
   });
 };
+
+export const getEditUserSchema = (printerFieldLabels) => {
+
+
+  return yup.object().shape({
+    nome: yup.string().required(`${printerFieldLabels.nome} é obrigatório`),
+    documento: yup.string().required(`${printerFieldLabels.documento} é obrigatório`),
+    email: yup.string().required(`${printerFieldLabels.email} é obrigatório`),
+    confirmaremail: yup.string().required(`${printerFieldLabels.confirmaremail} é obrigatório`),
+  });
+};
