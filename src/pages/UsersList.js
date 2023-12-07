@@ -195,8 +195,8 @@ export default function ListUsers() {
                 <img alt="engine" src={Engine}/>
                 <div className="listusers-user-dropdown-container">
                   <div className="listusers-user-dropdown">
-                    <Link to="#" tabIndex="0" >Editar</Link>
                     <Link to="#" tabIndex="0" onClick={modalDeleteUser} >Excluir</Link>
+                    <Link to="/editarusuario" tabIndex="0" >Editar</Link>
                   </div>
                 </div>
               </div>
