@@ -42,7 +42,7 @@ export default function RecoverPasswordPage() {
   return (
     <>
       <Navbar />
-      <div className="change-password-container">
+      <div className="change-password-container" data-testid="change-password-container">
         <div className="change-password-image-container">
           <img src={ChangePasswordPeople} alt="Pessoas" />
         </div>
