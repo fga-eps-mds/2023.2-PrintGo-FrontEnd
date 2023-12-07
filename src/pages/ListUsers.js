@@ -168,6 +168,16 @@ export default function ListUsers() {
                 <h4></h4>
               )}
             </div>
+
+            <div className="listusers-engine">
+              <img alt="engine" src={Engine}/>
+              <div className="listusers-user-dropdown-container">
+                <div className="listusers-user-dropdown">
+                  <Link to="#" tabIndex="0" >Editar</Link>
+                  <Link to="#" tabIndex="0" >Excluir</Link>
+                </div>
+              </div>
+            </div>
           </div>
         ))}
         <ToastContainer />
