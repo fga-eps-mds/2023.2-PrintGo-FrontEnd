@@ -10,7 +10,21 @@ import "../../style/components/editUserForms.css";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { Link, useNavigate } from 'react-router-dom';
 import { decodeToken } from "react-jwt";
+import { getEditUserSchema } from "../utils/YupSchema";
 
+const fieldLabels = {
+  nome: 'Nome',
+  documento: 'CPF',
+  email: 'Email',
+  emailConfirmar: 'Email',
+};
+
+const testObject = {
+  nome: 'Fulano',
+  documento: '01234567890',
+  email: 'email@email.com',
+  emailConfirmar: 'email@email.com',
+};
 
 const editUserSchema = yup.object().shape({
   nome: yup.string().required('Nome é obrigatório'),
@@ -32,6 +46,17 @@ const editUserSchema = yup.object().shape({
 });
 
 export default function EditUserForm(){
+  const editUserSchema = getEditUserSchema(fieldLabels);
+  const { register, setValue, handleSubmit, formState: { errors, isValid, isSubmitting }, reset } = useForm({
+    resolver: yupResolver(editUserSchema),
+    mode: "onSubmit"
+  });
+
+  useEffect(() => {
+    Object.entries(testObject).forEach(([key, value]) => {
+      setValue(key, value);
+    });
+  }, [setValue]);
 
   let loggedUser = null;
   const token = localStorage.getItem("jwt");
@@ -48,16 +73,6 @@ export default function EditUserForm(){
   const memoUnidadeList = useMemo(() => unidadeList, [unidadeList]);
 
   const navigate = useNavigate();
-
-
-  const {
-    register,
-    setValue,
-    handleSubmit,
-    formState: { errors, isValid, isSubmitting }, 
-    reset
-  } = useForm({resolver: yupResolver(editUserSchema), mode: "onChange"})
-
 
   // Puxe os dados do usuário logado.
   useEffect(() => {
@@ -245,3 +260,5 @@ export default function EditUserForm(){
     </div>
   );
 }
+
+export { fieldLabels, testObject };
