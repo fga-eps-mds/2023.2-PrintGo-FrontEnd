@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { getUnidades } from "../services/unidadeService";
+import { getUsers } from "../services/userService";
 import "../style/pages/listUsers.css";
 import { Link } from "react-router-dom";
 import Search from '../assets/Search.svg';
@@ -10,6 +11,7 @@ import Input from '../components/Input';
 import Modal from '../components/ui/Modal';
 import Navbar from "../components/navbar/Navbar";
 import { ToastContainer, toast } from "react-toastify";
+
 
 export default function ListUsers() {
 
@@ -30,6 +32,26 @@ export default function ListUsers() {
       ]
     },
   ]);
+
+  // Puxe os dados do usuário logado.
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const data = await getUsers();
+        
+        console.log(data);
+        if (data.type === 'success' && data.data) {
+          setUsers(data);
+        } else {
+          toast.error('Erro ao obter os usuários');
+        }
+      } catch(error) {
+        console.log('Erro ao buscar dados do usuário:', error);
+        toast.error('Erro ao obter os usuários');
+      }
+    }
+    fetchUserData();
+  }, []);
 
   // Puxa os dados das unidades policiais.
   useEffect( () => {

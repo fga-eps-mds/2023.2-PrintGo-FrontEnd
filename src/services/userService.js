@@ -18,6 +18,15 @@ export const updateUser = async (user, id) => {
   }
 }
 
+export const getUsers = async () => {
+  try {
+    const response = await api.get('/user/');
+    return response.data;
+  } catch (error) {
+    return { type: 'error', error };
+  }
+}
+
 export const getUserById = async (id) => {
   try {
     const response = await api.get(`/user/${id}`);
