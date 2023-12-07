@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import CreateUserPage from "./pages/CreateUser";
 import EditUserPage from "./pages/EditUser";
-import ListUsers from "./pages/ListUsers";
+import UsersList from "./pages/UsersList";
 import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
@@ -35,7 +35,7 @@ function App() {
             <Route path="/editarpadrao" element={<EditPattern />} />
             <Route path="/impressorascadastradas" element={<PrintersList />} />
             <Route path="/listapadroes" element={<PatternList />} />
-            <Route path="/listausuarios" element={<ListUsers />} />
+            <Route path="/listausuarios" element={<UsersList />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
