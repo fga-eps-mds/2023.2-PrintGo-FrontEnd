@@ -65,6 +65,7 @@ const Navbar = () => {
                   {userDropdownOpen && (
                     <div className="navbar-users-dropdown">
                       <Link to="/cadastro">Cadastro de usuário</Link>
+                      <Link to="/listausuarios">Usuários cadastrados</Link>
                     </div>
                   )}
                 </button>
