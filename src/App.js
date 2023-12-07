@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import CreateUserPage from "./pages/CreateUser";
 import EditUserPage from "./pages/EditUser";
+import ListUsers from "./pages/ListUsers";
 import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
@@ -27,6 +28,7 @@ function App() {
           <Route element={<PrivateRoutes />}>
             <Route path="/cadastro" element={<CreateUserPage />} />
             <Route path="/editarusuario" element={<EditUserPage/>}/>
+            <Route path="/listausuarios" element={<ListUsers />} />
             <Route path="/mudarsenha" element={<ChangePassword />} />
             <Route path="/cadastroimpressora" element={<RegisterPrinter />} />
             <Route path="/editarimpressora" element={<EditPrinter />} />
