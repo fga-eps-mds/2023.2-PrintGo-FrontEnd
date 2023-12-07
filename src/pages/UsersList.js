@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { getUnidades } from "../services/unidadeService";
-import { getUsers } from "../services/userService";
-import "../style/pages/listUsers.css";
+import { deleteUser, getUsers } from "../services/userService";
+import "../style/pages/usersList.css";
 import { Link } from "react-router-dom";
 import Search from '../assets/Search.svg';
 import Filter from '../assets/Filter.svg';
@@ -71,11 +71,26 @@ export default function ListUsers() {
 
       } catch (error) {
         console.error('Erro ao obter opções do serviço:', error);
-        toast.error('Erro ao obter as unidades');
       }
     }
     fetchWorkStationData();
   }, []);
+
+  // Excluir usuário.
+  async function deleteSelectedUser() {
+    try {
+      const response =  await deleteUser(selectedUser.id);
+
+      if (response.type === 'success') {
+        fetchUserData();
+      } else {
+        toast.error('Erro ao excluir o usuário');
+      }
+
+    } catch (error) {
+      console.error('Erro ao excluir o usuário:', error);
+    }
+  }
 
   // Retorna o filtro sendo usado.
   function filterBeingShown(filter) {
@@ -129,6 +144,7 @@ export default function ListUsers() {
           setOpenModal={setModalOpen}
           title={modalTitle}
           bodytext={modalBodytext}
+          onConfirm={deleteSelectedUser}
         />
       )}
 
