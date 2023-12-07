@@ -92,7 +92,7 @@ test('testa a alteração de senha', async () => {
     fireEvent.submit(screen.getByText('Confirmar'));
     await act( async() => {
         await new Promise((resolve) => setTimeout(resolve, 4000));
-        expect(window.location.pathname).toBe('/login');
+        expect(window.location.pathname).toBe('/');
     });
 
     
