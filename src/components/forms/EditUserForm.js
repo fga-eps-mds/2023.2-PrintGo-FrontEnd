@@ -152,6 +152,7 @@ export default function EditUserForm(){
 
   return(
     <div id="edit-user-card">
+      <Link id="link-back" to="/listausuarios">Voltar</Link>
       <header id="edit-user-form-header">
         Editar usuário
       </header>
