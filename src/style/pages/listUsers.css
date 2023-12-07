@@ -102,7 +102,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 25vw;
+  width: 28vw;
 }
 
 .listusers-user-name-email h3 {
@@ -134,5 +134,10 @@
 .listusers-user-workstation {
   display: flex;
   justify-content: center;
-  width: 25vw;
+  width: 18vw;
+}
+
+.listusers-user-workstation h4 {
+  margin: 0px;
+  text-align: center;
 }

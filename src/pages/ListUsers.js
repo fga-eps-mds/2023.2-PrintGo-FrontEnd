@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
+import { getUnidades } from "../services/unidadeService";
 import "../style/pages/listUsers.css";
 import { Link } from "react-router-dom";
 import Search from '../assets/Search.svg';
@@ -8,6 +9,7 @@ import Profile from '../assets/Profile.svg'
 import Input from '../components/Input'; 
 import Modal from '../components/ui/Modal';
 import Navbar from "../components/navbar/Navbar";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function ListUsers() {
 
@@ -21,7 +23,7 @@ export default function ListUsers() {
       "nome": "Administrador",
       "senha": "opmawdiomaiowemfapwkf",
       "documento": "05699128140",
-      "unidade_id": "bfcf915f-38ca-4754-b598-c085cfe0548a",
+      "unidade_id": "c97372ff-16ad-4454-ae93-774006ede969",
       "cargos": [
         "USER",
         "ADMIN"
@@ -29,6 +31,27 @@ export default function ListUsers() {
     },
   ]);
 
+  // Puxa os dados das unidades policiais.
+  useEffect( () => {
+    async function fetchWorkStationData() {
+      try {
+        const workstationData = await getUnidades();
+        
+        if (workstationData.type ==='success' && workstationData.data) {
+          setWorkstations(workstationData.data);
+        } else {
+          toast.error('Erro ao obter as unidades');
+        }
+
+      } catch (error) {
+        console.error('Erro ao obter opções do serviço:', error);
+        toast.error('Erro ao obter as unidades');
+      }
+    }
+    fetchWorkStationData();
+  }, []);
+
+  // Retorna o filtro sendo usado.
   function filterBeingShown(filter) {
     if (filter === 'admins') {
       return 'Admins';
@@ -39,6 +62,7 @@ export default function ListUsers() {
     }
   }
 
+  // Filtra os usuários de acordo com o filtro e a pesquisa.
   const filtereredUsers = useMemo(() => {
     if (users) {
       return users.filter(user => {
@@ -76,7 +100,7 @@ export default function ListUsers() {
           
           <div className="listusers-search">
 
-            <Input/>
+            <Input onChange={(e) => setSearch(e.target.value)}/>
             <img alt="search" src={Search} />
 
             <div className="listusers-filter">
@@ -117,15 +141,14 @@ export default function ListUsers() {
 
             <div className="listusers-user-workstation">
               {workstations ? (
-                <h4>{workstations.find(workstation => workstation.id === user.unidade_id).nome}</h4>
+                <h4>{workstations.find(workstation => workstation.id === user.unidade_id).name}</h4>
               ) : (
                 <h4></h4>
               )}
-              
             </div>
           </div>
         ))}
-
+        <ToastContainer />
       </div>
     </>
   )
