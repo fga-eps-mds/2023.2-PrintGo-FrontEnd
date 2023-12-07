@@ -23,7 +23,7 @@ test('renders ForgottenPasswordPage component', () => {
     expect(page).toBeInTheDocument();
 });
 
-test('enables input fields and submit button when valid', () => {
+test('enables submit button when valid', async() => {
     render(
         <BrowserRouter>
             <RecoverPasswordPage />
@@ -32,12 +32,30 @@ test('enables input fields and submit button when valid', () => {
     const passwordInput = screen.getByTestId('input-nova-senha');
     const confirmPasswordInput = screen.getByTestId('input-repita-senha');
     
-    fireEvent.change(passwordInput, { target: { value: 'validPassword' } });
-    fireEvent.change(confirmPasswordInput, { target: { value: 'validPassword' } });
+    
+    await act(async () => {
+        fireEvent.change(passwordInput, { target: { value: 'ValidPassword1@' } });
+        fireEvent.change(confirmPasswordInput, { target: { value: 'ValidPassword1@' } });
+    });
+    
+    await waitFor(() => {
+        expect(screen.getByText('Confirmar').disabled).toBeFalsy();
+    });
+});
+
+test('disables submit button when invalid', () => {
+    render(
+        <BrowserRouter>
+            <RecoverPasswordPage />
+        </BrowserRouter>
+    );
+    const passwordInput = screen.getByTestId('input-nova-senha');
+    const confirmPasswordInput = screen.getByTestId('input-repita-senha');
+    
+    fireEvent.change(passwordInput, { target: { value: 'invalid' } });
+    fireEvent.change(confirmPasswordInput, { target: { value: 'invalid' } });
   
-    expect(passwordInput.disabled).toBeFalsy();
-    expect(confirmPasswordInput.disabled).toBeFalsy();
-    expect(screen.getByText('Confirmar').enabled).toBeFalsy();
+    expect(screen.getByText('Confirmar').disabled).toBeTruthy();
 });
 
 test('shows inputs', () => {
@@ -57,7 +75,7 @@ test('shows inputs', () => {
 
 
 
-test('enables input fields and submit button when valid', async () => {
+test('testa a alteração de senha', async () => {
     render(
         <BrowserRouter>
             <RecoverPasswordPage />
@@ -66,15 +84,16 @@ test('enables input fields and submit button when valid', async () => {
     const passwordInput = screen.getByTestId('input-nova-senha');
     const confirmPasswordInput = screen.getByTestId('input-repita-senha');
     
-    fireEvent.change(passwordInput, { target: { value: 'validPassword' } });
-    fireEvent.change(confirmPasswordInput, { target: { value: 'validPassword' } });
+    fireEvent.change(passwordInput, { target: { value: 'ValidPassword1@' } });
+    fireEvent.change(confirmPasswordInput, { target: { value: 'ValidPassword1@' } });
   
    
     
     fireEvent.submit(screen.getByText('Confirmar'));
     await act( async() => {
-        await new Promise((resolve) => setTimeout(resolve, 3000));
+        await new Promise((resolve) => setTimeout(resolve, 4000));
+        expect(window.location.pathname).toBe('/login');
     });
 
-    expect(window.location.pathname).toBe('/');
+    
 });
