@@ -35,11 +35,11 @@ function App() {
             <Route path="/editarpadrao" element={<EditPattern />} />
             <Route path="/impressorascadastradas" element={<PrintersList />} />
             <Route path="/listapadroes" element={<PatternList />} />
+            <Route path="/listausuarios" element={<ListUsers />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/contato" element={<Contact />} />
-          <Route path="/listausuarios" element={<ListUsers />} />
           <Route path="/quemsomos" element={<AboutUs />} />
           <Route path="/recuperarSenha" element={<RecoverPasswordPage/>} />
           <Route path="/esqueciMinhaSenha" element={<ForgottenPasswordPage />} />
