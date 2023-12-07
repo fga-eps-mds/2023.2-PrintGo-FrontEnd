@@ -28,7 +28,6 @@ function App() {
           <Route element={<PrivateRoutes />}>
             <Route path="/cadastro" element={<CreateUserPage />} />
             <Route path="/editarusuario" element={<EditUserPage/>}/>
-            <Route path="/listausuarios" element={<ListUsers />} />
             <Route path="/mudarsenha" element={<ChangePassword />} />
             <Route path="/cadastroimpressora" element={<RegisterPrinter />} />
             <Route path="/editarimpressora" element={<EditPrinter />} />
@@ -40,6 +39,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/contato" element={<Contact />} />
+          <Route path="/listausuarios" element={<ListUsers />} />
           <Route path="/quemsomos" element={<AboutUs />} />
           <Route path="/recuperarSenha" element={<RecoverPasswordPage/>} />
           <Route path="/esqueciMinhaSenha" element={<ForgottenPasswordPage />} />
