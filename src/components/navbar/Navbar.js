@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../style/components/navbar.css";
-import logo from "../../assets/logo 3.svg";
+import logo from "../../assets/logo_navbar.svg";
 import LoggedUser from "../../assets/loggeduser.svg";
 import { decodeToken } from "react-jwt";
 
