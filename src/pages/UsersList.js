@@ -22,20 +22,7 @@ export default function ListUsers() {
   const [modalBodytext, setModalBodytext] = useState();
   const [workstations, setWorkstations] = useState();
   const [selectedUser, setSelectedUser] = useState();
-  const [users, setUsers] = useState([
-    {
-      "id": "clpt3te7y000014hq5whhzg0c",
-      "email": "admin@admin.com",
-      "nome": "Administrador",
-      "senha": "opmawdiomaiowemfapwkf",
-      "documento": "05699128140",
-      "unidade_id": "c97372ff-16ad-4454-ae93-774006ede969",
-      "cargos": [
-        "USER",
-        "ADMIN"
-      ]
-    },
-  ]);
+  const [users, setUsers] = useState();
 
   // Puxe os dados do usuário logado.
   useEffect(() => {
@@ -43,9 +30,8 @@ export default function ListUsers() {
       try {
         const data = await getUsers();
         
-        console.log(data);
         if (data.type === 'success' && data.data) {
-          setUsers(data);
+          setUsers(data.data);
         } else {
           toast.error('Erro ao obter os usuários');
         }
@@ -62,6 +48,7 @@ export default function ListUsers() {
     async function fetchWorkStationData() {
       try {
         const workstationData = await getUnidades();
+        console.log(workstationData);
         
         if (workstationData.type ==='success' && workstationData.data) {
           setWorkstations(workstationData.data);
@@ -111,7 +98,7 @@ export default function ListUsers() {
   }
 
   // Filtra os usuários de acordo com o filtro e a pesquisa.
-  const filtereredUsers = useMemo(() => {
+  const filteredUsers = useMemo(() => {
     if (users) {
       return users.filter(user => {
         const searchLower = search.toLowerCase();
@@ -185,7 +172,7 @@ export default function ListUsers() {
 
           </div>
 
-          {filtereredUsers.map(user => (
+          {filteredUsers && filteredUsers.map(user => (
             <div key={user.id} className="listusers-user">
               <div className="listusers-user-image">
                 <img alt="user" src={Profile}/>
@@ -207,10 +194,8 @@ export default function ListUsers() {
               </div>
 
               <div className="listusers-user-workstation">
-                {workstations ? (
-                  <h4>{workstations.find(workstation => workstation.id === user.unidade_id).name}</h4>
-                ) : (
-                  <h4></h4>
+                {workstations && (
+                  <h4>{workstations.find(workstation => workstation.id === user.unidade_id)?.name}</h4>
                 )}
               </div>
 

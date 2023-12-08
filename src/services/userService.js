@@ -21,7 +21,7 @@ export const updateUser = async (user, id) => {
 export const getUsers = async () => {
   try {
     const response = await api.get('/user/');
-    return response.data;
+    return { type: 'success', data: response.data};
   } catch (error) {
     return { type: 'error', error };
   }
