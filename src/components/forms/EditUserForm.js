@@ -8,7 +8,7 @@ import { getUnidades } from "../../services/unidadeService";
 import { getUserById, updateUser } from "../../services/userService";
 import "../../style/components/editUserForms.css";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { decodeToken } from "react-jwt";
 import { getEditUserSchema } from "../utils/YupSchema";
 
@@ -46,6 +46,7 @@ const editUserSchema = yup.object().shape({
 });
 
 export default function EditUserForm(){
+  const { id } = useParams();
   const editUserSchema = getEditUserSchema(fieldLabels);
   const { register, setValue, handleSubmit, formState: { errors, isValid, isSubmitting }, reset } = useForm({
     resolver: yupResolver(editUserSchema),
@@ -68,6 +69,8 @@ export default function EditUserForm(){
   const [displayLotacoes,setDisplayLotacoes] = useState ('');
   const [unidadeFilhoList, setUnidadeFilhoList] = useState ();
   const [userData, setUserData] = useState(null);
+  const [displayUserRole, setDisplayUserRole] = useState(true);
+
 
   const memoUserData = useMemo(() => userData, [userData]);
   const memoUnidadeList = useMemo(() => unidadeList, [unidadeList]);
@@ -78,7 +81,7 @@ export default function EditUserForm(){
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const data = await getUserById(loggedUser.id);
+        const data = await getUserById(id);
         
         console.log(data);
         if (data) {
@@ -89,6 +92,9 @@ export default function EditUserForm(){
       }
     }
     if(loggedUser && !userData) {
+      if(loggedUser.id === id){
+        setDisplayUserRole(false)
+      }
       fetchUserData();
     }
   }, [loggedUser])
@@ -242,6 +248,32 @@ export default function EditUserForm(){
           </div>
 
         </div>
+        {displayUserRole && (
+          <div id="edit-user-input-line">
+            <div id="edit-user-input-box">
+                <div id="edit-user-input-checkbox">
+                    <input
+                        id="checkbox"
+                        type="checkbox"
+                        {...register("isAdmin")}
+                    />
+                    <label htmlFor="label-checkbox" id="label-checkbox">Usuário é administrador?</label>
+                </div>
+            </div>
+            <div id="edit-user-input-box">
+                <div id="edit-user-input-checkbox">
+                    <input
+                        id="checkbox"
+                        type="checkbox"
+                        {...register("isLocadora")}
+                    />
+                    <label htmlFor="label-checkbox" id="label-checkbox">Locadora?</label>
+                </div>
+            </div>
+          </div>
+
+        )}
+        
 
         <div id="edit-user-buttons">
           <button className="edit-user-form-button" type="button" id="edit-user-cancel-bnt">

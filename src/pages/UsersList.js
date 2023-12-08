@@ -207,7 +207,7 @@ export default function ListUsers() {
                 <div className="listusers-user-dropdown-container">
                   <div className="listusers-user-dropdown">
                     <Link to="#" tabIndex="0" onClick={() => modalDeleteUser(user)} >Excluir</Link>
-                    <Link to="/editarusuario" tabIndex="0" >Editar</Link>
+                    <Link to={`/editarusuario/${user.id}`} tabIndex="0" >Editar</Link>
                   </div>
                 </div>
               </div>

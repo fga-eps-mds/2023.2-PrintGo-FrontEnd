@@ -95,7 +95,7 @@ const Navbar = () => {
         <div className="navbar-user-info">
           <div className="navbar-user-message">
             <img alt="loggeduser" src={LoggedUser}/>
-            <Link to={"/editarusuario"}>Olá, {user.nome}!</Link>
+            <Link to={`/editarusuario/${user.id}`}>Olá, {user.nome}!</Link>
           </div>
           <Link className="navbar-user-leave" data-testid="navbar-leave-button" onClick={userLogOut}>
             <button>
