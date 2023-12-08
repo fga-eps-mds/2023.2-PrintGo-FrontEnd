@@ -3,13 +3,16 @@ import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import SignupForm from '../../components/forms/SignupForm';
 import { getUnidades } from "../../services/unidadeService";
 import { createUser } from "../../services/userService";
+import '@testing-library/jest-dom';
+import { MemoryRouter } from 'react-router-dom';
 
-import '@testing-library/jest-dom/extend-expect';
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNscHJpaTRyOTAwMDFhaDJjazk5cWNxYW0iLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsIm5vbWUiOiJBZG1pbiIsImNhcmdvcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNzAxODg5NjY5LCJleHAiOjE3MDE4OTMyNjl9.2yqtoHjjXjguYkOVC9wZYiO_pASsyQO_o0z3d-4JFR0";
 
 jest.mock('../../api/api', () => ({
   getUnidades: jest.fn(),
   createUser: jest.fn(),
 }));
+
 
 describe('SignupForm', () => {
   beforeEach(() => {
@@ -67,35 +70,35 @@ describe('SignupForm', () => {
     //     },
     //   ]
     // });
+    render (
+      <MemoryRouter>
+        <SignupForm />
+      </MemoryRouter>
+    );
   });
 
   it('should render without crashing', () => {
-    render(<SignupForm />);
+    expect(screen.getByText("Cadastro de usuário")).toBeInTheDocument();
   });
 
   it('should display required error when value is invalid', async () => {
-    render(<SignupForm />);
-    
     // Simulate form submission
-    fireEvent.submit(document.getElementById('register-bnt'));
+    fireEvent.submit(document.getElementById('signup-register-bnt'));
 
     await waitFor(() => {
-      expect(screen.getByText(/Nome é obrigatório/i)).toBeInTheDocument()
-      expect(screen.getByText(/Email é obrigatório/i)).toBeInTheDocument()
-      expect(screen.getByText(/CPF ou CNPJ inválido/i)).toBeInTheDocument()
-      // Add more error checks as necessary
+      expect(screen.getByText("Nome é obrigatório")).toBeInTheDocument()
+      expect(screen.getByText("Email é obrigatório")).toBeInTheDocument()
+      expect(screen.getByText("CPF ou CNPJ inválido")).toBeInTheDocument()
     });
   });
 
   it('should display matching error when email does not match', async () => {
-    render(<SignupForm />);
-    
     // Fill in the email and emailConfirmar fields
     fireEvent.input(document.getElementsByName('email')[0], { target: { value: 'test@test.com' } });
     fireEvent.input(document.getElementsByName('emailConfirmar')[0], { target: { value: 'test1@test.com' } });
     
     // Simulate form submission
-    fireEvent.submit(document.getElementById('register-bnt'));
+    fireEvent.submit(document.getElementById('signup-register-bnt'));
 
     await waitFor(() => {
       expect(screen.getByText(/Os emails devem coincidir/i)).toBeInTheDocument();
@@ -103,20 +106,16 @@ describe('SignupForm', () => {
   });
 
   it('should not display error when value is valid', async () => {
-    render(<SignupForm />);
-    
     // Fill in valid values for the form fields
     fireEvent.input(document.getElementsByName('nome')[0], { target: { value: 'Test' } });
     fireEvent.input(document.getElementsByName('email')[0], { target: { value: 'test@test.com' } });
     fireEvent.input(document.getElementsByName('emailConfirmar')[0], { target: { value: 'test@test.com' } });
-    // Add more valid inputs as necessary
     
     // Simulate form submission
-    fireEvent.submit(document.getElementById('register-bnt'));
+    fireEvent.submit(document.getElementById('signup-register-bnt'));
 
     await waitFor(() => {
-        expect(screen.getByTestId('email-error')).toHaveTextContent('');
-      // Add more non-error checks as necessary
+      expect(screen.getByTestId('email-error')).toHaveTextContent('');
     });
   });
 });
