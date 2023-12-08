@@ -67,7 +67,7 @@ export const recoverPassword = async (data) => {
 export const deleteUser = async (id) => {
   try {
     const response = await api.delete(`/user/${id}`);
-    return response.data;
+    return { type: 'success', data: response.data };
   } catch (error) {
     return { type: 'error', error };
   }

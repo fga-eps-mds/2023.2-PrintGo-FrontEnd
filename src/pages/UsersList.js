@@ -25,6 +25,7 @@ export default function ListUsers() {
   const [users, setUsers] = useState();
 
   // Puxe os dados do usuário logado.
+  
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -41,7 +42,7 @@ export default function ListUsers() {
       }
     }
     fetchUserData();
-  }, []);
+  }, [users]);
 
   // Puxa os dados das unidades policiais.
   useEffect( () => {
@@ -68,9 +69,10 @@ export default function ListUsers() {
     if (selectedUser) {
       try {
         const response =  await deleteUser(selectedUser.id);
-
+        console.log(response);
         if (response.type === 'success') {
           const index = users.findIndex(user => user.id === selectedUser.id);
+          toast.success("Usuário deletado com sucesso!");
 
           if (index !== -1) {
             // Remover o usuário da lista
@@ -84,6 +86,7 @@ export default function ListUsers() {
         console.error('Erro ao excluir o usuário:', error);
       }
     }
+    setModalOpen(false);
   }
 
   // Retorna o filtro sendo usado.
@@ -203,7 +206,7 @@ export default function ListUsers() {
                 <img alt="engine" src={Engine}/>
                 <div className="listusers-user-dropdown-container">
                   <div className="listusers-user-dropdown">
-                    <Link to="#" tabIndex="0" onClick={modalDeleteUser} >Excluir</Link>
+                    <Link to="#" tabIndex="0" onClick={() => modalDeleteUser(user)} >Excluir</Link>
                     <Link to="/editarusuario" tabIndex="0" >Editar</Link>
                   </div>
                 </div>
