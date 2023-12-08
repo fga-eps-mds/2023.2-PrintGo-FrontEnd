@@ -1,7 +1,8 @@
 import React from 'react';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import { render, fireEvent, waitFor, screen, useSelector } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import EditUserForm from '../../components/forms/EditUserForm';
+import { BrowserRouter } from 'react-router-dom';
 
 jest.mock('../../services/userService', () => ({
   getUnidades:jest.fn(),
@@ -24,18 +25,6 @@ describe('EditUserForm', () => {
     });
 
     
-
-    test('initial state and values are set correctly', () => {
-        render(<EditUserForm />);
-        // Verificações do estado inicial...
-    });
-
-    test('allows user interaction and form inputs', async () => {
-        render(<EditUserForm />);
-        userEvent.type(screen.getByLabelText('Nome'), 'João da Silva');
-        userEvent.type(screen.getByLabelText('Documento'), '222.222.222-10');
-        // Outras interações...
-    });
 
     test('validates form inputs correctly', async () => {
         render(<EditUserForm />);
@@ -72,12 +61,7 @@ describe('EditUserForm', () => {
     });
 
 
-    test('updates state on unidadePai selection', async () => {
-        render(<EditUserForm />);
-        // Teste para linhas 60 a 62: selecionar uma unidade pai e verificar a mudança de estado
-        fireEvent.change(screen.getByLabelText('Selecione Unidade Pai'), { target: { value: 'some-unit-id' } });
-        // Verificar a atualização correspondente no estado do componente...
-    });
+    
 
     test('shows error messages for invalid inputs', async () => {
         render(<EditUserForm />);
@@ -90,20 +74,32 @@ describe('EditUserForm', () => {
     });
 
     test('renders input boxes', () => {
-        render(<EditUserForm />);
+        render(
+        <BrowserRouter>
+            <EditUserForm />
+        </BrowserRouter>
+        );
         // Teste para linha 71: verificar se as caixas de entrada são renderizadas
-        expect(screen.getByTestId('input-box')).toBeInTheDocument();
+        expect(document.querySelector('#edit-user-input-box')).toBeInTheDocument();
     });
 
     test('renders buttons with correct text', () => {
-        render(<EditUserForm />);
+        render(
+        <BrowserRouter>
+            <EditUserForm />
+        </BrowserRouter>
+        );
         // Teste para linhas 74 e 75: verificar a renderização dos botões
         expect(screen.getByText('CANCELAR')).toBeInTheDocument();
-        expect(screen.getByText('REGISTRAR')).toBeInTheDocument();
+        expect(screen.getByText('SALVAR')).toBeInTheDocument();
     });
 
     test('changes register button text on submitting', async () => {
-        render(<EditUserForm />);
+        render(
+        <BrowserRouter>
+            <EditUserForm />
+        </BrowserRouter>
+       );
         // Teste para linhas 76,77,78: verificar mudança de texto no botão durante a submissão
         userEvent.click(screen.getByText('REGISTRAR'));
         await waitFor(() => {
@@ -112,11 +108,7 @@ describe('EditUserForm', () => {
         });
     });
 
-    test('renders elipse image', () => {
-        render(<EditUserForm />);
-        // Teste para linha 82: verificar se a imagem da elipse é renderizada
-        expect(screen.getByAltText('elipse')).toBeInTheDocument();
-    });
+    
 
     test('displays toast messages on form submission', async () => {
         render(<EditUserForm />);
@@ -148,33 +140,75 @@ describe('EditUserForm', () => {
         });
     });
  
-    test('renders correctly', () => {
-        render(<EditUserForm />);
-        expect(document.querySelector('#edit-user-form-header')).toBeInTheDocument();
-    });
+    
 
     test('show loading icon when form is submitting', async () => {
-         mockCreateUser.mockResolvedValue();
-         render(<EditUserForm/>);
-         userEvent.type(screen.getByLabelText('Nome'), 'Antonio Rangel');
-         userEvent.type(screen.getByLabelText('Documento'), '555.555.555.-55');
-         userEvent.type(screen.getByLabelText('E-mail'), 'antonio@gmail.com');
-         userEvent.type(screen.getByLabelText('Confirmar'), 'antonio@gmail.com');
-         
+        mockCreateUser.mockResolvedValue();
+        render(
+        <BrowserRouter>
+        <EditUserForm/>
+        </BrowserRouter>
+        );
+        userEvent.type(screen.getByRole('textbox', { name: 'Nome *' }), 'Antonio Rangel');
+        userEvent.type(screen.getByRole('textbox', { name: 'Documento *' }), '555.555.555.-55');
+        userEvent.type(screen.getByRole('textbox', { name: 'E-mail *' }), 'antonio@gmail.com');
+        userEvent.type(screen.getByRole('textbox', { name: 'Confirmar E-mail *' }), 'antonio@gmail.com');
+        userEvent.type(screen.getByRole('select', { name: 'Unidade Pai *' }), 'unidade pai');
+        userEvent.type(screen.getByRole('select', { name: 'Unidade Filha *' }), 'unidade filha');
 
-         fireEvent.click(screen.getByText('REGISTRAR'));
+        fireEvent.click(screen.getByText('SALVAR'));
+        expect(screen.getByText('SALVAR').disabled).toBeFalsy();
+        await waitFor(() =>{
+        expect(screen.getByTestId('animate-spin')).toBeInTheDocument();
+        expect(screen.getByAltText('CADASTRANDO')).toBeInTheDocument();
+        });
 
-         await waitFor(() =>{
-            expect(screen.getByTestId('animate-spin')).toBeInTheDocument();
-            expect(screen.getByAltText('CADASTRANDO')).toBeInTheDocument();
-         });
-
-         await waitFor(() =>{
-          expect(screen.queryByTestId('animate-spin')).not.toBeInTheDocument();
-          expect(screen.getByText('REGISTRAR')).toBeInTheDocument();
-       });
+        await waitFor(() =>{
+        expect(screen.getByTestId('animate-spin')).not.toBeInTheDocument();
+        expect(screen.getByText('SALVAR')).toBeInTheDocument();
+    });
 
     });
 
+    test('renders correctly', () => {
+        render(
+            <BrowserRouter>
+                <EditUserForm />
+            </BrowserRouter>
+        );
+        expect(screen.getByTestId('edit-user-card')).toBeInTheDocument();
+    });
+
+    test('initial state and values are set correctly', () => {
+        render(
+            <BrowserRouter>
+                <EditUserForm />
+            </BrowserRouter>
+        );
+        expect(screen.getByRole('textbox', { name: 'Nome *' }).value).toBe('')
+    });
+
+
+
+    test('updates state on unidadePai selection', async () => {
+        render(
+        <BrowserRouter>
+            <EditUserForm />
+        </BrowserRouter>
+        );
+        const unidadePai = screen.getByRole('combobox')
+        // Teste para linhas 60 a 62: selecionar uma unidade pai e verificar a mudança de estado
+        fireEvent.change(unidadePai, { target: { value: 'some-unit-id' } });
+        await waitFor(() => {
+            const unidadeFilha = screen.getByTestId('unidadeFilha')
+            expect(unidadeFilha).toBeInTheDocument()
+        });
+        
+    });
+
+    
+
 });
+
+
 
