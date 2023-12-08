@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends dumb-init
 # Copy package files
 COPY package*.json /app/
 
+RUN npm cache clean --force
+
 # Install dependencies
 RUN npm install || npm ci
 
