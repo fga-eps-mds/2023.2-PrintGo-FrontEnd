@@ -62,7 +62,7 @@ export default function SignupForm(){
               }
         }
         setData();
-      }, []);
+    }, []);
    
     
     const {
@@ -108,7 +108,7 @@ export default function SignupForm(){
 
 
     return(
-        <div id="signup-card">
+        <div id="signup-card" data-testid="signup-card">
             <div id="form-header">
                 Cadastro de usuário
             </div>
@@ -170,7 +170,7 @@ export default function SignupForm(){
                           {displayLotacoes && (
                             <>
                               <label htmlFor="unidadeFilha">Unidade Filha<span>*</span></label>
-                              <select {...register("unidade_id", {required: "Lotação é obrigatória"})}>
+                              <select data-testid="unidadeFilha" {...register("unidade_id", {required: "Lotação é obrigatória"})}>
                                   <option value="">Selecione a Lotação</option>
                                   {unidadeInList?.map((unidade) => (
                                   <option key={unidade.id} value={unidade.id}>

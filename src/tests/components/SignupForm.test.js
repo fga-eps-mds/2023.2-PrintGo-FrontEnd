@@ -4,13 +4,16 @@ import SignupForm from '../../components/forms/SignupForm';
 import { getUnidades } from "../../services/unidadeService";
 import { createUser } from "../../services/userService";
 
+
 import '@testing-library/jest-dom/extend-expect';
+import { BrowserRouter } from 'react-router-dom';
 
 jest.mock('../../api/api', () => ({
   getUnidades: jest.fn(),
   createUser: jest.fn(),
 }));
-
+jest.mock('../../services/unidadeService');
+jest.mock('../../services/userService');
 describe('SignupForm', () => {
   beforeEach(() => {
     // getPoliceUnits.mockResolvedValue({
@@ -67,43 +70,91 @@ describe('SignupForm', () => {
     //     },
     //   ]
     // });
+    jest.clearAllMocks();
+  });
+  
+
+  it('should render without crashing', async() => {
+    render(
+    <BrowserRouter>
+      <SignupForm />
+    </BrowserRouter>
+    
+    );
+
+    const unidadesMock = [
+      { id: '1', name: 'Unidade1' },
+      { id: '2', name: 'Unidade2' },
+    ];
+
+    getUnidades.mockResolvedValueOnce({ type: 'success', data: unidadesMock });
+
+    const unidadePai = screen.getByRole('combobox')
+
+    fireEvent.change(unidadePai, { target: { value: 'some-unit-id' } });
+
+    await waitFor(() => expect(getUnidades).toHaveBeenCalledTimes(1));
+
+    await waitFor(() => {
+      const unidadeFilha = screen.getByTestId('unidadeFilha')
+      expect(unidadeFilha).toBeInTheDocument()
+    });
   });
 
   it('should render without crashing', () => {
-    render(<SignupForm />);
+    render(
+    <BrowserRouter>
+      <SignupForm />
+    </BrowserRouter>
+    
+    );
+
+    expect(screen.getByTestId("signup-card")).toBeInTheDocument()
   });
 
   it('should display required error when value is invalid', async () => {
-    render(<SignupForm />);
+    render(
+      <BrowserRouter>
+        <SignupForm />
+      </BrowserRouter>
+    );
     
     // Simulate form submission
-    fireEvent.submit(document.getElementById('register-bnt'));
+    fireEvent.submit(screen.getByText("REGISTRAR"));
 
     await waitFor(() => {
-      expect(screen.getByText(/Nome é obrigatório/i)).toBeInTheDocument()
-      expect(screen.getByText(/Email é obrigatório/i)).toBeInTheDocument()
-      expect(screen.getByText(/CPF ou CNPJ inválido/i)).toBeInTheDocument()
+      expect(screen.getByText("Nome é obrigatório")).toBeInTheDocument()
+      expect(screen.getByText("Email é obrigatório")).toBeInTheDocument()
+      expect(screen.getByText("CPF ou CNPJ inválido")).toBeInTheDocument()
       // Add more error checks as necessary
     });
   });
 
   it('should display matching error when email does not match', async () => {
-    render(<SignupForm />);
+    render(
+      <BrowserRouter>
+        <SignupForm />
+      </BrowserRouter>
+    );
     
     // Fill in the email and emailConfirmar fields
     fireEvent.input(document.getElementsByName('email')[0], { target: { value: 'test@test.com' } });
     fireEvent.input(document.getElementsByName('emailConfirmar')[0], { target: { value: 'test1@test.com' } });
     
     // Simulate form submission
-    fireEvent.submit(document.getElementById('register-bnt'));
+    fireEvent.submit(screen.getByText("REGISTRAR"));
 
     await waitFor(() => {
-      expect(screen.getByText(/Os emails devem coincidir/i)).toBeInTheDocument();
+      expect(screen.getByText("Os emails devem coincidir")).toBeInTheDocument();
     });
   });
 
   it('should not display error when value is valid', async () => {
-    render(<SignupForm />);
+    render(
+      <BrowserRouter>
+        <SignupForm />
+      </BrowserRouter>
+    );
     
     // Fill in valid values for the form fields
     fireEvent.input(document.getElementsByName('nome')[0], { target: { value: 'Test' } });
@@ -112,7 +163,7 @@ describe('SignupForm', () => {
     // Add more valid inputs as necessary
     
     // Simulate form submission
-    fireEvent.submit(document.getElementById('register-bnt'));
+    fireEvent.submit(screen.getByText("REGISTRAR"));
 
     await waitFor(() => {
         expect(screen.getByTestId('email-error')).toHaveTextContent('');
