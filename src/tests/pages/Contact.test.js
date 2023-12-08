@@ -35,7 +35,7 @@ describe('Contact Component', () => {
     );
     const nomeInput = getByPlaceholderText('Digite seu nome');
     const emailInput = getByPlaceholderText('Digite seu email');
-    const assuntoInput = getByPlaceholderText('Assunto');
+    const assuntoInput = getByPlaceholderText('Digite o assunto');
     const button = getByText('Enviar');
 
     fireEvent.change(nomeInput, { target: { value: 'Teste' } });
