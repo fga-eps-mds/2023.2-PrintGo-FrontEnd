@@ -43,6 +43,8 @@ const editUserSchema = yup.object().shape({
   }),
   unidade_id: yup.string().required('Lotação é obrigatória'),
   unidade_pai: yup.string().strip(),
+  isAdmin: yup.boolean(),
+  isLocadora: yup.boolean(),
 });
 
 export default function EditUserForm(){
@@ -66,6 +68,7 @@ export default function EditUserForm(){
   }
 
   const [unidadeList, setUnidadeList] = useState();
+  const [isAdmin, setIsAdmin] = useState(); //verifica se o usuario que esta sendo editado eh admin
   const [displayLotacoes,setDisplayLotacoes] = useState ('');
   const [unidadeFilhoList, setUnidadeFilhoList] = useState ();
   const [userData, setUserData] = useState(null);
@@ -83,20 +86,34 @@ export default function EditUserForm(){
       try {
         const data = await getUserById(id);
         
-        console.log(data);
+        console.log("Aqui: ",data);
         if (data) {
           setUserData(data);
+          if(data.cargos.includes("ADMIN") && loggedUser.id !== id){ //o admin pode editar o cargo de outros usuarios
+            setIsAdmin(true)
+          }
+          if(data.cargos.includes("LOCADORA") && loggedUser.id !== id){
+            setIsAdmin(false)
+          }
         }
       } catch(error) {
         console.log('Erro ao buscar dados do usuário:', error);
       }
     }
-    if(loggedUser && !userData) {
-      if(loggedUser.id === id){
-        setDisplayUserRole(false)
+
+    const verifyAdmin = async () =>{
+      if(loggedUser && !userData) {
+        await fetchUserData();
+        if(loggedUser.id === id){ //o admin nao pode alterar o proprio cargo
+          setDisplayUserRole(false)
+        }
       }
-      fetchUserData();
     }
+
+    verifyAdmin()
+    
+
+    
   }, [loggedUser])
 
   // Puxe os dados das unidades policiais.
@@ -120,7 +137,6 @@ export default function EditUserForm(){
   useEffect(() => {
     if (memoUserData && memoUnidadeList && unidadeList) {
       console.log(unidadeList);
-      
       Object.keys(userData).forEach((key) => {
         setValue(key, userData[key] || "");
       })
@@ -256,7 +272,9 @@ export default function EditUserForm(){
                         id="checkbox"
                         type="checkbox"
                         {...register("isAdmin")}
+                        checked={isAdmin}
                     />
+                   
                     <label htmlFor="label-checkbox" id="label-checkbox">Usuário é administrador?</label>
                 </div>
             </div>
@@ -266,6 +284,7 @@ export default function EditUserForm(){
                         id="checkbox"
                         type="checkbox"
                         {...register("isLocadora")}
+                        checked={!isAdmin}
                     />
                     <label htmlFor="label-checkbox" id="label-checkbox">Locadora?</label>
                 </div>
