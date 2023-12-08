@@ -13,8 +13,10 @@ COPY package*.json /app/
 
 RUN npm cache clean --force
 
+RUN npm install nodemon --save-dev
+
 # Install dependencies
-RUN npm install --legacy-peer-deps || npm ci
+RUN npm ci
 
 # Copy the rest of the files
 COPY . /app/
