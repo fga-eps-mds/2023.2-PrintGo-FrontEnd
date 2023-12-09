@@ -1,5 +1,3 @@
-import { render, fireEvent, waitFor } from '@testing-library/react'
-import { act } from 'react-dom/test-utils';
 import { createUser, forgottenPassword, getUserById, recoverPassword, updateUser } from '../../services/userService'
 import { api } from '../../lib/api/config';
 
