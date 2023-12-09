@@ -71,12 +71,12 @@ export default function ListUsers() {
         const response =  await deleteUser(selectedUser.id);
         console.log(response);
         if (response.type === 'success') {
-          const index = users.findIndex(user => user.id === selectedUser.id);
+          const index = users?.findIndex(user => user.id === selectedUser.id);
           toast.success("Usuário deletado com sucesso!");
 
           if (index !== -1) {
             // Remover o usuário da lista
-            users.splice(index, 1);
+            users?.splice(index, 1);
           }
         } else {
           toast.error('Erro ao excluir o usuário');
