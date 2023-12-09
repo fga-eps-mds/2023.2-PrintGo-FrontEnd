@@ -3,8 +3,8 @@ import "../style/pages/contact.css";
 import Imagem_Homen from "../assets/imagem-homen-ruivo.svg";
 import Input from "../components/Input";
 import emailjs from "@emailjs/browser";
-import NavbarSimple from "../components/navbar/NavbarSimple";
 import elipse from "../assets/home_elipse.svg";
+import Navbar from "../components/navbar/Navbar";
 export default function Contact() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -30,7 +30,7 @@ export default function Contact() {
 
   return (
     <>
-      <NavbarSimple />
+      <Navbar />
       <div className="Main-page-contact">
         <div className="Contact-principal">
           <div className="Box-contact">
@@ -54,7 +54,7 @@ export default function Contact() {
             <div className="Subject-input">
               <label htmlFor="assunto">Assunto</label>
               <textarea
-                placeholder="Assunto"
+                placeholder="Digite o assunto"
                 className="Larger-input"
                 value={assunto}
                 onChange={(e) => setAssunto(e.target.value)}

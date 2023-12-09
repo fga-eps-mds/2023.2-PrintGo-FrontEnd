@@ -61,3 +61,16 @@ export const getRegisterPrinterSchema = (fieldLabels) => {
   });
 }
 
+export const getPasswordSchema = () => {
+  return yup.object().shape({
+    novaSenha: yup.string()
+      .required('Senha é obrigatória')
+      .matches(
+        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        'A senha deve conter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial'
+      ),
+    confirmacaoNovaSenha: yup.string()
+      .oneOf([yup.ref('novaSenha'), null], 'As senhas devem corresponder')
+      .required('Confirmação de senha é obrigatória')
+  });
+};

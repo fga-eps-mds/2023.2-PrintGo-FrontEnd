@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import "../../style/components/editPrinterForms.css";
 import elipse6 from '../../assets/elipse6.svg';
 import { getPrinterSchema } from "../utils/YupSchema";
+import { Link } from "react-router-dom";
 
 const fieldLabels = {
   padrao: 'Padrão',
@@ -56,9 +57,11 @@ export default function EditPrinterForm() {
 
   return (
     <div id="editPrinter-card">
-      <div id="buttons">
-        <button className="form-button" type="button" id="voltar-bnt">Voltar</button>
-      </div>
+    
+      <Link id="link-back" to="/impressorascadastradas"> 
+      
+      Voltar</Link>
+     
       <header id="form-header">
         Editar impressora
       </header>

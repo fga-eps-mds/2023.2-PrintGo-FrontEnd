@@ -1,9 +1,11 @@
+/* Container navbar */
 .container-navbar {
   width: 100%;
   background-color: #ffff;
   height: 7vh;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   display: flex;
+  align-items: center;
 }
 
 .container-navbar img {
@@ -11,45 +13,79 @@
   height: 7vh;
 }
 
-.button-navbar{
+/* Link buttons */
+.button-navbar {
   display: flex;
   align-items: center;
+  min-width: 60vw;
+  height: 100%;
 }
+
 .button-navbar button {
   background-color: #ffff;
   color: #003366;
   border: none;
   font-size: 18px;
-  padding-right: 75px;
+  padding-right: 65px;
   cursor: pointer;
 }
+
 .button-navbar a {
   text-decoration: none;
   color: #003366;
 }
+
 .button-navbar :hover {
   background-color: #ffff;
   color: #006633;
   cursor: pointer;
 }
 
-.dropdown-navbar-users {
+/* Users dropdown */
+.navbar-users {
   display: flex;
   align-items: center;
-  margin-left: 0.1px;
 }
 
-.users-navbar {
+.navbar-users-button {
+  display: flex;
   background-color: #ffff;
   color: #003366;
-  padding: 4px;
   font-size: 18px;
   border: none;
   cursor: pointer;
-
+  margin-bottom: 1px;
 }
 
-.dropdown-users-navbar {
+.navbar-users-button h4{
+  margin: 0;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+/* Printers dropdown */
+.navbar-printers {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-printers-button {
+  display: flex;
+  background-color: #ffff;
+  color: #003366;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 1px;
+}
+
+.navbar-printers-button h4{
+  margin: 0;
+  font-weight: normal;
+  font-size: 18px;
+}
+
+.navbar-users-dropdown {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
@@ -58,7 +94,7 @@
   z-index: 1;
 }
 
-.dropdown-users-navbar a {
+.navbar-users-dropdown a {
   color: #003366;
   width: 15vw;
   text-decoration: none;
@@ -67,30 +103,25 @@
   padding: 4px 4px;
 }
 
-.dropdown-users-navbar a:hover {
+.navbar-users-dropdown a:hover {
   background-color: #003366;
   color: #ffff;
 }
 
-.dropdown-navbar-users:hover .dropdown-users-navbar {
+.navbar-users:hover .navbar-users-dropdown {
   display: block;
 }
 
-.dropdown-navbar-users:hover .users-navbar {
+.navbar-users:hover .navbar-users-button  {
   background-color: #ffff;
   color: #006633;
 }
 
-.printers-navbar {
-  background-color: #ffff;
-  color: #003366;
-  padding: 10px;
-  font-size: 18px;
-  border: none;
-  cursor: pointer;
-}
 
-.dropdown-printers-navbar {
+
+
+
+.navbar-printers-dropdown {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
@@ -99,31 +130,136 @@
   z-index: 1;
 }
 
-.dropdown-printers-navbar a {
+.navbar-printers-dropdown a {
   color: #003366;
   width: 15vw;
   text-decoration: none;
   display: block;
   font-size: 20px;
-  padding: 2px 2px;
+  padding: 4px 4px;
 }
 
-.dropdown-printers-navbar a:hover {
+.navbar-printers-dropdown a:hover {
   background-color: #003366;
   color: #ffff;
 }
 
-.dropdown-navbar-printers{
-  display: flex;
-  align-items: center;
-  margin-left: 3rem;
-}
-.dropdown-navbar-printers:hover .dropdown-printers-navbar {
+.navbar-printers:hover .navbar-printers-dropdown {
   display: block;
 }
 
-.dropdown-navbar-printers:hover .printers-navbar {
+.navbar-printers:hover .navbar-printers-button  {
   background-color: #ffff;
   color: #006633;
+}
 
+/* Login */
+.navbar-login {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navbar-login button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.button-login-navbar {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  text-decoration: none;
+  color: #003366;
+  margin-right: 9vw;
+}
+
+.button-login-navbar a:visited {
+  text-decoration: none;
+  color: #003366;
+}
+
+
+.button-login-navbar button {
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #003366;
+  width: 10vw;
+  height: 70%;
+  border-radius: 35px;
+  border-color: #003366;
+  padding: 10px;
+  background-color: #ffff;
+  cursor: pointer;
+}
+
+.button-login-navbar :hover {
+  color: #006633;
+  border-color: #006633;
+}
+
+/* Logged user */
+.navbar-user-info {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  color: #003366;
+  margin-right: 9vw;
+}
+
+.navbar-user-message {
+  width: 15vw;
+  height: 6vh;
+  margin-top: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-user-message a{
+  text-decoration: none;
+}
+
+.navbar-user-message a:hover{
+  text-decoration: underline;
+}
+
+.navbar-user-message a:visited{
+  color: #003366;
+}
+
+.navbar-user-message img {
+  width: 40px;
+  margin-right: 20px;
+}
+
+.navbar-user-leave {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-left: 2rem;
+  height: 7vh;
+}
+
+.navbar-user-leave button {
+  background-color: #ffff;
+  font-size: 18px;
+  color: #003366;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar-user-leave a:visited {
+  color: #003366;
+}
+
+.navbar-user-leave :hover {
+  color: #006633;
 }
