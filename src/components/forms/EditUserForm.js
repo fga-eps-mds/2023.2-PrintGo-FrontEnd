@@ -152,12 +152,42 @@ export default function EditUserForm(){
   
   const onSubmit = async (data) =>  {
 
+    data.cargos = ["USER"]
+
     setTimeout(() => {
       console.log("3 segundos se passaram.");
     }, 3000);  // 3000 milissegundos = 3 segundos
-    
+
+    if (data.isAdmin) {
+      data.cargos = data.cargos || [];
+
+      data.cargos.push("ADMIN")
+      delete data["isAdmin"];
+    }
+
+    if (data.isLocadora) {
+      data.cargos = data.cargos || [];
+
+      data.cargos.push("LOCADORA")
+      delete data["isLocadora"];
+    }
+
+    if (data.isAdmin === false) {
+      // Remove "ADMIN" do array de cargos
+      data.cargos = (data.cargos || []).filter(cargo => cargo !== "ADMIN");
+    }
+  
+    if (data.isLocadora === false) {
+      // Remove "Locadora" do array de cargos
+      data.cargos = (data.cargos || []).filter(cargo => cargo !== "LOCADORA");
+    }
+
     delete data["emailConfirmar"];
     delete data["unidade_pai"];
+    delete data["isLocadora"]
+    delete data["type"]
+
+    console.log(data)
 
     const response = await updateUser(data, data.id);
     if(response.type === 'success'){
