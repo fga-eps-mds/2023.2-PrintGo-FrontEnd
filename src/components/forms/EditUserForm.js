@@ -17,6 +17,7 @@ const fieldLabels = {
   documento: 'CPF',
   email: 'Email',
   emailConfirmar: 'Email',
+
 };
 
 const testObject = {
@@ -26,40 +27,19 @@ const testObject = {
   emailConfirmar: 'email@email.com',
 };
 
-const editUserSchema = yup.object().shape({
-  nome: yup.string().required('Nome é obrigatório'),
-  email: yup
-    .string()
-    .email('Email inválido')
-    .required('Email é obrigatório'),
-  emailConfirmar: yup
-    .string()
-    .oneOf([yup.ref('email'), null], 'Os emails devem coincidir')
-    .required('Email é obrigatória'),
-  documento: yup.string()
-  .matches(/^(\d{11}|\d{14})$/, 'CPF ou CNPJ inválido')
-  .test('cpfOrCnpj', 'CPF ou CNPJ inválido', value => {
-      return value.length === 11 || value.length === 14;
-  }),
-  unidade_id: yup.string().required('Lotação é obrigatória'),
-  unidade_pai: yup.string().strip(),
-  isAdmin: yup.boolean(),
-  isLocadora: yup.boolean(),
-});
-
 export default function EditUserForm(){
   const { id } = useParams();
   const editUserSchema = getEditUserSchema(fieldLabels);
-  const { register, setValue, handleSubmit, formState: { errors, isValid, isSubmitting }, reset } = useForm({
+  const { register, getValues, setValue, handleSubmit, formState: { errors, isValid, isSubmitting  }, reset } = useForm({
     resolver: yupResolver(editUserSchema),
-    mode: "onSubmit"
+    mode: "onChange"
   });
 
-  useEffect(() => {
+  /*useEffect(() => {
     Object.entries(testObject).forEach(([key, value]) => {
       setValue(key, value);
     });
-  }, [setValue]);
+  }, [setValue]);*/
 
   let loggedUser = null;
   const token = localStorage.getItem("jwt");
@@ -67,8 +47,11 @@ export default function EditUserForm(){
     loggedUser = decodeToken(token);
   }
 
+  
+
   const [unidadeList, setUnidadeList] = useState();
   const [isAdmin, setIsAdmin] = useState(); //verifica se o usuario que esta sendo editado eh admin
+  const [isLocadora, setIsLocadora] = useState(); //verifica se o usuario que esta sendo editado eh da locadora
   const [displayLotacoes,setDisplayLotacoes] = useState ('');
   const [unidadeFilhoList, setUnidadeFilhoList] = useState ();
   const [userData, setUserData] = useState(null);
@@ -78,6 +61,19 @@ export default function EditUserForm(){
   const memoUserData = useMemo(() => userData, [userData]);
   const memoUnidadeList = useMemo(() => unidadeList, [unidadeList]);
 
+  // const { register, handleSubmit, formState: { errors, isValid, isSubmitting }, reset } = useForm({
+  //   resolver: yupResolver(editUserSchema),
+  //   mode: "onChange" 
+  // });
+
+  const handleCheckboxLocadoraChange = (event) => {
+    setIsLocadora(event.target.checked);
+  };
+
+  const handleCheckboxAdminChange = (event) =>{
+    setIsAdmin(event.target.checked);
+  }
+
   const navigate = useNavigate();
 
   // Puxe os dados do usuário logado.
@@ -86,14 +82,14 @@ export default function EditUserForm(){
       try {
         const data = await getUserById(id);
         
-        console.log("Aqui: ",data);
+        
         if (data) {
           setUserData(data);
           if(data.cargos.includes("ADMIN") && loggedUser.id !== id){ //o admin pode editar o cargo de outros usuarios
             setIsAdmin(true)
           }
           if(data.cargos.includes("LOCADORA") && loggedUser.id !== id){
-            setIsAdmin(false)
+            setIsLocadora(true)
           }
         }
       } catch(error) {
@@ -225,7 +221,7 @@ export default function EditUserForm(){
 
           <div id="edit-user-input-line">
             <div id="edit-user-input-box">
-              <label htmlFor="confirmarEmail" >Senha</label>
+              <label htmlFor="edit-user-change-password" >Senha</label>
               <button className="form-button" id="edit-user-change-password" type="button" onClick={redirectToChangePassword}>
                 MUDAR SENHA
               </button>
@@ -273,6 +269,7 @@ export default function EditUserForm(){
                         type="checkbox"
                         {...register("isAdmin")}
                         checked={isAdmin}
+                        onChange={handleCheckboxAdminChange}
                     />
                    
                     <label htmlFor="label-checkbox" id="label-checkbox">Usuário é administrador?</label>
@@ -284,21 +281,21 @@ export default function EditUserForm(){
                         id="checkbox"
                         type="checkbox"
                         {...register("isLocadora")}
-                        checked={!isAdmin}
+                        checked={isLocadora}
+                        onChange={handleCheckboxLocadoraChange}
                     />
-                    <label htmlFor="label-checkbox" id="label-checkbox">Locadora?</label>
+                    <label htmlFor="label-checkbox" id="label-checkbox">Usuário é da Locadora?</label>
                 </div>
             </div>
           </div>
-
         )}
         
 
         <div id="edit-user-buttons">
-          <button className="edit-user-form-button" type="button" id="edit-user-cancel-bnt">
+          <button className="edit-user-form-button" type="button" onClick={console.log(getValues())} id="edit-user-cancel-bnt">
             <Link to="/">CANCELAR</Link>
           </button>
-          <button className="edit-user-form-button" type="submit" id="edit-user-register-bnt" disabled={!isValid || isSubmitting}>
+          <button className="edit-user-form-button" type="submit" id="edit-user-register-bnt" disabled={isSubmitting || !isValid}>
             {isSubmitting && (
               <ReloadIcon id="animate-spin"/>
             )}

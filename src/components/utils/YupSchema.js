@@ -81,13 +81,15 @@ export const getPasswordSchema = () => {
   });
 };
 
-export const getEditUserSchema = (printerFieldLabels) => {
+export const getEditUserSchema = (userFiledLabels) => {
 
-
+  
   return yup.object().shape({
-    nome: yup.string().required(`${printerFieldLabels.nome} é obrigatório`),
-    documento: yup.string().required(`${printerFieldLabels.documento} é obrigatório`),
-    email: yup.string().required(`${printerFieldLabels.email} é obrigatório`),
-    confirmaremail: yup.string().required(`${printerFieldLabels.confirmaremail} é obrigatório`),
+    nome: yup.string().required(`${userFiledLabels.nome} é obrigatório`),
+    documento: yup.string().required(`${userFiledLabels.documento} é obrigatório`),
+    email: yup.string().required(`${userFiledLabels.email} é obrigatório`),
+    emailConfirmar: yup.string().required(`${userFiledLabels.emailConfirmar} é obrigatório`),
+    isAdmin: yup.boolean(),
+    isLocadora: yup.boolean(),
   });
 };
