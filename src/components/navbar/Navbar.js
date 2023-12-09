@@ -1,15 +1,25 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "../../style/components/navbar.css";
+import { getUserById, updateUser } from "../../services/userService";
 import logo from "../../assets/logo_navbar.svg";
 import LoggedUser from "../../assets/loggeduser.svg";
 import { decodeToken } from "react-jwt";
-
 import { FiChevronDown } from "react-icons/fi";
 
 const Navbar = () => {
+  const { id } = useParams();
+  let user = null;
+  const token = localStorage.getItem("jwt");
+  if (token) {
+    user = decodeToken(token);
+  }
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [printerDropdownOpen, setPrinterDropdownOpen] = useState(false);
+  const [tooglePrinterDropdown, setooglePrinterDropdown] = useState(false);
+  const [isAdmin, setIsAdmin] = useState();
+  const [userData, setUserData] = useState(null);
+  const [displayUserRole, setDisplayUserRole] = useState(true);
 
   let navigate = useNavigate();
 
@@ -17,15 +27,40 @@ const Navbar = () => {
     setUserDropdownOpen(!userDropdownOpen)
   }
 
-  const togglePrinterDropdown = () => {
-    setPrinterDropdownOpen(!printerDropdownOpen)
+  const fetchUserData = async () => {
+    try{
+      const data = await getUserById(id);
+
+      if (data) {
+      setUserData(data);
+      if(data.cargos.includes("ADMIN") && user.id !== id){ //o admin pode editar o cargo de outros usuarios
+        setIsAdmin(true)
+      }
+      if(data.cargos.includes("LOCADORA") && user.id !== id){
+        setIsAdmin(false)
+      }
+    }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  let user = null;
-  const token = localStorage.getItem("jwt");
-  if (token) {
-    user = decodeToken(token);
+  const verifyAdmin = async () =>{
+      if(user && !userData) {
+        await fetchUserData();
+        if(user.id === id){ //o admin nao pode alterar o proprio cargo
+          setDisplayUserRole(false)
+        }
+      }
+    }
+
+    verifyAdmin()
+  if(isAdmin==true){
+    const togglePrinterDropdown = () => {
+      setPrinterDropdownOpen(!printerDropdownOpen)
+   }
   }
+
 
   const userLogOut = async (e) => {
     e.preventDefault();
@@ -73,7 +108,7 @@ const Navbar = () => {
             )}
 
             <div className="navbar-printers">
-              <button className="navbar-printers-button" onClick={togglePrinterDropdown}>
+              <button className="navbar-printers-button" onClick={ setPrinterDropdownOpen(!printerDropdownOpen) }>
                 <h4>Impressoras</h4> 
                 <FiChevronDown />
                 {printerDropdownOpen && (
