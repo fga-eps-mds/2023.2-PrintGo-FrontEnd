@@ -74,6 +74,7 @@ export default function SignupForm(){
 
     const onSubmit = async (data) =>  {
 
+        console.log(data);
         data.cargos = ["USER"];
 
         if (data.isAdmin) {
@@ -157,7 +158,7 @@ export default function SignupForm(){
                     <div id="signup-input-line">
                         <div id="signup-input-box">
                             <label htmlFor="unidadePai">Unidade Pai<span>*</span></label>
-                            <select onChange={handleWorkstationChange}>
+                            <select data-testid="unidadePai" onChange={handleWorkstationChange}>
                                 <option value="">Selecione a Unidade de policia</option>
                                 {unidade?.map((unit) => (
                                 <option key={unit.id} value={unit.id}>
@@ -188,6 +189,7 @@ export default function SignupForm(){
                             <div id="signup-input-checkbox">
                                 <input
                                     id="checkbox"
+                                    data-testid="admin-checkbox"
                                     type="checkbox"
                                     {...register("isAdmin")}
                                 />
@@ -198,6 +200,7 @@ export default function SignupForm(){
                             <div id="signup-input-checkbox">
                                 <input
                                     id="checkbox"
+                                    data-testid="locadora-checkbox"
                                     type="checkbox"
                                     {...register("isLocadora")}
                                 />
