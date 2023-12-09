@@ -2,12 +2,10 @@ import React from 'react';
 import { render as rtlRender, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import * as router from 'react-router-dom';
-import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import SignupForm from '../../components/forms/SignupForm';
 import { getUnidades } from "../../services/unidadeService";
-import { createUser } from "../../services/userService";
-import * as unidadeService from '../../lib/api/config';
-import { act } from 'react-test-renderer';
+import { createUser } from "../../services/userService";;
 
 jest.mock('../../services/unidadeService', () => ({
   getUnidades: jest.fn(),
@@ -276,9 +274,6 @@ describe('SignupForm', () => {
       expect(rentalCheckbox).toBeChecked();
 
     });
-
-    console.log(adminCheckbox.checked);
-    console.log(rentalCheckbox.checked);
 
     await waitFor(() => {
       fireEvent.submit(submitButton);
