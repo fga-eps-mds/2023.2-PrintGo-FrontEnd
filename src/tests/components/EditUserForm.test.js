@@ -1,15 +1,27 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import * as router from 'react-router-dom';
-import { render as rtlRender, fireEvent, waitFor, screen, useSelector } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render as rtlRender, fireEvent, waitFor, screen } from '@testing-library/react';
 import EditUserForm from '../../components/forms/EditUserForm';
 import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
+import { decodeToken } from 'react-jwt';
+import { getUnidades } from "../../services/unidadeService";
+import { getUserById, updateUser } from '../../services/userService';
+
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNscHJpaTRyOTAwMDFhaDJjazk5cWNxYW0iLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsIm5vbWUiOiJBZG1pbiIsImNhcmdvcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNzAxODg5NjY5LCJleHAiOjE3MDE4OTMyNjl9.2yqtoHjjXjguYkOVC9wZYiO_pASsyQO_o0z3d-4JFR0";
+
+jest.mock('../../services/unidadeService', () => ({
+  getUnidades: jest.fn(),
+}))
 
 jest.mock('../../services/userService', () => ({
-  getUnidades:jest.fn(),
-  createUser:jest.fn()
+  getUserById: jest.fn(),
+  updateUser: jest.fn(),
 }));
+
+jest.mock('react-jwt', () => ({
+  decodeToken: jest.fn(),
+}))
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -26,14 +38,17 @@ function render(ui, { route = '/', ...renderOptions } = {}) {
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
 }
 
-const mockGetUnidades = require('../../services/userService').getUnidades;
-const mockCreateUser = require('../../services/userService').createUser;
-
 describe('EditUserForm', () => {
     beforeEach(() => {
-        router.useNavigate.mockImplementation(jest.requireActual('react-router-dom').useNavigate);
-        mockGetUnidades.mockResolvedValue(/* valor esperado de retorno */);
-        mockCreateUser.mockResolvedValue(/* valor esperado de retorno */);
+      getUnidades.mockResolvedValue({
+        type: 'success',
+        data: [
+          {id: 1, nome: "unidade1"},
+          {id: 2, nome: "unidade2"},
+          {id: 3, nome: "unidade3"},
+        ]
+      });
+      router.useNavigate.mockImplementation(jest.requireActual('react-router-dom').useNavigate);
     });
 
     afterEach(() => {
@@ -46,187 +61,313 @@ describe('EditUserForm', () => {
       expect(screen.getByText("Editar usuário")).toBeInTheDocument();
     })
 
-    // test('validates form inputs correctly', async () => {
-    //     render(<EditUserForm />);
-    //     userEvent.click(screen.getByText('REGISTRAR'));
-    //     await waitFor(() => {
-    //         expect(screen.getByText('Nome é obrigatório')).toBeInTheDocument();
-    //         // Outras validações...
-    //     });
-    // });
+    it('should make API call and get workstations succesfully', async() => {
+      getUnidades.mockResolvedValue({
+        type: 'success',
+        data: [
+          {id: 1, nome: "unidade1"},
+          {id: 2, nome: "unidade2"},
+          {id: 3, nome: "unidade3"},
+        ]
+      });
+  
+      render(<EditUserForm />);
+  
+      await waitFor(() => {
+        const unidade1 = screen.getByRole('option', { value: 1 });
+        const unidade2 = screen.getByRole('option', { value: 2 });
+        const unidade3 = screen.getByRole('option', { value: 3 });
+        expect(unidade1).toBeInTheDocument();
+        expect(unidade2).toBeInTheDocument();
+        expect(unidade3).toBeInTheDocument();
+      });
+  
+    });
 
-    // test('makes an API call on form submission', async () => {
-    //     render(<EditUserForm />);
-    //     // Preenche o formulário...
-    //     userEvent.click(screen.getByText('REGISTRAR'));
-    //     await waitFor(() => {
-    //         expect(mockCreateUser).toHaveBeenCalledWith(/* argumentos esperados */);
-    //     });
-    // });
+    it('should make API call for workstations and throw error', async() => {
+      getUnidades.mockRejectedValue(new Error('error'));
+  
+      render(<EditUserForm />);
 
-    // test('handles API response correctly', async () => {
-    //     render(<EditUserForm />);
-    //     // Preenche o formulário...
-    //     userEvent.click(screen.getByText('REGISTRAR'));
-    //     await waitFor(() => {
-    //         // Verifica a resposta da API e o comportamento do componente...
-    //     });
-    // });
+      const unidadePaiCombobox = screen.getByTestId("unidadePai");
+  
+      await waitFor(() => {
+        fireEvent.change(unidadePaiCombobox, { target: { value: '1' } });
+        expect(unidadePaiCombobox.value).toBe("");
+      });
+  
+    });
 
-    // test('renders select or input based on key value', () => {
-    //   render(<EditUserForm />);
-    //   // Teste para linhas 53: verificar se os selects para 'unidadePai' e 'unidadeFilha' são renderizados
-    //   expect(screen.getByLabelText('Selecione Unidade Pai')).toBeInTheDocument();
-    //   expect(screen.getByLabelText('Selecione Unidade Filho')).toBeInTheDocument();
-    // });
+    it('should decode user from token', async () => {
+      jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(token);
 
+      render(<EditUserForm />);
 
-    
+      await waitFor(() => {
+        expect(decodeToken).toHaveBeenCalledWith(token);
+      })
+    })
 
-    // test('shows error messages for invalid inputs', async () => {
-    //     render(<EditUserForm />);
-    //     // Teste para linha 70: verificar a renderização de mensagens de erro para campos inválidos
-    //     userEvent.click(screen.getByText('REGISTRAR'));
-    //     await waitFor(() => {
-    //         expect(screen.getByText('Nome é obrigatório')).toBeInTheDocument();
-    //         // Verificar outras mensagens de erro...
-    //     });
-    // });
+    it('should make API call and get user successfully', async() => {
+      jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(token);
+      decodeToken.mockReturnValue({
+        "id": "clprc9gem0001y06nguit2ikt",
+        "email": "ass@example.com",
+        "nome": "Another User",
+        "cargos": [
+          "USER"
+        ]
+      })
 
-    // test('renders input boxes', () => {
-    //     render(
-    //     <BrowserRouter>
-    //         <EditUserForm />
-    //     </BrowserRouter>
-    //     );
-    //     // Teste para linha 71: verificar se as caixas de entrada são renderizadas
-    //     expect(document.querySelector('#edit-user-input-box')).toBeInTheDocument();
-    // });
+      getUserById.mockResolvedValue({
+        "id": "clprc9gem0001y06nguit2ikt",
+        "email": "ass@example.com",
+        "nome": "Another User",
+        "senha": "$2a$10$Dw/zp0AIR8G1Fxy0kR9tOu9MOyYTLBkwRyVXDlFEedDjMY4h23Wsu",
+        "documento": "46921264009",
+        "unidade_id": "cfa19c26-3b18-4659-b02e-51047e5b3d13",
+        "resetPasswordToken": "a7f8f87806d8cf757770621a6f9b16b8165660a5",
+        "resetPasswordExpires": "2023-12-06T22:49:18.221Z",
+        "cargos": [
+          "USER"
+        ]
+      });
+  
+      render(<EditUserForm />);
+  
+      await waitFor(() => {
+        expect(decodeToken).toHaveBeenCalled();
+        expect(getUserById).toHaveBeenCalledWith("clprc9gem0001y06nguit2ikt");
+        expect(screen.getByPlaceholderText("Nome")).toHaveValue("Another User")
+      });
+    });
 
-    // test('renders buttons with correct text', () => {
-    //     render(
-    //     <BrowserRouter>
-    //         <EditUserForm />
-    //     </BrowserRouter>
-    //     );
-    //     // Teste para linhas 74 e 75: verificar a renderização dos botões
-    //     expect(screen.getByText('CANCELAR')).toBeInTheDocument();
-    //     expect(screen.getByText('SALVAR')).toBeInTheDocument();
-    // });
+    it('should make API call for getting a user and catch a error', async() => {
+      jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(token);
+      decodeToken.mockReturnValue({
+        "id": "clprc9gem0001y06nguit2ikt",
+        "email": "ass@example.com",
+        "nome": "Another User",
+        "cargos": [
+          "USER"
+        ]
+      })
 
-    // test('changes register button text on submitting', async () => {
-    //     render(
-    //     <BrowserRouter>
-    //         <EditUserForm />
-    //     </BrowserRouter>
-    //    );
-    //     // Teste para linhas 76,77,78: verificar mudança de texto no botão durante a submissão
-    //     userEvent.click(screen.getByText('REGISTRAR'));
-    //     await waitFor(() => {
-    //         expect(screen.getByText('CADASTRANDO')).toBeInTheDocument();
-    //         // Verificar se o ícone de carregamento está presente...
-    //     });
-    // });
+      getUserById.mockRejectedValue(new Error('error'));
+  
+      render(<EditUserForm />);
+  
+      await waitFor(() => {
+        expect(decodeToken).toHaveBeenCalled();
+        expect(getUserById).toHaveBeenCalledWith("clprc9gem0001y06nguit2ikt");
+        expect(screen.getByPlaceholderText("Nome")).toHaveValue("")
+      });
+    });
 
-    
+    it('should make API call and get user successfully', async() => {
+      jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(token);
+      decodeToken.mockReturnValue({
+        "id": "clprc9gem0001y06nguit2ikt",
+        "email": "ass@example.com",
+        "nome": "Another User",
+        "cargos": [
+          "USER"
+        ]
+      })
 
-    // test('displays toast messages on form submission', async () => {
-    //     render(<EditUserForm />);
-    //     // Teste para linhas 88,89 e 90: verificar exibição de mensagens toast após submissão
-    //     userEvent.type(screen.getByLabelText('Nome'), 'João da Silva');
-    //     userEvent.click(screen.getByText('REGISTRAR'));
-    //     await waitFor(() => {
-    //         expect(screen.getByText('Usuario cadastrado com sucesso!')).toBeInTheDocument();
-    //         // Verificar também o toast de erro...
-    //     });
-    // });
+      getUnidades.mockResolvedValue({
+        type: 'success',
+        data: [
+          {id: '1', name: "unidade1", child_workstations: [{id: '2', name: "unidade2"}, {id: '3', name: "unidade3"}]},
+          {id: '2', name: "unidade2", parent_workstation: {id: "1"}},
+          {id: '3', name: "unidade3"}
+        ]
+      });
 
-    // test('resets form on successful submission', async () => {
-    //     render(<EditUserForm />);
-    //     // Teste para linha 96: verificar se o formulário é resetado após submissão bem-sucedida
-    //     userEvent.type(screen.getByLabelText('Nome'), 'João da Silva');
-    //     userEvent.click(screen.getByText('REGISTRAR'));
-    //     await waitFor(() => {
-    //         // Verificar se o formulário foi resetado...
-    //     });
-    // });
+      getUserById.mockResolvedValue({
+        "id": "clprc9gem0001y06nguit2ikt",
+        "email": "ass@example.com",
+        "nome": "Another User",
+        "senha": "$2a$10$Dw/zp0AIR8G1Fxy0kR9tOu9MOyYTLBkwRyVXDlFEedDjMY4h23Wsu",
+        "documento": "46921264009",
+        "unidade_id": "2",
+        "resetPasswordToken": "a7f8f87806d8cf757770621a6f9b16b8165660a5",
+        "resetPasswordExpires": "2023-12-06T22:49:18.221Z",
+        "cargos": [
+          "USER"
+        ]
+      });
+  
+      render(<EditUserForm />);
+  
+      await waitFor(() => {
+        expect(decodeToken).toHaveBeenCalled();
+        expect(getUnidades).toHaveBeenCalled();
+        expect(getUserById).toHaveBeenCalledWith("clprc9gem0001y06nguit2ikt");
+        expect(screen.getByPlaceholderText("Nome")).toHaveValue("Another User");
+        expect(screen.getByTestId("unidadeFilha")).toBeInTheDocument();
+      });
+    });
 
-    // test('handles errors in data fetching', async () => {
-    //     mockGetUnidades.mockRejectedValue(new Error('Erro ao obter opções do serviço'));
-    //     render(<EditUserForm />);
-    //     // Teste para linhas 98 e 99: verificar o tratamento de erros na busca de dados
-    //     await waitFor(() => {
-            
-    //     });
-    // });
- 
-    
+    it('should enable child workstations combobox', async () => {
+      getUnidades.mockResolvedValue({
+        type: 'success',
+        data: [
+          {id: '1', name: "unidade1", child_workstations: [{id: '2', name: "unidade2"}, {id: '3', name: "unidade3"}]},
+          {id: '2', name: "unidade2"},
+          {id: '3', name: "unidade3"}
+        ]
+      });
+  
+      render(<EditUserForm />);
+  
+      const unidadePaiCombobox = screen.getByTestId("unidadePai");
+  
+      await waitFor(() => {
+        fireEvent.change(unidadePaiCombobox, { target: { value: '1' } });
+        expect(unidadePaiCombobox.value).toBe("1");
+        expect(screen.getByTestId("unidadeFilha")).toBeInTheDocument();
+      });
+    })
 
-    // test('show loading icon when form is submitting', async () => {
-    //     mockCreateUser.mockResolvedValue();
-    //     render(
-    //     <BrowserRouter>
-    //     <EditUserForm/>
-    //     </BrowserRouter>
-    //     );
-    //     userEvent.type(screen.getByRole('textbox', { name: 'Nome *' }), 'Antonio Rangel');
-    //     userEvent.type(screen.getByRole('textbox', { name: 'Documento *' }), '555.555.555.-55');
-    //     userEvent.type(screen.getByRole('textbox', { name: 'E-mail *' }), 'antonio@gmail.com');
-    //     userEvent.type(screen.getByRole('textbox', { name: 'Confirmar E-mail *' }), 'antonio@gmail.com');
-    //     userEvent.type(screen.getByRole('select', { name: 'Unidade Pai *' }), 'unidade pai');
-    //     userEvent.type(screen.getByRole('select', { name: 'Unidade Filha *' }), 'unidade filha');
+    it('should submit form and call API', async () => {
+      jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(token);
+      decodeToken.mockReturnValue({
+        "id": "clprc9gem0001y06nguit2ikt",
+        "email": "ass@example.com",
+        "nome": "Another User",
+        "cargos": [
+          "USER"
+        ]
+      })
 
-    //     fireEvent.click(screen.getByText('SALVAR'));
-    //     expect(screen.getByText('SALVAR').disabled).toBeFalsy();
-    //     await waitFor(() =>{
-    //     expect(screen.getByTestId('animate-spin')).toBeInTheDocument();
-    //     expect(screen.getByAltText('CADASTRANDO')).toBeInTheDocument();
-    //     });
+      getUnidades.mockResolvedValue({
+        type: 'success',
+        data: [
+          {id: '1', name: "unidade1", child_workstations: [{id: '2', name: "unidade2"}, {id: '3', name: "unidade3"}]},
+          {id: '2', name: "unidade2", parent_workstation: {id: "1"}},
+          {id: '3', name: "unidade3"}
+        ]
+      });
 
-    //     await waitFor(() =>{
-    //     expect(screen.getByTestId('animate-spin')).not.toBeInTheDocument();
-    //     expect(screen.getByText('SALVAR')).toBeInTheDocument();
-    // });
+      getUserById.mockResolvedValue({
+        "id": "clprc9gem0001y06nguit2ikt",
+        "email": "ass@example.com",
+        "nome": "Another User",
+        "senha": "$2a$10$Dw/zp0AIR8G1Fxy0kR9tOu9MOyYTLBkwRyVXDlFEedDjMY4h23Wsu",
+        "documento": "46921264009",
+        "unidade_id": "2",
+        "resetPasswordToken": "a7f8f87806d8cf757770621a6f9b16b8165660a5",
+        "resetPasswordExpires": "2023-12-06T22:49:18.221Z",
+        "cargos": [
+          "USER"
+        ]
+      });
 
-    // });
+      updateUser.mockResolvedValue({type: 'success'});
 
-    // test('renders correctly', () => {
-    //     render(
-    //         <BrowserRouter>
-    //             <EditUserForm />
-    //         </BrowserRouter>
-    //     );
-    //     expect(screen.getByTestId('edit-user-card')).toBeInTheDocument();
-    // });
+      render(<EditUserForm />);
 
-    // test('initial state and values are set correctly', () => {
-    //     render(
-    //         <BrowserRouter>
-    //             <EditUserForm />
-    //         </BrowserRouter>
-    //     );
-    //     expect(screen.getByRole('textbox', { name: 'Nome *' }).value).toBe('')
-    // });
+      await waitFor(() => {
+        expect(decodeToken).toHaveBeenCalled();
+        expect(getUnidades).toHaveBeenCalled();
+        expect(getUserById).toHaveBeenCalledWith("clprc9gem0001y06nguit2ikt");
+        expect(screen.getByPlaceholderText("Nome")).toHaveValue("Another User");
+        expect(screen.getByPlaceholderText("CPF ou CNPJ")).toHaveValue("46921264009");
+        expect(screen.getByPlaceholderText("Email")).toHaveValue("ass@example.com");
+        const confirmEmail = screen.getByPlaceholderText("Confirmar Email");
+        fireEvent.change(confirmEmail, { target: { value: 'ass@example.com' } });
+        expect(screen.getByTestId("unidadeFilha").value).toBe('2');
+      });
 
+      console.log(screen.getByPlaceholderText("Nome").value);
 
+      const submitButton = screen.getByText("SALVAR");
+      fireEvent.submit(submitButton);
 
-    // test('updates state on unidadePai selection', async () => {
-    //     render(
-    //     <BrowserRouter>
-    //         <EditUserForm />
-    //     </BrowserRouter>
-    //     );
-    //     const unidadePai = screen.getByRole('combobox')
-    //     // Teste para linhas 60 a 62: selecionar uma unidade pai e verificar a mudança de estado
-    //     fireEvent.change(unidadePai, { target: { value: 'some-unit-id' } });
-    //     await waitFor(() => {
-    //         const unidadeFilha = screen.getByTestId('unidadeFilha')
-    //         expect(unidadeFilha).toBeInTheDocument()
-    //     });
-        
-    // });
+      await waitFor(() => {
+        expect(updateUser).toHaveBeenCalledWith({
+          "cargos": ["USER"],
+          "documento": "46921264009",
+          "email": "ass@example.com",
+          "id": "clprc9gem0001y06nguit2ikt",
+          "nome": "Another User",
+          "resetPasswordExpires": "2023-12-06T22:49:18.221Z",
+          "resetPasswordToken": "a7f8f87806d8cf757770621a6f9b16b8165660a5",
+          "senha": "$2a$10$Dw/zp0AIR8G1Fxy0kR9tOu9MOyYTLBkwRyVXDlFEedDjMY4h23Wsu", 
+          "unidade_id": "2"
+        }, "clprc9gem0001y06nguit2ikt");
+      });
+    })
 
+    it('should submit form and call API and throw error', async () => {
+      jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(token);
+      decodeToken.mockReturnValue({
+        "id": "clprc9gem0001y06nguit2ikt",
+        "email": "ass@example.com",
+        "nome": "Another User",
+        "cargos": [
+          "USER"
+        ]
+      })
+
+      getUnidades.mockResolvedValue({
+        type: 'success',
+        data: [
+          {id: '1', name: "unidade1", child_workstations: [{id: '2', name: "unidade2"}, {id: '3', name: "unidade3"}]},
+          {id: '2', name: "unidade2", parent_workstation: {id: "1"}},
+          {id: '3', name: "unidade3"}
+        ]
+      });
+
+      getUserById.mockResolvedValue({
+        "id": "clprc9gem0001y06nguit2ikt",
+        "email": "ass@example.com",
+        "nome": "Another User",
+        "senha": "$2a$10$Dw/zp0AIR8G1Fxy0kR9tOu9MOyYTLBkwRyVXDlFEedDjMY4h23Wsu",
+        "documento": "46921264009",
+        "unidade_id": "2",
+        "resetPasswordToken": "a7f8f87806d8cf757770621a6f9b16b8165660a5",
+        "resetPasswordExpires": "2023-12-06T22:49:18.221Z",
+        "cargos": [
+          "USER"
+        ]
+      });
+
+      updateUser.mockResolvedValue({type: 'error'});
+
+      render(<EditUserForm />);
+
+      await waitFor(() => {
+        expect(decodeToken).toHaveBeenCalled();
+        expect(getUnidades).toHaveBeenCalled();
+        expect(getUserById).toHaveBeenCalledWith("clprc9gem0001y06nguit2ikt");
+        expect(screen.getByPlaceholderText("Nome")).toHaveValue("Another User");
+        expect(screen.getByPlaceholderText("CPF ou CNPJ")).toHaveValue("46921264009");
+        expect(screen.getByPlaceholderText("Email")).toHaveValue("ass@example.com");
+        const confirmEmail = screen.getByPlaceholderText("Confirmar Email");
+        fireEvent.change(confirmEmail, { target: { value: 'ass@example.com' } });
+        expect(screen.getByTestId("unidadeFilha").value).toBe('2');
+      });
+
+      console.log(screen.getByPlaceholderText("Nome").value);
+
+      const submitButton = screen.getByText("SALVAR");
+      fireEvent.submit(submitButton);
+
+      await waitFor(() => {
+        expect(updateUser).toHaveBeenCalledWith({
+          "cargos": ["USER"],
+          "documento": "46921264009",
+          "email": "ass@example.com",
+          "id": "clprc9gem0001y06nguit2ikt",
+          "nome": "Another User",
+          "resetPasswordExpires": "2023-12-06T22:49:18.221Z",
+          "resetPasswordToken": "a7f8f87806d8cf757770621a6f9b16b8165660a5",
+          "senha": "$2a$10$Dw/zp0AIR8G1Fxy0kR9tOu9MOyYTLBkwRyVXDlFEedDjMY4h23Wsu", 
+          "unidade_id": "2"
+        }, "clprc9gem0001y06nguit2ikt");
+        expect(screen.getByText("Erro ao atualizar usuário")).toBeInTheDocument();
+      });
+    })
 });
-
-
-

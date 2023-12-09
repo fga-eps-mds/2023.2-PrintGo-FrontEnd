@@ -5,7 +5,7 @@ import * as router from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import SignupForm from '../../components/forms/SignupForm';
 import { getUnidades } from "../../services/unidadeService";
-import { createUser } from "../../services/userService";;
+import { createUser } from "../../services/userService";
 
 jest.mock('../../services/unidadeService', () => ({
   getUnidades: jest.fn(),

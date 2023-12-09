@@ -119,6 +119,7 @@ export default function EditUserForm(){
   }, [memoUserData, memoUnidadeList, setValue]);
   
   const onSubmit = async (data) =>  {
+    console.log(data);
 
     setTimeout(() => {
       console.log("3 segundos se passaram.");
@@ -199,7 +200,7 @@ export default function EditUserForm(){
           <div id="edit-user-input-line">
               <div id="edit-user-input-box">
                   <label htmlFor="unidadePai">Unidade Pai<span>*</span></label>
-                  <select {...register("unidade_pai")} onChange={handleWorkstationChange}>
+                  <select data-testid="unidadePai" {...register("unidade_pai")} onChange={handleWorkstationChange}>
                       <option value="">Selecione a Unidade de policia</option>
                       {unidadeList?.map((unidade) => (
                       <option key={unidade.id} value={unidade.id}>
