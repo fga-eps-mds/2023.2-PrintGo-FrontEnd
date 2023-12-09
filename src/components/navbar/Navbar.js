@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "../../style/components/navbar.css";
-import { getUserById, updateUser } from "../../services/userService";
+import { getUserById } from "../../services/userService";
 import logo from "../../assets/logo_navbar.svg";
 import LoggedUser from "../../assets/loggeduser.svg";
 import { decodeToken } from "react-jwt";
@@ -55,7 +55,7 @@ const Navbar = () => {
     }
 
     verifyAdmin()
-  if(isAdmin==true){
+  if(isAdmin){
     const togglePrinterDropdown = () => {
       setPrinterDropdownOpen(!printerDropdownOpen)
    }
