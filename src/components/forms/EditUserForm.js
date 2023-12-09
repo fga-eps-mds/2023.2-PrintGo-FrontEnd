@@ -3,7 +3,6 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import * as yup from "yup";
 import { getUnidades } from "../../services/unidadeService";
 import { getUserById, updateUser } from "../../services/userService";
 import "../../style/components/editUserForms.css";
@@ -35,12 +34,6 @@ export default function EditUserForm(){
     mode: "onChange"
   });
 
-  /*useEffect(() => {
-    Object.entries(testObject).forEach(([key, value]) => {
-      setValue(key, value);
-    });
-  }, [setValue]);*/
-
   let loggedUser = null;
   const token = localStorage.getItem("jwt");
   if (token) {
@@ -60,11 +53,6 @@ export default function EditUserForm(){
 
   const memoUserData = useMemo(() => userData, [userData]);
   const memoUnidadeList = useMemo(() => unidadeList, [unidadeList]);
-
-  // const { register, handleSubmit, formState: { errors, isValid, isSubmitting }, reset } = useForm({
-  //   resolver: yupResolver(editUserSchema),
-  //   mode: "onChange" 
-  // });
 
   const handleCheckboxLocadoraChange = (event) => {
     setIsLocadora(event.target.checked);
