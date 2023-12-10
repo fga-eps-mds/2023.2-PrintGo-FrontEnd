@@ -7,22 +7,23 @@ import Engine from '../assets/engine.svg';
 import Input from '../components/Input'; 
 import Modal from '../components/ui/Modal';
 import Navbar from "../components/navbar/Navbar";
-import { getPatterns } from "../services/printerservice";
+import { getPadroes, togglePattern } from "../services/printerservice";
 
 export default function PatternList() {
 
   useEffect( () => {
     async function fetchData() {
       try {
-        const data = await getPatterns();
+        const data = await getPadroes();
         if (data.type === 'success' && data.data) {
           setPatterns(data.data);
-          console.log(data.data);
         }
       } catch (error) {
         console.error('Erro ao obter lista de padrões', error);
       }
     }
+
+    fetchData();
   }, []);
 
   const [search, setSearch] = useState('');
@@ -47,6 +48,23 @@ export default function PatternList() {
     setModalTitle("Ativação de padrão");
     setModalBodytext("Você tem certeza que deseja reativar o padrão?");
     setModalOpen(true);
+  }
+  
+  //ativa e desativa padrão.
+  async function patternToggle() {
+    try {
+      const data = await togglePattern(selectedPattern.id, selectedPattern.status);
+      console.log(data);
+      
+      if (data.type === 'success') {
+        const pattern = patterns.find(pattern => pattern.id === selectedPattern.id);
+        pattern.status === 'ATIVO' ? pattern.status = 'DESATIVADO' : pattern.status = 'ATIVO';
+        setModalOpen(false);
+      }
+      
+    } catch (error) {
+      setModalOpen(false);
+    }
   }
 
   //qual filtro esta sendo aplicado
@@ -92,6 +110,7 @@ export default function PatternList() {
           setOpenModal={setModalOpen} 
           title={modalTitle} 
           bodytext={modalBodytext}
+          onConfirm={patternToggle}
         />
       )}
 

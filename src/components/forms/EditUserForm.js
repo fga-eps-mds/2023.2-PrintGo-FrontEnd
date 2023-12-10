@@ -177,7 +177,7 @@ export default function EditUserForm(){
                 type="button" 
                
                 onClick={redirectToChangePassword}
-            >
+            />
                 MUDAR SENHA
 
                 </div>
