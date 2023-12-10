@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import "../style/pages/patternList.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Search from '../assets/Search.svg';
 import Filter from '../assets/Filter.svg';
 import Engine from '../assets/engine.svg';
@@ -11,7 +11,6 @@ import { getPadroes, togglePattern } from "../services/printerservice";
 
 export default function PatternList() {
 
-  const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
   const [modalOpen, setModalOpen] = useState(false);
