@@ -91,13 +91,11 @@ export default function EditUserForm(){
             setDisplayUserRole(false);
           }
           else{
-          }
-        } else {
-          if(loggedUser.id != id) {
-            navigate("/"); // Um usuário comum não pode editar outro usuário além dele mesmo.
-          } else {
+            navigate("/"); // Um administrador não pode editar outro administrador além dele mesmo.
             setDisplayUserRole(false);
           }
+        } else {
+          return;
         }
         
       }
