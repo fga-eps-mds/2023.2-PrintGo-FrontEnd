@@ -28,6 +28,7 @@ const testObject = {
 
 export default function EditUserForm(){
   const { id } = useParams();
+
   const editUserSchema = getEditUserSchema(fieldLabels);
   const { register, getValues, setValue, handleSubmit, formState: { errors, isValid, isSubmitting  }, reset } = useForm({
     resolver: yupResolver(editUserSchema),
@@ -302,7 +303,7 @@ export default function EditUserForm(){
         
 
         <div id="edit-user-buttons">
-          <button className="edit-user-form-button" type="button" onClick={() => {console.log(getValues())}} id="edit-user-cancel-bnt">
+          <button className="edit-user-form-button" type="button" id="edit-user-cancel-bnt">
             <Link to="#">CANCELAR</Link>
           </button>
           <button className="edit-user-form-button" type="submit" id="edit-user-register-bnt" disabled={isSubmitting || !isValid}>
