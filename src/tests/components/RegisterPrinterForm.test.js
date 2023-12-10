@@ -36,6 +36,31 @@ describe('RegisterPrinterForm', () => {
     });
   });
 
+  test('renders all form fields, selects, and buttons', () => {
+    render(
+      <BrowserRouter>
+        <RegisterPrinterForm />
+      </BrowserRouter>
+    );
+  
+    // Verificar a renderização dos botões
+    expect(screen.getByRole('button', { name: /cancelar/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /registrar/i })).toBeInTheDocument();
 
+    expect(screen.getByPlaceholderText('Número de Série')).toBeInTheDocument();
+    expect(screen.getByText('Número de Série')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('IP')).toBeInTheDocument();
+    expect(screen.getByText('IP')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Código da Locadora')).toBeInTheDocument();
+    expect(screen.getByText('Código da Locadora')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Contador de Instalação')).toBeInTheDocument();
+    expect(screen.getByText('Contador de Instalação')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Data de Instalação')).toBeInTheDocument();
+    expect(screen.getByText('Data de Instalação')).toBeInTheDocument();
+
+
+  });
+  
+  
   // Adicione mais testes conforme necessário
 });
