@@ -68,7 +68,7 @@ const Navbar = () => {
 
         { user && (
           <>
-            { user.cargos && user.cargos.includes('ADMIN') && (
+            { user.cargos?.includes('ADMIN') && (
               <div className="navbar-users">
                 <button className="navbar-users-button" onClick={toggleUserDropdown}>
                   <h4>Usuários</h4> 
