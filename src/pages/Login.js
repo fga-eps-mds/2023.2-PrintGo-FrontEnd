@@ -37,7 +37,6 @@ export default function Login() {
 
       localStorage.setItem("jwt", token);
       const user = decodeToken(token);
-      console.log(user.nome);
 
       navigate("/");
 

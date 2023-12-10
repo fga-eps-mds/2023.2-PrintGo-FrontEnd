@@ -83,7 +83,6 @@ export default function RegisterPrinterForm() {
     data.dataInstalacao =  new Date(data.dataInstalacao).toISOString();
     data.dataContadorRetirada =  new Date(data.dataContadorRetirada).toISOString();
     data.dataUltimoContador =  new Date(data.dataUltimoContador).toISOString();
-    console.log(data);
     const response = await createImpressora(data);
     if (response.type === "success") {
       toast.success("Impressora criada com sucesso!");

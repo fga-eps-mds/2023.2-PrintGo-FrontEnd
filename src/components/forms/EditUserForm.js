@@ -114,12 +114,6 @@ export default function EditUserForm(){
   }, [memoUserData, memoUnidadeList, setValue]);
   
   const onSubmit = async (data) =>  {
-    console.log(data);
-
-    setTimeout(() => {
-      console.log("3 segundos se passaram.");
-    }, 3000);  // 3000 milissegundos = 3 segundos
-    
     delete data["emailConfirmar"];
     delete data["unidade_pai"];
 

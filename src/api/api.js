@@ -26,7 +26,6 @@ export async function changePassword(data) {
       const response = await api.post('/user/change-password', data, {headers});
       return response;
   } catch(error) {
-    console.log('Erro ao trocar de senha', error)
     return {type: 'error', error}; 
   }
 }

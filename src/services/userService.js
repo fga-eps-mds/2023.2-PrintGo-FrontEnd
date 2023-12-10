@@ -56,7 +56,6 @@ export const forgottenPassword = async (email) => {
 export const recoverPassword = async (data) => {
   try {
     const response = await api.post('/user/recover-password', data );
-    console.log(response.body);
     if(response.status !== 201) {
       return { type: 'error', error: "Erro não foi possível enviar email!"};
     }

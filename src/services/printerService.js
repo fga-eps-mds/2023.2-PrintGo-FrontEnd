@@ -57,7 +57,6 @@ export async function togglePrinter(id, status) {
 export const createImpressora = async (printer) => {
   try {
     const response = await api.post('/printer/impressora/create', printer);
-    console.log(response);
     if(response.status !== 201) {
       return { type: 'error', data: response.data};
     }
@@ -81,7 +80,6 @@ export const editImpressora = async (printer) => {
     dataUltimoContador: printer.dataUltimoContador,
     unidadeId: printer.unidadeId,
   }
-  console.log(data);
   try {
     const response = await api.put(`/printer/impressora/${printer.id}`, data);
     console.log(response);
@@ -97,7 +95,6 @@ export const editImpressora = async (printer) => {
 export const createPadraoImpressora = async (printerPattern) => {
   try {
     const response = await api.post('/printer/padrao/create', printerPattern);
-    console.log(response);
     if(response.status !== 201) {
       return { type: 'error', data: response.data};
     }

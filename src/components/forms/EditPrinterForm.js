@@ -75,7 +75,6 @@ export default function EditPrinterForm({ printer }) {
     if (event.target.value) {
 
         const selectedUnit = unidadeList.find(uni => uni.id === event.target.value);
-        console.log(selectedUnit);
         if (selectedUnit) {
             const combinedList = [selectedUnit, ...selectedUnit.child_workstations];
             setUnidadesFilhas(combinedList);

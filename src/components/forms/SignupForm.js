@@ -74,7 +74,6 @@ export default function SignupForm(){
 
     const onSubmit = async (data) =>  {
 
-        console.log(data);
         data.cargos = ["USER"];
 
         if (data.isAdmin) {
