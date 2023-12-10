@@ -1,16 +1,25 @@
 import React, { useState, useMemo, useEffect } from "react";
 import "../style/pages/printersList.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Search from '../assets/Search.svg';
 import Filter from '../assets/Filter.svg';
 import engine from '../assets/engine.svg';
 import Input from '../components/Input'; 
 import Modal from '../components/ui/Modal';
 import Navbar from "../components/navbar/Navbar";
-import { getPadroes, getPrinters, togglePrinter } from "../services/printerService";
+import { getPrinters, togglePrinter } from "../services/printerService";
 import { extractDate } from "../utils/utils";
+import { toast } from "react-toastify";
 
 export default function PrintersList() {
+  const navigate = useNavigate();
+  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState('all');
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState('');
+  const [modalBodytext, setModalBodytext] = useState('');
+  const [selectedPrinter, setSelectedPrinter] = useState(null);
+  const [printers, setPrinters] = useState([]);
 
   useEffect( () => {
     async function fetchData() {
@@ -28,46 +37,27 @@ export default function PrintersList() {
     fetchData();
   }, []);
 
-  const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState('all');
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalTitle, setModalTitle] = useState('');
-  const [modalBodytext, setModalBodytext] = useState('');
-  const [selectedPrinter, setSelectedPrinter] = useState(null);
-  const [printers, setPrinters] = useState([]);
-
-  const modalDeactivatePrinter = (printer) => {
+  const modalTogglePrinter = (printer) => {
     setSelectedPrinter(printer);
-    setModalTitle("Desativação de impressora");
-    setModalBodytext("Você tem certeza que deseja desativar a impressora?");
+    setModalTitle(printer.status === 'ATIVO' ? "Desativação de impressora": "Ativação de impressora");
+    setModalBodytext(`Você tem certeza que deseja ${printer.status === 'ATIVO' ? 'desativar' : 'ativar'} a impressora?`);
     setModalOpen(true);
   }
 
-  const modalActivePrinter = (printer) => {
-    setSelectedPrinter(printer);
-    setModalTitle("Ativação de impressora");
-    setModalBodytext("Você tem certeza que deseja reativar a impressora?");
-    setModalOpen(true);
-  }
-
-  async function printerToggle() {
-    try {
-      const data = await togglePrinter(selectedPrinter.id, selectedPrinter.status);
-      console.log(data);
-
-      if (data.type === 'success') {
-        const printer = printers.find(printer => printer.id === selectedPrinter.id);
-        printer.status === 'ATIVO' ? printer.status = 'DESATIVADO' : printer.status = 'ATIVO';
-        setModalOpen(false);
-      }
-    } catch (error) {
-      setModalOpen(false);
+  async function changePrinterStatus() {
+    const data = await togglePrinter(selectedPrinter.id, selectedPrinter.status);
+    if (data.type === 'success') {
+      toast.success("Status da impressora alterado com sucesso!");
+      const printer = printers.find(printer => printer.id === selectedPrinter.id);
+      printer.status === 'ATIVO' ? printer.status = 'DESATIVADO' : printer.status = 'ATIVO';
+    } else {
+      toast.error("Não foi possível alterar status da impressora! Por favor, tente novamente.");
     }
+    setModalOpen(false);
   }
 
   //qual filtro esta sendo aplicado
   function filterBeingShown(filter){
-
     if (filter === 'all') {
       return 'Todas';
     } else if (filter === 'active') {
@@ -80,6 +70,7 @@ export default function PrintersList() {
   //filtros para busca de impressora
   const filteredPrinters = useMemo(() => {
     return printers.filter(printer => {
+     
       const searchLower = search.toLowerCase();
       const {
         codigoLocadora,
@@ -90,7 +81,7 @@ export default function PrintersList() {
   
       return (
         search === '' ||
-        codigoLocadora.toLowerCase().includes(searchLower) ||
+        codigoLocadora?.toLowerCase().includes(searchLower) ||
         ip.toLowerCase().includes(searchLower) ||
         padrao.modelo.toLowerCase().includes(searchLower) ||
         numeroSerie.toLowerCase().includes(searchLower)
@@ -102,6 +93,12 @@ export default function PrintersList() {
     });
   }, [printers, search, filter]);
 
+  const redirectPrinter = (printer) => {
+    console.log(printer);
+    const printerEncoded =btoa(JSON.stringify(printer));
+    navigate(`/editarimpressora/${printerEncoded}`);
+  }
+
   return (
     <>
       {modalOpen && (
@@ -109,7 +106,7 @@ export default function PrintersList() {
           setOpenModal={setModalOpen} 
           title={modalTitle} 
           bodytext={modalBodytext}
-          onConfirm={printerToggle}
+          onConfirm={changePrinterStatus}
         />
       )}
 
@@ -129,7 +126,7 @@ export default function PrintersList() {
                 onChange={(e) => setSearch(e.target.value)} 
               />
               <img alt="Search" src={Search} />
-
+              
               <div className="printerslist-filter">
                 <img alt="Filter" src={Filter} />
                 <div className="printerslist-filter-dropdown-container">
@@ -143,7 +140,7 @@ export default function PrintersList() {
             </div>
           </div>
 
-          {filteredPrinters.map(printer => (
+          {filteredPrinters.length > 0 ? filteredPrinters.map(printer => (
             <div 
               key={printer.id} 
               className="printerslist-printer" 
@@ -178,16 +175,15 @@ export default function PrintersList() {
                 <img alt="" src={engine} />
                 <div tabIndex="0" className="printerslist-engine-dropdown">
                   <div className="printerslist-printer-dropdown">
-                    {printer.status === "ATIVO"
-                      ? <Link to="#" tabIndex="0" onClick={() => modalDeactivatePrinter(printer)}>Desativar</Link>
-                      : <Link to="#" tabIndex="0" onClick={() => modalActivePrinter(printer)}>Ativar</Link>
-                    }
-                    <Link to="#" tabIndex="0">Editar</Link>
+                    <Link to="#" tabIndex="0" onClick={() => modalTogglePrinter(printer)}>{printer.status === "ATIVO" ? 'Desativar' : 'Ativar'}</Link>
+                    <Link to="#" onClick={() => redirectPrinter(printer)} tabIndex="0">Editar</Link>
                   </div>
                 </div> 
               </div>
             </div>
-          ))}
+          )) : (
+            <p className="no-results">Nenhum resultado encontrado</p>
+          )}
         </div>
       </>
     </>

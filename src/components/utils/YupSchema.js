@@ -1,8 +1,6 @@
 import * as yup from 'yup';
 
 export const getPrinterSchema = (printerFieldLabels) => {
-
-
   return yup.object().shape({
     padrao_id: yup.string().required(`${printerFieldLabels.padrao_id} é obrigatório`),
     ip: yup.string().required(`${printerFieldLabels.ip} é obrigatório`),
