@@ -90,6 +90,8 @@ export default function EditUserForm(){
           if(loggedUser.id === id){ 
             setDisplayUserRole(false);
           }
+          else{
+          }
         } else {
           if(loggedUser.id != id) {
             navigate("/"); // Um usuário comum não pode editar outro usuário além dele mesmo.
