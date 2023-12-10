@@ -32,14 +32,14 @@ function App() {
             <Route path="/cadastroimpressora" element={<RegisterPrinter />} />
             <Route path="/editarimpressora" element={<EditPrinter />} />
             <Route path="/padraoimpressora" element={<PatternPrinter />} />
-            <Route path="/editarpadrao" element={<EditPattern />} />
+            <Route path="/editarpadrao/:padrao" element={<EditPattern />} />
             <Route path="/impressorascadastradas" element={<PrintersList />} />
             <Route path="/listapadroes" element={<PatternList />} />
+            <Route path="/padroescadastrados" element={<PatternList />} />
             <Route element={<AdminRoutes/>}>
               <Route path="/listausuarios" element={<UsersList />} />
               <Route path="/cadastro" element={<CreateUserPage />} />
             </Route>
-            
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />

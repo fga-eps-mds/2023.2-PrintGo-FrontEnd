@@ -100,7 +100,6 @@
     box-shadow: 0 5px 5px -3px black;
     padding-left: 20px;
     padding-right: 20px;
-    cursor: pointer;
 }
 
 .patternlist-pattern h6 {
@@ -119,6 +118,17 @@
     width: 60vw;
     margin: 0;
     padding-left: lrem;
+    cursor: pointer;
+}
+
+.patternlist-model a{
+    text-decoration: none;
+    color: #003366;
+}
+
+.patternlist-model a:visited{
+    text-decoration: none;
+    color: #003366;
 }
 
 .patternlist-model h5{
