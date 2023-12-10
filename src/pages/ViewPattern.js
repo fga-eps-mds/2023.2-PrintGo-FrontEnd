@@ -24,7 +24,7 @@ export default function ViewPattern() {
     totalCopiasPB: "Total de cópias P&B",
     totalCopiasColoridas: "Total de cópias color",
     totalImpressoesPb: "Total de impressões P&B",
-    totalCopiasColoridas: "Total de impressões color",
+    totalImpressoesColoridas: "Total de impressões color",
     totalGeral: "Total geral",
     enderecoIp: "Endereço de IP",
   }
@@ -66,7 +66,7 @@ export default function ViewPattern() {
               </div>
 
               <div className="viewpattern-oid-line">
-                <label>SNMP</label>
+                <p>SNMP</p>
                 {Object.entries(oidLabels).map(([key, label]) => (
                   <div key={key} className="viewpattern-oid-box">
                     <label>{label}:</label>

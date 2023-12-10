@@ -106,7 +106,7 @@
   margin-bottom: 30px;
 }
 
-.viewpattern-oid-line label {
+.viewpattern-oid-line p {
   color: #003366;
 }
 
@@ -151,8 +151,6 @@
     width: 40vw;
     height: 100vh;
 }
-
-/**/
 
 @media (max-width: 1210px) {
     .viewpattern-container{
