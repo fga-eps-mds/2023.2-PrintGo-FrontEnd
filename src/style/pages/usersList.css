@@ -25,13 +25,14 @@
 }
 
 .listusers-title h2 {
-  font-size: 35px;
+  font-size: 26px;
   margin: 0px;
 }
 
 .listusers-title h4 {
   font-size: 20px;
   margin: 0px;
+  font-weight: normal;
 }
 
 /* Search & Filter */
@@ -59,6 +60,12 @@
   min-width: 100px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  
+}
+
+.listusers-user-dropdown-container{
+  left: -10px;
+
 }
 
 .listusers-filter-dropdown a {
@@ -96,7 +103,13 @@
   display: flex;
   align-items: center;
   margin-right: 20px;
-  height: 100%;
+  height: 11vh;
+  width: 7vw;
+}
+
+.listusers-user-image img{
+  height: 50px;
+  width: 50px;
 }
 
 .listusers-user-name-email {
@@ -109,10 +122,12 @@
 .listusers-user-name-email h3 {
   font-size: 28px;
   margin: 0px;
+  font-weight: normal;
 }
 
 .listusers-user-name-email h4 {
   margin: 0px;
+  font-weight: normal;
 }
 
 .listusers-user-document {
@@ -183,4 +198,5 @@
 .listusers-engine:hover .listusers-user-dropdown {
   display: flex;
   flex-direction: column;
+  right: 2%;
 }

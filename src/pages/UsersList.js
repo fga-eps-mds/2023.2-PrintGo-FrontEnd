@@ -42,7 +42,7 @@ export default function ListUsers() {
       }
     }
     fetchUserData();
-  }, [users]);
+  }, []);
 
   // Puxa os dados das unidades policiais.
   useEffect( () => {
