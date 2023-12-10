@@ -33,14 +33,13 @@ export default function ViewPattern() {
 
   useEffect(() => {
     try {
-      console.log("Pattern Data:", padrao);
       const patternString = atob(padrao);
       const patternObject = JSON.parse(patternString);
       setPattern(patternObject);
     } catch (error) {
       console.error("Error decoding Base64 string", error);
     }
-  })
+  }, [padrao])
 
   return (
     <>
