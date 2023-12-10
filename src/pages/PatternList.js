@@ -160,16 +160,8 @@ export default function PatternList() {
           {filteredPatterns.map(pattern => (
             <div key={pattern.id_padrao} className="patternlist-pattern" style={{ color: pattern.status === "ATIVO" ? '' : 'gray' }}>
               <div className="patternlist-model">
-                <h4 
-                  onKeyDown={(e) => {
-                    if (e.key === 'enter') {
-                      redirectToView(pattern);
-                    }
-                  }}
-                  tabIndex={0}
-                  onClick={() => redirectToView(pattern)}
-                >
-                  Padrão {pattern.marca} - {pattern.modelo} - {pattern.tipo}
+                <h4>
+                  <Link to={`/visualizarpadrao/${btoa(JSON.stringify(pattern))}`}>Padrão {pattern.marca} - {pattern.modelo} - {pattern.tipo}</Link>
                 </h4>
                 {pattern.status === 'DESATIVADO' && <h5>Desativado</h5>}
               </div>
@@ -182,7 +174,7 @@ export default function PatternList() {
                         ? <Link to="#" tabIndex="0" onClick={() => modalDeactivatePattern(pattern)}>Desativar</Link>
                         : <Link to="#" tabIndex="0" onClick={() => modalActivePattern(pattern)}>Ativar</Link>
                       }
-                      <Link to="#" tabIndex="0">Editar</Link>
+                      <Link to={`/editarpadrao/${btoa(JSON.stringify(pattern))}`} tabIndex="0">Editar</Link>
                     </div>
                 </div> 
               </div>

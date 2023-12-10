@@ -118,6 +118,17 @@
     width: 60vw;
     margin: 0;
     padding-left: lrem;
+    cursor: pointer;
+}
+
+.patternlist-model a{
+    text-decoration: none;
+    color: #003366;
+}
+
+.patternlist-model a:visited{
+    text-decoration: none;
+    color: #003366;
 }
 
 .patternlist-model h5{
