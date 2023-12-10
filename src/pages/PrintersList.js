@@ -152,7 +152,7 @@ export default function PrintersList() {
                   to={`/visualizarimpressora/${encodeURIComponent(btoa(JSON.stringify(printer)))}`}
                   style={{ color: printer.status === "ATIVO" ? '' : 'gray' }}
                 >
-                  {printer.padrao.modelo}
+                  {`${printer.padrao.marca} ${printer.padrao.tipo} ${printer.padrao.modelo}`}
                 </Link>
                 {printer.status === 'DESATIVADO' && <h5>Desativada</h5>}
               </div>
