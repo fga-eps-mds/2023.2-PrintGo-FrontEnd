@@ -1,10 +1,13 @@
 import "../style/pages/viewPattern.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Ellipse from "../assets/login_ellipse.svg";
 import voltar_vector from "../assets/voltar_vector.svg";
 import Navbar from "../components/navbar/Navbar";
+import { useParams } from "react-router-dom";
 
 export default function ViewPattern() {
+
+  const { patternData } = useParams();
 
   const infoLabels = {
     tipo: "Tipo",
@@ -26,59 +29,56 @@ export default function ViewPattern() {
     oid_ip: "Endereço de IP",
   }
 
-  const [pattern, setPattern] = useState(
-    {
-      id_padrao: 1,
-      tipo: "Multifuncional Colorida",
-      modelo: "PIXMA MG3620",
-      marca: "Canon",
-      ativado: true,
-      oid_modelo: "1.3.6.1.2.1.xxxx",
-      oid_serial: "1.3.6.1.2.1.xxxx",
-      oid_firmware: "1.3.6.1.2.1.xxxx",
-      oid_tempo: "1.3.6.1.2.1.xxxx",
-      oid_digitalizacoes: "1.3.6.1.2.1.xxxx",
-      oid_copiasPB: "1.3.6.1.2.1.xxxx",
-      oid_copias_color: "1.3.6.1.2.1.xxxx",
-      oid_impressoesPB: "1.3.6.1.2.1.xxxx",
-      oid_impressoes_color: "1.3.6.1.2.1.xxxx",
-      oid_total: "1.3.6.1.2.1.xxxx",
-      oid_ip: "1.3.6.1.2.1.1347.xx",
+  const [pattern, setPattern] = useState()
+
+  useEffect(() => {
+    try {
+      const patternString = atob(patternData);
+      const patternObject = JSON.parse(patternData);
+      setPattern(patternObject);
+    } catch (error) {
+      console.error("Error decoding Base64 string", error);
     }
-  )
+  })
 
   return (
     <>
       <Navbar />
       <div className="viewpattern-container">
         <div className="viewpattern-card">
-          <div className="viewpattern-info-group">
-            
-            <header className="viewpattern-card-header">
-              <img alt="" src={voltar_vector}></img>
-              <a href="">Voltar</a>
-            </header>
 
-            <div className="viewpattern-info-line">
-              {Object.entries(infoLabels).map(([key, label]) => (
-                <div key={key} className="viewpattern-info-box">
-                  <label>{label}</label>
-                  <p>{pattern[key]}</p>
-                </div>
-              ))}
+          { pattern ? (
+            <div className="viewpattern-info-group">
+              
+              <header className="viewpattern-card-header">
+                <img alt="" src={voltar_vector}></img>
+                <a href="">Voltar</a>
+              </header>
+
+              <div className="viewpattern-info-line">
+                {Object.entries(infoLabels).map(([key, label]) => (
+                  <div key={key} className="viewpattern-info-box">
+                    <label>{label}</label>
+                    <p>{pattern[key]}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="viewpattern-oid-line">
+                <label>SNMP</label>
+                {Object.entries(oidLabels).map(([key, label]) => (
+                  <div key={key} className="viewpattern-oid-box">
+                    <label>{label}:</label>
+                    <p>{pattern[key]}</p>
+                  </div>
+                ))}
+              </div>
+
             </div>
-
-            <div className="viewpattern-oid-line">
-              <label>SNMP</label>
-              {Object.entries(oidLabels).map(([key, label]) => (
-                <div key={key} className="viewpattern-oid-box">
-                  <label>{label}:</label>
-                  <p>{pattern[key]}</p>
-                </div>
-              ))}
-            </div>
-
-          </div>
+            ) : (
+              <p id="viewpattern-loading-text">Carregando dados...</p>
+            )
+          }
         </div>
 
         <div className="viewpattern-ellipse">

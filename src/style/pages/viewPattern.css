@@ -23,6 +23,12 @@
     margin-bottom: 1vh;
 }
 
+.viewpattern-loading-text {
+  color: #003366;
+  display: block;
+  font-size: 20px;
+}
+
 /* Header */
 
 .viewpattern-card-header {
