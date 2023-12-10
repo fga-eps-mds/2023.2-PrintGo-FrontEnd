@@ -177,7 +177,7 @@ export default function ListUsers() {
 
           </div>
 
-          {filteredUsers && filteredUsers.map(user => (
+          {filteredUsers?.map(user => (
             <div key={user.id} className="listusers-user">
               <div className="listusers-user-image">
                 <img alt="user" src={Profile}/>
