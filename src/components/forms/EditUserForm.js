@@ -30,7 +30,7 @@ export default function EditUserForm(){
   const { id } = useParams();
 
   const editUserSchema = getEditUserSchema(fieldLabels);
-  const { register, setValue, handleSubmit, formState: { errors, isValid, isSubmitting  }, reset } = useForm({
+  const { register, setValue, handleSubmit, formState: { errors, isValid, isSubmitting  } } = useForm({
     resolver: yupResolver(editUserSchema),
     mode: "onChange"
   });
