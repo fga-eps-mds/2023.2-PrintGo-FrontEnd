@@ -9,6 +9,7 @@ import { getUnidades } from "../../services/unidadeService";
 import { getUsers } from "../../services/userService";
 import "../../style/components/registerPrinterForms.css";
 import { getPrinterSchema } from "../utils/YupSchema";
+import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 
 const fieldLabels = {
@@ -115,16 +116,7 @@ export default function RegisterPrinterForm() {
                   {label.charAt(0).toUpperCase() + label.slice(1)}
                   <span>*</span>
                 </label>
-                {key === "codigoLocadora" ? (
-                  <select {...register(key)}>
-                    <option value="">Selecione locadora</option>
-                    {locadora.map(option => (
-                      <option key={option.id} value={option.id}>
-                        {option.nome}
-                      </option>
-                    ))}
-                  </select>
-                ):key === "padrao_id" ? (
+                {key === "padrao_id" ? (
                   <select {...register(key)}>
                     <option value="">Selecione padrão</option>
                     {padroes.map(option => (
@@ -165,7 +157,9 @@ export default function RegisterPrinterForm() {
         </div>
         <div id="buttons">
           <button className="form-button" type="button" id="cancelar-bnt">
-            CANCELAR
+            <Link to="/">
+              CANCELAR
+            </Link>
           </button>
           <button className="form-button" type="submit" id="registrar-bnt" disabled={!isValid || isSubmitting} >
             {isSubmitting && (
