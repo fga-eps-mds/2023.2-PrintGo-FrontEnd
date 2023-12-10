@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import "../style/pages/patternList.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Search from '../assets/Search.svg';
 import Filter from '../assets/Filter.svg';
 import Engine from '../assets/engine.svg';
@@ -10,6 +10,15 @@ import Navbar from "../components/navbar/Navbar";
 import { getPadroes, togglePattern } from "../services/printerservice";
 
 export default function PatternList() {
+
+  const navigate = useNavigate();
+  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState('all');
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState('');
+  const [modalBodytext, setModalBodytext] = useState('');
+  const [selectedPattern, setSelectedPattern] = useState();
+  const [patterns, setPatterns] = useState([]);
 
   useEffect( () => {
     async function fetchData() {
@@ -26,13 +35,10 @@ export default function PatternList() {
     fetchData();
   }, []);
 
-  const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState('all');
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalTitle, setModalTitle] = useState('');
-  const [modalBodytext, setModalBodytext] = useState('');
-  const [selectedPattern, setSelectedPattern] = useState();
-  const [patterns, setPatterns] = useState([]);
+  const redirectToView = (pattern) => {
+    const patternEncoded = btoa(JSON.stringify(pattern));
+    navigate(`/visualizarpadrao/${patternEncoded}`);
+  }
 
   // modal para desativar impressora
   const modalDeactivatePattern = (pattern) => {
@@ -53,15 +59,22 @@ export default function PatternList() {
   //ativa e desativa padrão.
   async function patternToggle() {
     try {
-      const data = await togglePattern(selectedPattern.id, selectedPattern.status);
-      console.log(data);
-      
-      if (data.type === 'success') {
-        const pattern = patterns.find(pattern => pattern.id === selectedPattern.id);
-        pattern.status === 'ATIVO' ? pattern.status = 'DESATIVADO' : pattern.status = 'ATIVO';
-        setModalOpen(false);
+      if (selectedPattern) {
+        const data = await togglePattern(selectedPattern.id, selectedPattern.status);
+        console.log(data);
+        
+        if (data.type === 'success') {
+          const pattern = patterns.find(pattern => pattern.id === selectedPattern.id);
+          if (pattern.status === 'ATIVO') {
+            pattern.status = 'DESATIVADO';
+          } else {
+            pattern.status = 'ATIVO';
+          }
+          setModalOpen(false);
+        }
+      } else {
+        console.error("Pattern not selected");
       }
-      
     } catch (error) {
       setModalOpen(false);
     }
@@ -147,7 +160,17 @@ export default function PatternList() {
           {filteredPatterns.map(pattern => (
             <div key={pattern.id_padrao} className="patternlist-pattern" style={{ color: pattern.status === "ATIVO" ? '' : 'gray' }}>
               <div className="patternlist-model">
-                <h4>Padrão {pattern.marca} - {pattern.modelo} - {pattern.tipo}</h4>
+                <h4 
+                  onKeyDown={(e) => {
+                    if (e.key === 'enter') {
+                      redirectToView(pattern);
+                    }
+                  }}
+                  tabIndex={0}
+                  onClick={() => redirectToView(pattern)}
+                >
+                  Padrão {pattern.marca} - {pattern.modelo} - {pattern.tipo}
+                </h4>
                 {pattern.status === 'DESATIVADO' && <h5>Desativado</h5>}
               </div>
               
