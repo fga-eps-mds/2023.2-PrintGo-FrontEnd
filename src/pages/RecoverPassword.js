@@ -42,7 +42,7 @@ export default function RecoverPasswordPage() {
   return (
     <>
       <Navbar />
-      <div className="change-password-container">
+      <div className="change-password-container" data-testid="change-password-container">
         <div className="change-password-image-container">
           <img src={ChangePasswordPeople} alt="Pessoas" />
         </div>
@@ -58,6 +58,7 @@ export default function RecoverPasswordPage() {
                     type="password"
                     placeholder="*********"
                     className="input-field"
+                    data-testid="input-nova-senha"
                   />
                   <span>{errors.novaSenha?.message}</span>
                 </div>
@@ -70,6 +71,7 @@ export default function RecoverPasswordPage() {
                     {...register("confirmacaoNovaSenha", {required: true} )}
                     placeholder="*********"
                     className="input-field"
+                    data-testid="input-repita-senha"
                   />
                   <span>{errors.confirmacaoNovaSenha?.message}</span>
                 </div>

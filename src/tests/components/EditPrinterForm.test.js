@@ -1,13 +1,8 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import userEvent from '@testing-library/user-event';
 import EditPrinterForm, { fieldLabels, testObject } from '../../components/forms/EditPrinterForm';
 import { MemoryRouter } from 'react-router-dom';  // Adicionado para fornecer contexto de roteamento
-
-jest.mock('axios', () => ({
-  // Sua implementação mock, se necessário
-}));
 
 describe('EditPrinterForm', () => {
   beforeEach(() => {
@@ -16,7 +11,7 @@ describe('EditPrinterForm', () => {
 
   test('renders all form fields and buttons with testObject values', () => {
     render(
-      <MemoryRouter>  {/* Envolva o componente em MemoryRouter */}
+      <MemoryRouter>
         <EditPrinterForm />
       </MemoryRouter>
     );
@@ -30,6 +25,4 @@ describe('EditPrinterForm', () => {
     expect(screen.getByRole('button', { name: /cancelar/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /editar/i })).toBeInTheDocument();
   });
-
-  // ... outros testes ...
 });

@@ -244,7 +244,7 @@ export default function EditUserForm(){
           <div id="edit-user-input-line">
               <div id="edit-user-input-box">
                   <label htmlFor="unidadePai">Unidade Pai<span>*</span></label>
-                  <select {...register("unidade_pai")} onChange={handleWorkstationChange}>
+                  <select data-testid="unidadePai" {...register("unidade_pai")} onChange={handleWorkstationChange}>
                       <option value="">Selecione a Unidade de policia</option>
                       {unidadeList?.map((unidade) => (
                       <option key={unidade.id} value={unidade.id}>
@@ -257,7 +257,7 @@ export default function EditUserForm(){
                 {displayLotacoes && (
                   <>
                     <label htmlFor="unidadeFilha">Unidade Filha<span>*</span></label>
-                    <select {...register("unidade_id", {required: "Lotação é obrigatória"})}>
+                    <select data-testid="unidadeFilha"{...register("unidade_id", {required: "Lotação é obrigatória"})}>
                         <option value="">Selecione a Lotação</option>
                         {unidadeFilhoList?.map((unidade) => (
                         <option key={unidade.id} value={unidade.id}>
@@ -307,7 +307,7 @@ export default function EditUserForm(){
           </button>
           <button className="edit-user-form-button" type="submit" id="edit-user-register-bnt" disabled={isSubmitting || !isValid}>
             {isSubmitting && (
-              <ReloadIcon id="animate-spin"/>
+              <ReloadIcon id="animate-spin" data-testid="animate-spin"/>
             )}
 
             {!isSubmitting ? 'SALVAR': "SALVANDO"}
