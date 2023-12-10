@@ -30,45 +30,68 @@ export default function RegisterPrinterForm() {
   const [unidades, setUnidades] = useState([]);
   const [padroes, setPadroes] = useState([]);
   const [unidadeInList, setUnidadeInList] = useState([]);
+  
+  useEffect( () => {
+    async function setData() {
+        try {
+            const [dataUnidades, dataPadrao, dataUsers] = await Promise.all([
+              getUnidades(),
+              getPadroes(),
+              getUsers()
+            ]);
+            
+            if (dataUnidades.type ==='success' && dataUnidades.data) {
+              setUnidades(dataUnidades.data);
+            }
 
-  useEffect(() => {
-    fetchData();
+            if (dataPadrao.type ==='success' && dataPadrao.data) {
+              setPadroes(dataPadrao.data);
+            }
+            if (dataUsers.type ==='success' && dataUsers.data) {
+              const locadoras = dataUsers.data.filter(user => 
+                user.cargos.includes("LOCADORA")
+              );
+              setLocadoras(locadoras);
+            }
+
+        } catch (error) {
+            console.error('Erro ao obter opções do serviço:', error);
+          }
+    }
+    setData();
   }, []);
 
-  const fetchData = async () => {
-    try {
-      const [dataUnidades, dataPadrao] = await Promise.all([
-        getUnidades(),
-        getPadroes(),
-        getUsers()
-      ]);
-      
-      if (dataUnidades.type ==='success' && dataUnidades.data) {
-        setUnidades(dataUnidades.data);
-      }
-
-      if (dataPadrao.type ==='success' && dataPadrao.data) {
-        setPadroes(dataPadrao.data);
-      }
-    } catch (error) {
-      console.error('Erro ao obter opções do serviço:', error);
+  const handleWorkstationChange = (event) => {
+    if (event.target.value) {
+        const selectedUnit = unidades.find(uni => uni.id === event.target.value);
+        if (selectedUnit) {
+            const combinedList = [selectedUnit, ...selectedUnit.child_workstations];
+            setUnidadeInList(combinedList);
+        } else {
+            setUnidadeInList([]);
+        }
+    } else {
+        setUnidadeInList([]);
     }
   };
 
-  const handleWorkstationChange = (event) => {
-    const selectedUnit = unidades.find(uni => uni.id === event.target.value) || {};
-    setUnidadeInList(selectedUnit.child_workstations || []);
-  };
-
   const registerPrinterSchema = getPrinterSchema(fieldLabels);
-  const { register, handleSubmit, formState: { errors, isValid, isSubmitting }, reset } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+    reset,
+  } = useForm({
     resolver: yupResolver(registerPrinterSchema),
     mode: "onChange",
   });
 
-  const onSubmit = async (data) => {
-    const transformedData = transformData(data);
-    const response = await createImpressora(transformedData);
+  const onSubmit = async (data) => {    
+    data.dataInstalacao =  new Date(data.dataInstalacao).toISOString();
+    data.dataContadorRetirada =  new Date(data.dataContadorRetirada).toISOString();
+    data.dataUltimoContador =  new Date(data.dataUltimoContador).toISOString();
+    console.log(data);
+    const response = await createImpressora(data);
     if (response.type === "success") {
       toast.success("Impressora criada com sucesso!");
       reset();
@@ -77,67 +100,6 @@ export default function RegisterPrinterForm() {
     }
   };
 
-  const transformData = (data) => {
-    return {
-      ...data,
-      dataInstalacao: new Date(data.dataInstalacao).toISOString(),
-      dataContadorRetirada: new Date(data.dataContadorRetirada).toISOString(),
-      dataUltimoContador: new Date(data.dataUltimoContador).toISOString()
-    };
-  };
-  const renderInput = (key, label) => {
-    if (key === "padrao_id") {
-      return renderSelectPadraoId(key);
-    } else if (key === "unidadePai") {
-      return renderSelectUnidadePai(key);
-    } else if (key === "unidadeId") {
-      return renderSelectUnidadeId(key);
-    } else {
-      return renderDefaultInput(key, label);
-    }
-  };
-
-  const renderSelectPadraoId = (key) => (
-    <select {...register(key)}>
-      <option value="">Selecione padrão</option>
-      {padroes.map(option => (
-        <option key={option.id} value={option.id}>
-          {option.tipo}, {option.marca}, {option.modelo}
-        </option>
-      ))}
-    </select>
-  );
-
-  const renderSelectUnidadePai = (key) => (
-    <select {...register(key)} onChange={handleWorkstationChange}>
-      <option value="">Selecione a unidade pai</option>
-      {unidades.map(option => (
-        <option key={option.id} value={option.id}>
-          {option.name}
-        </option>
-      ))}
-    </select>
-  );
-
-  const renderSelectUnidadeId = (key) => (
-    <select {...register(key)}>
-      <option value="">Selecione a unidade filho</option>
-      {unidadeInList.map(option => (
-        <option key={option.id} value={option.id}>
-          {option.name}
-        </option>
-      ))}
-    </select>
-  );
-
-  const renderDefaultInput = (key, label) => (
-    <input
-      {...register(key)}
-      type={key.includes('data') ? 'date' : key === "ultimoContador" || key === "contadorRetiradas" || key === "contadorInstalacao" ? 'number' : 'text'}
-      placeholder={label.charAt(0).toUpperCase() + label.slice(1)}
-    />
-  );
-  
   return (
     <div id="registerPrinter-card">
       <header id="form-header">Cadastrar impressora</header>
