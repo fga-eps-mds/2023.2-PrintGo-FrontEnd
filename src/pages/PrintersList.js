@@ -29,6 +29,7 @@ export default function PrintersList() {
             ]) 
             if (dataPrinters.type ==='success' && dataPrinters.data) {
               setPrinters(dataPrinters.data);
+              console.log(dataPrinters.data);
             }
         } catch (error) {
             console.error('Erro ao obter lista de impressoras:', error);

@@ -4,6 +4,7 @@ import ellipse from '../assets/login_ellipse.svg';
 import voltar_vector from '../assets/voltar_vector.svg';
 import Navbar from "../components/navbar/Navbar";
 import { Link, useParams } from "react-router-dom";
+import { extractDate } from "../utils/utils";
 
 
 export default function ViewPrinter(){
@@ -17,12 +18,12 @@ export default function ViewPrinter(){
         espacoLivre: "",
         contadorInstalacao: "Contador de instalação",
         dataInstalacao: "Data de instalação",
-        contadorRetirada: "Contador de retirada",
-        dataRetirada: "Data de retirada",
+        contadorRetiradas: "Contador de retirada",
+        dataContadorRetirada: "Data de retirada",
         ultimoContador: "Último contador",
         dataUltimoContador: "Data do último contador",
         circunscricao: "Circunscrição",
-        unidade: "Unidade"
+        unidadeId: "Unidade"
     }
 
     // Estado para armazenar os dados da impressora.
@@ -63,7 +64,7 @@ export default function ViewPrinter(){
                         {Object.entries(infoLabels).map(([key, label]) => (
                           <div key={key} id="viewprinter-info-box">
                             <label>{label}</label>
-                            <p>{printer?.[key]}</p>
+                            <p>{key.includes("data") ? extractDate(printer?.[key]) : printer?.[key]}</p>
                           </div>
                         ))}
                       </div>

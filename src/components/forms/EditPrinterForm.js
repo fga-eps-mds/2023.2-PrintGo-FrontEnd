@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "../../style/components/editPrinterForms.css";
@@ -38,10 +38,12 @@ export default function EditPrinterForm({ printer }) {
   const [unidadeList, setUnidadeList] = useState([]);
   const [padroes, setPadroes] = useState([]);
   const [unidadesFilha, setUnidadesFilhas] = useState([]);
-  const [requestStatus, setRequestStatus] = useState("LOADING");
+  const [padrao, setPadrao] = useState(printerObject.padrao_id);
+  const [unidade, setUnidade] = useState(printerObject.unidadeId);
+  const [inicializou, setInicializou] = useState(false);	
 
   const editPrinterSchema = getPrinterSchema(fieldLabels);
-  const { register, setValue, handleSubmit, formState: { errors }, reset } = useForm({
+  const { register, setValue, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm({
     resolver: yupResolver(editPrinterSchema),
     mode: "onSubmit"
   });
@@ -63,13 +65,19 @@ export default function EditPrinterForm({ printer }) {
         }
     }
     setData();
-    Object.entries(printerObject).forEach(([key, value]) => {
-      if (key.includes('data')) {
-        value = formatDate(value)
-      }
-      setValue(key, value);
-    });
   }, []);
+
+  useEffect(() => {
+    if (padroes.length > 0 && unidadeList.length > 0 && !inicializou) {
+      Object.entries(printerObject).forEach(([key, value]) => {
+        if (key.includes('data')) {
+          value = formatDate(value);
+        }
+        setValue(key, value);
+      });
+      setInicializou(true);
+    }
+  }, [setValue, printerObject]);
 
   const handleWorkstationChange = (event) => {
     if (event.target.value) {
@@ -86,13 +94,20 @@ export default function EditPrinterForm({ printer }) {
     }
   };
 
+
   const onSubmit = async (data) => {
-    data.padrao_id = data.padrao.id
-    console.log(data);
+    data.padrao_id = padrao;
+    data.unidadeId = unidade;
+    data.dataInstalacao =  new Date(data.dataInstalacao).toISOString();
+    data.dataContadorRetirada =  new Date(data.dataContadorRetirada).toISOString();
+    data.dataUltimoContador =  new Date(data.dataUltimoContador).toISOString();
     const response = await editImpressora(data);
     if (response.type === "success") {
       toast.success("Impressora editada com sucesso!");
-      navigate("/impressorascadastradas");
+      setTimeout(() => {
+        reset();
+        navigate("/impressorascadastradas");
+    }, 1000);
     } else {
       toast.error("Erro ao editar impressora!");
     }
@@ -119,15 +134,15 @@ export default function EditPrinterForm({ printer }) {
                   <span>*</span>
                 </label>
                 {key === "padrao_id" ? (
-                  <select {...register(key, { defaultValue: printerObject.padrao_id})}>
+                  <select {...register(key)} onChange={(e) => setPadrao(e.target.value)}>
                     {padroes.map(option => (
-                      <option key={option.id} value={option.id}>
+                      <option key={option.id} value={option.id} >
                         {option.tipo}, {option.marca}, {option.modelo}
                       </option>
                     ))}
                   </select>                      
                 ) : key === "unidadePai" ? (
-                  <select {...register(key, { defaultValue: printerObject.unidadeId})} onChange={handleWorkstationChange}>
+                  <select onChange={handleWorkstationChange}>
                     {unidadeList.map(option => (
                       <option key={option.id} value={option.id}>
                         {option.name}
@@ -135,7 +150,7 @@ export default function EditPrinterForm({ printer }) {
                     ))}
                   </select>
                 ) : key === "unidadeId" ? (
-                  <select {...register(key, { defaultValue: printerObject.unidadeId})}>
+                  <select {...register(key)} onChange={(e) => setUnidade(e.target.value)}>
                     {unidadesFilha.map(option => (
                       <option key={option.id} value={option.id}>
                         {option.name}
@@ -157,7 +172,7 @@ export default function EditPrinterForm({ printer }) {
         </div>
         <div id="buttons">
           <button className="form-button" type="button" id="cancelar-bnt">CANCELAR</button>
-          <button className="form-button" type="submit" id="editar-bnt">EDITAR</button>
+          <button className="form-button" type="submit" id="editar-bnt" disabled={isSubmitting}>EDITAR</button>
         </div>
       </form>
       <div className="elipse-signup">

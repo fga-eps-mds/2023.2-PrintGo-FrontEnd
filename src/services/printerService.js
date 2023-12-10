@@ -67,23 +67,22 @@ export const createImpressora = async (printer) => {
 };
 
 export const editImpressora = async (printer) => {
-  const data = {
-    ip: printer.ip,
-    padrao_id: printer.padrao_id,
-    numeroSerie: printer.numeroSerie,
-    codigoLocadora: printer.codigoLocadora,
-    contadorInstalacao: printer.contadorInstalacao,    
-    dataInstalacao: printer.dataInstalacao,
-    contadorRetiradas: printer.contadorRetiradas,
-    dataContadorRetirada: printer.dataContadorRetirada,
-    ultimoContador: printer.ultimoContador,
-    dataUltimoContador: printer.dataUltimoContador,
-    unidadeId: printer.unidadeId,
-  }
   try {
-    const response = await api.put(`/printer/impressora/${printer.id}`, data);
-    console.log(response);
-    if(response.status !== 201) {
+    const data = {
+      ip: printer.ip,
+      padrao_id: printer.padrao_id,
+      numeroSerie: printer.numeroSerie,
+      codigoLocadora: printer.codigoLocadora,
+      contadorInstalacao: printer.contadorInstalacao,    
+      dataInstalacao: printer.dataInstalacao,
+      contadorRetiradas: printer.contadorRetiradas,
+      dataContadorRetirada: printer.dataContadorRetirada,
+      ultimoContador: printer.ultimoContador,
+      dataUltimoContador: printer.dataUltimoContador,
+      unidadeId: printer.unidadeId,
+    }
+    const response = await api.patch(`/printer/impressora/${printer.id}`, data);
+    if(response.status !== 200) {
       return { type: 'error', data: response.data};
     }
     return { type: 'success', data: response.data};
