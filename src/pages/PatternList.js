@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import "../style/pages/patternList.css";
 import { Link } from "react-router-dom";
 import Search from '../assets/Search.svg';
@@ -7,40 +7,32 @@ import Engine from '../assets/engine.svg';
 import Input from '../components/Input'; 
 import Modal from '../components/ui/Modal';
 import Navbar from "../components/navbar/Navbar";
+import { getPadroes, togglePattern } from "../services/printerservice";
 
 export default function PatternList() {
-  
+
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
   const [modalOpen, setModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalBodytext, setModalBodytext] = useState('');
   const [selectedPattern, setSelectedPattern] = useState();
-  const [patterns, setPatterns] = useState(
-    [
-      {
-        id_padrao: 1,
-        tipo: "Multifuncional Colorida", 
-        modelo: "PIXMA MG3620",
-        marca: "Canon",
-        status: "ATIVO"
-      },
-      {
-        id_padrao: 2,
-        tipo: "Laser",
-        modelo: "LaserJet Pro M404dn",
-        marca: "HP",
-        status: "ATIVO"
-      },
-      {
-        id_padrao: 3,
-        tipo: "Jato de Tinta",
-        modelo: "EcoTank L3150",
-        marca: "Epson",
-        status: "DESATIVADO"
-      },
-    ]
-  )
+  const [patterns, setPatterns] = useState([]);
+
+  useEffect( () => {
+    async function fetchData() {
+      try {
+        const data = await getPadroes();
+        if (data.type === 'success' && data.data) {
+          setPatterns(data.data);
+        }
+      } catch (error) {
+        console.error('Erro ao obter lista de padrões', error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   // modal para desativar impressora
   const modalDeactivatePattern = (pattern) => {
@@ -57,22 +49,30 @@ export default function PatternList() {
     setModalBodytext("Você tem certeza que deseja reativar o padrão?");
     setModalOpen(true);
   }
-
-  //ativa e desativa impressora
-  const patternToggle = () => {
-    if (patterns && selectedPattern) {
-       const updatedPattern = patterns.map(pattern => {
-        if (pattern.id_padrao === selectedPattern.id_padrao) {
-          return { ...pattern, ativada: !pattern.ativada };
+  
+  //ativa e desativa padrão.
+  async function patternToggle() {
+    try {
+      if (selectedPattern) {
+        const data = await togglePattern(selectedPattern.id, selectedPattern.status);
+        console.log(data);
+        
+        if (data.type === 'success') {
+          const pattern = patterns.find(pattern => pattern.id === selectedPattern.id);
+          if (pattern.status === 'ATIVO') {
+            pattern.status = 'DESATIVADO';
+          } else {
+            pattern.status = 'ATIVO';
+          }
+          setModalOpen(false);
         }
-        return pattern;
-      });
-      
-      setPatterns(updatedPattern);
+      } else {
+        console.error("Pattern not selected");
+      }
+    } catch (error) {
       setModalOpen(false);
     }
-  };
-
+  }
 
   //qual filtro esta sendo aplicado
   function filterBeingShown(filter){
@@ -154,7 +154,9 @@ export default function PatternList() {
           {filteredPatterns.map(pattern => (
             <div key={pattern.id_padrao} className="patternlist-pattern" style={{ color: pattern.status === "ATIVO" ? '' : 'gray' }}>
               <div className="patternlist-model">
-                <h4>Padrão {pattern.marca} - {pattern.modelo} - {pattern.tipo}</h4>
+                <h4>
+                  <Link to={`/visualizarpadrao/${btoa(JSON.stringify(pattern))}`}>Padrão {pattern.marca} - {pattern.modelo} - {pattern.tipo}</Link>
+                </h4>
                 {pattern.status === 'DESATIVADO' && <h5>Desativado</h5>}
               </div>
               
@@ -166,7 +168,7 @@ export default function PatternList() {
                         ? <Link to="#" tabIndex="0" onClick={() => modalDeactivatePattern(pattern)}>Desativar</Link>
                         : <Link to="#" tabIndex="0" onClick={() => modalActivePattern(pattern)}>Ativar</Link>
                       }
-                      <Link to="/editarpadrao" tabIndex="0">Editar</Link>
+                      <Link to={`/editarpadrao/${btoa(JSON.stringify(pattern))}`} tabIndex="0">Editar</Link>
                     </div>
                 </div> 
               </div>
