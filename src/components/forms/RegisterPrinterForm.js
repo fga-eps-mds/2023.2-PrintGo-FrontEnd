@@ -85,10 +85,59 @@ export default function RegisterPrinterForm() {
       dataUltimoContador: new Date(data.dataUltimoContador).toISOString()
     };
   };
-
-  const renderInputField = (key, label) => {
-    // Lógica de renderização do campo de entrada
+  const renderInput = (key, label) => {
+    if (key === "padrao_id") {
+      return renderSelectPadraoId(key);
+    } else if (key === "unidadePai") {
+      return renderSelectUnidadePai(key);
+    } else if (key === "unidadeId") {
+      return renderSelectUnidadeId(key);
+    } else {
+      return renderDefaultInput(key, label);
+    }
   };
+
+  const renderSelectPadraoId = (key) => (
+    <select {...register(key)}>
+      <option value="">Selecione padrão</option>
+      {padroes.map(option => (
+        <option key={option.id} value={option.id}>
+          {option.tipo}, {option.marca}, {option.modelo}
+        </option>
+      ))}
+    </select>
+  );
+
+  const renderSelectUnidadePai = (key) => (
+    <select {...register(key)} onChange={handleWorkstationChange}>
+      <option value="">Selecione a unidade pai</option>
+      {unidades.map(option => (
+        <option key={option.id} value={option.id}>
+          {option.name}
+        </option>
+      ))}
+    </select>
+  );
+
+  const renderSelectUnidadeId = (key) => (
+    <select {...register(key)}>
+      <option value="">Selecione a unidade filho</option>
+      {unidadeInList.map(option => (
+        <option key={option.id} value={option.id}>
+          {option.name}
+        </option>
+      ))}
+    </select>
+  );
+
+  const renderDefaultInput = (key, label) => (
+    <input
+      {...register(key)}
+      type={key.includes('data') ? 'date' : key === "ultimoContador" || key === "contadorRetiradas" || key === "contadorInstalacao" ? 'number' : 'text'}
+      placeholder={label.charAt(0).toUpperCase() + label.slice(1)}
+    />
+  );
+  
   return (
     <div id="registerPrinter-card">
       <header id="form-header">Cadastrar impressora</header>
