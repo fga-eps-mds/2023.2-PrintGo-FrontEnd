@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+
 import { ReloadIcon } from "@radix-ui/react-icons";
 import elipse6 from "../../assets/elipse6.svg";
 import { createImpressora, getPadroes } from "../../services/printerService";
@@ -26,9 +27,12 @@ const fieldLabels = {
   unidadeId: "Unidade Filho",
 };
 
+
+
 export default function RegisterPrinterForm() {
   const [unidades, setUnidades] = useState([]);
   const [padroes, setPadroes] = useState([]);
+  const [locadora, setLocadoras] = useState([]);
   const [unidadeInList, setUnidadeInList] = useState([]);
   
   useEffect( () => {
