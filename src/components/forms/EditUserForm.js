@@ -10,6 +10,7 @@ import "../../style/components/editUserForms.css";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { Link, useNavigate } from 'react-router-dom';
 import { decodeToken } from "react-jwt";
+import '@testing-library/jest-dom/extend-expect';
 
 
 const editUserSchema = yup.object().shape({
@@ -118,6 +119,7 @@ export default function EditUserForm(){
   }, [memoUserData, memoUnidadeList, setValue]);
   
   const onSubmit = async (data) =>  {
+    console.log(data);
 
     setTimeout(() => {
       console.log("3 segundos se passaram.");
@@ -151,7 +153,7 @@ export default function EditUserForm(){
   };
 
   return(
-    <div id="edit-user-card">
+    <div id="edit-user-card" data-testid="edit-user-card">
       <header id="edit-user-form-header">
         Editar usuário
       </header>
@@ -187,7 +189,7 @@ export default function EditUserForm(){
 
           <div id="edit-user-input-line">
             <div id="edit-user-input-box">
-              <label htmlFor="confirmarEmail" >Senha</label>
+              <label htmlFor="edit-user-change-password" >Senha</label>
               <button className="form-button" id="edit-user-change-password" type="button" onClick={redirectToChangePassword}>
                 MUDAR SENHA
               </button>
@@ -198,7 +200,7 @@ export default function EditUserForm(){
           <div id="edit-user-input-line">
               <div id="edit-user-input-box">
                   <label htmlFor="unidadePai">Unidade Pai<span>*</span></label>
-                  <select {...register("unidade_pai")} onChange={handleWorkstationChange}>
+                  <select data-testid="unidadePai" {...register("unidade_pai")} onChange={handleWorkstationChange}>
                       <option value="">Selecione a Unidade de policia</option>
                       {unidadeList?.map((unidade) => (
                       <option key={unidade.id} value={unidade.id}>
@@ -211,7 +213,7 @@ export default function EditUserForm(){
                 {displayLotacoes && (
                   <>
                     <label htmlFor="unidadeFilha">Unidade Filha<span>*</span></label>
-                    <select {...register("unidade_id", {required: "Lotação é obrigatória"})}>
+                    <select data-testid="unidadeFilha"{...register("unidade_id", {required: "Lotação é obrigatória"})}>
                         <option value="">Selecione a Lotação</option>
                         {unidadeFilhoList?.map((unidade) => (
                         <option key={unidade.id} value={unidade.id}>
@@ -233,7 +235,7 @@ export default function EditUserForm(){
           </button>
           <button className="edit-user-form-button" type="submit" id="edit-user-register-bnt" disabled={!isValid || isSubmitting}>
             {isSubmitting && (
-              <ReloadIcon id="animate-spin"/>
+              <ReloadIcon id="animate-spin" data-testid="animate-spin"/>
             )}
 
             {!isSubmitting ? 'SALVAR': "SALVANDO"}

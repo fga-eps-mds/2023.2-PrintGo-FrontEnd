@@ -8,7 +8,7 @@ export default function PatternPrinter() {
   return (
     <>
       <Navbar />
-      <div id="register-printer-pattern-container">
+      <div id="register-printer-pattern-container" data-testid="register-printer-pattern-container">
         <img alt="man" src={patternPrinter} />
         <PrinterPatternForm />
       </div>
