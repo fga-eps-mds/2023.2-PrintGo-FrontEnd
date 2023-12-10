@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 export default function ViewPattern() {
 
-  const { patternData } = useParams();
+  const { padrao } = useParams();
 
   const infoLabels = {
     tipo: "Tipo",
@@ -16,24 +16,25 @@ export default function ViewPattern() {
   }
 
   const oidLabels = {
-    oid_modelo: "Modelo de impressora",
-    oid_serial: "Número de série",
-    oid_firmware: "Versão de Firmware",
-    oid_tempo: "Tempo ativo do sistema",
-    oid_digitalizacoes: "Total de digitalizações",
-    oid_copiasPB: "Total de cópias P&B",
-    oid_copias_color: "Total de cópias color",
-    oid_impressoesPB: "Total de impressões P&B",
-    oid_impressoes_color: "Total de impressões color",
-    oid_total: "Total geral",
-    oid_ip: "Endereço de IP",
+    mdeoloImpressora: "Modelo de impressora",
+    numeroSerie: "Número de série",
+    versaoFirmware: "Versão de Firmware",
+    tempoAtivoSistema: "Tempo ativo do sistema",
+    totalDigitalizacoes: "Total de digitalizações",
+    totalCopiasPB: "Total de cópias P&B",
+    totalCopiasColoridas: "Total de cópias color",
+    totalImpressoesPb: "Total de impressões P&B",
+    totalCopiasColoridas: "Total de impressões color",
+    totalGeral: "Total geral",
+    enderecoIp: "Endereço de IP",
   }
 
   const [pattern, setPattern] = useState()
 
   useEffect(() => {
     try {
-      const patternString = atob(patternData);
+      console.log("Pattern Data:", padrao);
+      const patternString = atob(padrao);
       const patternObject = JSON.parse(patternString);
       setPattern(patternObject);
     } catch (error) {
@@ -52,7 +53,7 @@ export default function ViewPattern() {
               
               <header className="viewpattern-card-header">
                 <img alt="" src={voltar_vector}></img>
-                <a href="">Voltar</a>
+                <a href="/padroescadastrados">Voltar</a>
               </header>
 
               <div className="viewpattern-info-line">
