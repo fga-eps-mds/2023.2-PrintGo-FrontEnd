@@ -33,6 +33,7 @@ export default function ListUsers() {
         
         if (data.type === 'success' && data.data) {
           setUsers(data.data);
+          console.log(data.data);
         } else {
           toast.error('Erro ao obter os usuários');
         }
@@ -59,6 +60,7 @@ export default function ListUsers() {
 
       } catch (error) {
         console.error('Erro ao obter opções do serviço:', error);
+        toast.error('Erro ao obter as unidades');
       }
     }
     fetchWorkStationData();
@@ -147,7 +149,7 @@ export default function ListUsers() {
 
       <>
         <Navbar />
-        <div className="listusers-container">
+        <div className="listusers-container" data-testid="listusers-container">
           <div className="listusers-header">
 
             <div className="listusers-title">
@@ -155,12 +157,12 @@ export default function ListUsers() {
               <h4>{filterBeingShown(filter)}</h4>
             </div>
             
-            <div className="listusers-search">
+            <div className="listusers-search" data-testid="listusers-search">
 
               <Input onChange={(e) => setSearch(e.target.value)}/>
               <img alt="search" src={Search} />
 
-              <div className="listusers-filter">
+              <div className="listusers-filter" data-testid="listusers-filter">
                 <img alt="filter" src={Filter} />
                 <div className="listusers-filter-dropdown-container">
                   <div className="listusers-filter-dropdown">
@@ -206,7 +208,7 @@ export default function ListUsers() {
                 <img alt="engine" src={Engine}/>
                 <div className="listusers-user-dropdown-container">
                   <div className="listusers-user-dropdown">
-                    <Link to="#" tabIndex="0" onClick={() => modalDeleteUser(user)} >Excluir</Link>
+                    <Link to="#" tabIndex="0" onClick={() => modalDeleteUser(user)} data-testid="dropdown-user-excluir">Excluir</Link>
                     <Link to={`/editarusuario/${user.id}`} tabIndex="0" >Editar</Link>
                   </div>
                 </div>
