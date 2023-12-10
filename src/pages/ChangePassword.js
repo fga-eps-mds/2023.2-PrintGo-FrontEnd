@@ -1,56 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
 import "../style/pages/changePassword.css";
 import ChangePasswordPeople from "../assets/change-password-people.svg";
 import elipse6 from "../assets/elipse6.svg";
 import { changePassword } from "../api/api";
 import Navbar from "../components/navbar/Navbar";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { ReloadIcon } from "@radix-ui/react-icons";
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { getPasswordSchema } from "../components/utils/YupSchema";
+
+const passwordSchema = getPasswordSchema();
+
 
 export default function ChangePassword() {
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [passwordError, setPasswordError] = useState(null);
-  const [passwordConfirmationError, setPasswordConfirmationError] = useState(null);
-  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
 
-  function isValidPassword(password) {
-    const trimmedPassword = password.trim()
-    return trimmedPassword === ''
-  }
-
-  const handlePasswordChange = (e) => {
-    if(!isValidPassword(e.target.value)){
-      setPasswordError("Senha inválida")
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting }, 
+    reset
+  } = useForm({resolver: yupResolver(passwordSchema), mode: "onChange"})
+  
+  const submitChangePassword = async (data) => {
+    const response = await changePassword(data);
+    if (response.type === 'error') {
+      toast.error("Erro não foi possível alterar a senha! por favor tente novamente");
     } else {
-      setPasswordError(null)
-    }
-
-    setPassword(e.target.value)
-  }
-
-  const handlePasswordConfirmationChange = (e) => {
-    if(!isValidPassword(e.target.value)){
-      setPasswordConfirmationError("Confirmação de Senha inválida")
-    } else {
-      setPasswordConfirmationError(null)
-    }
-
-    setPasswordConfirmation(e.target.value)
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await changePassword(password, passwordConfirmation);
-
-      if (response) {
-        setSuccess(true);
-        setPassword("");
-        setPasswordConfirmation("");
-      }
-    } catch (error) {
-      console.log(error);
-      setPasswordError("Erro ao trocar de senha");
+      toast.success("Senha alterada com sucesso! redirecionando");
+      setTimeout(() => {
+        reset();
+        navigate('/');
+      }, 3000); 
     }
   };
 
@@ -58,50 +41,48 @@ export default function ChangePassword() {
     <>
       <Navbar />
       <div className="change-password-container">
-        <div className="image-container">
+        <div className="change-password-image-container">
           <img src={ChangePasswordPeople} alt="Pessoas" />
         </div>
-        <div className="form-container">
-          <form className="form" onSubmit={handleSubmit}>
-            <div className="input-container">
-              <div className="form-title">Mudar senha</div>
-              <div className="form-group">
+        <div className="change-password-form-container">
+          <form className="change-password-form" onSubmit={handleSubmit(submitChangePassword)}>
+            <div className="change-password-input-container">
+              <div className="change-password-form-title">Mudar senha</div>
+              <div className="change-password-form-group">
                 <div className="input-form-container">
-                  <label className="label-change-password">Nova Senha</label>
+                  <label htmlFor="label-change-password" className="label-change-password">Nova Senha</label>
                   <input
+                    {...register("novaSenha", {required: true} )}
                     type="password"
-                    name="password"
-                    placeholder="*****************"
+                    placeholder="*********"
                     className="input-field"
-                    value={password}
-                    onChange={handlePasswordChange}
                   />
+                  <span>{errors.novaSenha?.message}</span>
                 </div>
                 <div className="input-form-container">
-                  <label className="label-change-password">
+                  <label htmlFor="label-change-password" className="label-change-password">
                     Repita a senha
                   </label>
                   <input
                     type="password"
-                    name="passwordConfirmation"
-                    placeholder="******************"
+                    {...register("confirmacaoNovaSenha", {required: true} )}
+                    placeholder="*********"
                     className="input-field"
-                    value={passwordConfirmation}
-                    onChange={handlePasswordConfirmationChange}
                   />
+                  <span>{errors.confirmacaoNovaSenha?.message}</span>
                 </div>
               </div>
-              <div className="button-container">
+              <div className="change-password-button-container">
                 <button
-                  className="button"
                   type="submit"
+                  disabled={!isValid || isSubmitting}
                 >
+                  {isSubmitting && (
+                            <ReloadIcon id="animate-spin"/>
+                  )}
                   Confirmar
                 </button>
               </div>
-              {passwordError && <h5 style={{ color: "red" }}>{passwordError}</h5>}
-              {passwordConfirmationError && <h5 style={{ color: "red" }}>{passwordConfirmationError}</h5>}
-              {success && <h5 style={{ color: "green" }}>Senha atualizada!</h5>}
             </div>
           </form>
 

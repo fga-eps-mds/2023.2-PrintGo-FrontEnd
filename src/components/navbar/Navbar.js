@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Importe o Link
+import { Link, useNavigate } from "react-router-dom";
 import "../../style/components/navbar.css";
-import logo from "../../assets/logo 3.svg";
+import logo from "../../assets/logo_navbar.svg";
+import LoggedUser from "../../assets/loggeduser.svg";
+import { decodeToken } from "react-jwt";
 
 import { FiChevronDown } from "react-icons/fi";
 
 const Navbar = () => {
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [printerDropdownOpen, setPrinterDropdownOpen] = useState(false);
+
+  let navigate = useNavigate();
 
   const toggleUserDropdown = () => {
     setUserDropdownOpen(!userDropdownOpen)
@@ -17,45 +21,99 @@ const Navbar = () => {
     setPrinterDropdownOpen(!printerDropdownOpen)
   }
 
+  let user = null;
+  const token = localStorage.getItem("jwt");
+  if (token) {
+    user = decodeToken(token);
+  }
+
+  const userLogOut = async (e) => {
+    e.preventDefault();
+    try{
+      localStorage.clear();
+      navigate("/");
+    }
+    catch(error){
+      console.log(error)
+    }
+    
+      
+  }
+
   return (
     <div className="container-navbar">
       <img alt="" src={logo}></img>
 
       <div className="button-navbar">
-        <button className="home-navbar">
-          <Link to="/">Home</Link> 
+        <button>
+          <Link to="/">Home</Link>
         </button>
-        <button className="aboutUs-navbar">
+        <button>
           <Link to="/quemsomos">Quem Somos</Link>
         </button>
-        <button className="contact-navbar">
+        <button>
           <Link to="/contato">Contato</Link>
         </button>
+
+        { user && (
+          <>
+            { user.cargos.includes('ADMIN') && (
+              <div className="navbar-users">
+                <button className="navbar-users-button" onClick={toggleUserDropdown}>
+                  <h4>Usuários</h4> 
+                  <FiChevronDown />
+                  {userDropdownOpen && (
+                    <div className="navbar-users-dropdown">
+                      <Link to="/cadastro">Cadastro de usuário</Link>
+                    </div>
+                  )}
+                </button>
+              </div>
+            )}
+
+            <div className="navbar-printers">
+              <button className="navbar-printers-button" onClick={togglePrinterDropdown}>
+                <h4>Impressoras</h4> 
+                <FiChevronDown />
+                {printerDropdownOpen && (
+                  <div className="navbar-printers-dropdown">
+                    <Link to="/cadastroimpressora">Cadastro de impressora</Link>
+                    <Link to="/padraoimpressora">Cadastro de padrão de impressora</Link>
+                    <Link to="/impressorascadastradas">Impressoras cadastradas</Link>
+                    <Link to="/padroescadastrados">Padrões de impressora cadastrados</Link>
+                  </div>
+                )}
+              </button>
+            </div>
+          </>
+        )}
+
       </div>
 
-      <div className="dropdown-navbar-users">
-        <button className="users-navbar" onClick={toggleUserDropdown}>
-          Usuários <FiChevronDown />
-          {userDropdownOpen && (
-            <div className="dropdown-users-navbar">
-              <Link to="/cadastro">Cadastro de usuário</Link>
-              <Link to="#">Edição de usuário</Link>
-            </div>
-          )}
-        </button>
-      </div>
+      { user && (
+        <div className="navbar-user-info">
+          <div className="navbar-user-message">
+            <img alt="loggeduser" src={LoggedUser}/>
+            <Link to={"/editarusuario"}>Olá, {user.nome}!</Link>
+          </div>
+          <Link className="navbar-user-leave" data-testid="navbar-leave-button" onClick={userLogOut}>
+            <button>
+              Sair
+            </button>
+          </Link>
+        </div>
+      )}
 
-      <div className="dropdown-navbar-printers">
-        <button className="printers-navbar" onClick={togglePrinterDropdown}>
-          Impressoras <FiChevronDown />
-          {printerDropdownOpen && (
-            <div className="dropdown-printers-navbar">
-              <Link to="#">Cadastro de impressora</Link>
-              <Link to="#">Edição de impressora</Link>
-            </div>
-          )}
-        </button>
-      </div>
+      { !user && (
+        <div className="navbar-login">
+          <Link to="/login" className="button-login-navbar">
+            <button>
+              <h4>Login</h4>
+            </button>
+          </Link>
+        </div>
+      )}
+
     </div>
   );
 };
