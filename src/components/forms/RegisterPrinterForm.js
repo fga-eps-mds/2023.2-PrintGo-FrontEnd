@@ -1,7 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-
 import { ReloadIcon } from "@radix-ui/react-icons";
 import elipse6 from "../../assets/elipse6.svg";
 import { createImpressora, getPadroes } from "../../services/printerService";
@@ -27,18 +26,15 @@ const fieldLabels = {
   unidadeId: "Unidade Filho",
 };
 
-
-
 export default function RegisterPrinterForm() {
   const [unidades, setUnidades] = useState([]);
   const [padroes, setPadroes] = useState([]);
-  const [locadora, setLocadoras] = useState([]);
   const [unidadeInList, setUnidadeInList] = useState([]);
   
   useEffect( () => {
     async function setData() {
         try {
-            const [dataUnidades, dataPadrao, dataUsers] = await Promise.all([
+            const [dataUnidades, dataPadrao] = await Promise.all([
               getUnidades(),
               getPadroes(),
               getUsers()
@@ -51,13 +47,6 @@ export default function RegisterPrinterForm() {
             if (dataPadrao.type ==='success' && dataPadrao.data) {
               setPadroes(dataPadrao.data);
             }
-            if (dataUsers.type ==='success' && dataUsers.data) {
-              const locadoras = dataUsers.data.filter(user => 
-                user.cargos.includes("LOCADORA")
-              );
-              setLocadoras(locadoras);
-            }
-
         } catch (error) {
             console.error('Erro ao obter opções do serviço:', error);
           }

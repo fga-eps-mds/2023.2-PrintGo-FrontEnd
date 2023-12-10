@@ -11,7 +11,6 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 import { Link, useNavigate } from 'react-router-dom';
 import { decodeToken } from "react-jwt";
 
-
 const editUserSchema = yup.object().shape({
   nome: yup.string().required('Nome é obrigatório'),
   email: yup
@@ -41,7 +40,7 @@ export default function EditUserForm(){
 
   const [unidadeList, setUnidadeList] = useState();
   const [displayLotacoes,setDisplayLotacoes] = useState ('');
-  const [unidadeFilhoList, setUnidadeFilhoList] = useState ();
+  const [unidadeFilhoList, setUnidadeFilhoList] = useState();
   const [userData, setUserData] = useState(null);
 
   const memoUserData = useMemo(() => userData, [userData]);
@@ -65,7 +64,6 @@ export default function EditUserForm(){
       try {
         const data = await getUserById(loggedUser.id);
         
-        console.log(data);
         if (data) {
           setUserData(data);
         }
@@ -97,9 +95,7 @@ export default function EditUserForm(){
 
   
   useEffect(() => {
-    if (memoUserData && memoUnidadeList && unidadeList) {
-      console.log(unidadeList);
-      
+    if (memoUserData && memoUnidadeList && unidadeList) {      
       Object.keys(userData).forEach((key) => {
         setValue(key, userData[key] || "");
       })

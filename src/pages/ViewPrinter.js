@@ -3,7 +3,7 @@ import '../style/pages/viewPrinter.css';
 import ellipse from '../assets/login_ellipse.svg';
 import voltar_vector from '../assets/voltar_vector.svg';
 import Navbar from "../components/navbar/Navbar";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 
 export default function ViewPrinter(){
@@ -51,7 +51,9 @@ export default function ViewPrinter(){
                   {printer ? (
                     <div id="viewprinter-info-group">
                       <header id="viewprinter-card-header">
-                        <img alt="" src={voltar_vector}></img>
+                        <Link to="/impressorascadastradas">
+                          <img alt="" src={voltar_vector}></img>
+                        </Link>
                         <a href="/impressorascadastradas">Voltar</a>
                       </header>
                       <p id="viewprinter-info-header">

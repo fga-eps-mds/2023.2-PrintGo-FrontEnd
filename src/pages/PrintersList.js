@@ -93,12 +93,6 @@ export default function PrintersList() {
     });
   }, [printers, search, filter]);
 
-  const redirectPrinter = (printer) => {
-    console.log(printer);
-    const printerEncoded =btoa(JSON.stringify(printer));
-    navigate(`/editarimpressora/${printerEncoded}`);
-  }
-
   return (
     <>
       {modalOpen && (
@@ -176,7 +170,7 @@ export default function PrintersList() {
                 <div tabIndex="0" className="printerslist-engine-dropdown">
                   <div className="printerslist-printer-dropdown">
                     <Link to="#" tabIndex="0" onClick={() => modalTogglePrinter(printer)}>{printer.status === "ATIVO" ? 'Desativar' : 'Ativar'}</Link>
-                    <Link to="#" onClick={() => redirectPrinter(printer)} tabIndex="0">Editar</Link>
+                    <Link to={`/editarimpressora/${btoa(JSON.stringify(printer))}`} tabIndex="0">Editar</Link>
                   </div>
                 </div> 
               </div>
