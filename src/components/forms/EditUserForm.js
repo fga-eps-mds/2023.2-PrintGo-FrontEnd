@@ -93,13 +93,11 @@ export default function EditUserForm(){
           else{
             return;
           }
-        } else {
-          if(loggedUser.id != id) {
+        } else if(loggedUser.id != id) {
             navigate("/"); // Um usuário comum não pode editar outro usuário além dele mesmo.
           } else {
             setDisplayUserRole(false);
           }
-        }
         
       }
     }
