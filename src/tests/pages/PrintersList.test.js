@@ -109,7 +109,7 @@ describe('PrintersListPage', () => {
     await waitFor(() => {
       
                 
-      expect(screen.getByText("Data do último contador: 01/12/23")).toBeInTheDocument();
+      expect(screen.getByText("IP: 192.168.1.9")).toBeInTheDocument();
       
     });
   });
@@ -189,30 +189,144 @@ describe('PrintersListPage', () => {
   
   
   test("deve mostrar se a impressora esta sendo desativada", async () => {
-    render(<router.BrowserRouter>
-        <PrintersList />
-      </router.BrowserRouter>);
+    getPrinters.mockResolvedValue(
+      {
+        type: 'success',
+        data: [
+          {
+            "id": "clpzts1g70001ikth3c7ixpn0",
+            "ip": "192.168.1.9",
+            "numeroSerie": "1234578",
+            "padrao_id": "clpz1mhas0002mxauco67iokp",
+            "codigoLocadora": "clpt90cbh000014p5ynunod0u",
+            "locadora_id": null,
+            "contadorInstalacao": 1000,
+            "dataInstalacao": "2023-01-15T00:00:00.000Z",
+            "ultimoContador": 40,
+            "dataUltimoContador": "2023-12-01T12:30:00.000Z",
+            "contadorRetiradas": 2010,
+            "dataContadorRetirada": "2023-12-05T08:45:00.000Z",
+            "unidadeId": "f39a868c-dbf7-4fca-a257-f915311b5a79",
+            "status": "ATIVO",
+            "padrao": {
+                "id": "clpz1mhas0002mxauco67iokp",
+                "tipo": "LaserJet",
+                "marca": "HP",
+                "modeloImpressora": "123.12.1.3123.01",
+                "modelo": "Pro M404dn",
+                "numeroSerie": "123.12.1.3123.01",
+                "versaoFirmware": "123.12.1.3123.01",
+                "totalDigitalizacoes": "123.12.1.3123.01",
+                "totalCopiasPB": "123.12.1.3123.01",
+                "totalCopiasColoridas": "123.12.1.3123.01",
+                "totalImpressoesPb": "123.12.1.3123.01",
+                "totalImpressoesColoridas": "123.12.1.3123.01",
+                "totalGeral": "123.12.1.3123.01",
+                "enderecoIp": "123.12.1.3123.01",
+                "status": "ATIVO",
+                "tempoAtivoSistema": "123.12.1.3123.01",
+                "num": null
+            }
+          }
+        ]
   
-    
-    const botaoDesativar = screen.getByText("Desativar");
-    fireEvent.click(botaoDesativar);
+      }
+    );
   
-    
-    expect(screen.getByText("Desativação de impressora")).toBeInTheDocument();
-  });
+    getUnidades.mockResolvedValue({
+      type: 'success',
+      data: [
+        {id: '1', name: "unidade1", child_workstations: [{id: '2', name: "unidade2"}, {id: '3', name: "unidade3"}]},
+        {id: '2', name: "unidade2", parent_workstation: {id: "1"}},
+        {id: '3', name: "unidade3"}
+      ]
+    });
   
-  test("deve mostrar se a impressora esta sendo ativada", async () => {
     render(<router.BrowserRouter>
         <PrintersList />
       </router.BrowserRouter>
     );
   
     
-    const botaoAtivar = screen.getByText("Ativar");
-    fireEvent.click(botaoAtivar);
+
+    await waitFor(() => {
+      const botaoDesativar = screen.getByText("Desativar")
+      fireEvent.click(botaoDesativar)
+      expect(screen.getByText("Desativação de impressora")).toBeInTheDocument();
+      
+    });
   
     
-    expect(screen.getByText("Ativação de impressora")).toBeInTheDocument();
+    
+  });
+  
+  test("deve mostrar se a impressora esta sendo ativada", async () => {
+    getPrinters.mockResolvedValue(
+      {
+        type: 'success',
+        data: [
+          {
+            "id": "clpzts1g70001ikth3c7ixpn0",
+            "ip": "192.168.1.9",
+            "numeroSerie": "1234578",
+            "padrao_id": "clpz1mhas0002mxauco67iokp",
+            "codigoLocadora": "clpt90cbh000014p5ynunod0u",
+            "locadora_id": null,
+            "contadorInstalacao": 1000,
+            "dataInstalacao": "2023-01-15T00:00:00.000Z",
+            "ultimoContador": 40,
+            "dataUltimoContador": "2023-12-01T12:30:00.000Z",
+            "contadorRetiradas": 2010,
+            "dataContadorRetirada": "2023-12-05T08:45:00.000Z",
+            "unidadeId": "f39a868c-dbf7-4fca-a257-f915311b5a79",
+            "status": "DESATIVADO",
+            "padrao": {
+                "id": "clpz1mhas0002mxauco67iokp",
+                "tipo": "LaserJet",
+                "marca": "HP",
+                "modeloImpressora": "123.12.1.3123.01",
+                "modelo": "Pro M404dn",
+                "numeroSerie": "123.12.1.3123.01",
+                "versaoFirmware": "123.12.1.3123.01",
+                "totalDigitalizacoes": "123.12.1.3123.01",
+                "totalCopiasPB": "123.12.1.3123.01",
+                "totalCopiasColoridas": "123.12.1.3123.01",
+                "totalImpressoesPb": "123.12.1.3123.01",
+                "totalImpressoesColoridas": "123.12.1.3123.01",
+                "totalGeral": "123.12.1.3123.01",
+                "enderecoIp": "123.12.1.3123.01",
+                "status": "ATIVO",
+                "tempoAtivoSistema": "123.12.1.3123.01",
+                "num": null
+            }
+          }
+        ]
+  
+      }
+    );
+  
+    getUnidades.mockResolvedValue({
+      type: 'success',
+      data: [
+        {id: '1', name: "unidade1", child_workstations: [{id: '2', name: "unidade2"}, {id: '3', name: "unidade3"}]},
+        {id: '2', name: "unidade2", parent_workstation: {id: "1"}},
+        {id: '3', name: "unidade3"}
+      ]
+    });
+  
+    render(<router.BrowserRouter>
+        <PrintersList />
+      </router.BrowserRouter>
+    );
+  
+    
+
+    await waitFor(() => {
+      const botaoAtivar = screen.getByText("Ativar")
+      fireEvent.click(botaoAtivar)
+      expect(screen.getByText("Ativação de impressora")).toBeInTheDocument();
+      
+    });
   });
   
   
