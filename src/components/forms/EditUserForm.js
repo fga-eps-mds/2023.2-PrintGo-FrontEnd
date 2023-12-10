@@ -30,7 +30,7 @@ export default function EditUserForm(){
   const { id } = useParams();
 
   const editUserSchema = getEditUserSchema(fieldLabels);
-  const { register, setValue, handleSubmit, formState: { errors, isValid, isSubmitting  } } = useForm({
+  const { register, getValues, setValue, handleSubmit, formState: { errors, isValid, isSubmitting  }, reset } = useForm({
     resolver: yupResolver(editUserSchema),
     mode: "onChange"
   });
@@ -91,11 +91,14 @@ export default function EditUserForm(){
             setDisplayUserRole(false);
           }
           else{
-            navigate("/"); // Um administrador não pode editar outro administrador além dele mesmo.
-            setDisplayUserRole(false);
+            return;
           }
         } else {
-          return;
+          if(loggedUser.id != id) {
+            navigate("/"); // Um usuário comum não pode editar outro usuário além dele mesmo.
+          } else {
+            setDisplayUserRole(false);
+          }
         }
         
       }
