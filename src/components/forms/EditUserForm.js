@@ -276,7 +276,7 @@ export default function EditUserForm(){
         {displayUserRole && (
           <div id="edit-user-input-line">
             <div id="edit-user-input-box">
-                <div id="edit-user-input-checkbox">
+                <div id="edit-user-input-checkbox" data-testid="admin-checkbox">
                     <input
                         id="checkbox"
                         type="checkbox"
@@ -288,7 +288,7 @@ export default function EditUserForm(){
                 </div>
             </div>
             <div id="edit-user-input-box">
-                <div id="edit-user-input-checkbox">
+                <div id="edit-user-input-checkbox" data-testid="locadora-checkbox">
                     <input
                         id="checkbox"
                         type="checkbox"
