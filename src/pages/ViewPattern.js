@@ -34,7 +34,7 @@ export default function ViewPattern() {
   useEffect(() => {
     try {
       const patternString = atob(patternData);
-      const patternObject = JSON.parse(patternData);
+      const patternObject = JSON.parse(patternString);
       setPattern(patternObject);
     } catch (error) {
       console.error("Error decoding Base64 string", error);
