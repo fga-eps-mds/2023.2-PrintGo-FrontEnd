@@ -89,6 +89,7 @@ export const getEditUserSchema = (userFiledLabels) => {
     documento: yup.string().required(`${userFiledLabels.documento} é obrigatório`),
     email: yup.string().required(`${userFiledLabels.email} é obrigatório`),
     emailConfirmar: yup.string().required(`${userFiledLabels.emailConfirmar} é obrigatório`),
+    unidade_id: yup.string().required(`${userFiledLabels.unidade_id} é obrigatório`),
     isAdmin: yup.boolean(),
     isLocadora: yup.boolean(),
   });
