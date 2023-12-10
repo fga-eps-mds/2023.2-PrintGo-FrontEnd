@@ -16,7 +16,7 @@ const fieldLabels = {
   documento: 'CPF',
   email: 'Email',
   emailConfirmar: 'Email',
-
+  unidade_id: "Unidade",
 };
 
 const testObject = {
@@ -40,16 +40,13 @@ export default function EditUserForm(){
     loggedUser = decodeToken(token);
   }
 
-  
-
   const [unidadeList, setUnidadeList] = useState();
-  const [isAdmin, setIsAdmin] = useState(); //verifica se o usuario que esta sendo editado eh admin
+  const [isEditingAnotherAdmin, setIsEditingAnotherAdmin] = useState(); //verifica se o usuario que esta sendo editado eh admin
   const [isLocadora, setIsLocadora] = useState(); //verifica se o usuario que esta sendo editado eh da locadora
   const [displayLotacoes,setDisplayLotacoes] = useState ('');
   const [unidadeFilhoList, setUnidadeFilhoList] = useState ();
   const [userData, setUserData] = useState(null);
   const [displayUserRole, setDisplayUserRole] = useState(true);
-
 
   const memoUserData = useMemo(() => userData, [userData]);
   const memoUnidadeList = useMemo(() => unidadeList, [unidadeList]);
@@ -59,7 +56,7 @@ export default function EditUserForm(){
   };
 
   const handleCheckboxAdminChange = (event) =>{
-    setIsAdmin(event.target.checked);
+    setIsEditingAnotherAdmin(event.target.checked);
   }
 
   const navigate = useNavigate();
@@ -70,14 +67,13 @@ export default function EditUserForm(){
       try {
         const data = await getUserById(id);
         
-        
         if (data) {
           setUserData(data);
-          if(data.cargos.includes("ADMIN") && loggedUser.id !== id){ //o admin pode editar o cargo de outros usuarios
-            setIsAdmin(true)
+          if(data.cargos.includes("ADMIN")){
+            setIsEditingAnotherAdmin(true);
           }
-          if(data.cargos.includes("LOCADORA") && loggedUser.id !== id){
-            setIsLocadora(true)
+          if(data.cargos.includes("LOCADORA")){
+            setIsLocadora(true);
           }
         }
       } catch(error) {
@@ -85,18 +81,26 @@ export default function EditUserForm(){
       }
     }
 
-    const verifyAdmin = async () =>{
+    const verifyUser = async () =>{
       if(loggedUser && !userData) {
         await fetchUserData();
-        if(loggedUser.id === id){ //o admin nao pode alterar o proprio cargo
-          setDisplayUserRole(false)
+
+        if(loggedUser.cargos.includes("ADMIN")) {
+          if(loggedUser.id === id){ 
+            setDisplayUserRole(false);
+          }
+        } else {
+          if(loggedUser.id != id) {
+            navigate("/"); // Um usuário comum não pode editar outro usuário além dele mesmo.
+          } else {
+            setDisplayUserRole(false);
+          }
         }
+        
       }
     }
 
-    verifyAdmin()
-    
-
+    verifyUser();
     
   }, [loggedUser])
 
@@ -120,10 +124,14 @@ export default function EditUserForm(){
   
   useEffect(() => {
     if (memoUserData && memoUnidadeList && unidadeList) {
-      console.log(unidadeList);
-      Object.keys(userData).forEach((key) => {
-        setValue(key, userData[key] || "");
+      Object.keys(editUserSchema.fields).forEach((key) => {
+        if (userData[key]) {
+          setValue(key, userData[key]);
+        }
       })
+
+      isEditingAnotherAdmin ? setValue("isAdmin", true) : setValue("isAdmin", false);
+      isLocadora ? setValue("isLocadora", true) : setValue("isLocadora", false);
       
       const unidadeFilha = unidadeList.find(unidade => unidade.id === userData.unidade_id);
       
@@ -139,48 +147,34 @@ export default function EditUserForm(){
   }, [memoUserData, memoUnidadeList, setValue]);
   
   const onSubmit = async (data) =>  {
+    data.id = id;
 
     data.cargos = ["USER"]
+
+    if (data.isAdmin) {
+      data.cargos = data.cargos || [];
+      data.cargos.push("ADMIN")
+    }
+
+    if (data.isLocadora) {
+      data.cargos = data.cargos || [];
+      data.cargos.push("LOCADORA")
+    }
+
+    delete data["isAdmin"];
+    delete data["isLocadora"];
+    delete data["emailConfirmar"];
+    delete data["unidade_pai"];
+
+    console.log(data);
 
     setTimeout(() => {
       console.log("3 segundos se passaram.");
     }, 3000);  // 3000 milissegundos = 3 segundos
 
-    if (data.isAdmin) {
-      data.cargos = data.cargos || [];
-
-      data.cargos.push("ADMIN")
-      delete data["isAdmin"];
-    }
-
-    if (data.isLocadora) {
-      data.cargos = data.cargos || [];
-
-      data.cargos.push("LOCADORA")
-      delete data["isLocadora"];
-    }
-
-    if (data.isAdmin === false) {
-      // Remove "ADMIN" do array de cargos
-      data.cargos = (data.cargos || []).filter(cargo => cargo !== "ADMIN");
-    }
-  
-    if (data.isLocadora === false) {
-      // Remove "Locadora" do array de cargos
-      data.cargos = (data.cargos || []).filter(cargo => cargo !== "LOCADORA");
-    }
-
-    delete data["emailConfirmar"];
-    delete data["unidade_pai"];
-    delete data["isLocadora"]
-    delete data["type"]
-
-    console.log(data)
-
     const response = await updateUser(data, data.id);
     if(response.type === 'success'){
       toast.success("Usuario atualizado com sucesso!");
-      reset()
     } else {
       toast.error("Erro ao atualizar usuário");
     }
@@ -250,7 +244,7 @@ export default function EditUserForm(){
           <div id="edit-user-input-line">
               <div id="edit-user-input-box">
                   <label htmlFor="unidadePai">Unidade Pai<span>*</span></label>
-                  <select {...register("unidade_pai")} onChange={handleWorkstationChange}>
+                  <select data-testid="unidadePai" {...register("unidade_pai")} onChange={handleWorkstationChange}>
                       <option value="">Selecione a Unidade de policia</option>
                       {unidadeList?.map((unidade) => (
                       <option key={unidade.id} value={unidade.id}>
@@ -263,7 +257,7 @@ export default function EditUserForm(){
                 {displayLotacoes && (
                   <>
                     <label htmlFor="unidadeFilha">Unidade Filha<span>*</span></label>
-                    <select {...register("unidade_id", {required: "Lotação é obrigatória"})}>
+                    <select data-testid="unidadeFilha"{...register("unidade_id", {required: "Lotação é obrigatória"})}>
                         <option value="">Selecione a Lotação</option>
                         {unidadeFilhoList?.map((unidade) => (
                         <option key={unidade.id} value={unidade.id}>
@@ -286,7 +280,6 @@ export default function EditUserForm(){
                         id="checkbox"
                         type="checkbox"
                         {...register("isAdmin")}
-                        checked={isAdmin}
                         onChange={handleCheckboxAdminChange}
                     />
                    
@@ -299,7 +292,6 @@ export default function EditUserForm(){
                         id="checkbox"
                         type="checkbox"
                         {...register("isLocadora")}
-                        checked={isLocadora}
                         onChange={handleCheckboxLocadoraChange}
                     />
                     <label htmlFor="label-checkbox" id="label-checkbox">Usuário é da Locadora?</label>
@@ -310,12 +302,12 @@ export default function EditUserForm(){
         
 
         <div id="edit-user-buttons">
-          <button className="edit-user-form-button" type="button" onClick={console.log(getValues())} id="edit-user-cancel-bnt">
-            <Link to="/">CANCELAR</Link>
+          <button className="edit-user-form-button" type="button" onClick={() => {console.log(getValues())}} id="edit-user-cancel-bnt">
+            <Link to="#">CANCELAR</Link>
           </button>
           <button className="edit-user-form-button" type="submit" id="edit-user-register-bnt" disabled={isSubmitting || !isValid}>
             {isSubmitting && (
-              <ReloadIcon id="animate-spin"/>
+              <ReloadIcon id="animate-spin" data-testid="animate-spin"/>
             )}
 
             {!isSubmitting ? 'SALVAR': "SALVANDO"}

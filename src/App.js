@@ -19,6 +19,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RecoverPasswordPage from "./pages/RecoverPassword";
 import PrivateRoutes from "./components/utils/PrivateRoutes";
+import AdminRoutes from "./components/utils/AdminRoutes";
 
 function App() {
   return (
@@ -26,7 +27,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<PrivateRoutes />}>
-            <Route path="/cadastro" element={<CreateUserPage />} />
             <Route path="/editarusuario/:id" element={<EditUserPage/>}/>
             <Route path="/mudarsenha" element={<ChangePassword />} />
             <Route path="/cadastroimpressora" element={<RegisterPrinter />} />
@@ -35,7 +35,11 @@ function App() {
             <Route path="/editarpadrao" element={<EditPattern />} />
             <Route path="/impressorascadastradas" element={<PrintersList />} />
             <Route path="/listapadroes" element={<PatternList />} />
-            <Route path="/listausuarios" element={<UsersList />} />
+            <Route element={<AdminRoutes/>}>
+              <Route path="/listausuarios" element={<UsersList />} />
+              <Route path="/cadastro" element={<CreateUserPage />} />
+            </Route>
+            
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
