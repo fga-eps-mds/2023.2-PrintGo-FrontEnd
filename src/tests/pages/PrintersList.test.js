@@ -1,9 +1,8 @@
 import React from "react";
-import { render, screen, fireEvent, waitFor} from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import PrintersList from "../../pages/PrintersList";
 import * as api from "../../api/api";
-import * as router from "react-router-dom";
 import { BrowserRouter } from 'react-router-dom';
 
 // Mock das chamadas de API
@@ -93,9 +92,7 @@ test("Deve mostrar o texto do filto 'Ativas'", async () =>{
   fireEvent.click(botaoAtivas);
   const filter_being_shown = screen.getByTestId("filter_beign_shown")
   expect(filter_being_shown).toHaveTextContent("Ativas");
-
-})
-
+  })
 
 test("Deve mostrar o texto do filtro 'Todas'", async () =>{
 
@@ -125,4 +122,4 @@ test("Deve mostrar o texto do filtro 'Desativadas'", async () =>{
   const filter_being_shown = screen.getByTestId("filter_beign_shown")
   expect(filter_being_shown).toHaveTextContent("Desativadas");
 
-})
+});

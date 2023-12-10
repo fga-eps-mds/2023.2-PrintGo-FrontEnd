@@ -10,7 +10,6 @@ import "../../style/components/editUserForms.css";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { Link, useNavigate } from 'react-router-dom';
 import { decodeToken } from "react-jwt";
-import '@testing-library/jest-dom/extend-expect';
 
 
 const editUserSchema = yup.object().shape({

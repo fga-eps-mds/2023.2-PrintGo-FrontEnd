@@ -44,7 +44,7 @@ export async function togglePrinter(id, status) {
   }
 
   try {
-    const response = await api.patch('/printer/impressora', data);
+    const response = await api.patch(`/printer/impressora/${id}`, data);
     if(response.status !== 200) {
       return { type: 'error', data: response.data};
     }
