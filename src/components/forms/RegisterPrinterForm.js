@@ -34,68 +34,44 @@ export default function RegisterPrinterForm() {
   const [padroes, setPadroes] = useState([]);
   const [locadora, setLocadoras] = useState([]);
   const [unidadeInList, setUnidadeInList] = useState([]);
-  
-  useEffect( () => {
-    async function setData() {
-        try {
-            const [dataUnidades, dataPadrao, dataUsers] = await Promise.all([
-              getUnidades(),
-              getPadroes(),
-              getUsers()
-            ]);
-            
-            if (dataUnidades.type ==='success' && dataUnidades.data) {
-              setUnidades(dataUnidades.data);
-            }
 
-            if (dataPadrao.type ==='success' && dataPadrao.data) {
-              setPadroes(dataPadrao.data);
-            }
-            if (dataUsers.type ==='success' && dataUsers.data) {
-              const locadoras = dataUsers.data.filter(user => 
-                user.cargos.includes("LOCADORA")
-              );
-              setLocadoras(locadoras);
-            }
-
-        } catch (error) {
-            console.error('Erro ao obter opções do serviço:', error);
-          }
-    }
-    setData();
+  useEffect(() => {
+    fetchData();
   }, []);
 
-  const handleWorkstationChange = (event) => {
-    if (event.target.value) {
-        const selectedUnit = unidades.find(uni => uni.id === event.target.value);
-        if (selectedUnit) {
-            const combinedList = [selectedUnit, ...selectedUnit.child_workstations];
-            setUnidadeInList(combinedList);
-        } else {
-            setUnidadeInList([]);
-        }
-    } else {
-        setUnidadeInList([]);
+  const fetchData = async () => {
+    try {
+      const [dataUnidades, dataPadrao, dataUsers] = await Promise.all([
+        getUnidades(),
+        getPadroes(),
+        getUsers()
+      ]);
+      
+      setUnidades(dataUnidades.type ==='success' ? dataUnidades.data : []);
+      setPadroes(dataPadrao.type ==='success' ? dataPadrao.data : []);
+      if (dataUsers.type ==='success') {
+        const locadoras = dataUsers.data.filter(user => user.cargos.includes("LOCADORA"));
+        setLocadoras(locadoras);
+      }
+    } catch (error) {
+      console.error('Erro ao obter opções do serviço:', error);
     }
   };
 
+  const handleWorkstationChange = (event) => {
+    const selectedUnit = unidades.find(uni => uni.id === event.target.value) || {};
+    setUnidadeInList(selectedUnit.child_workstations || []);
+  };
+
   const registerPrinterSchema = getPrinterSchema(fieldLabels);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid, isSubmitting },
-    reset,
-  } = useForm({
+  const { register, handleSubmit, formState: { errors, isValid, isSubmitting }, reset } = useForm({
     resolver: yupResolver(registerPrinterSchema),
     mode: "onChange",
   });
 
-  const onSubmit = async (data) => {    
-    data.dataInstalacao =  new Date(data.dataInstalacao).toISOString();
-    data.dataContadorRetirada =  new Date(data.dataContadorRetirada).toISOString();
-    data.dataUltimoContador =  new Date(data.dataUltimoContador).toISOString();
-    console.log(data);
-    const response = await createImpressora(data);
+  const onSubmit = async (data) => {
+    const transformedData = transformData(data);
+    const response = await createImpressora(transformedData);
     if (response.type === "success") {
       toast.success("Impressora criada com sucesso!");
       reset();
@@ -104,6 +80,18 @@ export default function RegisterPrinterForm() {
     }
   };
 
+  const transformData = (data) => {
+    return {
+      ...data,
+      dataInstalacao: new Date(data.dataInstalacao).toISOString(),
+      dataContadorRetirada: new Date(data.dataContadorRetirada).toISOString(),
+      dataUltimoContador: new Date(data.dataUltimoContador).toISOString()
+    };
+  };
+
+  const renderInputField = (key, label) => {
+    // Lógica de renderização do campo de entrada
+  };
   return (
     <div id="registerPrinter-card">
       <header id="form-header">Cadastrar impressora</header>
