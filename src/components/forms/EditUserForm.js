@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect, useState, useMemo } from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getUnidades } from "../../services/unidadeService";
@@ -91,13 +91,11 @@ export default function EditUserForm(){
             setDisplayUserRole(false);
           }
           else{
-          }
-        } else {
-          if(loggedUser.id != id) {
-            navigate("/"); // Um usuário comum não pode editar outro usuário além dele mesmo.
-          } else {
+            navigate("/"); // Um administrador não pode editar outro administrador além dele mesmo.
             setDisplayUserRole(false);
           }
+        } else {
+          console.log("Não é administrador");
         }
         
       }
