@@ -23,6 +23,23 @@
 
 }
 
+.elipse-edit-user{
+  position: fixed; 
+  width: 50vw;
+  height: 100vh;
+  top:0;
+  right: 0;
+  z-index: -1;
+  bottom: 2px;
+  color:#003366;
+  overflow: hidden;
+
+}
+
+.elipse-edit-user img{
+  height: 150vh;
+}
+
 @media (max-width: 900px) {
     #edit-user-container img{
         display: none;

@@ -88,6 +88,7 @@ export default function PrintersList() {
     }
   }
   
+  
 
   //filtros para busca de impressora
   const filteredPrinters = useMemo(() => {
