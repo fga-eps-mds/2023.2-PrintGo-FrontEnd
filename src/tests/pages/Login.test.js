@@ -6,6 +6,8 @@ import React from 'react';
 import * as router from 'react-router-dom';
 import * as api from '../../api/api'
 
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNscHJpaTRyOTAwMDFhaDJjazk5cWNxYW0iLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsIm5vbWUiOiJBZG1pbiIsImNhcmdvcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNzAxODg5NjY5LCJleHAiOjE3MDE4OTMyNjl9.2yqtoHjjXjguYkOVC9wZYiO_pASsyQO_o0z3d-4JFR0";
+
 jest.mock('../../api/api', () => ({
   login: jest.fn(),
 }));
@@ -88,7 +90,7 @@ describe('Login Component', () => {
 
   it('should make API call with valid credentials', async () => {
     const mockLoginApi = jest.spyOn(api, 'login');
-    mockLoginApi.mockResolvedValue('fakeToken');
+    mockLoginApi.mockResolvedValue(token);
 
     const mockNavigate = jest.fn();
     useNavigate.mockImplementation(() => mockNavigate);
@@ -104,7 +106,7 @@ describe('Login Component', () => {
       expect(mockLoginApi).toHaveBeenCalledWith('teste@teste.com', 'senha123');
       
       // Verificar se a navegação ocorreu após o login bem-sucedido
-      expect(mockNavigate).toHaveBeenCalledWith('/home');
+      expect(mockNavigate).toHaveBeenCalledWith('/');
     });
   });
 
@@ -113,7 +115,8 @@ describe('Login Component', () => {
     const buttonElement = screen.getByText("Recuperar senha");
     fireEvent.click(buttonElement);
     let url = location.href;
-    url = url.replace("http://localhost/", "/")
+    const resultado = url.match(/\/\/[^\/]+(\/[^?#]*)/);
+    url = resultado ? resultado[1] : null;
     expect(url).toBe("/esqueciMinhaSenha");
   });
 });

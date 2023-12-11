@@ -1,0 +1,163 @@
+/* Container */
+
+.viewpattern-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* View card */
+
+.viewpattern-card {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    width: 43rem;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    padding: 1rem 5rem;
+    margin-right: 8vw;
+    margin-top: 8%;
+    margin-bottom: 1vh;
+}
+
+.viewpattern-loading-text {
+  color: #003366;
+  display: block;
+  font-size: 20px;
+}
+
+/* Header */
+
+.viewpattern-card-header {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 70px;
+    display: block;
+}
+
+.viewpattern-card-header a {
+    font-weight: bold;
+    font-size: 22px;
+    color: #003366;
+    margin-left: 8px;
+    text-decoration: none;
+}
+
+/* Infos */
+
+.viewpattern-info-group{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 16px 0;
+}
+
+.viewpattern-info-header {
+    display: block;
+    width: 100%;
+    color: #003366;
+    font-size: 30px;
+}
+
+.viewpattern-info-line {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.viewpattern-info-line label {
+  color: #003366;
+  display: block;
+  margin-bottom: 0px;
+}
+
+.viewpattern-info-box {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+.viewpattern-info-box label {
+    color: #003366;
+    display: block;
+    margin-bottom: 0px;
+}
+
+.viewpattern-info-box p {
+    color: #003366;
+    display: block;
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.viewpattern-oid-line {
+  display: block;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.viewpattern-oid-line p {
+  color: #003366;
+}
+
+.viewpattern-oid-box {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  height: fit-content;
+  margin: 0px;
+}
+
+.viewpattern-oid-box label {
+  color: #003366;
+  width: 50%;
+  margin-bottom: 0px;
+}
+
+.viewpattern-oid-box p {
+  color: #003366;
+  display: block;
+  font-size: 16px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+/*Estilo de circuferencia */
+
+.viewpattern-ellipse {
+    position: fixed;
+    display: flex;
+    top: 10vh;
+    right: 0vw;
+    width: fit-content;
+    min-height: 100vh;
+    justify-content: flex-end;
+    align-items: end;
+    z-index: -1;
+    color:#003366;
+}
+
+.viewpattern-ellipse img{
+    width: 40vw;
+    height: 100vh;
+}
+
+@media (max-width: 1210px) {
+    .viewpattern-container{
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+        padding-left: 2rem;
+        align-items: center;
+    }
+}

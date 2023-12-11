@@ -1,9 +1,13 @@
+import { decodeToken } from 'react-jwt';
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 
+jest.mock('react-jwt', () => ({
+  decodeToken: jest.fn(),
+}))
 
 describe('Navbar before login', () => {
   beforeEach(() => {
@@ -43,6 +47,15 @@ describe('Navbar after login', () => {
   beforeEach(() => {
     // Simula o usuário autenticado
     jest.spyOn(Storage.prototype, 'getItem').mockReturnValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNscHJpaTRyOTAwMDFhaDJjazk5cWNxYW0iLCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsIm5vbWUiOiJBZG1pbiIsImNhcmdvcyI6WyJVU0VSIiwiQURNSU4iXSwiaWF0IjoxNzAxODg5NjY5LCJleHAiOjE3MDE4OTMyNjl9.2yqtoHjjXjguYkOVC9wZYiO_pASsyQO_o0z3d-4JFR0");
+    decodeToken.mockReturnValue({
+      "id": "clprc9gem0001y06nguit2ikt",
+      "email": "admin@admin.com",
+      "nome": "Admin",
+      "cargos": [
+        "USER",
+        "ADMIN"
+      ]
+    })
 
     render(
       <MemoryRouter>
