@@ -8,25 +8,23 @@ describe('PrinterPatternForm', () => {
     render(<PrinterPatternForm />);
   });
 
-  test('renders all form fields and buttons', () => {
-    // Testa campos principais
+  test('renderiza todos os campos e botões do formulário', () => {
+    // Verifica se todos os campos principais estão renderizados
     ['tipo', 'marca', 'modelo'].forEach(field => {
       expect(screen.getByPlaceholderText(`Digite ${fieldLabels[field].toLowerCase()}`)).toBeInTheDocument();
     });
 
-    // Testa campos SNMP
+    // Verifica se os campos SNMP estão renderizados
     Object.keys(fieldLabels.snmp).forEach(subField => {
-      // Aqui você deve identificar cada campo de forma única, se necessário
       expect(screen.getAllByPlaceholderText('Código OID')).toHaveLength(Object.keys(fieldLabels.snmp).length);
     });
 
-    // Testa botões
+    // Verifica se os botões estão renderizados
     expect(screen.getByRole('button', { name: /cancelar/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /registrar/i })).toBeInTheDocument();
   });
 
-  // Teste de Validação
-  test(' erro quando um campo obrigatório é deixado em branco', async () => {
+  test('exibe erro quando um campo obrigatório é deixado em branco', async () => {
     const submitButton = screen.getByRole('button', { name: /registrar/i });
     fireEvent.click(submitButton);
 
@@ -34,5 +32,5 @@ describe('PrinterPatternForm', () => {
       expect(screen.getByText('Este campo é obrigatório')).toBeInTheDocument(); 
     });
   });
-
+ 
 });
