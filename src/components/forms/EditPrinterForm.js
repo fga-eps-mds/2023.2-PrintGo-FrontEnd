@@ -4,17 +4,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import "../../style/components/editPrinterForms.css";
 import elipse6 from '../../assets/elipse6.svg';
 import { getPrinterSchema } from "../utils/YupSchema";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { getUnidades } from "../../services/unidadeService";
 import { editImpressora, getPadroes } from "../../services/printerService";
-import { getUsers } from "../../services/userService";
 import { formatDate } from "../../utils/utils";
 import { toast } from "react-toastify";
-
-EditPrinterForm.propTypes = {
-  printer: PropTypes.string.isRequired,
-};
 
 const fieldLabels = {
   padrao_id: 'Padrão',
@@ -31,7 +26,11 @@ const fieldLabels = {
   unidadeId: 'Unidade Filho',
 };
 
-export default function EditPrinterForm({ printer }) {
+export default function EditPrinterForm() {
+
+  const { printer } = useParams();
+  console.log(printer);
+
   const navigate = useNavigate();
   const printerObject = JSON.parse(atob(printer));
 
@@ -53,7 +52,6 @@ export default function EditPrinterForm({ printer }) {
         const [dataUnidades, dataPadrao] = await Promise.all([
           getUnidades(),
           getPadroes(),
-          getUsers()
         ]);
             
         if (dataUnidades.type ==='success' && dataUnidades.data) {
