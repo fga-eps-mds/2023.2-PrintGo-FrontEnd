@@ -4,9 +4,15 @@ import '@testing-library/jest-dom/extend-expect';
 import RegisterPrinterForm, { fieldLabels } from '../../components/forms/RegisterPrinterForm';
 import axios from 'axios';
 import { BrowserRouter } from 'react-router-dom';
+import * as printerService from '../../services/printerService';
+import * as unidadeService from '../../services/unidadeService';
+import * as userService from '../../services/userService';
+
 
 jest.mock('axios');
-
+jest.mock('../../services/printerService');
+jest.mock('../../services/unidadeService');
+jest.mock('../../services/userService');
 
 
 describe('RegisterPrinterForm', () => {
@@ -60,6 +66,32 @@ describe('RegisterPrinterForm', () => {
 
 
   });
+
+  it('fetches data on mount and updates the state', async () => {
+    // Mock das respostas dos serviços
+    const unidadesMock = { type: 'success', data: [{ id: '1', name: 'Unidade 1' }] };
+    const padroesMock = { type: 'success', data: [{ id: '1', tipo: 'Padrão 1', marca: 'Marca 1', modelo: 'Modelo 1' }] };
+    const usersMock = { type: 'success', data: [{ id: '1', name: 'User 1', cargos: ['LOCADORA'] }] };
+   
+    unidadeService.getUnidades.mockResolvedValue(unidadesMock);
+    printerService.getPadroes.mockResolvedValue(padroesMock);
+    userService.getUsers.mockResolvedValue(usersMock);
+   
+    // Renderizar o componente dentro de um BrowserRouter
+    const { getByText } = render(
+      <BrowserRouter>
+        <RegisterPrinterForm />
+      </BrowserRouter>
+    );
+   
+    // Aguardar as chamadas assíncronas e verificar se o estado é atualizado
+    await waitFor(() => {
+      expect(getByText('Selecione padrão')).toBeInTheDocument();
+      expect(getByText('Selecione a unidade pai')).toBeInTheDocument();
+      // Verifique se as outras opções esperadas estão presentes no DOM
+    });
+   });
+   
   
   
   // Adicione mais testes conforme necessário
