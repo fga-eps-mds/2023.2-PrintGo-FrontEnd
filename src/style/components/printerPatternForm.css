@@ -2,36 +2,39 @@
   background-color: #ffffff;
   border-radius: 10px;
   display: flex;
-  width: 48vw;
-  height: 96vh;
-  justify-content: center;
-  align-items: center;
+  min-width: 38vw;
+  min-height: fit-content;
+  justify-content: start;
+  align-items: start;
   flex-direction: column;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-  margin-top: 1.5rem;
+  margin-top: 10vh;
   margin-bottom: 1rem;
   margin-right: 50vw;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 #printer-pattern-fields {
-  height: 23vh;
-  width: 45vw;
+  height: fit-content;
+  width: 100%;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   font-size: 14px;
+  gap: 10px;
 }
 
 #printer-pattern-form-header {
   color: #003366;
   margin: 0;
-  width: 48vw;
+  width: 100%;
   text-align: center;
 }
 
 #printer-pattern-input-group {
-  height: 82vh;
-  width: 48vw;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -43,25 +46,23 @@
   display: flex;
   width: 250px;
   flex-direction: column;
-  padding: 0 10px;
+  padding: 0px;
   box-sizing: border-box;
 }
 
 #printer-pattern-snmp-fields {
-  height: 55vh;
-  width: 45vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin-bottom: 20px
 }
+
 #snmp-fields-input-line {
   display: flex;
-  width: 45vw;
-
+  width: 100%;
   justify-content: space-between;
-}
-#snmp-fields-input-line label {
-  margin-left: 0.3rem;
+  gap: 10vw;
 }
 
 #snmp-fields-input-line span {
@@ -70,13 +71,12 @@
 
 #printer-pattern-input-box {
   flex: 1;
-  min-width: 100px; /* Largura mínima para cada input */
+  width: 100%;
   display: flex;
-  width: 250px;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  padding: 0 10px;
+  padding: 0 20px;
   box-sizing: border-box;
 }
 
@@ -85,6 +85,7 @@
 }
 
 #printer-pattern-input-box label {
+  font-size: 16px;
   color: #003366;
   display: block;
 }
@@ -123,14 +124,14 @@
 }
 
 #printer-pattern-buttons {
-  height: 8vh;
+  height: fit-content;
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
 
 .printer-pattern-form-button {
-  height: 5vh;
+  height: 40px;
   width: 12vw;
   text-align: center;
   color: #ffffff;
@@ -157,7 +158,7 @@
   background-color: #006633;
 }
 
-#register-bnt:disabled {
+#registrar-bnt:disabled {
   background-color: #6c6c6c !important;
   opacity: 65%;
   cursor: not-allowed;

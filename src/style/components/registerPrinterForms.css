@@ -92,7 +92,9 @@
 
 #buttons {
   display: flex;
+  justify-content: space-around;
   align-items: center;
+  width: 100%;
 }
 
 .form-button:disabled {
@@ -118,9 +120,9 @@
   filter: brightness(1.8);
 }
 
-#cancel-bnt {
-  background-color: #003366;
-  transition: background-color 0.3s, filter 0.3s;
+#cancelar-bnt a {
+  text-decoration: none;
+  color: #ffffff;
 }
 
 #registrar-bnt.form-button {
@@ -128,12 +130,6 @@
   padding: 10px 10px;
   transition: background-color 0.3s, filter 0.3s;
   background-color: #006633;
-}
-
-#register-bnt:disabled {
-  background-color: #006633 !important;
-  opacity: 65%;
-  cursor: not-allowed;
 }
 
 #input-description {
