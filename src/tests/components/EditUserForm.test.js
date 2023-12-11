@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect';
 import * as router from 'react-router-dom';
 import { render as rtlRender, fireEvent, waitFor, screen } from '@testing-library/react';
 import EditUserForm from '../../components/forms/EditUserForm';
-import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, useNavigate, useParams } from 'react-router-dom';
 import { decodeToken } from 'react-jwt';
 import { getUnidades } from "../../services/unidadeService";
 import { getUserById, updateUser } from '../../services/userService';
@@ -26,6 +26,7 @@ jest.mock('react-jwt', () => ({
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: jest.fn(),
+  useParams: jest.fn(),
 }));
 
 function render(ui, { route = '/', ...renderOptions } = {}) {
@@ -48,6 +49,23 @@ describe('EditUserForm', () => {
           {id: 3, nome: "unidade3"},
         ]
       });
+
+      // Mock do id vindo da url.
+      useParams.mockReturnValue(
+        {id: "clprc9gem0001y06nguit2ikt"}
+      );
+
+      // Simule o usuário logado.
+      jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(token);
+      decodeToken.mockReturnValue({
+        "id": "clprc9gem0001y06nguit2ikt",
+        "email": "ass@example.com",
+        "nome": "Another User",
+        "cargos": [
+          "USER"
+        ]
+      })
+
       router.useNavigate.mockImplementation(jest.requireActual('react-router-dom').useNavigate);
     });
 
@@ -59,6 +77,17 @@ describe('EditUserForm', () => {
       render(<EditUserForm />);
 
       expect(screen.getByText("Editar usuário")).toBeInTheDocument();
+    })
+
+    it('should render page correctly', () => {
+      render(<EditUserForm />);
+      const botaoMudarSenha = screen.getByText("MUDAR SENHA");
+      fireEvent.click(botaoMudarSenha);
+      let url = location.href;
+      const resultado = url.match(/\/\/[^\/]+(\/[^?#]*)/);
+      url = resultado ? resultado[1] : null;
+      expect(url).toBe("/mudarsenha");
+      
     })
 
     it('should make API call and get workstations succesfully', async() => {
@@ -109,15 +138,6 @@ describe('EditUserForm', () => {
     })
 
     it('should make API call and get user successfully', async() => {
-      jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(token);
-      decodeToken.mockReturnValue({
-        "id": "clprc9gem0001y06nguit2ikt",
-        "email": "ass@example.com",
-        "nome": "Another User",
-        "cargos": [
-          "USER"
-        ]
-      })
 
       getUserById.mockResolvedValue({
         "id": "clprc9gem0001y06nguit2ikt",
@@ -136,7 +156,7 @@ describe('EditUserForm', () => {
       render(<EditUserForm />);
   
       await waitFor(() => {
-        expect(decodeToken).toHaveBeenCalled();
+        expect(useParams).toHaveBeenCalled();
         expect(getUserById).toHaveBeenCalledWith("clprc9gem0001y06nguit2ikt");
         expect(screen.getByPlaceholderText("Nome")).toHaveValue("Another User")
       });
@@ -292,9 +312,77 @@ describe('EditUserForm', () => {
           "email": "ass@example.com",
           "id": "clprc9gem0001y06nguit2ikt",
           "nome": "Another User",
-          "resetPasswordExpires": "2023-12-06T22:49:18.221Z",
-          "resetPasswordToken": "a7f8f87806d8cf757770621a6f9b16b8165660a5",
-          "senha": "$2a$10$Dw/zp0AIR8G1Fxy0kR9tOu9MOyYTLBkwRyVXDlFEedDjMY4h23Wsu", 
+          "unidade_id": "2"
+        }, "clprc9gem0001y06nguit2ikt");
+      });
+    })
+
+    it('should set user as admin & rental and submit form and call API', async () => {
+      jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(token);
+      decodeToken.mockReturnValue({
+        "id": "clprc9gem0001y06nguit2ikt",
+        "email": "ass@example.com",
+        "nome": "Another User",
+        "cargos": [
+          "USER",
+          "ADMIN",
+          "LOCADORA",
+        ]
+      })
+
+      getUnidades.mockResolvedValue({
+        type: 'success',
+        data: [
+          {id: '1', name: "unidade1", child_workstations: [{id: '2', name: "unidade2"}, {id: '3', name: "unidade3"}]},
+          {id: '2', name: "unidade2", parent_workstation: {id: "1"}},
+          {id: '3', name: "unidade3"}
+        ]
+      });
+
+      getUserById.mockResolvedValue({
+        "id": "clprc9gem0001y06nguit2ikt",
+        "email": "ass@example.com",
+        "nome": "Another User",
+        "senha": "$2a$10$Dw/zp0AIR8G1Fxy0kR9tOu9MOyYTLBkwRyVXDlFEedDjMY4h23Wsu",
+        "documento": "46921264009",
+        "unidade_id": "2",
+        "resetPasswordToken": "a7f8f87806d8cf757770621a6f9b16b8165660a5",
+        "resetPasswordExpires": "2023-12-06T22:49:18.221Z",
+        "cargos": [
+          "USER",
+          "ADMIN",
+          "LOCADORA",
+        ]
+      });
+
+      updateUser.mockResolvedValue({type: 'success'});
+
+      render(<EditUserForm />);
+
+      await waitFor(() => {
+        expect(decodeToken).toHaveBeenCalled();
+        expect(getUnidades).toHaveBeenCalled();
+        expect(getUserById).toHaveBeenCalledWith("clprc9gem0001y06nguit2ikt");
+        expect(screen.getByPlaceholderText("Nome")).toHaveValue("Another User");
+        expect(screen.getByPlaceholderText("CPF ou CNPJ")).toHaveValue("46921264009");
+        expect(screen.getByPlaceholderText("Email")).toHaveValue("ass@example.com");
+        const confirmEmail = screen.getByPlaceholderText("Confirmar Email");
+        fireEvent.change(confirmEmail, { target: { value: 'ass@example.com' } });
+        expect(screen.getByTestId("unidadeFilha").value).toBe('2');
+      });
+
+      console.log(screen.getByPlaceholderText("Nome").value);
+
+      const submitButton = screen.getByText("SALVAR");
+      fireEvent.submit(submitButton);
+
+      await waitFor(() => {
+        expect(updateUser).toHaveBeenCalledWith({
+          "cargos": ["USER", "ADMIN", "LOCADORA"],
+          "documento": "46921264009",
+          "email": "ass@example.com",
+          "id": "clprc9gem0001y06nguit2ikt",
+          "nome": "Another User",
           "unidade_id": "2"
         }, "clprc9gem0001y06nguit2ikt");
       });
@@ -341,7 +429,7 @@ describe('EditUserForm', () => {
       await waitFor(() => {
         expect(decodeToken).toHaveBeenCalled();
         expect(getUnidades).toHaveBeenCalled();
-        expect(getUserById).toHaveBeenCalledWith("clprc9gem0001y06nguit2ikt");
+        expect(getUserById).toHaveBeenCalled();
         expect(screen.getByPlaceholderText("Nome")).toHaveValue("Another User");
         expect(screen.getByPlaceholderText("CPF ou CNPJ")).toHaveValue("46921264009");
         expect(screen.getByPlaceholderText("Email")).toHaveValue("ass@example.com");
@@ -362,12 +450,118 @@ describe('EditUserForm', () => {
           "email": "ass@example.com",
           "id": "clprc9gem0001y06nguit2ikt",
           "nome": "Another User",
-          "resetPasswordExpires": "2023-12-06T22:49:18.221Z",
-          "resetPasswordToken": "a7f8f87806d8cf757770621a6f9b16b8165660a5",
-          "senha": "$2a$10$Dw/zp0AIR8G1Fxy0kR9tOu9MOyYTLBkwRyVXDlFEedDjMY4h23Wsu", 
           "unidade_id": "2"
         }, "clprc9gem0001y06nguit2ikt");
         expect(screen.getByText("Erro ao atualizar usuário")).toBeInTheDocument();
       });
     })
 });
+
+describe('EditUserForm login cases', () => {
+  beforeEach(() => {
+    getUnidades.mockResolvedValue({
+      type: 'success',
+      data: [
+        {id: 1, nome: "unidade1"},
+        {id: 2, nome: "unidade2"},
+        {id: 3, nome: "unidade3"},
+      ]
+    });
+
+    router.useNavigate.mockImplementation(jest.requireActual('react-router-dom').useNavigate);
+  });
+
+  it('should test when a admin user edits itself', async () => {
+    // Mock do id vindo da url.
+    useParams.mockReturnValue(
+      {id: "clprc9gem0001y06nguit2ikt"}
+    );
+
+    jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(token);
+    decodeToken.mockReturnValue({
+      "id": "clprc9gem0001y06nguit2ikt",
+      "email": "ass@example.com",
+      "nome": "Another User",
+      "cargos": [
+        "USER",
+        "ADMIN"
+      ]
+    })
+
+    render(<EditUserForm />);
+
+    await waitFor(() => {
+      expect(screen.queryByTestId("admin-checkbox")).toBeNull();
+    }) 
+  });
+
+  it('should test when a admin user edits another user', async () => {
+    // Mock do id vindo da url.
+    useParams.mockReturnValue(
+      {id: "id_diferente"}
+    );
+
+    jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(token);
+    decodeToken.mockReturnValue({
+      "id": "clprc9gem0001y06nguit2ikt",
+      "email": "ass@example.com",
+      "nome": "Another User",
+      "cargos": [
+        "USER",
+        "ADMIN"
+      ]
+    })
+
+    render(<EditUserForm />);
+
+    await waitFor(() => {
+      expect(screen.queryByTestId("admin-checkbox")).toBeInTheDocument();
+    }) 
+  });
+
+  it('should test when a user edits himself', async () => {
+    // Mock do id vindo da url.
+    useParams.mockReturnValue(
+      {id: "clprc9gem0001y06nguit2ikt"}
+    );
+
+    jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(token);
+    decodeToken.mockReturnValue({
+      "id": "clprc9gem0001y06nguit2ikt",
+      "email": "ass@example.com",
+      "nome": "Another User",
+      "cargos": [
+        "USER",
+      ]
+    })
+
+    render(<EditUserForm />);
+
+    await waitFor(() => {
+      expect(screen.queryByTestId("admin-checkbox")).toBeNull();
+    }) 
+  });
+
+  it('should test when a user tries to edit another user', async () => {
+    // Mock do id vindo da url.
+    useParams.mockReturnValue(
+      {id: "id_diferente"}
+    );
+
+    jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(token);
+    decodeToken.mockReturnValue({
+      "id": "clprc9gem0001y06nguit2ikt",
+      "email": "ass@example.com",
+      "nome": "Another User",
+      "cargos": [
+        "USER",
+      ]
+    })
+
+    render(<EditUserForm />);
+
+    await waitFor(() => {
+      expect(screen.queryByTestId("admin-checkbox")).toBeInTheDocument();
+    }) 
+  });
+})

@@ -6,6 +6,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import SignupForm from '../../components/forms/SignupForm';
 import { getUnidades } from "../../services/unidadeService";
 import { createUser } from "../../services/userService";
+import '@testing-library/jest-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('../../services/unidadeService', () => ({
   getUnidades: jest.fn(),

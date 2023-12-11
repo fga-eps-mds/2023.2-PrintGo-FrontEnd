@@ -115,7 +115,8 @@ describe('Login Component', () => {
     const buttonElement = screen.getByText("Recuperar senha");
     fireEvent.click(buttonElement);
     let url = location.href;
-    url = url.replace("http://localhost/", "/")
+    const resultado = url.match(/\/\/[^\/]+(\/[^?#]*)/);
+    url = resultado ? resultado[1] : null;
     expect(url).toBe("/esqueciMinhaSenha");
   });
 });

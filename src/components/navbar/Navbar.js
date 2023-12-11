@@ -13,6 +13,16 @@ const Navbar = () => {
 
   let navigate = useNavigate();
 
+  const isTokenExpired = (decodedToken) =>{
+    if (!decodedToken || Date.now() >= decodedToken.exp * 1000) {
+      console.log("token expirou")
+      return true; // Token expirado
+    }
+    else {
+      return false;
+    }
+  }
+
   const toggleUserDropdown = () => {
     setUserDropdownOpen(!userDropdownOpen)
   }
@@ -25,6 +35,9 @@ const Navbar = () => {
   const token = localStorage.getItem("jwt");
   if (token) {
     user = decodeToken(token);
+    if(isTokenExpired(user)){
+      user = null
+    } 
   }
 
   const userLogOut = async (e) => {
@@ -36,8 +49,6 @@ const Navbar = () => {
     catch(error){
       console.log(error)
     }
-    
-      
   }
 
   return (
@@ -57,7 +68,7 @@ const Navbar = () => {
 
         { user && (
           <>
-            { user.cargos.includes('ADMIN') && (
+            { user.cargos?.includes('ADMIN') && (
               <div className="navbar-users">
                 <button className="navbar-users-button" onClick={toggleUserDropdown}>
                   <h4>Usuários</h4> 
@@ -65,6 +76,7 @@ const Navbar = () => {
                   {userDropdownOpen && (
                     <div className="navbar-users-dropdown">
                       <Link to="/cadastro">Cadastro de usuário</Link>
+                      <Link to='/listausuarios'>Usuários cadastrados</Link>
                     </div>
                   )}
                 </button>
@@ -94,7 +106,7 @@ const Navbar = () => {
         <div className="navbar-user-info">
           <div className="navbar-user-message">
             <img alt="loggeduser" src={LoggedUser}/>
-            <Link to={"/editarusuario"}>Olá, {user.nome}!</Link>
+            <Link to={`/editarusuario/${user.id}`}>Olá, {user.nome}!</Link>
           </div>
           <Link className="navbar-user-leave" data-testid="navbar-leave-button" onClick={userLogOut}>
             <button>
