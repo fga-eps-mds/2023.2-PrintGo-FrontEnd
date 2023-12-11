@@ -1,4 +1,4 @@
-import { createImpressora, createPadraoImpressora, getPadrao, getPadroes, getPrinters, togglePattern, togglePrinter } from '../../services/printerservice'
+import { createImpressora, createPadraoImpressora, getPadrao, getPadroes, getPrinters, togglePattern, togglePrinter } from '../../services/printerService'
 import { api } from '../../lib/api/config';
 
 jest.mock('../../lib/api/config.js', () => ({
