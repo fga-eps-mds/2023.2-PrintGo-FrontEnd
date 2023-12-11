@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import "../style/pages/printersList.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Search from '../assets/Search.svg';
 import Filter from '../assets/Filter.svg';
 import engine from '../assets/engine.svg';
@@ -12,7 +12,6 @@ import { extractDate } from "../utils/utils";
 import { toast } from "react-toastify";
 
 export default function PrintersList() {
-  const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
   const [modalOpen, setModalOpen] = useState(false);
