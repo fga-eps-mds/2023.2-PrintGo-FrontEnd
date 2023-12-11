@@ -21,6 +21,11 @@
   margin-top: 0.2rem;
 }
 
+.no-results {
+  text-align: center;
+  margin-top: 30vh;
+}
+
 .printerslist-header-title {
   display: flex;
   flex-direction: column;
@@ -115,8 +120,10 @@
   flex-direction: column;
 }
 
-.printerslist-model h4{
+.printerslist-model a {
   width: 20vw;
+  color: #003366;
+  text-decoration: none;
   margin: 0;
   padding-left: 1rem;
 }

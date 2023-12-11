@@ -13,11 +13,12 @@ import EditPrinter from "./pages/EditPrinter";
 import PatternPrinter from "./pages/PatternPrinter";
 import EditPattern from "./pages/EditPattern";
 import PrintersList from "./pages/PrintersList";
+import ViewPrinter from "./pages/ViewPrinter";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import PatternList from "./pages/PatternList";
 import ViewPattern from "./pages/ViewPattern";
 import ForgottenPasswordPage from "./pages/ForgottenPassword";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import RecoverPasswordPage from "./pages/RecoverPassword";
 import PrivateRoutes from "./components/utils/PrivateRoutes";
 import AdminRoutes from "./components/utils/AdminRoutes";
@@ -31,10 +32,11 @@ function App() {
             <Route path="/editarusuario/:id" element={<EditUserPage/>}/>
             <Route path="/mudarsenha" element={<ChangePassword />} />
             <Route path="/cadastroimpressora" element={<RegisterPrinter />} />
-            <Route path="/editarimpressora" element={<EditPrinter />} />
+            <Route path="/editarimpressora/:printer" element={<EditPrinter />} />
             <Route path="/padraoimpressora" element={<PatternPrinter />} />
             <Route path="/editarpadrao/:padrao" element={<EditPattern />} />
             <Route path="/impressorascadastradas" element={<PrintersList />} />
+            <Route path="/visualizarimpressora/:printerData" element={<ViewPrinter/>}/>
             <Route path="/listapadroes" element={<PatternList />} />
             <Route path="/padroescadastrados" element={<PatternList />} />
             <Route path="/visualizarpadrao/:padrao" element={<ViewPattern />} />

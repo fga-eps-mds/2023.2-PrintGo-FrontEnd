@@ -1,0 +1,132 @@
+/* Container */
+
+#container-viewprinter {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#viewprinter-left-content {
+    width: 30vw;
+}
+
+#viewprinter-right-content {
+    width: 70vw;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* View card */
+
+#viewprinter-card {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    width: 43rem;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    padding: 1rem 5rem;
+    margin-right: 8vw;
+    margin-top: 11%;
+    margin-bottom: 1vh;
+}
+
+#viewprinter-loading-text {
+  color: #003366;
+  display: block;
+  font-size: 20px;
+}
+
+/* Header */
+
+#viewprinter-card-header {
+    width: 100%;
+    margin-top: 10px;
+    display: block;
+}
+
+#viewprinter-card-header a {
+  font-weight: bold;
+  font-size: 22px;
+  color: #003366;
+  margin-left: 8px;
+  text-decoration: none;
+}
+
+/* Infos */
+
+#viewprinter-info-group{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 16px 0;
+}
+
+#viewprinter-info-header {
+    display: block;
+    margin-bottom: 20px;
+    width: 100%;
+    color: #003366;
+    font-size: 30px;
+}
+
+#viewprinter-info-line {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+#viewprinter-info-box {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+#viewprinter-info-box label {
+    color: #003366;
+    display: block;
+    margin-bottom: 0px;
+}
+
+#viewprinter-info-box p {
+    color: #003366;
+    display: block;
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+/*Estilo de circuferencia */
+
+.elipse-viewprinter{
+    position: fixed;
+    display: flex;
+    width: fit-content;
+    min-height: 100vh;
+    justify-content: flex-end;
+    align-items: end;
+    z-index: -1;
+    color:#003366;
+}
+
+.elipse-viewprinter img{
+    width: 40vw;
+    height: 100vh;
+}
+
+@media (max-width: 1210px) {
+    .container-viewprinter{
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+        padding-left: 2rem;
+        align-items: center;
+    }
+}

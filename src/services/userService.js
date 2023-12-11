@@ -9,6 +9,18 @@ export const createUser = async (user) => {
   }
 };
 
+export const getUsers = async () => {
+  try {
+    const response = await api.get('/user');
+    if(response.status !== 200) {
+      return { type: 'error', data: response.data};
+    }
+    return { type: 'success', data: response.data};
+  } catch (error) {
+    return { type: 'error', error };
+  }
+};
+
 export const updateUser = async (user, id) => {
   try {
     const response = await api.patch(`/user/${id}`, user)
@@ -18,14 +30,6 @@ export const updateUser = async (user, id) => {
   }
 }
 
-export const getUsers = async () => {
-  try {
-    const response = await api.get('/user/');
-    return { type: 'success', data: response.data};
-  } catch (error) {
-    return { type: 'error', error };
-  }
-}
 
 export const getUserById = async (id) => {
   try {
@@ -53,7 +57,6 @@ export const forgottenPassword = async (email) => {
 export const recoverPassword = async (data) => {
   try {
     const response = await api.post('/user/recover-password', data );
-    console.log(response.body);
     if(response.status !== 201) {
       return { type: 'error', error: "Erro não foi possível enviar email!"};
     }

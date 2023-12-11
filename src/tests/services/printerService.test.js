@@ -1,4 +1,4 @@
-import { createImpressora, createPadraoImpressora, getPadrao, getPadroes, getPrinters, togglePattern, togglePrinter } from '../../services/printerservice'
+import { createImpressora, createPadraoImpressora, getPadrao, getPadroes, getPrinters, togglePattern, togglePrinter } from '../../services/printerService'
 import { api } from '../../lib/api/config';
 
 jest.mock('../../lib/api/config.js', () => ({
@@ -113,7 +113,7 @@ describe('PrinterService API functions', () => {
 
     const result = await togglePrinter(data.id, data.status);
 
-    expect(api.patch).toHaveBeenCalledWith(`/printer/impressora/${data.id}`, data);
+    expect(api.patch).toHaveBeenCalledWith(`/printer/impressora/desativar/${data.id}`, data);
     expect(result).toEqual({ type: 'success', data: 'some data' });
   });
 
@@ -127,7 +127,7 @@ describe('PrinterService API functions', () => {
 
     const result = await togglePrinter(data.id, data.status);
 
-    expect(api.patch).toHaveBeenCalledWith(`/printer/impressora/${data.id}`, data);
+    expect(api.patch).toHaveBeenCalledWith(`/printer/impressora/desativar/${data.id}`, data);
     expect(result).toEqual({ type: 'error', data: 'some data' });
   });
 
@@ -141,7 +141,7 @@ describe('PrinterService API functions', () => {
 
     const result = await togglePrinter(data.id, data.status);
 
-    expect(api.patch).toHaveBeenCalledWith(`/printer/impressora/${data.id}`, data);
+    expect(api.patch).toHaveBeenCalledWith(`/printer/impressora/desativar/${data.id}`, data);
     expect(result).toEqual({ type: 'error', error: new Error('error') });
   });
 

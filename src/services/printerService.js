@@ -44,7 +44,7 @@ export async function togglePrinter(id, status) {
   }
 
   try {
-    const response = await api.patch(`/printer/impressora/${id}`, data);
+    const response = await api.patch(`/printer/impressora/desativar/${id}`, data);
     if(response.status !== 200) {
       return { type: 'error', data: response.data};
     }
@@ -74,8 +74,32 @@ export async function togglePattern(id, status) {
 export const createImpressora = async (printer) => {
   try {
     const response = await api.post('/printer/impressora/create', printer);
-    console.log(response);
     if(response.status !== 201) {
+      return { type: 'error', data: response.data};
+    }
+    return { type: 'success', data: response.data};
+  } catch (error) {
+    return { type: 'error', error };
+  }
+};
+
+export const editImpressora = async (printer) => {
+  try {
+    const data = {
+      ip: printer.ip,
+      padrao_id: printer.padrao_id,
+      numeroSerie: printer.numeroSerie,
+      codigoLocadora: printer.codigoLocadora,
+      contadorInstalacao: printer.contadorInstalacao,    
+      dataInstalacao: printer.dataInstalacao,
+      contadorRetiradas: printer.contadorRetiradas,
+      dataContadorRetirada: printer.dataContadorRetirada,
+      ultimoContador: printer.ultimoContador,
+      dataUltimoContador: printer.dataUltimoContador,
+      unidadeId: printer.unidadeId,
+    }
+    const response = await api.patch(`/printer/impressora/${printer.id}`, data);
+    if(response.status !== 200) {
       return { type: 'error', data: response.data};
     }
     return { type: 'success', data: response.data};
@@ -87,7 +111,6 @@ export const createImpressora = async (printer) => {
 export const createPadraoImpressora = async (printerPattern) => {
   try {
     const response = await api.post('/printer/padrao/create', printerPattern);
-    console.log(response);
     if(response.status !== 201) {
       return { type: 'error', data: response.data};
     }

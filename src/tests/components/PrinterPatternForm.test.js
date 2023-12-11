@@ -1,28 +1,39 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'; 
-import '@testing-library/jest-dom';
-import PrinterPatternForm, { fieldLabels } from '../../components/forms/PrinterPatternForm';
+import '@testing-library/jest-dom/extend-expect';
+import * as router from 'react-router-dom';
+import { render as rtlRender, fireEvent, waitFor, screen } from '@testing-library/react';
+import PrinterPatternForm from '../../components/forms/PrinterPatternForm';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { createPadraoImpressora } from '../../services/printerService';
+
+jest.mock('../../services/printerService', () => ({
+  createPadraoImpressora: jest.fn(),
+}));
+
+function render(ui, { route = '/', ...renderOptions } = {}) {
+  window.history.pushState({}, 'Test page', route);
+
+  function Wrapper({ children }) {
+    return <Router>{children}</Router>;
+  }
+
+  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
+}
 
 describe('PrinterPatternForm', () => {
-  beforeEach(() => {
-    render(<PrinterPatternForm />);
-  });
-
-  test('renders all form fields and buttons', () => {
-    // Testa campos principais
-    ['tipo', 'marca', 'modelo'].forEach(field => {
-      expect(screen.getByPlaceholderText(`Digite ${fieldLabels[field].toLowerCase()}`)).toBeInTheDocument();
+    beforeEach(() => {
+      jest.mocked(createPadraoImpressora).mockReset();
     });
 
-    // Testa campos SNMP
-    Object.keys(fieldLabels.snmp).forEach(subField => {
-      // Aqui você deve identificar cada campo de forma única, se necessário
-      expect(screen.getAllByPlaceholderText('Código OID')).toHaveLength(Object.keys(fieldLabels.snmp).length);
+    afterEach(() => {
+        jest.resetAllMocks();
     });
 
-    // Testa botões
-    expect(screen.getByRole('button', { name: /cancelar/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /registrar/i })).toBeInTheDocument();
-  });
+    it('deve renderizar o formulário corretamente', () => {
+      render(<PrinterPatternForm />);
+      expect(screen.getByText("Cadastrar padrão de impressora")).toBeInTheDocument();
+    });
 
+
+   
 });

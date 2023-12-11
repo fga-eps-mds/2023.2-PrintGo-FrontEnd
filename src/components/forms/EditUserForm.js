@@ -45,7 +45,7 @@ export default function EditUserForm(){
   const [isEditingAnotherAdmin, setIsEditingAnotherAdmin] = useState(); //verifica se o usuario que esta sendo editado eh admin
   const [isLocadora, setIsLocadora] = useState(); //verifica se o usuario que esta sendo editado eh da locadora
   const [displayLotacoes,setDisplayLotacoes] = useState ('');
-  const [unidadeFilhoList, setUnidadeFilhoList] = useState ();
+  const [unidadeFilhoList, setUnidadeFilhoList] = useState();
   const [userData, setUserData] = useState(null);
   const [displayUserRole, setDisplayUserRole] = useState(true);
 
