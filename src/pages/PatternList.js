@@ -7,7 +7,7 @@ import Engine from '../assets/engine.svg';
 import Input from '../components/Input'; 
 import Modal from '../components/ui/Modal';
 import Navbar from "../components/navbar/Navbar";
-import { getPadroes, togglePattern } from "../services/printerservice";
+import { getPadroes, togglePattern, togglePrinter } from "../services/printerService";
 
 export default function PatternList() {
 

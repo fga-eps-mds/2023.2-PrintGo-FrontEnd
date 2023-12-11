@@ -25,6 +25,23 @@ export async function getPadrao(id) {
   }
 }
 
+export async function togglePattern(id, status) {
+  const data = {
+    id,
+    status
+  };
+
+  try {
+    const response = await api.patch(`/printer/padrao/toggle/${id}`, data);
+    if(response.status !== 200) {
+      return { type: 'error', data: response.data };
+    }
+    return { type: 'success', data: response.data };
+  } catch (error) {
+    return { type: 'error', error };
+  }
+}
+
 export async function getPadroes() {
   try {
     const response = await api.get('/printer/padrao');

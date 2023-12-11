@@ -25,4 +25,14 @@ describe('PrinterPatternForm', () => {
     expect(screen.getByRole('button', { name: /registrar/i })).toBeInTheDocument();
   });
 
+  // Teste de Validação
+  test(' erro quando um campo obrigatório é deixado em branco', async () => {
+    const submitButton = screen.getByRole('button', { name: /registrar/i });
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(screen.getByText('Este campo é obrigatório')).toBeInTheDocument(); 
+    });
+  });
+
 });
