@@ -32,15 +32,19 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const token = await login(email, password);
-
-      localStorage.setItem("jwt", token);
-      navigate("/");
-
+      const response = await login(email, password);
+      
+      if (response.type === 'success') {
+        localStorage.setItem("jwt", response.token);
+        navigate("/");
+      } else {
+        console.error(response.error);
+        setLoginError("E-mail ou senha incorreto.");
+      }
+      
     } catch (error) {
       console.error(error);
-      setLoginError("E-mail ou senha incorreto.");
-      
+      setLoginError("Não foi possível fazer o login");
     }
   };
 

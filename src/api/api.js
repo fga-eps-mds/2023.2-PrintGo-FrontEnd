@@ -7,8 +7,8 @@ export async function login(email, password) {
   };
 
   try {
-      const response = await api.post('/user/login', data);
-      return response.data.token;
+    const response = await api.post('/user/login', data);
+    return {type: 'success', token: response.data.token };
   } catch (error) {
     console.error('Erro ao fazer login:', error);
     return {type: 'error', error}; 
