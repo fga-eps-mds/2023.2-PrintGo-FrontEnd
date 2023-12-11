@@ -72,3 +72,17 @@ export const getPasswordSchema = () => {
       .required('Confirmação de senha é obrigatória')
   });
 };
+
+export const getEditUserSchema = (userFiledLabels) => {
+
+  
+  return yup.object().shape({
+    nome: yup.string().required(`${userFiledLabels.nome} é obrigatório`),
+    documento: yup.string().required(`${userFiledLabels.documento} é obrigatório`),
+    email: yup.string().required(`${userFiledLabels.email} é obrigatório`),
+    emailConfirmar: yup.string().required(`${userFiledLabels.emailConfirmar} é obrigatório`),
+    unidade_id: yup.string().required(`${userFiledLabels.unidade_id} é obrigatório`),
+    isAdmin: yup.boolean(),
+    isLocadora: yup.boolean(),
+  });
+};

@@ -1,0 +1,202 @@
+/* Container */
+.listusers-container {
+  position: relative;
+  max-width: 100vw;
+  max-height: 100vh;
+  text-align: left;
+}
+
+/* Header */
+.listusers-header {
+  height: 10vh;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #003366;
+  padding: 0px 40px 0px 20px;
+}
+
+.listusers-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.listusers-title h2 {
+  font-size: 26px;
+  margin: 0px;
+}
+
+.listusers-title h4 {
+  font-size: 20px;
+  margin: 0px;
+  font-weight: normal;
+}
+
+/* Search & Filter */
+.listusers-search {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  gap: 20px;
+}
+
+.listusers-search input {
+  width: 250px;
+  margin-bottom: 8px;
+}
+
+.listusers-filter:hover {
+  cursor: pointer;
+}
+
+.listusers-filter-dropdown {
+  display: none;
+  position: absolute;
+  right: 0px;
+  background-color: #f9f9f9;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  
+}
+
+.listusers-user-dropdown-container{
+  left: -10px;
+
+}
+
+.listusers-filter-dropdown a {
+  color: #003366;
+  text-decoration: none;
+  display: block;
+  font-size: 20px;
+  padding: 4px 4px;
+}
+
+.listusers-filter-dropdown a:hover {
+  background-color: #003366;
+  color: #ffffff;
+}
+
+.listusers-filter:hover .listusers-filter-dropdown {
+  display: flex;
+  flex-direction: column;
+}
+
+/* User */
+.listusers-user {
+  height: 18vh;
+  max-width: 100vw;
+  color: #003366;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.listusers-user-image {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  height: 11vh;
+  width: 7vw;
+}
+
+.listusers-user-image img{
+  height: 50px;
+  width: 50px;
+}
+
+.listusers-user-name-email {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 28vw;
+}
+
+.listusers-user-name-email h3 {
+  font-size: 28px;
+  margin: 0px;
+  font-weight: normal;
+}
+
+.listusers-user-name-email h4 {
+  margin: 0px;
+  font-weight: normal;
+}
+
+.listusers-user-document {
+  display: flex;
+  justify-content: center;
+  width: 10vw;
+}
+
+.listusers-user-positions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25vw;
+}
+
+.listusers-user-positions h4 {
+  margin: 0px;
+}
+
+.listusers-user-workstation {
+  display: flex;
+  justify-content: center;
+  width: 15vw;
+}
+
+.listusers-user-workstation h4 {
+  margin: 0px;
+  text-align: center;
+}
+
+/* Dropdown usuário */
+.listusers-engine {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 100px;
+}
+
+.listusers-engine img {
+  height: 50px;
+  width: 50px;
+}
+
+.listusers-user-dropdown {
+  display: none;
+  position: absolute;
+  min-width: 180px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.listusers-user-dropdown a {
+  color: #003366;
+  text-decoration: none;
+  display: block;
+  font-size: 20px;
+  padding: 4px 4px;
+}
+
+.listusers-user-dropdown a:hover {
+  background-color: #003366;
+  color: #ffffff;
+}
+
+.listusers-engine:hover .listusers-user-dropdown {
+  display: flex;
+  flex-direction: column;
+  right: 2%;
+}

@@ -29,7 +29,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --coverage --passWithNoTests --no-cache --runInBand",
+    "test": "jest --passWithNoTests --no-cache --runInBand --bail",
     "test:all": "CI=true npm run test -- --coverage",
     "test:watch": "react-scripts test",
     "eject": "react-scripts eject",

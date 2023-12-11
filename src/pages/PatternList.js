@@ -155,7 +155,12 @@ export default function PatternList() {
             <div key={pattern.id_padrao} className="patternlist-pattern" style={{ color: pattern.status === "ATIVO" ? '' : 'gray' }}>
               <div className="patternlist-model">
                 <h4>
-                  <Link to={`/visualizarpadrao/${btoa(JSON.stringify(pattern))}`}>Padrão {pattern.marca} - {pattern.modelo} - {pattern.tipo}</Link>
+                  <Link 
+                    to={`/visualizarpadrao/${btoa(JSON.stringify(pattern))}`}
+                    style={{ color: pattern.status === "ATIVO" ? '' : 'gray' }}
+                   >
+                    Padrão {pattern.marca} - {pattern.modelo} - {pattern.tipo}
+                   </Link>
                 </h4>
                 {pattern.status === 'DESATIVADO' && <h5>Desativado</h5>}
               </div>

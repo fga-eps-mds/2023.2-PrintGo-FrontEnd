@@ -30,6 +30,15 @@ export const updateUser = async (user, id) => {
   }
 }
 
+export const getUsers = async () => {
+  try {
+    const response = await api.get('/user/');
+    return { type: 'success', data: response.data};
+  } catch (error) {
+    return { type: 'error', error };
+  }
+}
+
 export const getUserById = async (id) => {
   try {
     const response = await api.get(`/user/${id}`);
@@ -65,3 +74,12 @@ export const recoverPassword = async (data) => {
     return { type: 'error', error };
   }
 };
+
+export const deleteUser = async (id) => {
+  try {
+    const response = await api.delete(`/user/${id}`);
+    return { type: 'success', data: response.data };
+  } catch (error) {
+    return { type: 'error', error };
+  }
+}

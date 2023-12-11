@@ -1,4 +1,4 @@
-import { createUser, forgottenPassword, getUserById, recoverPassword, updateUser } from '../../services/userService'
+import { createUser, forgottenPassword, getUserById, recoverPassword, updateUser, getUsers, deleteUser } from '../../services/userService'
 import { api } from '../../lib/api/config';
 
 jest.mock('../../lib/api/config.js', () => ({
@@ -6,6 +6,7 @@ jest.mock('../../lib/api/config.js', () => ({
     post: jest.fn(),
     patch: jest.fn(),
     get: jest.fn(),
+    delete: jest.fn()
   },
 }));
 
@@ -170,4 +171,31 @@ describe('UserService API functions', () => {
     expect(api.post).toHaveBeenCalledWith('/user/recover-password', data);
     expect(result).toEqual({ type: 'error', error: new Error('error') });
   })
+
+  it('gets users', async () => {
+    api.get.mockResolvedValue({data: "get users"});
+    const result = await getUsers();
+
+    expect(api.get).toHaveBeenCalledWith(`/user/`);
+    expect(result).toEqual({type:'success', data: 'get users'});
+  });
+
+  it('error when gets users', async () => {
+    api.get.mockRejectedValue(new Error('error'));
+    const result = await getUsers();
+
+    expect(api.get).toHaveBeenCalledWith(`/user/`);
+    expect(result).toEqual({ type: 'error', error: new Error('error') });
+  });
+
+  it('deletes a user', async () => {
+    const userId = 1
+    api.delete.mockResolvedValue({data: "some data"});
+
+    const result = await deleteUser(userId);
+
+    expect(api.delete).toHaveBeenCalledWith(`/user/${userId}`);
+    expect(result).toEqual({ type: 'success', data: 'some data' });
+  });
+  
 })
