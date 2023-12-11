@@ -6,7 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import PatternList from '../../pages/PatternList';
 import { getPadroes, togglePattern } from '../../services/printerService'
 
-jest.mock('../../services/printerservice', () => ({
+jest.mock('../../services/printerService', () => ({
   getPadroes: jest.fn(),
   togglePattern: jest.fn(),
 }));
