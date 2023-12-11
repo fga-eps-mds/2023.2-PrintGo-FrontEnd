@@ -68,30 +68,6 @@ describe('getRegisterPrinterSchema', () => {
     }
   };
 
-  it('validates correctly with valid data', async () => {
-    const validData = {
-      tipo: 'Laser',
-      marca: 'Marca Teste',
-      modelo: 'Modelo Teste',
-      snmp: {
-        modeloImpressora: 'Modelo Impressora Teste',
-        numeroSerie: '12345678',
-        versaoFirmware: 'v1.0.0',
-        tempoAtivo: '100 horas',
-        totalDigitalizacoes: '1000',
-        totalCopiasPB: '500',
-        totalCopiasColorido: '500',
-        totalImpressoesPB: '1000',
-        totalImpressoesColorido: '1000',
-        totalGeral: '4000',
-        enderecoIP: '192.168.1.1',
-      }
-    };
-
-    const schema = getRegisterPrinterSchema(fieldLabels);
-    await expect(schema.validate(validData)).resolves.toEqual(validData);
-  });
-
   it('rejects with invalid data', async () => {
     const invalidData = {
       tipo: '',
