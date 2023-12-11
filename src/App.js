@@ -14,6 +14,7 @@ import PatternPrinter from "./pages/PatternPrinter";
 import EditPattern from "./pages/EditPattern";
 import PrintersList from "./pages/PrintersList";
 import PatternList from "./pages/PatternList";
+import ViewPattern from "./pages/ViewPattern";
 import ForgottenPasswordPage from "./pages/ForgottenPassword";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -36,6 +37,7 @@ function App() {
             <Route path="/impressorascadastradas" element={<PrintersList />} />
             <Route path="/listapadroes" element={<PatternList />} />
             <Route path="/padroescadastrados" element={<PatternList />} />
+            <Route path="/visualizarpadrao/:padrao" element={<ViewPattern />} />
             <Route element={<AdminRoutes/>}>
               <Route path="/listausuarios" element={<UsersList />} />
               <Route path="/cadastro" element={<CreateUserPage />} />
