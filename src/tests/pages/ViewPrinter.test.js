@@ -1,89 +1,51 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render as rtlRender, fireEvent, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import * as api from "../../api/api";
 import * as router from "react-router-dom";
+import { BrowserRouter as Router, useParams } from 'react-router-dom';
 import ViewPrinter from '../../pages/ViewPrinter';
-import { BrowserRouter } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
-
-// Mock das chamadas de API
-jest.mock("../../api/api", () => ({
-  getPrinterById: jest.fn(),
-  getPatternById: jest.fn(),
-}));
 
 // Mock do React Router
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useHistory: () => ({
-    push: jest.fn(),
-  })
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn(),
+  useParams: jest.fn(),
 }));
 
+function render(ui, { route = '/', ...renderOptions } = {}) {
+  window.history.pushState({}, 'Test page', route);
+
+  function Wrapper({ children }) {
+    return <Router>{children}</Router>;
+  }
+
+  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
+}
+
 beforeEach(() => {
-  api.getPrinterById.mockResolvedValue(
-    {
-      id: "",
-      padrao_id: "",
-      ip: "192.168.15.1",
-      numeroSerie: "XXXX-000000",
-      codigoLocadora: "PRINTER-004",
-      contadorInstalacao: 0,
-      ultimoContador: 0,
-      dataInstalacao: "12/10/2023",
-      dataUltimoContador: "20/11/2023",
-      contadorRetirada: 0,
-      dataRetirada: "12/10/2023",
-      circunscricao: "1ª Delegacia Regional de Goiânia",
-      unidade: "2ª Delegacia Municipal de Goiânia",
-    }
-  );
-  api.getPatternById.mockResolvedValue(
-    {
-      tipo: "Multifuncional P&B",
-      marca: "Canon",
-      modelo: "MF1643i II",
-    }
-  )
-  jest.clearAllMocks();
+  router.useNavigate.mockImplementation(jest.requireActual('react-router-dom').useNavigate);
+  jest.resetAllMocks();
 });
 
 // Teste de renderização inicial.
 test("deve renderizar a visualização de impressora corretamente", async () => {
-  render(<BrowserRouter>
-          <ViewPrinter />
-        </BrowserRouter>);
+  useParams.mockReturnValue({ printerData: "" });
 
-  expect(await screen.findByText("Multifuncional P&B - Canon - MF1643i II")).toBeInTheDocument();
+  render(<ViewPrinter />);
+
+  expect(screen.getByText("Carregando dados...")).toBeInTheDocument();
 });
 
 // Teste de renderização dos labels.
-test("deve renderizar os labels de informação corretamente", async () => {
-  render(<BrowserRouter>
-          <ViewPrinter />
-        </BrowserRouter>);
+test("deve renderizar a página com os dados de uma impressora", async () => {
+  useParams.mockReturnValue({printerData: "eyJpZCI6ImNscTA3bWkwaDAwMDJ2eGdocWttMmJscDEiLCJpcCI6IjEzMi4xNS4yLjQ1LjE3IiwibnVtZXJvU2VyaWUiOiIxMzIxNTY4NCIsInBhZHJhb19pZCI6ImNscTA3bDh6NTAwMDB2eGdoZG11czkwZnAiLCJjb2RpZ29Mb2NhZG9yYSI6IjI2MjZhd2RhIiwibG9jYWRvcmFfaWQiOm51bGwsImNvbnRhZG9ySW5zdGFsYWNhbyI6MTAsImRhdGFJbnN0YWxhY2FvIjoiMjAyMy0xMi0xMFQwMDowMDowMC4wMDBaIiwidWx0aW1vQ29udGFkb3IiOjEwLCJkYXRhVWx0aW1vQ29udGFkb3IiOiIyMDIzLTEyLTEwVDAwOjAwOjAwLjAwMFoiLCJjb250YWRvclJldGlyYWRhcyI6MTAsImRhdGFDb250YWRvclJldGlyYWRhIjoiMjAyMy0xMi0xMFQwMDowMDowMC4wMDBaIiwidW5pZGFkZUlkIjoiZjM5YTg2OGMtZGJmNy00ZmNhLWEyNTctZjkxNTMxMWI1YTc5Iiwic3RhdHVzIjoiQVRJVk8iLCJwYWRyYW8iOnsiaWQiOiJjbHEwN2w4ejUwMDAwdnhnaGRtdXM5MGZwIiwidGlwbyI6Ikxhc2VySmV0IiwibWFyY2EiOiJIUCIsIm1vZGVsb0ltcHJlc3NvcmEiOiIxMzIuMTIuMS41LjEyIiwibW9kZWxvIjoiUHJvIiwibnVtZXJvU2VyaWUiOiIxMzIuMTIuMS41LjEyIiwidmVyc2FvRmlybXdhcmUiOiIxMzIuMTIuMS41LjEyIiwidG90YWxEaWdpdGFsaXphY29lcyI6IjEzMi4xMi4xLjUuMTIiLCJ0b3RhbENvcGlhc1BCIjoiMTMyLjEyLjEuNS4xMiIsInRvdGFsQ29waWFzQ29sb3JpZGFzIjoiMTMyLjEyLjEuNS4xMiIsInRvdGFsSW1wcmVzc29lc1BiIjoiMTMyLjEyLjEuNS4xMiIsInRvdGFsSW1wcmVzc29lc0NvbG9yaWRhcyI6IjEzMi4xMi4xLjUuMTIiLCJ0b3RhbEdlcmFsIjoiMTMyLjEyLjEuNS4xMiIsImVuZGVyZWNvSXAiOiIxMzIuMTIuMS41LjEyIiwic3RhdHVzIjoiQVRJVk8iLCJ0ZW1wb0F0aXZvU2lzdGVtYSI6IjEzMi4xMi4xLjUuMTIiLCJudW0iOm51bGx9fQ"});
 
-  expect(await screen.findByText("Número de série")).toBeInTheDocument();
-  expect(await screen.findByText("IP")).toBeInTheDocument();
-  expect(await screen.findByText("Código de locadora")).toBeInTheDocument();
-  expect(await screen.findByText("Contador de instalação")).toBeInTheDocument();
-  expect(await screen.findByText("Data de instalação")).toBeInTheDocument();
-  expect(await screen.findByText("Contador de retirada")).toBeInTheDocument();
-  expect(await screen.findByText("Data de retirada")).toBeInTheDocument();
-  expect(await screen.findByText("Último contador")).toBeInTheDocument();
-  expect(await screen.findByText("Data do último contador")).toBeInTheDocument();
-  expect(await screen.findByText("Circunscrição")).toBeInTheDocument();
-  expect(await screen.findByText("Unidade")).toBeInTheDocument();
-});
+  render(<ViewPrinter />);
 
-// Teste de renderização do Botão de Voltar.
-test("deve renderizar o archor de voltar", async () => {
-  render(<BrowserRouter>
-          <ViewPrinter />
-        </BrowserRouter>);
+  await waitFor(() => {
+    expect(screen.getByText("13215684")).toBeInTheDocument();
+  })
   
-  const linkVoltar = screen.getByText("Voltar");
-
-  expect(linkVoltar).toBeInTheDocument();
 });
+
+

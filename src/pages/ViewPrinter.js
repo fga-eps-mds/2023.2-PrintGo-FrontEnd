@@ -9,6 +9,7 @@ import { extractDate } from "../utils/utils";
 
 export default function ViewPrinter(){
     const { printerData } = useParams();
+    console.log(atob(printerData));
 
     // Labels dos campos de informação.
     const infoLabels = {
@@ -44,7 +45,7 @@ export default function ViewPrinter(){
     return(
         <>
           <Navbar />
-          <div id="container-viewprinter">
+          <div id="container-viewprinter" data-testid="container-viewprinter">
             <div id="viewprinter-left-content"></div>
             <div id="viewprinter-right-content">
               <div id="viewprinter-card">
