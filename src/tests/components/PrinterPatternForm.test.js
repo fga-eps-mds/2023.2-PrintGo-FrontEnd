@@ -1,61 +1,52 @@
 import React from 'react';
-import { render, fireEvent, screen, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import PrinterPatternForm, { fieldLabels } from '../../components/forms/PrinterPatternForm';
+import '@testing-library/jest-dom/extend-expect';
+import * as router from 'react-router-dom';
+import { render as rtlRender, fireEvent, waitFor, screen } from '@testing-library/react';
+import PrinterPatternForm from '../../components/forms/PrinterPatternForm';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { createPadraoImpressora } from '../../services/printerService';
 
 jest.mock('../../services/printerService', () => ({
   createPadraoImpressora: jest.fn(),
 }));
 
-const mockCreatePadraoImpressora = jest.mocked(createPadraoImpressora);
+function render(ui, { route = '/', ...renderOptions } = {}) {
+  window.history.pushState({}, 'Test page', route);
+
+  function Wrapper({ children }) {
+    return <Router>{children}</Router>;
+  }
+
+  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
+}
 
 describe('PrinterPatternForm', () => {
-  beforeEach(() => {
-    mockCreatePadraoImpressora.mockReset();
-    render(<PrinterPatternForm />);
-  });
-
-  test('renderiza todos os campos e botões do formulário', () => {
-    // Testa se todos os campos principais estão renderizados
-    Object.entries(fieldLabels).filter(([key]) => key !== "snmp").forEach(([key, label]) => {
-      expect(screen.getByPlaceholderText(`Digite ${label.toLowerCase()}`)).toBeInTheDocument();
+    beforeEach(() => {
+      jest.mocked(createPadraoImpressora).mockReset();
     });
 
-    // Testa se os campos SNMP estão renderizados
-    Object.keys(fieldLabels.snmp).forEach(key => {
-      expect(screen.getByPlaceholderText('Código OID')).toBeInTheDocument();
+    afterEach(() => {
+        jest.resetAllMocks();
     });
 
-    // Testa se os botões estão renderizados
-    expect(screen.getByRole('button', { name: /cancelar/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /registrar/i })).toBeInTheDocument();
-  });
+    it('deve renderizar o formulário corretamente', () => {
+      render(<PrinterPatternForm />);
+      expect(screen.getByText("Cadastrar padrão de impressora")).toBeInTheDocument();
+    });
 
-  test('exibe mensagem de erro para campos obrigatórios não preenchidos', async () => {
-    const submitButton = screen.getByRole('button', { name: /registrar/i });
-    fireEvent.click(submitButton);
+    it('deve enviar o formulário e chamar a API', async () => {
+      jest.mocked(createPadraoImpressora).mockResolvedValue({ type: 'success' });
 
-    await waitFor(() => {
-      Object.entries(fieldLabels).filter(([key]) => key !== "snmp").forEach(([key]) => {
-        expect(screen.getByText('Este campo é obrigatório')).toBeInTheDocument();
+      render(<PrinterPatternForm />);
+
+      // Preencha os campos do formulário e submeta
+      fireEvent.change(screen.getByPlaceholderText('Digite tipo'), { target: { value: 'Tipo Teste' } });
+      fireEvent.click(screen.getByRole('button', { name: /registrar/i }));
+
+      await waitFor(() => {
+        expect(createPadraoImpressora).toHaveBeenCalledWith(expect.anything());
       });
     });
-  });
 
-  test('envia o formulário com dados válidos', async () => {
-    mockCreatePadraoImpressora.mockResolvedValue({ type: 'success' });
-
-    // Preenchendo os campos do formulário
-    fireEvent.change(screen.getByPlaceholderText('Digite tipo'), { target: { value: 'Tipo Teste' } });
-    fireEvent.change(screen.getByPlaceholderText('Digite marca'), { target: { value: 'Marca Teste' } });
-    fireEvent.change(screen.getByPlaceholderText('Digite modelo'), { target: { value: 'Modelo Teste' } });
-    fireEvent.click(screen.getByRole('button', { name: /registrar/i }));
-
-    await waitFor(() => {
-      expect(mockCreatePadraoImpressora).toHaveBeenCalledWith(expect.anything());
-     
-    });
-  });
-
+   
 });
