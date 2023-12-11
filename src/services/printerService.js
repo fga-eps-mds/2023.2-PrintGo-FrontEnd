@@ -54,6 +54,23 @@ export async function togglePrinter(id, status) {
   }
 }
 
+export async function togglePattern(id, status) {
+  const data = {
+    id,
+    status
+  }
+
+  try {
+    const response = await api.patch(`/printer/padrao/${id}`, data);
+    if(response.status !== 200) {
+      return { type: 'error', data: response.data};
+    }
+    return { type: 'success', data: response.data };
+  } catch (error) {
+    return { type: 'error', error };
+  }
+}
+
 export const createImpressora = async (printer) => {
   try {
     const response = await api.post('/printer/impressora/create', printer);
