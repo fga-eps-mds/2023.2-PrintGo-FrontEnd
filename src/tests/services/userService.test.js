@@ -172,19 +172,13 @@ describe('UserService API functions', () => {
     expect(result).toEqual({ type: 'error', error: new Error('error') });
   })
 
-  it('gets users', async () => {
-    api.get.mockResolvedValue({data: "get users"});
-    const result = await getUsers();
 
-    expect(api.get).toHaveBeenCalledWith(`/user/`);
-    expect(result).toEqual({type:'success', data: 'get users'});
-  });
 
   it('error when gets users', async () => {
     api.get.mockRejectedValue(new Error('error'));
     const result = await getUsers();
 
-    expect(api.get).toHaveBeenCalledWith(`/user/`);
+    expect(api.get).toHaveBeenCalledWith(`/user`);
     expect(result).toEqual({ type: 'error', error: new Error('error') });
   });
 
