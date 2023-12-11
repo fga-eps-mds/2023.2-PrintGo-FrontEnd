@@ -25,23 +25,6 @@ export async function getPadrao(id) {
   }
 }
 
-export async function togglePattern(id, status) {
-  const data = {
-    id,
-    status
-  };
-
-  try {
-    const response = await api.patch(`/printer/padrao/toggle/${id}`, data);
-    if(response.status !== 200) {
-      return { type: 'error', data: response.data };
-    }
-    return { type: 'success', data: response.data };
-  } catch (error) {
-    return { type: 'error', error };
-  }
-}
-
 export async function getPadroes() {
   try {
     const response = await api.get('/printer/padrao');
@@ -61,7 +44,24 @@ export async function togglePrinter(id, status) {
   }
 
   try {
-    const response = await api.patch(`/printer/impressora/desativar/${id}`, data);
+    const response = await api.patch(`/printer/impressora/${id}`, data);
+    if(response.status !== 200) {
+      return { type: 'error', data: response.data};
+    }
+    return { type: 'success', data: response.data };
+  } catch (error) {
+    return { type: 'error', error };
+  }
+}
+
+export async function togglePattern(id, status) {
+  const data = {
+    id,
+    status
+  }
+
+  try {
+    const response = await api.patch(`/printer/padrao/${id}`, data);
     if(response.status !== 200) {
       return { type: 'error', data: response.data};
     }
