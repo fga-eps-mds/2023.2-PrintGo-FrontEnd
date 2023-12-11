@@ -4,7 +4,6 @@ import pessoas from "../assets/pessoas.svg";
 import login_ellipse from "../assets/login_ellipse.svg";
 import { login } from "../api/api";
 import { useNavigate } from 'react-router-dom';
-import { decodeToken } from "react-jwt";
 import Navbar from "../components/navbar/Navbar";
 
 
