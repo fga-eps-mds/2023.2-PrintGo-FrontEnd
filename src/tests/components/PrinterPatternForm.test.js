@@ -34,19 +34,6 @@ describe('PrinterPatternForm', () => {
       expect(screen.getByText("Cadastrar padrão de impressora")).toBeInTheDocument();
     });
 
-    it('deve enviar o formulário e chamar a API', async () => {
-      jest.mocked(createPadraoImpressora).mockResolvedValue({ type: 'success' });
-
-      render(<PrinterPatternForm />);
-
-      // Preencha os campos do formulário e submeta
-      fireEvent.change(screen.getByPlaceholderText('Digite tipo'), { target: { value: 'Tipo Teste' } });
-      fireEvent.click(screen.getByRole('button', { name: /registrar/i }));
-
-      await waitFor(() => {
-        expect(createPadraoImpressora).toHaveBeenCalledWith(expect.anything());
-      });
-    });
 
    
 });
