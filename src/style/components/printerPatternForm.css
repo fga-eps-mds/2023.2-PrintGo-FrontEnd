@@ -62,6 +62,7 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
   gap: 10vw;
 }
 
@@ -121,6 +122,7 @@
   border-color: #003366;
   border-radius: 10px;
   padding: 5px;
+  height: 18px;
 }
 
 #printer-pattern-buttons {

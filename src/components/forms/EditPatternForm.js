@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from 'react-router-dom';
 import "../../style/components/printerPatternForm.css";
 import elipse6 from "../../assets/elipse6.svg";
 import { getRegisterPatternSchema } from "../utils/YupSchema";
@@ -135,12 +136,10 @@ export default function EditPatternForm() {
           </div>
         </div>
         <div id="printer-pattern-buttons">
-          <button
-            className="printer-pattern-form-button"
-            type="button"
-            id="cancelar-bnt"
-          >
-            EXCLUIR
+          <button className="printer-pattern-form-button" type="button" id="cancelar-bnt">
+            <Link to="/padroescadastrados">
+              CANCELAR
+            </Link>
           </button>
           <button
             className="printer-pattern-form-button"
