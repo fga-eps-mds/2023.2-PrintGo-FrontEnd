@@ -119,3 +119,34 @@ export const createPadraoImpressora = async (printerPattern) => {
     return { type: 'error', error };
   }
 };
+
+export const editPadrao = async (pattern) => {
+  try {
+    const data = {
+      tipo: pattern.tipo,
+      marca: pattern.marca,
+      modelo: pattern.modelo,
+      modeloImpressora: pattern.modeloImpressora,
+      numeroSerie: pattern.numeroSerie,
+      versaoFirmware: pattern.versaoFirmware,
+      totalDigitalizacoes: pattern.totalDigitalizacoes,
+      totalCopiasPB: pattern.totalCopiasPB,
+      totalCopiasColoridas: pattern.totalCopiasColoridas,
+      totalImpressoesPb: pattern.totalImpressoesPb,
+      totalImpressoesColoridas: pattern.totalImpressoesColoridas,
+      totalGeral: pattern.totalGeral,
+      enderecoIp: pattern.enderecoIp,
+    }
+    
+    const response = await api.patch(`/printer/padrao/${pattern.id}`, data);
+    
+    if (response.status !== 200) {
+      return { type: 'error', data: response.data };
+    }
+    
+    return { type: 'success', data: response.data };
+    
+  } catch (error) {
+    return { type: 'error', error };
+  }
+}
