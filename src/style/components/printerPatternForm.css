@@ -3,6 +3,7 @@
   border-radius: 10px;
   display: flex;
   min-width: 38vw;
+  width: 38vw;
   min-height: fit-content;
   justify-content: start;
   align-items: start;
@@ -63,11 +64,11 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  gap: 10vw;
 }
 
-#snmp-fields-input-line span {
-  display: none;
+#snmp-fields-input-line label{
+  display: flex;
+  width: 380px;
 }
 
 #printer-pattern-input-box {
@@ -88,7 +89,6 @@
 #printer-pattern-input-box label {
   font-size: 16px;
   color: #003366;
-  display: block;
 }
 
 #printer-pattern-input-box span {

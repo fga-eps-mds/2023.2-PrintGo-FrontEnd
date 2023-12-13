@@ -29,7 +29,6 @@ const fieldLabels = {
 export default function EditPrinterForm() {
 
   const { printer } = useParams();
-  console.log(printer);
 
   const navigate = useNavigate();
   const printerObject = JSON.parse(atob(printer));
