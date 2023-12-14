@@ -32,6 +32,7 @@ export default function EditPatternForm() {
   const { padrao } = useParams();
   
   const pattern = JSON.parse(atob(padrao));
+  console.log(pattern);
   
   const navigate = useNavigate();
   const registerPrinterSchema = getRegisterPatternSchema(fieldLabels);
@@ -41,7 +42,6 @@ export default function EditPatternForm() {
     handleSubmit,
     setValue,
     formState: { errors, isSubmitting },
-    reset,
   } = useForm({
     resolver: yupResolver(registerPrinterSchema),
     mode: "onSubmit",
@@ -69,7 +69,7 @@ export default function EditPatternForm() {
   }, [setValue]);
   
   return (
-    <div id="printer-pattern-signup-card">
+    <div id="printer-pattern-signup-card" data-testid="printer-pattern-signup-card">
       <h2 id="printer-pattern-form-header">Edição de padrão de impressora</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div id="printer-pattern-input-group">

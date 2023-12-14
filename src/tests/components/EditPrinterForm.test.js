@@ -99,10 +99,17 @@ describe('EditPrinterForm', () => {
     jest.clearAllMocks();
   });
 
-  it('should render page and load printer data', () => {
+  it('should render page and load printer data', async () => {
     render(<EditPrinterForm />);
+
+    const submitButton = screen.getByText("EDITAR");
+    fireEvent.click(submitButton);
+
+    console.log(screen.getByPlaceholderText('Número de Série').value);
     
-    expect(screen.getByPlaceholderText('Número de Série').value).toBe("");
+    await waitFor(() => {
+      expect(screen.getByPlaceholderText('Número de Série').value).toBe("hp-132-a789");
+    })
   });
 
 })
