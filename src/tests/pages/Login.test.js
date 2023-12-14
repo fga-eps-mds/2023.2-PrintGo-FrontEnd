@@ -30,6 +30,7 @@ function render(ui, { route = '/', ...renderOptions } = {}) {
 describe('Login Component', () => {
   beforeEach(() => {
     router.useNavigate.mockImplementation(jest.requireActual('react-router-dom').useNavigate);
+    jest.clearAllMocks();
   });
 
   test('...', () => {
@@ -84,13 +85,13 @@ describe('Login Component', () => {
     fireEvent.submit(screen.getByText('LOGIN'));
 
     await waitFor(() => {
-      expect(screen.getByText('E-mail ou senha incorreto.')).toBeInTheDocument();
+      expect(screen.getByText('Não foi possível fazer o login')).toBeInTheDocument();
     });
   });
 
   it('should make API call with valid credentials', async () => {
     const mockLoginApi = jest.spyOn(api, 'login');
-    mockLoginApi.mockResolvedValue(token);
+    mockLoginApi.mockResolvedValue({ type: 'success', token: token});
 
     const mockNavigate = jest.fn();
     useNavigate.mockImplementation(() => mockNavigate);
@@ -98,12 +99,12 @@ describe('Login Component', () => {
     // Simular o envio do formulário com credenciais válidas
     render(<Login />);
     fireEvent.input(screen.getByPlaceholderText('email@email.com'), { target: { value: 'teste@teste.com' } });
-    fireEvent.input(screen.getByPlaceholderText('************'), { target: { value: 'senha123' } });
+    fireEvent.input(screen.getByPlaceholderText('************'), { target: { value: 'Senha123@' } });
     fireEvent.submit(screen.getByText('LOGIN'));
 
     await waitFor(() => {
       // Verificar se a função da API foi chamada com as credenciais corretas
-      expect(mockLoginApi).toHaveBeenCalledWith('teste@teste.com', 'senha123');
+      expect(mockLoginApi).toHaveBeenCalledWith('teste@teste.com', 'Senha123@');
       
       // Verificar se a navegação ocorreu após o login bem-sucedido
       expect(mockNavigate).toHaveBeenCalledWith('/');
