@@ -71,6 +71,7 @@ describe('Login Component', () => {
     });
   });
 
+
   it('should display login error for invalid credentials', async () => {
     const mockLoginApi = jest.spyOn(api, 'login');
     mockLoginApi.mockRejectedValue(new Error('Invalid credentials'));
@@ -108,6 +109,30 @@ describe('Login Component', () => {
       
       // Verificar se a navegação ocorreu após o login bem-sucedido
       expect(mockNavigate).toHaveBeenCalledWith('/');
+    });
+  });
+
+
+  it('should make API call with invalid credentials', async () => {
+    const mockLoginApi = jest.spyOn(api, 'login');
+    mockLoginApi.mockResolvedValue({ type: 'error', token: token});
+
+    const mockNavigate = jest.fn();
+    useNavigate.mockImplementation(() => mockNavigate);
+
+    // Simular o envio do formulário com credenciais válidas
+    render(<Login />);
+    fireEvent.input(screen.getByPlaceholderText('email@email.com'), { target: { value: 'testecom' } });
+    fireEvent.input(screen.getByPlaceholderText('************'), { target: { value: '@' } });
+    fireEvent.submit(screen.getByText('LOGIN'));
+
+    await waitFor(() => {
+      // Verificar se a função da API foi chamada com as credenciais corretas
+      expect(mockLoginApi).toHaveBeenCalledWith('testecom', '@');
+      
+      // Verificar se a navegação ocorreu após o login bem-sucedido
+      expect(screen.queryByText('E-mail inválido')).toBeInTheDocument()
+      expect(screen.queryByText('E-mail ou senha incorreto.')).toBeInTheDocument()
     });
   });
 
