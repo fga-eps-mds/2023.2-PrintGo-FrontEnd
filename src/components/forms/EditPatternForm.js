@@ -1,9 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import "../../style/components/printerPatternForm.css";
 import elipse6 from "../../assets/elipse6.svg";
-import { getRegisterPrinterSchema } from "../utils/YupSchema";
+import { getRegisterPatternSchema } from "../utils/YupSchema";
+import { editPadrao } from "../../services/printerService";
+import { toast } from "react-toastify";
 
 const fieldLabels = {
   tipo: "Tipo",
@@ -13,140 +16,109 @@ const fieldLabels = {
     modeloImpressora: "Modelo da impressora",
     numeroSerie: "Número de série",
     versaoFirmware: "Versão do Firmware",
-    tempoAtivo: "Tempo ativo do sistema",
+    tempoAtivoSistema: "Tempo ativo do sistema",
     totalDigitalizacoes: "Total de digitalizações",
     totalCopiasPB: "Total de cópias P&B",
-    totalCopiasColorido: "Total de cópias coloridas",
-    totalImpressoesPB: "Total de impressões P&B",
-    totalImpressoesColorido: "Total de impressoões coloridas",
+    totalCopiasColoridas: "Total de cópias coloridas",
+    totalImpressoesPb: "Total de impressões P&B",
+    totalImpressoesColoridas: "Total de impressões coloridas",
     totalGeral: "Total geral",
-    enderecoIP: "Endereço IP",
+    enderecoIp: "Endereço IP",
   },
 };
-
-
-const testObject = {
-  tipo: "teste",
-  marca: "Marcateste",
-  modelo: "Modeloteste",
-  snmp: {
-    modeloImpressora: "Modelo da impressora",
-    numeroSerie: "Número de série",
-    versaoFirmware: "Versão do Firmware",
-    tempoAtivo: "Tempo ativo do sistema",
-    totalDigitalizacoes: "Total de digitalizações",
-    totalCopiasPB: "Total de cópias P&B",
-    totalCopiasColorido: "Total de cópias coloridas",
-    totalImpressoesPB: "Total de impressões P&B",
-    totalImpressoesColorido: "Total de impressoões coloridas",
-    totalGeral: "Total geral",
-    enderecoIP: "Endereço IP",
-  },
-};
-
 
 export default function EditPatternForm() {
-  const registerPrinterSchema = getRegisterPrinterSchema(fieldLabels);
+
+  const { padrao } = useParams();
+  
+  const pattern = JSON.parse(atob(padrao));
+  console.log(pattern);
+  
+  const navigate = useNavigate();
+  const registerPrinterSchema = getRegisterPatternSchema(fieldLabels);
+  
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { errors, isValid },
-    reset,
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(registerPrinterSchema),
-    mode: "onChange",
+    mode: "onSubmit",
   });
 
   const onSubmit = async (data) => {
     console.log(data);
-
-    reset();
+    
+    const response = await editPadrao(data);
+    if (response.type === "success") {
+      toast.success("Padrão editado com sucesso!");
+      setTimeout(() => {
+        navigate("/padroescadastrados");
+      }, 1000);
+    } else {
+       toast.error("Erro ao editar o padrão!");
+    }
+    
   };
 
   useEffect(() => {
-    Object.entries(testObject).forEach(([key, value]) => {
+    Object.entries(pattern).forEach(([key, value]) => {
       setValue(key, value);
     });
   }, [setValue]);
-
+  
   return (
-    <div id="printer-pattern-signup-card">
+    <div id="printer-pattern-signup-card" data-testid="printer-pattern-signup-card">
       <h2 id="printer-pattern-form-header">Edição de padrão de impressora</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div id="printer-pattern-input-group">
           <div id="printer-pattern-input-box">
             <div id="printer-pattern-fields">
-              {["tipo", "marca", "modelo"].map((field) => (
-                <div id="printer-pattern-input-line" key={field.id}>
+              {Object.entries(fieldLabels).filter(([key]) => key !== "snmp").map(([key, label]) => (
+                <div id="printer-pattern-input-line" key={key}>
                   <label>
-                    {fieldLabels[field]}
+                    {label}
                     <span>*</span>
                   </label>
                   <input
-                    {...register(field)}
-                    placeholder={`Digite ${fieldLabels[field].toLowerCase()}`}
+                    {...register(key)}
+                    placeholder={`Digite ${label.toLowerCase()}`}
                   />
-                  <span>{errors[field]?.message}</span>
+                  <span>{errors[key]?.message}</span>
                 </div>
               ))}
             </div>
 
-            {/* SNMP Fields */}
             <div id="printer-pattern-snmp-fields">
               <label htmlFor="snmp">SNMP</label>
-              {Object.keys(fieldLabels.snmp).map((subField) => (
-                <div id="snmp-fields-input-line" key={`sub-${subField.id}`}>
+              {Object.entries(fieldLabels.snmp).map(([key, label]) => (
+                <div id="snmp-fields-input-line" key={key}>
                   <label>
-                    {fieldLabels.snmp[subField]}
+                    {label}
                     <span>*</span>
                   </label>
-                  {[
-                    "modeloImpressora",
-                    "numeroSerie",
-                    "versaoFirmware",
-                    "tempoAtivo",
-                    "totalDigitalizacoes",
-                    "totalCopiasPB",
-                    "totalCopiasColorido",
-                    "totalImpressoesPB",
-                    "totalImpressoesColorido",
-                    "totalGeral",
-                    "enderecoIP",
-                  ].includes(subField) ? (
-                    <input
-                      {...register(`snmp.${subField}`)}
-                      //style={{ width: '200px' }}  // Adjust the width as needed
-                      placeholder="Código OID"
-                    />
-                  ) : (
-                    <input
-                      {...register(`snmp.${subField}`)}
-                      style={{ width: "200px" }} // Adjust the width as needed
-                      placeholder={`Digite ${fieldLabels.snmp[
-                        subField
-                      ].toLowerCase()}`}
-                    />
-                  )}
-                  <span>{errors[`snmp.${subField}`]?.message}</span>
+                  <input
+                    {...register(key)}
+                    placeholder="Código OID"
+                  />
+                  <span>{errors[key]?.message}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
         <div id="printer-pattern-buttons">
-          <button
-            className="printer-pattern-form-button"
-            type="button"
-            id="cancelar-bnt"
-          >
-            EXCLUIR
+          <button className="printer-pattern-form-button" type="button" id="cancelar-bnt">
+            <Link to="/padroescadastrados">
+              CANCELAR
+            </Link>
           </button>
           <button
             className="printer-pattern-form-button"
             type="submit"
             id="registrar-bnt"
-            disabled={!isValid}
+            disabled={isSubmitting}
           >
             SALVAR
           </button>

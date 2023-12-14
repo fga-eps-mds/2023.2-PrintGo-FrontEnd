@@ -142,12 +142,11 @@
 .patternlist-engine {
     display: flex;
     flex-direction: column;
-    height: 4vh;
+    height: fit-content;
     width: 4vw;
     margin-right: 40px;
     cursor: pointer;
 }
-
 
 .patternlist-pattern-dropdown {
     display: none;

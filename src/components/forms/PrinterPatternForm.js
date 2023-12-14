@@ -1,9 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Link } from 'react-router-dom';
 import "../../style/components/printerPatternForm.css";
 import elipse6 from "../../assets/elipse6.svg";
-import { getRegisterPrinterSchema } from "../utils/YupSchema";
+import { getRegisterPatternSchema } from "../utils/YupSchema";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { createPadraoImpressora } from "../../services/printerService";
 import { toast } from "react-toastify";
@@ -29,7 +30,7 @@ const fieldLabels = {
 
 
 export default function PrinterPatternForm() {
-  const registerPrinterSchema = getRegisterPrinterSchema(fieldLabels);
+  const registerPrinterSchema = getRegisterPatternSchema(fieldLabels);
   const {
     register,
     handleSubmit,
@@ -92,8 +93,12 @@ export default function PrinterPatternForm() {
           </div>
         </div>
         <div id="printer-pattern-buttons">
-          <button className="printer-pattern-form-button" type="button" id="cancelar-bnt">CANCELAR</button>
-          <button className="form-button" type="submit" id="registrar-bnt" disabled={!isValid || isSubmitting}>
+          <button className="printer-pattern-form-button" type="button" id="cancelar-bnt">
+            <Link to="/">
+              CANCELAR
+            </Link>
+          </button>
+          <button className="printer-pattern-form-button" type="submit" id="registrar-bnt" disabled={!isValid || isSubmitting}>
             {isSubmitting && (
               <ReloadIcon id="animate-spin"/>
             )}

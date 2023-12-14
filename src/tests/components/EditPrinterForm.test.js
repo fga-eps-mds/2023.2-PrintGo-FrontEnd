@@ -2,7 +2,7 @@ import React from 'react';
 import { render as rtlRender, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import * as router from 'react-router-dom';
-import { BrowserRouter as Router, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, useParams, useNavigate } from 'react-router-dom';
 import EditPrinterForm from '../../components/forms/EditPrinterForm';
 import { getUnidades } from '../../services/unidadeService';
 import { editImpressora, getPadroes } from '../../services/printerService';
@@ -35,6 +35,7 @@ function render(ui, { route = '/', ...renderOptions } = {}) {
 const printer = {
   id: "1",
   padrao_id: "1",
+  unidadeId: '3',
   ip: "123.12.1.3.01",
   numeroSerie: "hp-132-a789",
   codigoLocadora: "879845634",
@@ -94,15 +95,58 @@ describe('EditPrinterForm', () => {
         {id: '3', name: "unidade3"}
       ]
     });
-    getPadroes.mockResolvedValue(patterns);
+    getPadroes.mockResolvedValue({ type: 'success', data: patterns});
     router.useNavigate.mockImplementation(jest.requireActual('react-router-dom').useNavigate);
     jest.clearAllMocks();
   });
 
-  it('should render page and load printer data', () => {
+  it('should render page and load printer data', async () => {
+    editImpressora.mockResolvedValue({ type: 'success' });
+
     render(<EditPrinterForm />);
     
-    expect(screen.getByPlaceholderText('Número de Série').value).toBe("");
+    await waitFor(() => {
+
+      const submitButton = screen.getByText("EDITAR");
+      fireEvent.click(submitButton);
+      
+      expect(editImpressora).toHaveBeenCalled();
+    })
+  });
+
+  it('should try to submit form and return a error', async () => {
+    editImpressora.mockResolvedValue({ type: 'error' });
+
+    render(<EditPrinterForm />);
+    
+    await waitFor(() => {
+
+      const submitButton = screen.getByText("EDITAR");
+      fireEvent.click(submitButton);
+      
+      expect(editImpressora).toHaveBeenCalled();
+    })
+  });
+
+  it('should handle workstation change', async () => {
+    //editImpressora.mockResolvedValue({ type: 'success' })
+
+    render(<EditPrinterForm />);
+
+    const unidadePaiSelect = screen.getByTestId("unidadePai-select");
+    const unidadeFilhaSelect = screen.getByTestId("unidadeFilha-select");
+    
+    await waitFor(() => {
+      fireEvent.change(unidadePaiSelect, { target: { value: '' } });
+      expect(unidadePaiSelect.value).toBe('');
+
+      fireEvent.change(unidadePaiSelect, { target: { value: '1' } });
+      expect(unidadePaiSelect.value).toBe('1');
+
+      fireEvent.change(unidadeFilhaSelect, { target: { value: '2' } });
+      expect(unidadeFilhaSelect.value).toBe('2');
+    })
+
   });
 
 })
