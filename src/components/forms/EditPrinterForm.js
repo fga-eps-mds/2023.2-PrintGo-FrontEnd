@@ -131,7 +131,7 @@ export default function EditPrinterForm() {
                   <span>*</span>
                 </label>
                 {key === "padrao_id" ? (
-                  <select {...register(key)} onChange={(e) => setPadrao(e.target.value)}>
+                  <select {...register(key)} onChange={(e) => setPadrao(e.target.value)} data-testid="padrao-select">
                     {padroes.map(option => (
                       <option key={option.id} value={option.id} >
                         {option.tipo}, {option.marca}, {option.modelo}
@@ -139,7 +139,7 @@ export default function EditPrinterForm() {
                     ))}
                   </select>                      
                 ) : key === "unidadePai" ? (
-                  <select onChange={handleWorkstationChange}>
+                  <select onChange={handleWorkstationChange} data-testid="unidadePai-select">
                     {unidadeList.map(option => (
                       <option key={option.id} value={option.id}>
                         {option.name}
@@ -147,7 +147,7 @@ export default function EditPrinterForm() {
                     ))}
                   </select>
                 ) : key === "unidadeId" ? (
-                  <select {...register(key)} onChange={(e) => setUnidade(e.target.value)}>
+                  <select {...register(key)} onChange={(e) => setUnidade(e.target.value)} data-testid="unidadeFilha-select">
                     {unidadesFilha.map(option => (
                       <option key={option.id} value={option.id}>
                         {option.name}
