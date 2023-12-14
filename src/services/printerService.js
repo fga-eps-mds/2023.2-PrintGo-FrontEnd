@@ -129,6 +129,7 @@ export const editPadrao = async (pattern) => {
       modeloImpressora: pattern.modeloImpressora,
       numeroSerie: pattern.numeroSerie,
       versaoFirmware: pattern.versaoFirmware,
+      tempoAtivoSistema: pattern.tempoAtivoSistema,
       totalDigitalizacoes: pattern.totalDigitalizacoes,
       totalCopiasPB: pattern.totalCopiasPB,
       totalCopiasColoridas: pattern.totalCopiasColoridas,

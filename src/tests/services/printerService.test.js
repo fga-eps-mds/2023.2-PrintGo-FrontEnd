@@ -1,4 +1,6 @@
-import { createImpressora, createPadraoImpressora, getPadrao, getPadroes, getPrinters, togglePattern, togglePrinter } from '../../services/printerService'
+import { waitFor } from '@testing-library/react';
+import { createImpressora, editImpressora, createPadraoImpressora, getPadrao,
+         getPadroes, getPrinters, togglePattern, togglePrinter, editPadrao } from '../../services/printerService'
 import { api } from '../../lib/api/config';
 
 jest.mock('../../lib/api/config.js', () => ({
@@ -9,7 +11,12 @@ jest.mock('../../lib/api/config.js', () => ({
   },
 }));
 
-describe('PrinterService API functions', () => {
+describe('printer endpoints', () => {
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  })
+
   it('creates a printer', async () => {
     const printer = {
       padrao_id: "12",
@@ -103,6 +110,122 @@ describe('PrinterService API functions', () => {
     expect(result).toEqual({ type: 'error', error: new Error('error') });
   });
 
+  it('edits a printer successfully', async () => {
+    const printer = {
+      id: "1",
+      padrao_id: "1",
+      unidadeId: '3',
+      ip: "123.12.1.3.01",
+      numeroSerie: "hp-132-a789",
+      codigoLocadora: "879845634",
+      contadorInstalacao: 1000,
+      dataInstalacao: "2023-01-15T00:00:00.000Z",
+      contadorRetiradas: 10,
+      dataContadorRetirada: "2023-12-01T12:30:00.000Z",
+      dataUltimoContador: "2023-12-01T12:30:00.000Z",
+      ultimoContador: 10,
+    }
+
+    const data = {
+      padrao_id: "1",
+      unidadeId: '3',
+      ip: "123.12.1.3.01",
+      numeroSerie: "hp-132-a789",
+      codigoLocadora: "879845634",
+      contadorInstalacao: 1000,
+      dataInstalacao: "2023-01-15T00:00:00.000Z",
+      contadorRetiradas: 10,
+      dataContadorRetirada: "2023-12-01T12:30:00.000Z",
+      dataUltimoContador: "2023-12-01T12:30:00.000Z",
+      ultimoContador: 10,
+    }
+
+    api.patch.mockResolvedValue({ status: 200, data: 'some data' });
+
+    const result = await editImpressora(printer);
+    console.log(result);
+
+    expect(result).toEqual({ type: 'success', data: 'some data' });
+    expect(api.patch).toHaveBeenCalledWith(`/printer/impressora/${printer.id}`, data);
+  });
+
+  it('edits a printer and return status != 200', async () => {
+    const printer = {
+      id: "1",
+      padrao_id: "1",
+      unidadeId: '3',
+      ip: "123.12.1.3.01",
+      numeroSerie: "hp-132-a789",
+      codigoLocadora: "879845634",
+      contadorInstalacao: 1000,
+      dataInstalacao: "2023-01-15T00:00:00.000Z",
+      contadorRetiradas: 10,
+      dataContadorRetirada: "2023-12-01T12:30:00.000Z",
+      dataUltimoContador: "2023-12-01T12:30:00.000Z",
+      ultimoContador: 10,
+    }
+
+    const data = {
+      padrao_id: "1",
+      unidadeId: '3',
+      ip: "123.12.1.3.01",
+      numeroSerie: "hp-132-a789",
+      codigoLocadora: "879845634",
+      contadorInstalacao: 1000,
+      dataInstalacao: "2023-01-15T00:00:00.000Z",
+      contadorRetiradas: 10,
+      dataContadorRetirada: "2023-12-01T12:30:00.000Z",
+      dataUltimoContador: "2023-12-01T12:30:00.000Z",
+      ultimoContador: 10,
+    }
+
+    api.patch.mockResolvedValue({ status: 500, data: 'some data' });
+
+    const result = await editImpressora(printer);
+    console.log(result);
+
+    expect(result).toEqual({ type: 'error', data: 'some data' });
+    expect(api.patch).toHaveBeenCalledWith(`/printer/impressora/${printer.id}`, data);
+  });
+
+  it('tries to edit a printer and throws error', async () => {
+    const printer = {
+      id: "1",
+      padrao_id: "1",
+      unidadeId: '3',
+      ip: "123.12.1.3.01",
+      numeroSerie: "hp-132-a789",
+      codigoLocadora: "879845634",
+      contadorInstalacao: 1000,
+      dataInstalacao: "2023-01-15T00:00:00.000Z",
+      contadorRetiradas: 10,
+      dataContadorRetirada: "2023-12-01T12:30:00.000Z",
+      dataUltimoContador: "2023-12-01T12:30:00.000Z",
+      ultimoContador: 10,
+    }
+
+    const data = {
+      padrao_id: "1",
+      unidadeId: '3',
+      ip: "123.12.1.3.01",
+      numeroSerie: "hp-132-a789",
+      codigoLocadora: "879845634",
+      contadorInstalacao: 1000,
+      dataInstalacao: "2023-01-15T00:00:00.000Z",
+      contadorRetiradas: 10,
+      dataContadorRetirada: "2023-12-01T12:30:00.000Z",
+      dataUltimoContador: "2023-12-01T12:30:00.000Z",
+      ultimoContador: 10,
+    }
+
+    api.patch.mockRejectedValue(new Error('error'));
+
+    const result = await editImpressora(printer);
+
+    expect(result).toEqual({ type: 'error', error: new Error('error') });
+    expect(api.patch).toHaveBeenCalledWith(`/printer/impressora/${printer.id}`, data);
+  });
+
   it('toggles printer successfully', async () => {
     const data = {
       id: "2",
@@ -144,6 +267,14 @@ describe('PrinterService API functions', () => {
     expect(api.patch).toHaveBeenCalledWith(`/printer/impressora/desativar/${data.id}`, data);
     expect(result).toEqual({ type: 'error', error: new Error('error') });
   });
+
+})
+
+describe('pattern endpoints', () => {
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  })
 
   it('creates a pattern successfully', async () => {
     const pattern = {
@@ -275,6 +406,138 @@ describe('PrinterService API functions', () => {
 
     expect(api.get).toHaveBeenCalledWith(`/printer/padrao/${pattern.id}`);
     expect(result).toEqual({ type: 'error', error: new Error('error') });
+  });
+
+  it('edits a pattern successfully', async () => {
+    const pattern = {
+      id: "1",
+      tipo: "Tipo",
+      marca: "Marca",
+      modelo: "Modelo",
+      modeloImpressora: "Modelo da impressora",
+      numeroSerie: "Número de série",
+      versaoFirmware: "Versão do Firmware",
+      tempoAtivoSistema: "Tempo ativo do sistema",
+      totalDigitalizacoes: "Total de digitalizações",
+      totalCopiasPB: "Total de cópias P&B",
+      totalCopiasColoridas: "Total de cópias coloridas",
+      totalImpressoesPb: "Total de impressões P&B",
+      totalImpressoesColoridas: "Total de impressões coloridas",
+      totalGeral: "Total geral",
+      enderecoIp: "Endereço IP",
+    }
+
+    const data = {
+      tipo: "Tipo",
+      marca: "Marca",
+      modelo: "Modelo",
+      modeloImpressora: "Modelo da impressora",
+      numeroSerie: "Número de série",
+      versaoFirmware: "Versão do Firmware",
+      tempoAtivoSistema: "Tempo ativo do sistema",
+      totalDigitalizacoes: "Total de digitalizações",
+      totalCopiasPB: "Total de cópias P&B",
+      totalCopiasColoridas: "Total de cópias coloridas",
+      totalImpressoesPb: "Total de impressões P&B",
+      totalImpressoesColoridas: "Total de impressões coloridas",
+      totalGeral: "Total geral",
+      enderecoIp: "Endereço IP",
+    }
+
+    api.patch.mockResolvedValue({ status: 200, data: 'some data' });
+
+    const result = await editPadrao(pattern);
+
+    expect(result).toEqual({ type: 'success', data: 'some data' });
+    expect(api.patch).toHaveBeenCalledWith(`/printer/padrao/${pattern.id}`, data);
+  });
+
+  it('edits a pattern and return status != 200', async () => {
+    const pattern = {
+      id: "1",
+      tipo: "Tipo",
+      marca: "Marca",
+      modelo: "Modelo",
+      modeloImpressora: "Modelo da impressora",
+      numeroSerie: "Número de série",
+      versaoFirmware: "Versão do Firmware",
+      tempoAtivoSistema: "Tempo ativo do sistema",
+      totalDigitalizacoes: "Total de digitalizações",
+      totalCopiasPB: "Total de cópias P&B",
+      totalCopiasColoridas: "Total de cópias coloridas",
+      totalImpressoesPb: "Total de impressões P&B",
+      totalImpressoesColoridas: "Total de impressões coloridas",
+      totalGeral: "Total geral",
+      enderecoIp: "Endereço IP",
+    }
+
+    const data = {
+      tipo: "Tipo",
+      marca: "Marca",
+      modelo: "Modelo",
+      modeloImpressora: "Modelo da impressora",
+      numeroSerie: "Número de série",
+      versaoFirmware: "Versão do Firmware",
+      tempoAtivoSistema: "Tempo ativo do sistema",
+      totalDigitalizacoes: "Total de digitalizações",
+      totalCopiasPB: "Total de cópias P&B",
+      totalCopiasColoridas: "Total de cópias coloridas",
+      totalImpressoesPb: "Total de impressões P&B",
+      totalImpressoesColoridas: "Total de impressões coloridas",
+      totalGeral: "Total geral",
+      enderecoIp: "Endereço IP",
+    }
+
+    api.patch.mockResolvedValue({ status: 500, data: 'some data' });
+
+    const result = await editPadrao(pattern);
+
+    expect(result).toEqual({ type: 'error', data: 'some data' });
+    expect(api.patch).toHaveBeenCalledWith(`/printer/padrao/${pattern.id}`, data);
+  });
+
+  it('tries to edit a pattern and throws error', async () => {
+    const pattern = {
+      id: "1",
+      tipo: "Tipo",
+      marca: "Marca",
+      modelo: "Modelo",
+      modeloImpressora: "Modelo da impressora",
+      numeroSerie: "Número de série",
+      versaoFirmware: "Versão do Firmware",
+      tempoAtivoSistema: "Tempo ativo do sistema",
+      totalDigitalizacoes: "Total de digitalizações",
+      totalCopiasPB: "Total de cópias P&B",
+      totalCopiasColoridas: "Total de cópias coloridas",
+      totalImpressoesPb: "Total de impressões P&B",
+      totalImpressoesColoridas: "Total de impressões coloridas",
+      totalGeral: "Total geral",
+      enderecoIp: "Endereço IP",
+    }
+
+    const data = {
+      tipo: "Tipo",
+      marca: "Marca",
+      modelo: "Modelo",
+      modeloImpressora: "Modelo da impressora",
+      numeroSerie: "Número de série",
+      versaoFirmware: "Versão do Firmware",
+      tempoAtivoSistema: "Tempo ativo do sistema",
+      totalDigitalizacoes: "Total de digitalizações",
+      totalCopiasPB: "Total de cópias P&B",
+      totalCopiasColoridas: "Total de cópias coloridas",
+      totalImpressoesPb: "Total de impressões P&B",
+      totalImpressoesColoridas: "Total de impressões coloridas",
+      totalGeral: "Total geral",
+      enderecoIp: "Endereço IP",
+    }
+
+    api.patch.mockRejectedValue(new Error('error'));
+
+    const result = await editPadrao(pattern);
+
+    expect(result).toEqual({ type: 'error', error: new Error('error') });
+    expect(api.patch).toHaveBeenCalledWith(`/printer/padrao/${pattern.id}`, data);
   });
 
   it('toggles pattern successfully', async () => {
